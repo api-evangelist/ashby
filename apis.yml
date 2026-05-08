@@ -29,6 +29,8 @@ apis:
         type: Documentation
       - url: https://developers.ashbyhq.com/reference
         type: API Reference
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Create candidates from external sources, retrieve candidate profiles,
       manage candidate-level identifiers, social handles, demographics,
@@ -42,6 +44,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Submit applications against jobs, advance applications through stages,
       reject, archive, withdraw, and reactivate applications across the
@@ -54,6 +58,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Manage jobs (the recruiting concept) — title, department, employment
       type, status, and lifecycle — separate from openings (headcount slots).
@@ -65,6 +71,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Manage openings — the headcount slots associated with a job; multiple
       openings allow tracking parallel hires per requisition.
@@ -76,6 +84,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Manage public job postings (the candidate-facing job ads) and the
       careers-page configuration including title, location, description,
@@ -88,6 +98,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Generate offer drafts, route through approvals, and track offer
       versions, compensation, and acceptance status.
@@ -99,6 +111,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read interview definitions configured per job stage and the per-
       candidate interview events generated as candidates progress.
@@ -110,6 +124,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Create and manage interview schedules — the day-of itinerary linking
       candidates, interviewers, and time slots, including ad-hoc and
@@ -122,6 +138,10 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
+      - url: openapi/ashby-assessments-partner-openapi.json
+        type: OpenAPI
     description: >-
       Read interview feedback and scorecards submitted by interviewers,
       including ratings, free-text responses, and recommendation values.
@@ -133,6 +153,10 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
+      - url: openapi/ashby-assessments-partner-openapi.json
+        type: OpenAPI
     description: >-
       Read the structured feedback form templates (questions, rating
       scales, recommendation values) configured for the tenant.
@@ -144,6 +168,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read the hiring-team assignments per job — recruiter, hiring manager,
       sourcer, coordinator, and interviewer roles.
@@ -155,6 +181,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read the configured archive reasons used when candidates are
       rejected, withdrawn, or hired.
@@ -166,6 +194,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read the source taxonomy (job board, referral, sourced, agency)
       attached to candidate applications for sourcing analytics.
@@ -177,6 +207,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read survey responses (EEO, candidate experience) submitted alongside
       applications. PII-isolated for compliance reporting.
@@ -188,6 +220,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read the location dictionary used to tag jobs, postings, and
       candidate location preferences.
@@ -199,6 +233,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read the department dictionary used to scope jobs, openings, and
       reporting.
@@ -210,6 +246,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read custom field definitions and values across candidates,
       applications, openings, and other resources for tenant-specific
@@ -222,6 +260,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Read Ashby user accounts and their role assignments (Org Admin,
       Recruiter, Hiring Manager, Interviewer).
@@ -233,6 +273,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/docs/setting-up-webhooks
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Subscribe to Ashby events (candidateHired, applicationStageChange,
       offerCreated, interviewScheduleCreated, surveySubmitted) and receive
@@ -245,6 +287,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/docs/dedicated-partner-job-feeds
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Dedicated partner job feed for distributing live postings to job
       boards and aggregators with consistent metadata.
@@ -256,6 +300,8 @@ apis:
     properties:
       - url: https://developers.ashbyhq.com/docs/custom-careers-page
         type: Documentation
+      - url: openapi/ashby-api-openapi.json
+        type: OpenAPI
     description: >-
       Public read-only API for retrieving published jobs and posting
       content for embedding in custom careers pages.
