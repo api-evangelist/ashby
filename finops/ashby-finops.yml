@@ -5,22 +5,22 @@ provider: Ashby
 providerId: ashby
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
-- HR
-- ATS
-- Recruiting
-- Analytics
-- Sourcing
-- FinOps
-- Cost Management
-- FOCUS
-description: FOCUS-aligned FinOps placeholder for Ashby. Pipeline will replace with the provider's
-  real billing-model details once researched.
-notes: Initial scaffold — billing model has not yet been reconciled.
+  - HR
+  - ATS
+  - Recruiting
+  - Analytics
+  - FinOps
+  - FOCUS
+description: >-
+  Ashby's billing model is monthly or annual subscription with a flat
+  Foundations price ($400/mo, up to 100 employees) and custom-quoted Plus
+  and Enterprise tiers. Add-ons (Advanced Scheduling, AI Notetaker) are
+  priced separately. Annual commits earn a 10% discount.
 sources:
-- https://www.ashbyhq.com/
-- https://focus.finops.org/focus-specification/v1-3/
+  - https://www.ashbyhq.com/pricing
+  - https://focus.finops.org/focus-specification/v1-3/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -30,13 +30,13 @@ alignedWith:
 publisherName: Ashby
 serviceCategory: HR
 billingModel:
-  pricingCategory: To Be Reconciled
+  pricingCategory: Subscription
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
-  - Usage
-  - Purchase
-  - Adjustment
+    - Purchase
+    - Adjustment
+    - Tax
 focusColumns:
   ServiceName: Ashby
   ServiceCategory: HR
@@ -44,24 +44,43 @@ focusColumns:
   PublisherName: Ashby
   InvoiceIssuerName: Ashby
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-- name: api_usage
-  description: Catch-all meter pending reconciliation against the provider's published metering.
-  unit: varies
-  aggregation: sum
-  dimensions:
-  - account
-  - resource
+  - name: ashby_subscription
+    description: Foundations / Plus / Enterprise monthly or annual subscription.
+    unit: subscription-month
+    aggregation: sum
+    dimensions:
+      - tier
+      - cost_center
+  - name: ashby_analytics_subscription
+    description: Standalone Ashby Analytics for non-Ashby ATS customers.
+    unit: subscription-month
+    aggregation: sum
+    dimensions:
+      - cost_center
+  - name: ashby_addons
+    description: Advanced Scheduling and AI Notetaker add-ons.
+    unit: addon-month
+    aggregation: sum
+    dimensions:
+      - addon
+      - cost_center
 principles:
-- name: Visibility
-  description: Pull provider invoices or usage exports until a self-serve usage feed is documented.
-- name: Allocation
-  description: Tag invoice line items to consuming business units in your FinOps store.
-- name: Optimization
-  description: Levers depend on the provider's billing model; review at renewal once reconciled.
-- name: Accountability
-  description: Assign a contract owner to review billing against negotiated terms.
+  - name: Visibility
+    description: >-
+      Track Ashby invoices alongside headcount; Foundations covers up to
+      100 employees, so monitor employee count to detect tier transitions.
+  - name: Allocation
+    description: >-
+      Allocate to recruiting / talent functions; tag add-ons by team.
+  - name: Optimization
+    description: >-
+      Lock annual commitment for 10% discount; audit Plus tier usage at
+      renewal to validate seat count and feature usage.
+  - name: Accountability
+    description: >-
+      Designate Talent Operations as contract owner; review at renewal.
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com

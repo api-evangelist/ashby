@@ -5,32 +5,55 @@ provider: Ashby
 providerId: ashby
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
-- HR
-- ATS
-- Recruiting
-- Analytics
-- Sourcing
-- Rate Limiting
-- Quotas
-- Throttling
-description: Placeholder rate-limit artifact for Ashby. Replace with real limits once the pipeline
-  researches the provider's rate-limit documentation.
-notes: Initial scaffold — limits have not yet been reconciled against the provider's documentation.
+  - HR
+  - ATS
+  - Recruiting
+  - Rate Limiting
+  - Throttling
+description: >-
+  Ashby applies per-API-key rate limits across its JSON-RPC API. The default
+  is a sliding-window limit applied per access key and per endpoint family;
+  exceeded requests return HTTP 429 with a Retry-After header.
 sources:
-- https://www.ashbyhq.com/
+  - https://developers.ashbyhq.com/
+notes: >-
+  Ashby does not publish a fixed numeric rate-limit threshold; limits scale
+  with plan tier and partnership level. Inspect rate-limit response headers
+  for live values.
 responseCodes:
   throttled: 429
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+  - name: Per API Key Default
+    scope: token
+    metric: requests
+    notes: >-
+      Sliding-window limit per API key; 429 returned with Retry-After when
+      exceeded.
+  - name: Listing / Search Endpoints
+    scope: token
+    metric: requests
+    notes: >-
+      List endpoints (candidate.list, application.list) carry tighter
+      limits than item-level reads; paginate aggressively.
+  - name: Webhook Delivery
+    scope: subscription
+    metric: events
+    notes: >-
+      Outbound webhook deliveries are signed and retried on 5xx; receivers
+      must respond within the platform timeout.
 policies:
-- name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  - name: Backoff Strategy
+    description: >-
+      Exponential backoff with jitter on 429; honor Retry-After.
+  - name: Pagination
+    description: >-
+      Use cursor-based pagination on .list endpoints rather than scanning
+      all records.
+  - name: Webhooks-First
+    description: >-
+      Subscribe to events for change notification; reduce list polling.
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
