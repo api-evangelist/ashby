@@ -353,6 +353,11 @@ common:
       - https://www.ashbyhq.com/pricing
       - https://developers.ashbyhq.com/
     updated: '2026-05-08'
+  - type: Integrations
+    url: https://www.ashbyhq.com/integrations
+integrations:
+  - name: G2
+  - name: SoC2
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
