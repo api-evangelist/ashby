@@ -1,7 +1,7 @@
 aid: ashby
 url: https://raw.githubusercontent.com/api-evangelist/ashby/refs/heads/main/apis.yml
 name: Ashby
-x-type: company
+kind: company
 description: >-
   Ashby is an all-in-one talent strategy platform combining ATS, sourcing,
   scheduling, and analytics. The Ashby API exposes candidates, applications,
@@ -28,7 +28,7 @@ apis:
       - url: https://developers.ashbyhq.com/
         type: Documentation
       - url: https://developers.ashbyhq.com/reference
-        type: API Reference
+        type: APIReference
       - url: openapi/ashby-api-openapi.json
         type: OpenAPI
     description: >-
@@ -310,23 +310,23 @@ common:
     url: https://www.ashbyhq.com/
   - type: Documentation
     url: https://developers.ashbyhq.com/
-  - type: API Reference
+  - type: APIReference
     url: https://developers.ashbyhq.com/reference
   - type: Pricing
     url: https://www.ashbyhq.com/pricing
   - type: Login
     url: https://app.ashbyhq.com/login
-  - type: Status
+  - type: StatusPage
     url: https://status.ashbyhq.com/
   - type: Blog
     url: https://www.ashbyhq.com/blog
   - type: Support
     url: https://www.ashbyhq.com/support
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/ashbyhq
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.ashbyhq.com/privacy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.ashbyhq.com/terms
   - type: Authentication
     url: https://developers.ashbyhq.com/docs/authentication
