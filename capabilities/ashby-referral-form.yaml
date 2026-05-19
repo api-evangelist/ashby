@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Referral Form
+  description: 'Ashby API — Referral Form. 1 operations. Lead operation: referralForm.info. Self-contained Naftiko capability
+    covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - Referral Form
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-referral-form
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Referral Form business capability. Self-contained, no shared references.
+    resources:
+    - name: referralForm.info
+      path: /referralForm.info
+      operations:
+      - name: referralforminfo
+        method: POST
+        description: referralForm.info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-referral-form-rest
+    port: 8080
+    description: REST adapter for Ashby API — Referral Form. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/referralform-info
+      name: referralform-info
+      description: REST surface for referralForm.info.
+      operations:
+      - method: POST
+        name: referralforminfo
+        description: referralForm.info
+        call: ashby-referral-form.referralforminfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-referral-form-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Referral Form. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: referralform-info
+      description: referralForm.info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-referral-form.referralforminfo
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,333 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Job
+  description: 'Ashby API — Job. 7 operations. Lead operation: job.create. Self-contained Naftiko capability covering one
+    Ashby business surface.'
+  tags:
+  - Ashby
+  - Job
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-job
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Job business capability. Self-contained, no shared references.
+    resources:
+    - name: job.create
+      path: /job.create
+      operations:
+      - name: jobcreate
+        method: POST
+        description: job.create
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: job.info
+      path: /job.info
+      operations:
+      - name: jobinfo
+        method: POST
+        description: job.info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: job.list
+      path: /job.list
+      operations:
+      - name: joblist
+        method: POST
+        description: job.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: job.search
+      path: /job.search
+      operations:
+      - name: jobsearch
+        method: POST
+        description: job.search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: job.setStatus
+      path: /job.setStatus
+      operations:
+      - name: jobsetstatus
+        method: POST
+        description: job.setStatus
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: job.update
+      path: /job.update
+      operations:
+      - name: jobupdate
+        method: POST
+        description: job.update
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: job.updateCompensation
+      path: /job.updateCompensation
+      operations:
+      - name: jobupdatecompensation
+        method: POST
+        description: job.updateCompensation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-job-rest
+    port: 8080
+    description: REST adapter for Ashby API — Job. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/job-create
+      name: job-create
+      description: REST surface for job.create.
+      operations:
+      - method: POST
+        name: jobcreate
+        description: job.create
+        call: ashby-job.jobcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job-info
+      name: job-info
+      description: REST surface for job.info.
+      operations:
+      - method: POST
+        name: jobinfo
+        description: job.info
+        call: ashby-job.jobinfo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job-list
+      name: job-list
+      description: REST surface for job.list.
+      operations:
+      - method: POST
+        name: joblist
+        description: job.list
+        call: ashby-job.joblist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job-search
+      name: job-search
+      description: REST surface for job.search.
+      operations:
+      - method: POST
+        name: jobsearch
+        description: job.search
+        call: ashby-job.jobsearch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job-setstatus
+      name: job-setstatus
+      description: REST surface for job.setStatus.
+      operations:
+      - method: POST
+        name: jobsetstatus
+        description: job.setStatus
+        call: ashby-job.jobsetstatus
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job-update
+      name: job-update
+      description: REST surface for job.update.
+      operations:
+      - method: POST
+        name: jobupdate
+        description: job.update
+        call: ashby-job.jobupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job-updatecompensation
+      name: job-updatecompensation
+      description: REST surface for job.updateCompensation.
+      operations:
+      - method: POST
+        name: jobupdatecompensation
+        description: job.updateCompensation
+        call: ashby-job.jobupdatecompensation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-job-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Job. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: job-create
+      description: job.create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-job.jobcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: job-info
+      description: job.info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-job.jobinfo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: job-list
+      description: job.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-job.joblist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: job-search
+      description: job.search
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: ashby-job.jobsearch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: job-setstatus
+      description: job.setStatus
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-job.jobsetstatus
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: job-update
+      description: job.update
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-job.jobupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: job-updatecompensation
+      description: job.updateCompensation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-job.jobupdatecompensation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

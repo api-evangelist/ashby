@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ashby-api-assessments-partner-implemented-endpoints
+  description: 'ashby-api-assessments-partner-implemented-endpoints. 4 operations. Lead operation: workflow.info (Implemented
+    by Partner). Self-contained Naftiko capability covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - ashby-api-assessments-partner-implemented-endpoints
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assessments-partner
+    baseUri: https://api.ashbyhq.com
+    description: ashby-api-assessments-partner-implemented-endpoints business capability. Self-contained, no shared references.
+    resources:
+    - name: workflow.info
+      path: /workflow.info
+      operations:
+      - name: workflowinfo
+        method: POST
+        description: workflow.info (Implemented by Partner)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: workflow.list
+      path: /workflow.list
+      operations:
+      - name: workflowlist
+        method: POST
+        description: workflow.list (Implemented by Partner)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workflow.start
+      path: /workflow.start
+      operations:
+      - name: workflowstart
+        method: POST
+        description: workflow.start (Implemented by Partner)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: workflow.update
+      path: /workflow.update
+      operations:
+      - name: workflowupdate
+        method: POST
+        description: workflow.update
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: basic
+      username: '{{env.ASHBY_USER}}'
+      password: '{{env.ASHBY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: assessments-partner-rest
+    port: 8080
+    description: REST adapter for ashby-api-assessments-partner-implemented-endpoints. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/workflow-info
+      name: workflow-info
+      description: REST surface for workflow.info.
+      operations:
+      - method: POST
+        name: workflowinfo
+        description: workflow.info (Implemented by Partner)
+        call: assessments-partner.workflowinfo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workflow-list
+      name: workflow-list
+      description: REST surface for workflow.list.
+      operations:
+      - method: POST
+        name: workflowlist
+        description: workflow.list (Implemented by Partner)
+        call: assessments-partner.workflowlist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workflow-start
+      name: workflow-start
+      description: REST surface for workflow.start.
+      operations:
+      - method: POST
+        name: workflowstart
+        description: workflow.start (Implemented by Partner)
+        call: assessments-partner.workflowstart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workflow-update
+      name: workflow-update
+      description: REST surface for workflow.update.
+      operations:
+      - method: POST
+        name: workflowupdate
+        description: workflow.update
+        call: assessments-partner.workflowupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: assessments-partner-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ashby-api-assessments-partner-implemented-endpoints. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workflow-info-implemented-partner
+      description: workflow.info (Implemented by Partner)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assessments-partner.workflowinfo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workflow-list-implemented-partner
+      description: workflow.list (Implemented by Partner)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: assessments-partner.workflowlist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workflow-start-implemented-partner
+      description: workflow.start (Implemented by Partner)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assessments-partner.workflowstart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workflow-update
+      description: workflow.update
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assessments-partner.workflowupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

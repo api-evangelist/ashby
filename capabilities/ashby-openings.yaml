@@ -1,0 +1,502 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Openings
+  description: 'Ashby API — Openings. 11 operations. Lead operation: opening.addJob. Self-contained Naftiko capability covering
+    one Ashby business surface.'
+  tags:
+  - Ashby
+  - Openings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-openings
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Openings business capability. Self-contained, no shared references.
+    resources:
+    - name: opening.addJob
+      path: /opening.addJob
+      operations:
+      - name: openingaddjob
+        method: POST
+        description: opening.addJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.addLocation
+      path: /opening.addLocation
+      operations:
+      - name: openingaddlocation
+        method: POST
+        description: opening.addLocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.create
+      path: /opening.create
+      operations:
+      - name: openingcreate
+        method: POST
+        description: opening.create
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.info
+      path: /opening.info
+      operations:
+      - name: openinginfo
+        method: POST
+        description: opening.info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.list
+      path: /opening.list
+      operations:
+      - name: openinglist
+        method: POST
+        description: opening.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.removeJob
+      path: /opening.removeJob
+      operations:
+      - name: openingremovejob
+        method: POST
+        description: opening.removeJob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.removeLocation
+      path: /opening.removeLocation
+      operations:
+      - name: openingremovelocation
+        method: POST
+        description: opening.removeLocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.search
+      path: /opening.search
+      operations:
+      - name: openingsearch
+        method: POST
+        description: opening.search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.setArchived
+      path: /opening.setArchived
+      operations:
+      - name: openingsetarchived
+        method: POST
+        description: opening.setArchived
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.setOpeningState
+      path: /opening.setOpeningState
+      operations:
+      - name: openingsetopeningstate
+        method: POST
+        description: opening.setOpeningState
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: opening.update
+      path: /opening.update
+      operations:
+      - name: openingupdate
+        method: POST
+        description: opening.update
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-openings-rest
+    port: 8080
+    description: REST adapter for Ashby API — Openings. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/opening-addjob
+      name: opening-addjob
+      description: REST surface for opening.addJob.
+      operations:
+      - method: POST
+        name: openingaddjob
+        description: opening.addJob
+        call: ashby-openings.openingaddjob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-addlocation
+      name: opening-addlocation
+      description: REST surface for opening.addLocation.
+      operations:
+      - method: POST
+        name: openingaddlocation
+        description: opening.addLocation
+        call: ashby-openings.openingaddlocation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-create
+      name: opening-create
+      description: REST surface for opening.create.
+      operations:
+      - method: POST
+        name: openingcreate
+        description: opening.create
+        call: ashby-openings.openingcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-info
+      name: opening-info
+      description: REST surface for opening.info.
+      operations:
+      - method: POST
+        name: openinginfo
+        description: opening.info
+        call: ashby-openings.openinginfo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-list
+      name: opening-list
+      description: REST surface for opening.list.
+      operations:
+      - method: POST
+        name: openinglist
+        description: opening.list
+        call: ashby-openings.openinglist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-removejob
+      name: opening-removejob
+      description: REST surface for opening.removeJob.
+      operations:
+      - method: POST
+        name: openingremovejob
+        description: opening.removeJob
+        call: ashby-openings.openingremovejob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-removelocation
+      name: opening-removelocation
+      description: REST surface for opening.removeLocation.
+      operations:
+      - method: POST
+        name: openingremovelocation
+        description: opening.removeLocation
+        call: ashby-openings.openingremovelocation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-search
+      name: opening-search
+      description: REST surface for opening.search.
+      operations:
+      - method: POST
+        name: openingsearch
+        description: opening.search
+        call: ashby-openings.openingsearch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-setarchived
+      name: opening-setarchived
+      description: REST surface for opening.setArchived.
+      operations:
+      - method: POST
+        name: openingsetarchived
+        description: opening.setArchived
+        call: ashby-openings.openingsetarchived
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-setopeningstate
+      name: opening-setopeningstate
+      description: REST surface for opening.setOpeningState.
+      operations:
+      - method: POST
+        name: openingsetopeningstate
+        description: opening.setOpeningState
+        call: ashby-openings.openingsetopeningstate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/opening-update
+      name: opening-update
+      description: REST surface for opening.update.
+      operations:
+      - method: POST
+        name: openingupdate
+        description: opening.update
+        call: ashby-openings.openingupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-openings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Openings. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: opening-addjob
+      description: opening.addJob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingaddjob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-addlocation
+      description: opening.addLocation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingaddlocation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-create
+      description: opening.create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-info
+      description: opening.info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openinginfo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-list
+      description: opening.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openinglist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-removejob
+      description: opening.removeJob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingremovejob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-removelocation
+      description: opening.removeLocation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingremovelocation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-search
+      description: opening.search
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingsearch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-setarchived
+      description: opening.setArchived
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingsetarchived
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-setopeningstate
+      description: opening.setOpeningState
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingsetopeningstate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: opening-update
+      description: opening.update
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-openings.openingupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

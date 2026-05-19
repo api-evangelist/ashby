@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Report
+  description: 'Ashby API — Report. 2 operations. Lead operation: report.generate. Self-contained Naftiko capability covering
+    one Ashby business surface.'
+  tags:
+  - Ashby
+  - Report
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-report
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Report business capability. Self-contained, no shared references.
+    resources:
+    - name: report.generate
+      path: /report.generate
+      operations:
+      - name: reportgenerate
+        method: POST
+        description: report.generate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: report.synchronous
+      path: /report.synchronous
+      operations:
+      - name: reportsynchronous
+        method: POST
+        description: report.synchronous
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-report-rest
+    port: 8080
+    description: REST adapter for Ashby API — Report. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/report-generate
+      name: report-generate
+      description: REST surface for report.generate.
+      operations:
+      - method: POST
+        name: reportgenerate
+        description: report.generate
+        call: ashby-report.reportgenerate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/report-synchronous
+      name: report-synchronous
+      description: REST surface for report.synchronous.
+      operations:
+      - method: POST
+        name: reportsynchronous
+        description: report.synchronous
+        call: ashby-report.reportsynchronous
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-report-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Report. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: report-generate
+      description: report.generate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-report.reportgenerate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: report-synchronous
+      description: report.synchronous
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-report.reportsynchronous
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

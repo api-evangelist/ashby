@@ -1,0 +1,250 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Department & Team
+  description: 'Ashby API — Department & Team. 5 operations. Lead operation: department.archive. Self-contained Naftiko capability
+    covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - Department & Team
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-department-team
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Department & Team business capability. Self-contained, no shared references.
+    resources:
+    - name: department.archive
+      path: /department.archive
+      operations:
+      - name: departmentarchive
+        method: POST
+        description: department.archive
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: department.create
+      path: /department.create
+      operations:
+      - name: departmentcreate
+        method: POST
+        description: department.create
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: department.move
+      path: /department.move
+      operations:
+      - name: departmentmove
+        method: POST
+        description: department.move
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: department.restore
+      path: /department.restore
+      operations:
+      - name: departmentrestore
+        method: POST
+        description: department.restore
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: department.update
+      path: /department.update
+      operations:
+      - name: departmentupdate
+        method: POST
+        description: department.update
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-department-team-rest
+    port: 8080
+    description: REST adapter for Ashby API — Department & Team. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/department-archive
+      name: department-archive
+      description: REST surface for department.archive.
+      operations:
+      - method: POST
+        name: departmentarchive
+        description: department.archive
+        call: ashby-department-team.departmentarchive
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/department-create
+      name: department-create
+      description: REST surface for department.create.
+      operations:
+      - method: POST
+        name: departmentcreate
+        description: department.create
+        call: ashby-department-team.departmentcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/department-move
+      name: department-move
+      description: REST surface for department.move.
+      operations:
+      - method: POST
+        name: departmentmove
+        description: department.move
+        call: ashby-department-team.departmentmove
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/department-restore
+      name: department-restore
+      description: REST surface for department.restore.
+      operations:
+      - method: POST
+        name: departmentrestore
+        description: department.restore
+        call: ashby-department-team.departmentrestore
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/department-update
+      name: department-update
+      description: REST surface for department.update.
+      operations:
+      - method: POST
+        name: departmentupdate
+        description: department.update
+        call: ashby-department-team.departmentupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-department-team-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Department & Team. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: department-archive
+      description: department.archive
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-department-team.departmentarchive
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: department-create
+      description: department.create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-department-team.departmentcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: department-move
+      description: department.move
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-department-team.departmentmove
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: department-restore
+      description: department.restore
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-department-team.departmentrestore
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: department-update
+      description: department.update
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-department-team.departmentupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

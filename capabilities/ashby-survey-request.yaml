@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Survey Request
+  description: 'Ashby API — Survey Request. 2 operations. Lead operation: surveyRequest.create. Self-contained Naftiko capability
+    covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - Survey Request
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-survey-request
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Survey Request business capability. Self-contained, no shared references.
+    resources:
+    - name: surveyRequest.create
+      path: /surveyRequest.create
+      operations:
+      - name: surveyrequestcreate
+        method: POST
+        description: surveyRequest.create
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: surveyRequest.list
+      path: /surveyRequest.list
+      operations:
+      - name: surveyrequestlist
+        method: POST
+        description: surveyRequest.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-survey-request-rest
+    port: 8080
+    description: REST adapter for Ashby API — Survey Request. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/surveyrequest-create
+      name: surveyrequest-create
+      description: REST surface for surveyRequest.create.
+      operations:
+      - method: POST
+        name: surveyrequestcreate
+        description: surveyRequest.create
+        call: ashby-survey-request.surveyrequestcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/surveyrequest-list
+      name: surveyrequest-list
+      description: REST surface for surveyRequest.list.
+      operations:
+      - method: POST
+        name: surveyrequestlist
+        description: surveyRequest.list
+        call: ashby-survey-request.surveyrequestlist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-survey-request-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Survey Request. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: surveyrequest-create
+      description: surveyRequest.create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-survey-request.surveyrequestcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: surveyrequest-list
+      description: surveyRequest.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-survey-request.surveyrequestlist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

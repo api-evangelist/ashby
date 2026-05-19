@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Application Hiring Team Role
+  description: 'Ashby API — Application Hiring Team Role. 1 operations. Lead operation: applicationHiringTeamRole.list. Self-contained
+    Naftiko capability covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - Application Hiring Team Role
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-application-hiring-team-role
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Application Hiring Team Role business capability. Self-contained, no shared references.
+    resources:
+    - name: applicationHiringTeamRole.list
+      path: /applicationHiringTeamRole.list
+      operations:
+      - name: applicationhiringteamrolelist
+        method: POST
+        description: applicationHiringTeamRole.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-application-hiring-team-role-rest
+    port: 8080
+    description: REST adapter for Ashby API — Application Hiring Team Role. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/applicationhiringteamrole-list
+      name: applicationhiringteamrole-list
+      description: REST surface for applicationHiringTeamRole.list.
+      operations:
+      - method: POST
+        name: applicationhiringteamrolelist
+        description: applicationHiringTeamRole.list
+        call: ashby-application-hiring-team-role.applicationhiringteamrolelist
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-application-hiring-team-role-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Application Hiring Team Role. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: applicationhiringteamrole-list
+      description: applicationHiringTeamRole.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-application-hiring-team-role.applicationhiringteamrolelist
+      outputParameters:
+      - type: object
+        mapping: $.

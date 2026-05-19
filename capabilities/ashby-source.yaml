@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Source
+  description: 'Ashby API — Source. 1 operations. Lead operation: source.list. Self-contained Naftiko capability covering
+    one Ashby business surface.'
+  tags:
+  - Ashby
+  - Source
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-source
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Source business capability. Self-contained, no shared references.
+    resources:
+    - name: source.list
+      path: /source.list
+      operations:
+      - name: sourcelist
+        method: POST
+        description: source.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-source-rest
+    port: 8080
+    description: REST adapter for Ashby API — Source. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/source-list
+      name: source-list
+      description: REST surface for source.list.
+      operations:
+      - method: POST
+        name: sourcelist
+        description: source.list
+        call: ashby-source.sourcelist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-source-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Source. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: source-list
+      description: source.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-source.sourcelist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Interview Stage
+  description: 'Ashby API — Interview Stage. 2 operations. Lead operation: interviewStage.info. Self-contained Naftiko capability
+    covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - Interview Stage
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-interview-stage
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Interview Stage business capability. Self-contained, no shared references.
+    resources:
+    - name: interviewStage.info
+      path: /interviewStage.info
+      operations:
+      - name: interviewstageinfo
+        method: POST
+        description: interviewStage.info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: interviewStage.list
+      path: /interviewStage.list
+      operations:
+      - name: interviewstagelist
+        method: POST
+        description: interviewStage.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-interview-stage-rest
+    port: 8080
+    description: REST adapter for Ashby API — Interview Stage. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/interviewstage-info
+      name: interviewstage-info
+      description: REST surface for interviewStage.info.
+      operations:
+      - method: POST
+        name: interviewstageinfo
+        description: interviewStage.info
+        call: ashby-interview-stage.interviewstageinfo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/interviewstage-list
+      name: interviewstage-list
+      description: REST surface for interviewStage.list.
+      operations:
+      - method: POST
+        name: interviewstagelist
+        description: interviewStage.list
+        call: ashby-interview-stage.interviewstagelist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-interview-stage-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Interview Stage. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: interviewstage-info
+      description: interviewStage.info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-interview-stage.interviewstageinfo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: interviewstage-list
+      description: interviewStage.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-interview-stage.interviewstagelist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

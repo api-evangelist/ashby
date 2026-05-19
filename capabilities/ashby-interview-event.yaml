@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Interview Event
+  description: 'Ashby API — Interview Event. 1 operations. Lead operation: interviewEvent.list. Self-contained Naftiko capability
+    covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - Interview Event
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-interview-event
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Interview Event business capability. Self-contained, no shared references.
+    resources:
+    - name: interviewEvent.list
+      path: /interviewEvent.list
+      operations:
+      - name: intervieweventlist
+        method: POST
+        description: interviewEvent.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-interview-event-rest
+    port: 8080
+    description: REST adapter for Ashby API — Interview Event. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/interviewevent-list
+      name: interviewevent-list
+      description: REST surface for interviewEvent.list.
+      operations:
+      - method: POST
+        name: intervieweventlist
+        description: interviewEvent.list
+        call: ashby-interview-event.intervieweventlist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-interview-event-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Interview Event. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: interviewevent-list
+      description: interviewEvent.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-interview-event.intervieweventlist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Application Feedback
+  description: 'Ashby API — Application Feedback. 2 operations. Lead operation: applicationFeedback.list. Self-contained Naftiko
+    capability covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - Application Feedback
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-application-feedback
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Application Feedback business capability. Self-contained, no shared references.
+    resources:
+    - name: applicationFeedback.list
+      path: /applicationFeedback.list
+      operations:
+      - name: applicationfeedbacklist
+        method: POST
+        description: applicationFeedback.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: applicationFeedback.submit
+      path: /applicationFeedback.submit
+      operations:
+      - name: applicationfeedbacksubmit
+        method: POST
+        description: applicationFeedback.submit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-application-feedback-rest
+    port: 8080
+    description: REST adapter for Ashby API — Application Feedback. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/applicationfeedback-list
+      name: applicationfeedback-list
+      description: REST surface for applicationFeedback.list.
+      operations:
+      - method: POST
+        name: applicationfeedbacklist
+        description: applicationFeedback.list
+        call: ashby-application-feedback.applicationfeedbacklist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applicationfeedback-submit
+      name: applicationfeedback-submit
+      description: REST surface for applicationFeedback.submit.
+      operations:
+      - method: POST
+        name: applicationfeedbacksubmit
+        description: applicationFeedback.submit
+        call: ashby-application-feedback.applicationfeedbacksubmit
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-application-feedback-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Application Feedback. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: applicationfeedback-list
+      description: applicationFeedback.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-application-feedback.applicationfeedbacklist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: applicationfeedback-submit
+      description: applicationFeedback.submit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-application-feedback.applicationfeedbacksubmit
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

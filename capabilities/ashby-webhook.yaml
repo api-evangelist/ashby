@@ -1,0 +1,208 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Webhook
+  description: 'Ashby API — Webhook. 4 operations. Lead operation: webhook.create. Self-contained Naftiko capability covering
+    one Ashby business surface.'
+  tags:
+  - Ashby
+  - Webhook
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-webhook
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Webhook business capability. Self-contained, no shared references.
+    resources:
+    - name: webhook.create
+      path: /webhook.create
+      operations:
+      - name: webhookcreate
+        method: POST
+        description: webhook.create
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: webhook.delete
+      path: /webhook.delete
+      operations:
+      - name: webhookdelete
+        method: POST
+        description: webhook.delete
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: webhook.info
+      path: /webhook.info
+      operations:
+      - name: webhookinfo
+        method: POST
+        description: webhook.info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: webhook.update
+      path: /webhook.update
+      operations:
+      - name: webhookupdate
+        method: POST
+        description: webhook.update
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-webhook-rest
+    port: 8080
+    description: REST adapter for Ashby API — Webhook. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/webhook-create
+      name: webhook-create
+      description: REST surface for webhook.create.
+      operations:
+      - method: POST
+        name: webhookcreate
+        description: webhook.create
+        call: ashby-webhook.webhookcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/webhook-delete
+      name: webhook-delete
+      description: REST surface for webhook.delete.
+      operations:
+      - method: POST
+        name: webhookdelete
+        description: webhook.delete
+        call: ashby-webhook.webhookdelete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/webhook-info
+      name: webhook-info
+      description: REST surface for webhook.info.
+      operations:
+      - method: POST
+        name: webhookinfo
+        description: webhook.info
+        call: ashby-webhook.webhookinfo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/webhook-update
+      name: webhook-update
+      description: REST surface for webhook.update.
+      operations:
+      - method: POST
+        name: webhookupdate
+        description: webhook.update
+        call: ashby-webhook.webhookupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-webhook-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Webhook. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: webhook-create
+      description: webhook.create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-webhook.webhookcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: webhook-delete
+      description: webhook.delete
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-webhook.webhookdelete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: webhook-info
+      description: webhook.info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-webhook.webhookinfo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: webhook-update
+      description: webhook.update
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-webhook.webhookupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

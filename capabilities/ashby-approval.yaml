@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Approval
+  description: 'Ashby API — Approval. 1 operations. Lead operation: approval.list. Self-contained Naftiko capability covering
+    one Ashby business surface.'
+  tags:
+  - Ashby
+  - Approval
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-approval
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Approval business capability. Self-contained, no shared references.
+    resources:
+    - name: approval.list
+      path: /approval.list
+      operations:
+      - name: approvallist
+        method: POST
+        description: approval.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-approval-rest
+    port: 8080
+    description: REST adapter for Ashby API — Approval. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/approval-list
+      name: approval-list
+      description: REST surface for approval.list.
+      operations:
+      - method: POST
+        name: approvallist
+        description: approval.list
+        call: ashby-approval.approvallist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-approval-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Approval. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: approval-list
+      description: approval.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-approval.approvallist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

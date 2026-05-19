@@ -1,0 +1,460 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Location
+  description: 'Ashby API — Location. 10 operations. Lead operation: location.archive. Self-contained Naftiko capability covering
+    one Ashby business surface.'
+  tags:
+  - Ashby
+  - Location
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-location
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Location business capability. Self-contained, no shared references.
+    resources:
+    - name: location.archive
+      path: /location.archive
+      operations:
+      - name: locationarchive
+        method: POST
+        description: location.archive
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.create
+      path: /location.create
+      operations:
+      - name: locationcreate
+        method: POST
+        description: location.create
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.info
+      path: /location.info
+      operations:
+      - name: locationinfo
+        method: POST
+        description: location.info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.list
+      path: /location.list
+      operations:
+      - name: locationlist
+        method: POST
+        description: location.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.move
+      path: /location.move
+      operations:
+      - name: locationmove
+        method: POST
+        description: location.move
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.restore
+      path: /location.restore
+      operations:
+      - name: locationrestore
+        method: POST
+        description: location.restore
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.updateAddress
+      path: /location.updateAddress
+      operations:
+      - name: locationupdateaddress
+        method: POST
+        description: location.updateAddress
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.updateExternalName
+      path: /location.updateExternalName
+      operations:
+      - name: locationupdateexternalname
+        method: POST
+        description: location.updateExternalName
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.updateName
+      path: /location.updateName
+      operations:
+      - name: locationupdatename
+        method: POST
+        description: location.updateName
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: location.updateWorkplaceType
+      path: /location.updateWorkplaceType
+      operations:
+      - name: locationupdateworkplacetype
+        method: POST
+        description: location.updateWorkplaceType
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-location-rest
+    port: 8080
+    description: REST adapter for Ashby API — Location. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/location-archive
+      name: location-archive
+      description: REST surface for location.archive.
+      operations:
+      - method: POST
+        name: locationarchive
+        description: location.archive
+        call: ashby-location.locationarchive
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-create
+      name: location-create
+      description: REST surface for location.create.
+      operations:
+      - method: POST
+        name: locationcreate
+        description: location.create
+        call: ashby-location.locationcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-info
+      name: location-info
+      description: REST surface for location.info.
+      operations:
+      - method: POST
+        name: locationinfo
+        description: location.info
+        call: ashby-location.locationinfo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-list
+      name: location-list
+      description: REST surface for location.list.
+      operations:
+      - method: POST
+        name: locationlist
+        description: location.list
+        call: ashby-location.locationlist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-move
+      name: location-move
+      description: REST surface for location.move.
+      operations:
+      - method: POST
+        name: locationmove
+        description: location.move
+        call: ashby-location.locationmove
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-restore
+      name: location-restore
+      description: REST surface for location.restore.
+      operations:
+      - method: POST
+        name: locationrestore
+        description: location.restore
+        call: ashby-location.locationrestore
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-updateaddress
+      name: location-updateaddress
+      description: REST surface for location.updateAddress.
+      operations:
+      - method: POST
+        name: locationupdateaddress
+        description: location.updateAddress
+        call: ashby-location.locationupdateaddress
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-updateexternalname
+      name: location-updateexternalname
+      description: REST surface for location.updateExternalName.
+      operations:
+      - method: POST
+        name: locationupdateexternalname
+        description: location.updateExternalName
+        call: ashby-location.locationupdateexternalname
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-updatename
+      name: location-updatename
+      description: REST surface for location.updateName.
+      operations:
+      - method: POST
+        name: locationupdatename
+        description: location.updateName
+        call: ashby-location.locationupdatename
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/location-updateworkplacetype
+      name: location-updateworkplacetype
+      description: REST surface for location.updateWorkplaceType.
+      operations:
+      - method: POST
+        name: locationupdateworkplacetype
+        description: location.updateWorkplaceType
+        call: ashby-location.locationupdateworkplacetype
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-location-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Location. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: location-archive
+      description: location.archive
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationarchive
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-create
+      description: location.create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-info
+      description: location.info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationinfo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-list
+      description: location.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationlist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-move
+      description: location.move
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationmove
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-restore
+      description: location.restore
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationrestore
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-updateaddress
+      description: location.updateAddress
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationupdateaddress
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-updateexternalname
+      description: location.updateExternalName
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationupdateexternalname
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-updatename
+      description: location.updateName
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationupdatename
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: location-updateworkplacetype
+      description: location.updateWorkplaceType
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-location.locationupdateworkplacetype
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

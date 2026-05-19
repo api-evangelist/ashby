@@ -1,0 +1,376 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — User
+  description: 'Ashby API — User. 8 operations. Lead operation: user.createInterviewerPause. Self-contained Naftiko capability
+    covering one Ashby business surface.'
+  tags:
+  - Ashby
+  - User
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-user
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — User business capability. Self-contained, no shared references.
+    resources:
+    - name: user.createInterviewerPause
+      path: /user.createInterviewerPause
+      operations:
+      - name: usercreateinterviewerpause
+        method: POST
+        description: user.createInterviewerPause
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: user.deleteInterviewerPause
+      path: /user.deleteInterviewerPause
+      operations:
+      - name: userdeleteinterviewerpause
+        method: POST
+        description: user.deleteInterviewerPause
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: user.info
+      path: /user.info
+      operations:
+      - name: userinfo
+        method: POST
+        description: user.info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: user.interviewerSettings
+      path: /user.interviewerSettings
+      operations:
+      - name: userinterviewersettings
+        method: POST
+        description: user.interviewerSettings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: user.list
+      path: /user.list
+      operations:
+      - name: userlist
+        method: POST
+        description: user.list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: user.listInterviewerPauses
+      path: /user.listInterviewerPauses
+      operations:
+      - name: userlistinterviewerpauses
+        method: POST
+        description: user.listInterviewerPauses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: user.search
+      path: /user.search
+      operations:
+      - name: usersearch
+        method: POST
+        description: user.search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: user.updateInterviewerSettings
+      path: /user.updateInterviewerSettings
+      operations:
+      - name: userupdateinterviewersettings
+        method: POST
+        description: user.updateInterviewerSettings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-user-rest
+    port: 8080
+    description: REST adapter for Ashby API — User. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/user-createinterviewerpause
+      name: user-createinterviewerpause
+      description: REST surface for user.createInterviewerPause.
+      operations:
+      - method: POST
+        name: usercreateinterviewerpause
+        description: user.createInterviewerPause
+        call: ashby-user.usercreateinterviewerpause
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-deleteinterviewerpause
+      name: user-deleteinterviewerpause
+      description: REST surface for user.deleteInterviewerPause.
+      operations:
+      - method: POST
+        name: userdeleteinterviewerpause
+        description: user.deleteInterviewerPause
+        call: ashby-user.userdeleteinterviewerpause
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-info
+      name: user-info
+      description: REST surface for user.info.
+      operations:
+      - method: POST
+        name: userinfo
+        description: user.info
+        call: ashby-user.userinfo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-interviewersettings
+      name: user-interviewersettings
+      description: REST surface for user.interviewerSettings.
+      operations:
+      - method: POST
+        name: userinterviewersettings
+        description: user.interviewerSettings
+        call: ashby-user.userinterviewersettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-list
+      name: user-list
+      description: REST surface for user.list.
+      operations:
+      - method: POST
+        name: userlist
+        description: user.list
+        call: ashby-user.userlist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-listinterviewerpauses
+      name: user-listinterviewerpauses
+      description: REST surface for user.listInterviewerPauses.
+      operations:
+      - method: POST
+        name: userlistinterviewerpauses
+        description: user.listInterviewerPauses
+        call: ashby-user.userlistinterviewerpauses
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-search
+      name: user-search
+      description: REST surface for user.search.
+      operations:
+      - method: POST
+        name: usersearch
+        description: user.search
+        call: ashby-user.usersearch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-updateinterviewersettings
+      name: user-updateinterviewersettings
+      description: REST surface for user.updateInterviewerSettings.
+      operations:
+      - method: POST
+        name: userupdateinterviewersettings
+        description: user.updateInterviewerSettings
+        call: ashby-user.userupdateinterviewersettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-user-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — User. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: user-createinterviewerpause
+      description: user.createInterviewerPause
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-user.usercreateinterviewerpause
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: user-deleteinterviewerpause
+      description: user.deleteInterviewerPause
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-user.userdeleteinterviewerpause
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: user-info
+      description: user.info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-user.userinfo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: user-interviewersettings
+      description: user.interviewerSettings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-user.userinterviewersettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: user-list
+      description: user.list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-user.userlist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: user-listinterviewerpauses
+      description: user.listInterviewerPauses
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-user.userlistinterviewerpauses
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: user-search
+      description: user.search
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: ashby-user.usersearch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: user-updateinterviewersettings
+      description: user.updateInterviewerSettings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-user.userupdateinterviewersettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

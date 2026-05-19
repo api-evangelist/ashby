@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ashby API — Referral
+  description: 'Ashby API — Referral. 1 operations. Lead operation: referral.create. Self-contained Naftiko capability covering
+    one Ashby business surface.'
+  tags:
+  - Ashby
+  - Referral
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASHBY_API_KEY: ASHBY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ashby-referral
+    baseUri: https://api.ashbyhq.com
+    description: Ashby API — Referral business capability. Self-contained, no shared references.
+    resources:
+    - name: referral.create
+      path: /referral.create
+      operations:
+      - name: referralcreate
+        method: POST
+        description: referral.create
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Ashby-Signature
+      value: '{{env.ASHBY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ashby-referral-rest
+    port: 8080
+    description: REST adapter for Ashby API — Referral. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/referral-create
+      name: referral-create
+      description: REST surface for referral.create.
+      operations:
+      - method: POST
+        name: referralcreate
+        description: referral.create
+        call: ashby-referral.referralcreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ashby-referral-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ashby API — Referral. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: referral-create
+      description: referral.create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ashby-referral.referralcreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
