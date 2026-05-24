@@ -420,6 +420,8 @@ common:
   updated: '2026-05-08'
 - type: Integrations
   url: https://www.ashbyhq.com/integrations
+- type: LLMsTxt
+  url: https://developers.ashbyhq.com/llms.txt
 integrations:
 - name: G2
 - name: SoC2
