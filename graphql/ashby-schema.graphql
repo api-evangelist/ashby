@@ -1,0 +1,1220 @@
+"""
+Ashby GraphQL Schema
+Conceptual schema derived from the Ashby REST API reference at https://developers.ashbyhq.com/reference
+Ashby is an all-in-one recruiting and ATS platform exposing candidates, applications, jobs, openings,
+offers, interviews, hiring teams, surveys, custom fields, and webhooks.
+"""
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum JobStatus {
+  Draft
+  Open
+  Paused
+  Closed
+  Filled
+}
+
+enum JobType {
+  FullTime
+  PartTime
+  Contract
+  Temporary
+  Intern
+}
+
+enum JobOpeningStatus {
+  Open
+  Filled
+  Closed
+  OnHold
+}
+
+enum ApplicationStatus {
+  Active
+  Archived
+  Hired
+  Converted
+}
+
+enum StageType {
+  PreScreen
+  Screen
+  Assessment
+  Interview
+  Offer
+  Hired
+}
+
+enum StageMilestone {
+  Active
+  PreOffer
+  Offer
+  Hired
+}
+
+enum UserRole {
+  OrgAdmin
+  Recruiter
+  HiringManager
+  Interviewer
+  Coordinator
+  Sourcer
+}
+
+enum NoteType {
+  General
+  InterviewPrep
+  ClientFeedback
+  Internal
+}
+
+enum ActivityType {
+  StageChange
+  EmailSent
+  NoteAdded
+  OfferCreated
+  FeedbackSubmitted
+  WebhookFired
+  ApplicationCreated
+  ApplicationArchived
+}
+
+enum InterviewType {
+  Phone
+  Video
+  Onsite
+  Technical
+  Panel
+  HiringManager
+  Cultural
+}
+
+enum InterviewFeedbackRating {
+  StrongNo
+  No
+  Mixed
+  Yes
+  StrongYes
+}
+
+enum OfferStatus {
+  Draft
+  PendingApproval
+  Approved
+  Extended
+  Accepted
+  Rejected
+  Rescinded
+}
+
+enum CustomFieldType {
+  Text
+  LongText
+  Number
+  Boolean
+  Date
+  Select
+  MultiSelect
+  User
+  Candidate
+}
+
+enum SourceType {
+  JobBoard
+  Referral
+  Sourced
+  Agency
+  Direct
+  Other
+}
+
+enum ScorecardRating {
+  StrongNo
+  No
+  Mixed
+  Yes
+  StrongYes
+}
+
+enum WebhookEvent {
+  CandidateHired
+  ApplicationCreated
+  ApplicationStageChange
+  ApplicationArchived
+  OfferCreated
+  OfferApproved
+  OfferAccepted
+  InterviewScheduleCreated
+  SurveySubmitted
+  JobOpened
+  JobClosed
+}
+
+# ─── Scalar Types ─────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar URL
+
+# ─── Pagination ───────────────────────────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  nextCursor: String
+  moreDataAvailable: Boolean!
+}
+
+# ─── Job Types ────────────────────────────────────────────────────────────────
+
+"""A recruiting concept representing a role to fill."""
+type Job {
+  id: ID!
+  title: String!
+  status: JobStatus!
+  type: JobType
+  department: Department
+  location: JobLocation
+  team: Team
+  confidential: Boolean
+  externalId: String
+  requisitionId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  openedAt: DateTime
+  closedAt: DateTime
+  openings: [JobOpening]
+  postings: [JobPost]
+  hiringTeam: [HiringTeamMember]
+  customFields: [CustomFieldValue]
+}
+
+"""Extended job metadata including compensation range and custom fields."""
+type JobDetails {
+  job: Job!
+  compensationTierSummary: String
+  employmentType: JobType
+  internalNotes: String
+  targetHireDate: DateTime
+  headcount: Int
+  stages: [Stage]
+  interviewPlan: [Interview]
+  reportingFields: [ReportingField]
+  customFieldValues: [CustomFieldValue]
+}
+
+"""Location associated with a job."""
+type JobLocation {
+  id: ID!
+  name: String!
+  city: String
+  region: String
+  country: String
+  isRemote: Boolean
+}
+
+"""Department association for a job."""
+type JobDepartment {
+  id: ID!
+  name: String!
+  parentDepartment: Department
+}
+
+type JobConnection {
+  nodes: [Job!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Job Opening Types ────────────────────────────────────────────────────────
+
+"""A headcount slot (requisition line) associated with a job."""
+type JobOpening {
+  id: ID!
+  job: Job!
+  status: JobOpeningStatus!
+  openingCode: String
+  targetStartDate: DateTime
+  hiringManager: User
+  recruiter: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  filledAt: DateTime
+  customFields: [CustomFieldValue]
+}
+
+"""Extended opening metadata."""
+type JobOpeningDetails {
+  opening: JobOpening!
+  compensation: CompensationRange
+  headcountBudgeted: Boolean
+  budgetNote: String
+  approver: User
+  customFieldValues: [CustomFieldValue]
+}
+
+type JobOpeningConnection {
+  nodes: [JobOpening!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Job Post Types ───────────────────────────────────────────────────────────
+
+"""A candidate-facing job posting."""
+type JobPost {
+  id: ID!
+  job: Job!
+  title: String!
+  location: JobLocation
+  descriptionHtml: String
+  descriptionPlain: String
+  applyUrl: URL
+  isPublished: Boolean!
+  publishedAt: DateTime
+  unpublishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  externalLink: URL
+}
+
+"""Extended posting content including careers page configuration."""
+type JobPostDetails {
+  post: JobPost!
+  careersPageTitle: String
+  careersPageDescription: String
+  employmentType: JobType
+  department: Department
+  salaryRange: CompensationRange
+  applicationForm: Form
+}
+
+type JobPostConnection {
+  nodes: [JobPost!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Candidate Types ──────────────────────────────────────────────────────────
+
+"""A person in the talent database."""
+type Candidate {
+  id: ID!
+  name: String!
+  primaryEmail: CandidateEmail
+  emails: [CandidateEmail]
+  primaryPhone: CandidatePhone
+  phones: [CandidatePhone]
+  location: String
+  linkedInUrl: URL
+  githubUrl: URL
+  websiteUrl: URL
+  source: Source
+  tags: [String]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  applications: [Application]
+  notes: [Note]
+  customFields: [CustomFieldValue]
+}
+
+"""Extended candidate record."""
+type CandidateDetails {
+  candidate: Candidate!
+  demographics: JSON
+  socialProfiles: [SocialProfile]
+  mergedCandidates: [ID]
+  doNotContact: Boolean
+  externalId: String
+  resumeUrl: URL
+  coverLetterUrl: URL
+  customFieldValues: [CustomFieldValue]
+  activityFeed: [Activity]
+}
+
+"""An email address associated with a candidate."""
+type CandidateEmail {
+  value: String!
+  isPrimary: Boolean!
+  isValid: Boolean
+}
+
+"""A phone number associated with a candidate."""
+type CandidatePhone {
+  value: String!
+  isPrimary: Boolean!
+  type: String
+}
+
+"""The attribution source for a candidate."""
+type CandidateSource {
+  id: ID!
+  source: Source!
+  creditedTo: User
+  createdAt: DateTime!
+}
+
+type CandidateConnection {
+  nodes: [Candidate!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Application Types ────────────────────────────────────────────────────────
+
+"""A candidate's submission against a specific job."""
+type Application {
+  id: ID!
+  candidate: Candidate!
+  job: Job!
+  currentStage: Stage
+  status: ApplicationStatus!
+  source: Source
+  appliedAt: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  archivedAt: DateTime
+  archiveReason: ArchiveReason
+  hiredAt: DateTime
+  offer: Offer
+  customFields: [CustomFieldValue]
+}
+
+"""Extended application record."""
+type ApplicationDetails {
+  application: Application!
+  stageHistory: [ApplicationStage]
+  interviewSchedules: [InterviewSchedule]
+  feedback: [InterviewFeedback]
+  scorecard: Scorecard
+  notes: [Note]
+  emails: [Email]
+  surveyAnswers: JSON
+  reportingFields: [ReportingField]
+  customFieldValues: [CustomFieldValue]
+  activityFeed: [Activity]
+}
+
+"""A stage transition in the application history."""
+type ApplicationStage {
+  id: ID!
+  application: Application!
+  stage: Stage!
+  enteredAt: DateTime!
+  exitedAt: DateTime
+  movedBy: User
+}
+
+type ApplicationConnection {
+  nodes: [Application!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Stage Types ──────────────────────────────────────────────────────────────
+
+"""A named step in a hiring pipeline."""
+type Stage {
+  id: ID!
+  name: String!
+  type: StageType!
+  milestone: StageMilestone
+  order: Int!
+  job: Job
+  interviewDefinitions: [Interview]
+  feedbackFormDefinition: Form
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Extended stage metadata."""
+type StageDetails {
+  stage: Stage!
+  automations: [JSON]
+  scorecardTemplates: [Form]
+  defaultInterviewers: [User]
+}
+
+# ─── Org Structure Types ──────────────────────────────────────────────────────
+
+"""An organizational department."""
+type Department {
+  id: ID!
+  name: String!
+  parentDepartment: Department
+  childDepartments: [Department]
+  jobs: [Job]
+  headcount: Int
+  externalId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Extended department record."""
+type DepartmentDetails {
+  department: Department!
+  users: [User]
+  openHeadcount: Int
+  filledHeadcount: Int
+  activeApplications: Int
+}
+
+type DepartmentConnection {
+  nodes: [Department!]!
+  pageInfo: PageInfo!
+}
+
+"""A sub-unit within a department."""
+type Team {
+  id: ID!
+  name: String!
+  department: Department
+  lead: User
+  members: [User]
+}
+
+"""An Ashby platform user."""
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  role: UserRole!
+  isActive: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Extended user record."""
+type UserDetails {
+  user: User!
+  department: Department
+  activeJobs: [Job]
+  permissions: [String]
+  lastLoginAt: DateTime
+  externalId: String
+}
+
+type UserConnection {
+  nodes: [User!]!
+  pageInfo: PageInfo!
+}
+
+"""A hiring team member assignment on a job."""
+type HiringTeamMember {
+  user: User!
+  role: UserRole!
+  job: Job!
+}
+
+# ─── Note and Activity Types ──────────────────────────────────────────────────
+
+"""A free-text note attached to a candidate or application."""
+type Note {
+  id: ID!
+  body: String!
+  type: NoteType!
+  author: User!
+  candidate: Candidate
+  application: Application
+  isPrivate: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Extended note record."""
+type NoteDetails {
+  note: Note!
+  visibleTo: [User]
+  mentions: [User]
+}
+
+"""An audit log event."""
+type Activity {
+  id: ID!
+  type: ActivityType!
+  actor: User
+  candidate: Candidate
+  application: Application
+  details: JSON
+  occurredAt: DateTime!
+}
+
+# ─── Email and Communication Types ───────────────────────────────────────────
+
+"""An email message sent to or from a candidate."""
+type Email {
+  id: ID!
+  subject: String!
+  bodyHtml: String
+  bodyPlain: String
+  fromAddress: String!
+  toAddresses: [String!]!
+  ccAddresses: [String]
+  bccAddresses: [String]
+  sentAt: DateTime
+  deliveredAt: DateTime
+  openedAt: DateTime
+  candidate: Candidate
+  application: Application
+  thread: EmailThread
+  attachments: [EmailAttachment]
+  createdAt: DateTime!
+}
+
+"""Extended email record."""
+type EmailDetails {
+  email: Email!
+  deliveryStatus: String
+  bounceReason: String
+  trackingEnabled: Boolean
+}
+
+"""A threaded conversation grouping related email messages."""
+type EmailThread {
+  id: ID!
+  subject: String!
+  messages: [Email!]!
+  candidate: Candidate
+  lastMessageAt: DateTime!
+  createdAt: DateTime!
+}
+
+"""An attachment on an email."""
+type EmailAttachment {
+  filename: String!
+  contentType: String!
+  url: URL
+  sizeBytes: Int
+}
+
+# ─── Interview Types ──────────────────────────────────────────────────────────
+
+"""An interview definition configured for a job stage."""
+type Interview {
+  id: ID!
+  name: String!
+  type: InterviewType!
+  durationMinutes: Int
+  job: Job
+  stage: Stage
+  defaultInterviewers: [User]
+  feedbackForm: Form
+  instructions: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Extended interview definition."""
+type InterviewDetails {
+  interview: Interview!
+  scorecardTemplate: Form
+  calibrationEnabled: Boolean
+  trainingMaterials: URL
+}
+
+"""Scorecard feedback submitted by an interviewer."""
+type InterviewFeedback {
+  id: ID!
+  interview: Interview
+  application: Application!
+  interviewer: User!
+  rating: InterviewFeedbackRating
+  recommendation: String
+  formResponses: [FormResponse]
+  submittedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A day-of itinerary linking a candidate to interview events."""
+type InterviewSchedule {
+  id: ID!
+  application: Application!
+  candidate: Candidate!
+  stages: [InterviewScheduleSlot]
+  startTime: DateTime
+  endTime: DateTime
+  timezone: String
+  location: String
+  videoConferenceUrl: URL
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User
+}
+
+"""A single time slot within an interview schedule."""
+type InterviewScheduleSlot {
+  id: ID!
+  interview: Interview!
+  interviewers: [User!]!
+  startTime: DateTime!
+  endTime: DateTime!
+  feedbackFormSent: Boolean
+  feedback: InterviewFeedback
+}
+
+# ─── Offer Types ──────────────────────────────────────────────────────────────
+
+"""A compensation offer extended to a candidate."""
+type Offer {
+  id: ID!
+  application: Application!
+  candidate: Candidate!
+  status: OfferStatus!
+  version: Int!
+  compensation: CompensationDetails
+  startDate: DateTime
+  expiresAt: DateTime
+  extendedAt: DateTime
+  acceptedAt: DateTime
+  rejectedAt: DateTime
+  rescindedAt: DateTime
+  approvedBy: [User]
+  createdBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  customFields: [CustomFieldValue]
+}
+
+"""Extended offer record."""
+type OfferDetails {
+  offer: Offer!
+  approvalChain: [OfferApprovalStep]
+  offerLetter: URL
+  compensationNarrative: String
+  signingBonus: Float
+  relocationBonus: Float
+  benefits: [String]
+  customFieldValues: [CustomFieldValue]
+}
+
+"""A step in the offer approval workflow."""
+type OfferApprovalStep {
+  approver: User!
+  status: String!
+  approvedAt: DateTime
+  rejectedAt: DateTime
+  comments: String
+}
+
+"""A reusable offer template."""
+type OfferTemplate {
+  id: ID!
+  name: String!
+  compensationStructure: JSON
+  approvalChainTemplate: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─── Compensation Types ───────────────────────────────────────────────────────
+
+"""A compensation range for a job or opening."""
+type CompensationRange {
+  minValue: Float
+  maxValue: Float
+  currency: String
+  period: String
+}
+
+"""Full compensation details for an offer."""
+type CompensationDetails {
+  baseSalary: Float
+  currency: String!
+  period: String
+  equityShares: Int
+  equityPercentage: Float
+  equityCliffMonths: Int
+  equityVestingMonths: Int
+  bonusTarget: Float
+  bonusType: String
+}
+
+# ─── Custom Field Types ───────────────────────────────────────────────────────
+
+"""A tenant-defined metadata field."""
+type CustomField {
+  id: ID!
+  name: String!
+  type: CustomFieldType!
+  objectType: String!
+  isRequired: Boolean!
+  selectOptions: [SelectOption]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A select option for CustomField of type Select or MultiSelect."""
+type SelectOption {
+  id: ID!
+  label: String!
+  value: String!
+  isActive: Boolean!
+}
+
+"""A value instance of a custom field on a specific object."""
+type CustomFieldValue {
+  field: CustomField!
+  value: JSON
+  updatedAt: DateTime
+}
+
+type CustomFieldConnection {
+  nodes: [CustomField!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Form Types ───────────────────────────────────────────────────────────────
+
+"""A structured data-collection form."""
+type Form {
+  id: ID!
+  name: String!
+  type: String
+  fields: [FormField!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A single question or input within a form."""
+type FormField {
+  id: ID!
+  label: String!
+  type: String!
+  isRequired: Boolean!
+  options: [SelectOption]
+  helpText: String
+  order: Int!
+}
+
+"""A submitted response to a form field."""
+type FormResponse {
+  field: FormField!
+  value: JSON
+}
+
+# ─── Source Types ─────────────────────────────────────────────────────────────
+
+"""A candidate sourcing channel."""
+type Source {
+  id: ID!
+  name: String!
+  type: SourceType!
+  isActive: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type SourceConnection {
+  nodes: [Source!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Reporting Types ──────────────────────────────────────────────────────────
+
+"""A field used in Ashby Analytics reports."""
+type ReportingField {
+  id: ID!
+  name: String!
+  objectType: String!
+  dataType: String!
+  values: [JSON]
+}
+
+"""An aggregated interview scorecard for a candidate-application pair."""
+type Scorecard {
+  applicationId: ID!
+  application: Application!
+  overallRating: ScorecardRating
+  feedbackCount: Int!
+  feedbacks: [InterviewFeedback]
+  completedAt: DateTime
+  pendingInterviewers: [User]
+}
+
+# ─── Archive Types ────────────────────────────────────────────────────────────
+
+"""A reason for archiving an application."""
+type ArchiveReason {
+  id: ID!
+  name: String!
+  type: String
+  isActive: Boolean!
+}
+
+# ─── Social Profile Types ─────────────────────────────────────────────────────
+
+"""A social profile associated with a candidate."""
+type SocialProfile {
+  type: String!
+  url: URL!
+  username: String
+}
+
+# ─── Webhook Types ────────────────────────────────────────────────────────────
+
+"""A subscription to Ashby platform events."""
+type Webhook {
+  id: ID!
+  url: URL!
+  events: [WebhookEvent!]!
+  isActive: Boolean!
+  secretToken: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User
+}
+
+# ─── Platform Types ───────────────────────────────────────────────────────────
+
+"""An API credential for authenticating with the Ashby API."""
+type APIKey {
+  id: ID!
+  name: String!
+  prefix: String!
+  isActive: Boolean!
+  createdAt: DateTime!
+  lastUsedAt: DateTime
+  createdBy: User
+}
+
+"""An authentication token or session context."""
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresAt: DateTime
+  scopes: [String]
+}
+
+# ─── Search Types ─────────────────────────────────────────────────────────────
+
+"""Input parameters for a search operation."""
+input SearchQuery {
+  q: String
+  filters: JSON
+  sortBy: String
+  sortDirection: String
+  limit: Int
+  cursor: String
+}
+
+"""Paginated result set from a search operation."""
+type SearchResults {
+  totalCount: Int!
+  nodes: [JSON!]!
+  pageInfo: PageInfo!
+}
+
+# ─── Input Types ──────────────────────────────────────────────────────────────
+
+input CreateCandidateInput {
+  name: String!
+  email: String
+  phone: String
+  location: String
+  linkedInUrl: String
+  sourceId: ID
+  tags: [String]
+  customFields: [CustomFieldInput]
+}
+
+input UpdateCandidateInput {
+  name: String
+  email: String
+  phone: String
+  location: String
+  linkedInUrl: String
+  githubUrl: String
+  websiteUrl: String
+  tags: [String]
+  customFields: [CustomFieldInput]
+}
+
+input CreateApplicationInput {
+  candidateId: ID!
+  jobId: ID!
+  sourceId: ID
+  stageId: ID
+  customFields: [CustomFieldInput]
+}
+
+input UpdateApplicationInput {
+  customFields: [CustomFieldInput]
+  sourceId: ID
+}
+
+input CreateNoteInput {
+  candidateId: ID
+  applicationId: ID
+  body: String!
+  type: NoteType
+  isPrivate: Boolean
+}
+
+input CreateOfferInput {
+  applicationId: ID!
+  templateId: ID
+  compensation: CompensationInput
+  startDate: String
+  customFields: [CustomFieldInput]
+}
+
+input UpdateOfferInput {
+  compensation: CompensationInput
+  startDate: String
+  customFields: [CustomFieldInput]
+}
+
+input CompensationInput {
+  baseSalary: Float
+  currency: String
+  period: String
+  equityShares: Int
+  bonusTarget: Float
+}
+
+input CreateInterviewScheduleInput {
+  applicationId: ID!
+  slots: [InterviewSlotInput!]!
+  timezone: String
+  location: String
+  videoConferenceUrl: String
+}
+
+input InterviewSlotInput {
+  interviewId: ID!
+  interviewerIds: [ID!]!
+  startTime: String!
+  endTime: String!
+}
+
+input SubmitInterviewFeedbackInput {
+  applicationId: ID!
+  interviewId: ID
+  rating: InterviewFeedbackRating!
+  recommendation: String
+  formResponses: [FormResponseInput]
+}
+
+input FormResponseInput {
+  fieldId: ID!
+  value: JSON
+}
+
+input CreateWebhookInput {
+  url: String!
+  events: [WebhookEvent!]!
+  secretToken: String
+}
+
+input CustomFieldInput {
+  fieldId: ID!
+  value: JSON
+}
+
+# ─── Root Types ───────────────────────────────────────────────────────────────
+
+type Query {
+  """Fetch a single job by ID."""
+  job(id: ID!): Job
+
+  """List jobs with optional filters."""
+  jobs(
+    status: JobStatus
+    departmentId: ID
+    locationId: ID
+    limit: Int
+    cursor: String
+  ): JobConnection
+
+  """Fetch a single job opening by ID."""
+  jobOpening(id: ID!): JobOpening
+
+  """List job openings with optional filters."""
+  jobOpenings(
+    jobId: ID
+    status: JobOpeningStatus
+    limit: Int
+    cursor: String
+  ): JobOpeningConnection
+
+  """Fetch a single job post by ID."""
+  jobPost(id: ID!): JobPost
+
+  """List all published job posts."""
+  jobPosts(jobId: ID, isPublished: Boolean, limit: Int, cursor: String): JobPostConnection
+
+  """Fetch a single candidate by ID."""
+  candidate(id: ID!): Candidate
+
+  """List candidates with optional filters."""
+  candidates(
+    email: String
+    name: String
+    tag: String
+    limit: Int
+    cursor: String
+  ): CandidateConnection
+
+  """Fetch a single application by ID."""
+  application(id: ID!): Application
+
+  """List applications with optional filters."""
+  applications(
+    candidateId: ID
+    jobId: ID
+    status: ApplicationStatus
+    stageId: ID
+    limit: Int
+    cursor: String
+  ): ApplicationConnection
+
+  """Fetch a single stage by ID."""
+  stage(id: ID!): Stage
+
+  """List all stages for a job."""
+  stages(jobId: ID!): [Stage]
+
+  """Fetch a single department by ID."""
+  department(id: ID!): Department
+
+  """List all departments."""
+  departments(limit: Int, cursor: String): DepartmentConnection
+
+  """Fetch a single user by ID."""
+  user(id: ID!): User
+
+  """List users with optional role filter."""
+  users(role: UserRole, isActive: Boolean, limit: Int, cursor: String): UserConnection
+
+  """Fetch interview definition by ID."""
+  interview(id: ID!): Interview
+
+  """List interview definitions for a job or stage."""
+  interviews(jobId: ID, stageId: ID): [Interview]
+
+  """Fetch an interview schedule by ID."""
+  interviewSchedule(id: ID!): InterviewSchedule
+
+  """List interview schedules for an application."""
+  interviewSchedules(applicationId: ID!, limit: Int, cursor: String): [InterviewSchedule]
+
+  """Fetch interview feedback by ID."""
+  interviewFeedback(id: ID!): InterviewFeedback
+
+  """List feedback for an application."""
+  applicationFeedback(applicationId: ID!): [InterviewFeedback]
+
+  """Fetch an offer by ID."""
+  offer(id: ID!): Offer
+
+  """List offers with optional filters."""
+  offers(applicationId: ID, status: OfferStatus, limit: Int, cursor: String): OfferConnection
+
+  """Fetch a custom field definition by ID."""
+  customField(id: ID!): CustomField
+
+  """List custom field definitions."""
+  customFields(objectType: String, limit: Int, cursor: String): CustomFieldConnection
+
+  """Fetch a source by ID."""
+  source(id: ID!): Source
+
+  """List all sources."""
+  sources(type: SourceType, limit: Int, cursor: String): SourceConnection
+
+  """Fetch the aggregated scorecard for an application."""
+  scorecard(applicationId: ID!): Scorecard
+
+  """Fetch a webhook subscription by ID."""
+  webhook(id: ID!): Webhook
+
+  """List all webhook subscriptions."""
+  webhooks: [Webhook]
+
+  """List all archive reasons."""
+  archiveReasons: [ArchiveReason]
+
+  """List all offer templates."""
+  offerTemplates: [OfferTemplate]
+
+  """Search candidates."""
+  searchCandidates(query: SearchQuery!): SearchResults
+
+  """Search applications."""
+  searchApplications(query: SearchQuery!): SearchResults
+
+  """Search jobs."""
+  searchJobs(query: SearchQuery!): SearchResults
+}
+
+type Mutation {
+  """Create a new candidate."""
+  createCandidate(input: CreateCandidateInput!): Candidate
+
+  """Update an existing candidate."""
+  updateCandidate(id: ID!, input: UpdateCandidateInput!): Candidate
+
+  """Merge two candidate records."""
+  mergeCandidates(primaryId: ID!, duplicateId: ID!): Candidate
+
+  """Create a new application."""
+  createApplication(input: CreateApplicationInput!): Application
+
+  """Update application metadata."""
+  updateApplication(id: ID!, input: UpdateApplicationInput!): Application
+
+  """Advance an application to a new stage."""
+  moveApplicationToStage(applicationId: ID!, stageId: ID!): Application
+
+  """Archive (reject) an application."""
+  archiveApplication(applicationId: ID!, archiveReasonId: ID!): Application
+
+  """Reactivate an archived application."""
+  reactivateApplication(applicationId: ID!): Application
+
+  """Withdraw an application."""
+  withdrawApplication(applicationId: ID!): Application
+
+  """Convert an application to a hired employee."""
+  hireApplication(applicationId: ID!, openingId: ID): Application
+
+  """Add a note to a candidate or application."""
+  createNote(input: CreateNoteInput!): Note
+
+  """Update a note."""
+  updateNote(id: ID!, body: String!): Note
+
+  """Delete a note."""
+  deleteNote(id: ID!): Boolean
+
+  """Create an offer draft."""
+  createOffer(input: CreateOfferInput!): Offer
+
+  """Update an offer."""
+  updateOffer(id: ID!, input: UpdateOfferInput!): Offer
+
+  """Submit an offer for approval."""
+  submitOfferForApproval(offerId: ID!): Offer
+
+  """Extend an approved offer to the candidate."""
+  extendOffer(offerId: ID!): Offer
+
+  """Rescind an offer."""
+  rescindOffer(offerId: ID!, reason: String): Offer
+
+  """Create an interview schedule."""
+  createInterviewSchedule(input: CreateInterviewScheduleInput!): InterviewSchedule
+
+  """Submit interview feedback."""
+  submitInterviewFeedback(input: SubmitInterviewFeedbackInput!): InterviewFeedback
+
+  """Create a webhook subscription."""
+  createWebhook(input: CreateWebhookInput!): Webhook
+
+  """Update a webhook subscription."""
+  updateWebhook(id: ID!, url: String, events: [WebhookEvent], isActive: Boolean): Webhook
+
+  """Delete a webhook subscription."""
+  deleteWebhook(id: ID!): Boolean
+}
+
+type OfferConnection {
+  nodes: [Offer!]!
+  pageInfo: PageInfo!
+}

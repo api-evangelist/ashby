@@ -2,342 +2,341 @@ aid: ashby
 url: https://raw.githubusercontent.com/api-evangelist/ashby/refs/heads/main/apis.yml
 name: Ashby
 kind: company
-description: >-
-  Ashby is an all-in-one talent strategy platform combining ATS, sourcing, scheduling, and analytics. The Ashby API
-  exposes candidates, applications, jobs, openings, offers, interviews, hiring teams, surveys, custom fields, and
-  webhooks for recruiting operations teams.
+description: Ashby is an all-in-one talent strategy platform combining ATS, sourcing,
+  scheduling, and analytics. The Ashby API exposes candidates, applications, jobs,
+  openings, offers, interviews, hiring teams, surveys, custom fields, and webhooks
+  for recruiting operations teams.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - HR
-  - ATS
-  - Recruiting
-  - Analytics
-  - Sourcing
-  - Scheduling
+- HR
+- ATS
+- Recruiting
+- Analytics
+- Sourcing
+- Scheduling
 created: '2026-05-08'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: ashby:ashby-candidates-api
-    name: Ashby Candidates API
-    tags:
-      - Candidates
-      - People
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: https://developers.ashbyhq.com/reference
-        type: APIReference
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Create candidates from external sources, retrieve candidate profiles, manage candidate-level identifiers, social
-      handles, demographics, tags, and custom fields. Candidates exist independently of any single application.
-  - aid: ashby:ashby-applications-api
-    name: Ashby Applications API
-    tags:
-      - Applications
-      - Pipeline
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Submit applications against jobs, advance applications through stages, reject, archive, withdraw, and reactivate
-      applications across the hiring pipeline.
-  - aid: ashby:ashby-jobs-api
-    name: Ashby Jobs API
-    tags:
-      - Jobs
-      - Postings
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Manage jobs (the recruiting concept) — title, department, employment type, status, and lifecycle — separate from
-      openings (headcount slots).
-  - aid: ashby:ashby-openings-api
-    name: Ashby Openings API
-    tags:
-      - Openings
-      - Headcount
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Manage openings — the headcount slots associated with a job; multiple openings allow tracking parallel hires per
-      requisition.
-  - aid: ashby:ashby-job-postings-api
-    name: Ashby Job Postings API
-    tags:
-      - Job Postings
-      - Public
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Manage public job postings (the candidate-facing job ads) and the careers-page configuration including title,
-      location, description, and apply URL.
-  - aid: ashby:ashby-offers-api
-    name: Ashby Offers API
-    tags:
-      - Offers
-      - Approvals
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: Generate offer drafts, route through approvals, and track offer versions, compensation, and acceptance status.
-  - aid: ashby:ashby-interviews-api
-    name: Ashby Interviews API
-    tags:
-      - Interviews
-      - Stages
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Read interview definitions configured per job stage and the per- candidate interview events generated as
-      candidates progress.
-  - aid: ashby:ashby-interview-schedules-api
-    name: Ashby Interview Schedules API
-    tags:
-      - Interview Schedules
-      - Scheduling
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Create and manage interview schedules — the day-of itinerary linking candidates, interviewers, and time slots,
-      including ad-hoc and template-driven schedules.
-  - aid: ashby:ashby-feedback-api
-    name: Ashby Feedback API
-    tags:
-      - Feedback
-      - Scorecards
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-      - url: openapi/ashby-assessments-partner-openapi.json
-        type: OpenAPI
-    description: >-
-      Read interview feedback and scorecards submitted by interviewers, including ratings, free-text responses, and
-      recommendation values.
-  - aid: ashby:ashby-feedback-form-definitions-api
-    name: Ashby Feedback Form Definitions API
-    tags:
-      - Feedback Templates
-      - Forms
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-      - url: openapi/ashby-assessments-partner-openapi.json
-        type: OpenAPI
-    description: >-
-      Read the structured feedback form templates (questions, rating scales, recommendation values) configured for the
-      tenant.
-  - aid: ashby:ashby-hiring-team-api
-    name: Ashby Hiring Team API
-    tags:
-      - Hiring Team
-      - Roles
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: Read the hiring-team assignments per job — recruiter, hiring manager, sourcer, coordinator, and interviewer roles.
-  - aid: ashby:ashby-archive-reasons-api
-    name: Ashby Archive Reasons API
-    tags:
-      - Archive Reasons
-      - Disposition
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: Read the configured archive reasons used when candidates are rejected, withdrawn, or hired.
-  - aid: ashby:ashby-sources-api
-    name: Ashby Sources API
-    tags:
-      - Sources
-      - Attribution
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Read the source taxonomy (job board, referral, sourced, agency) attached to candidate applications for sourcing
-      analytics.
-  - aid: ashby:ashby-surveys-api
-    name: Ashby Surveys API
-    tags:
-      - Surveys
-      - EEO
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Read survey responses (EEO, candidate experience) submitted alongside applications. PII-isolated for compliance
-      reporting.
-  - aid: ashby:ashby-locations-api
-    name: Ashby Locations API
-    tags:
-      - Locations
-      - Offices
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: Read the location dictionary used to tag jobs, postings, and candidate location preferences.
-  - aid: ashby:ashby-departments-api
-    name: Ashby Departments API
-    tags:
-      - Departments
-      - Org Structure
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: Read the department dictionary used to scope jobs, openings, and reporting.
-  - aid: ashby:ashby-custom-fields-api
-    name: Ashby Custom Fields API
-    tags:
-      - Custom Fields
-      - Metadata
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Read custom field definitions and values across candidates, applications, openings, and other resources for
-      tenant-specific metadata and reporting.
-  - aid: ashby:ashby-users-api
-    name: Ashby Users API
-    tags:
-      - Users
-      - Permissions
-    properties:
-      - url: https://developers.ashbyhq.com/
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: Read Ashby user accounts and their role assignments (Org Admin, Recruiter, Hiring Manager, Interviewer).
-  - aid: ashby:ashby-webhooks-api
-    name: Ashby Webhooks API
-    tags:
-      - Webhooks
-      - Events
-    properties:
-      - url: https://developers.ashbyhq.com/docs/setting-up-webhooks
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: >-
-      Subscribe to Ashby events (candidateHired, applicationStageChange, offerCreated, interviewScheduleCreated,
-      surveySubmitted) and receive authenticated webhook deliveries.
-  - aid: ashby:ashby-job-feed-api
-    name: Ashby Partner Job Feed
-    tags:
-      - Job Feed
-      - Partners
-    properties:
-      - url: https://developers.ashbyhq.com/docs/dedicated-partner-job-feeds
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: Dedicated partner job feed for distributing live postings to job boards and aggregators with consistent metadata.
-  - aid: ashby:ashby-careers-page-api
-    name: Ashby Careers Page API
-    tags:
-      - Careers Page
-      - Public
-    properties:
-      - url: https://developers.ashbyhq.com/docs/custom-careers-page
-        type: Documentation
-      - url: openapi/ashby-api-openapi.json
-        type: OpenAPI
-    description: Public read-only API for retrieving published jobs and posting content for embedding in custom careers pages.
+- aid: ashby:ashby-candidates-api
+  name: Ashby Candidates API
+  tags:
+  - Candidates
+  - People
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: https://developers.ashbyhq.com/reference
+    type: APIReference
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  - url: graphql/ashby-graphql.md
+    type: GraphQL
+  description: Create candidates from external sources, retrieve candidate profiles,
+    manage candidate-level identifiers, social handles, demographics, tags, and custom
+    fields. Candidates exist independently of any single application.
+- aid: ashby:ashby-applications-api
+  name: Ashby Applications API
+  tags:
+  - Applications
+  - Pipeline
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Submit applications against jobs, advance applications through stages,
+    reject, archive, withdraw, and reactivate applications across the hiring pipeline.
+- aid: ashby:ashby-jobs-api
+  name: Ashby Jobs API
+  tags:
+  - Jobs
+  - Postings
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Manage jobs (the recruiting concept) — title, department, employment
+    type, status, and lifecycle — separate from openings (headcount slots).
+- aid: ashby:ashby-openings-api
+  name: Ashby Openings API
+  tags:
+  - Openings
+  - Headcount
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Manage openings — the headcount slots associated with a job; multiple
+    openings allow tracking parallel hires per requisition.
+- aid: ashby:ashby-job-postings-api
+  name: Ashby Job Postings API
+  tags:
+  - Job Postings
+  - Public
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Manage public job postings (the candidate-facing job ads) and the careers-page
+    configuration including title, location, description, and apply URL.
+- aid: ashby:ashby-offers-api
+  name: Ashby Offers API
+  tags:
+  - Offers
+  - Approvals
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Generate offer drafts, route through approvals, and track offer versions,
+    compensation, and acceptance status.
+- aid: ashby:ashby-interviews-api
+  name: Ashby Interviews API
+  tags:
+  - Interviews
+  - Stages
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read interview definitions configured per job stage and the per- candidate
+    interview events generated as candidates progress.
+- aid: ashby:ashby-interview-schedules-api
+  name: Ashby Interview Schedules API
+  tags:
+  - Interview Schedules
+  - Scheduling
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Create and manage interview schedules — the day-of itinerary linking
+    candidates, interviewers, and time slots, including ad-hoc and template-driven
+    schedules.
+- aid: ashby:ashby-feedback-api
+  name: Ashby Feedback API
+  tags:
+  - Feedback
+  - Scorecards
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  - url: openapi/ashby-assessments-partner-openapi.json
+    type: OpenAPI
+  description: Read interview feedback and scorecards submitted by interviewers, including
+    ratings, free-text responses, and recommendation values.
+- aid: ashby:ashby-feedback-form-definitions-api
+  name: Ashby Feedback Form Definitions API
+  tags:
+  - Feedback Templates
+  - Forms
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  - url: openapi/ashby-assessments-partner-openapi.json
+    type: OpenAPI
+  description: Read the structured feedback form templates (questions, rating scales,
+    recommendation values) configured for the tenant.
+- aid: ashby:ashby-hiring-team-api
+  name: Ashby Hiring Team API
+  tags:
+  - Hiring Team
+  - Roles
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read the hiring-team assignments per job — recruiter, hiring manager,
+    sourcer, coordinator, and interviewer roles.
+- aid: ashby:ashby-archive-reasons-api
+  name: Ashby Archive Reasons API
+  tags:
+  - Archive Reasons
+  - Disposition
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read the configured archive reasons used when candidates are rejected,
+    withdrawn, or hired.
+- aid: ashby:ashby-sources-api
+  name: Ashby Sources API
+  tags:
+  - Sources
+  - Attribution
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read the source taxonomy (job board, referral, sourced, agency) attached
+    to candidate applications for sourcing analytics.
+- aid: ashby:ashby-surveys-api
+  name: Ashby Surveys API
+  tags:
+  - Surveys
+  - EEO
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read survey responses (EEO, candidate experience) submitted alongside
+    applications. PII-isolated for compliance reporting.
+- aid: ashby:ashby-locations-api
+  name: Ashby Locations API
+  tags:
+  - Locations
+  - Offices
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read the location dictionary used to tag jobs, postings, and candidate
+    location preferences.
+- aid: ashby:ashby-departments-api
+  name: Ashby Departments API
+  tags:
+  - Departments
+  - Org Structure
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read the department dictionary used to scope jobs, openings, and reporting.
+- aid: ashby:ashby-custom-fields-api
+  name: Ashby Custom Fields API
+  tags:
+  - Custom Fields
+  - Metadata
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read custom field definitions and values across candidates, applications,
+    openings, and other resources for tenant-specific metadata and reporting.
+- aid: ashby:ashby-users-api
+  name: Ashby Users API
+  tags:
+  - Users
+  - Permissions
+  properties:
+  - url: https://developers.ashbyhq.com/
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Read Ashby user accounts and their role assignments (Org Admin, Recruiter,
+    Hiring Manager, Interviewer).
+- aid: ashby:ashby-webhooks-api
+  name: Ashby Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  properties:
+  - url: https://developers.ashbyhq.com/docs/setting-up-webhooks
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Subscribe to Ashby events (candidateHired, applicationStageChange,
+    offerCreated, interviewScheduleCreated, surveySubmitted) and receive authenticated
+    webhook deliveries.
+- aid: ashby:ashby-job-feed-api
+  name: Ashby Partner Job Feed
+  tags:
+  - Job Feed
+  - Partners
+  properties:
+  - url: https://developers.ashbyhq.com/docs/dedicated-partner-job-feeds
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Dedicated partner job feed for distributing live postings to job boards
+    and aggregators with consistent metadata.
+- aid: ashby:ashby-careers-page-api
+  name: Ashby Careers Page API
+  tags:
+  - Careers Page
+  - Public
+  properties:
+  - url: https://developers.ashbyhq.com/docs/custom-careers-page
+    type: Documentation
+  - url: openapi/ashby-api-openapi.json
+    type: OpenAPI
+  description: Public read-only API for retrieving published jobs and posting content
+    for embedding in custom careers pages.
 common:
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/ashbyhq
-  - type: Website
-    url: https://www.ashbyhq.com/
-  - type: Documentation
-    url: https://developers.ashbyhq.com/
-  - type: APIReference
-    url: https://developers.ashbyhq.com/reference
-  - type: Pricing
-    url: https://www.ashbyhq.com/pricing
-  - type: Login
-    url: https://app.ashbyhq.com/login
-  - type: StatusPage
-    url: https://status.ashbyhq.com/
-  - type: Blog
-    url: https://www.ashbyhq.com/blog
-  - type: Support
-    url: https://www.ashbyhq.com/support
-  - type: GitHubOrganization
-    url: https://github.com/ashbyhq
-  - type: PrivacyPolicy
-    url: https://www.ashbyhq.com/privacy
-  - type: TermsOfService
-    url: https://www.ashbyhq.com/terms
-  - type: Authentication
-    url: https://developers.ashbyhq.com/docs/authentication
-  - type: Webhooks
-    url: https://developers.ashbyhq.com/docs/setting-up-webhooks
-  - type: Plans
-    url: plans/ashby-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/ashby-rate-limits.yml
-  - type: FinOps
-    url: finops/ashby-finops.yml
-  - type: Features
-    data:
-      - JSON-RPC-style API at https://api.ashbyhq.com/
-      - HTTP Basic auth with API key (no password)
-      - Foundations plan at $400/month for up to 100 employees
-      - 10% discount for annual commitment
-      - Plus and Enterprise tiers custom-quoted
-      - Ashby Analytics standalone for non-Ashby ATS customers
-      - Advanced Scheduling and AI Notetaker add-ons
-      - Authenticated webhooks for application/offer/interview/survey events
-      - Dedicated partner job feeds and custom careers pages
-    sources:
-      - https://www.ashbyhq.com/pricing
-      - https://developers.ashbyhq.com/
-    updated: '2026-05-08'
-  - type: Integrations
-    url: https://www.ashbyhq.com/integrations
-  - type: LLMsTxt
-    url: https://developers.ashbyhq.com/llms.txt
+- type: LinkedIn
+  url: https://www.linkedin.com/company/ashbyhq
+- type: Website
+  url: https://www.ashbyhq.com/
+- type: Documentation
+  url: https://developers.ashbyhq.com/
+- type: APIReference
+  url: https://developers.ashbyhq.com/reference
+- type: Pricing
+  url: https://www.ashbyhq.com/pricing
+- type: Login
+  url: https://app.ashbyhq.com/login
+- type: StatusPage
+  url: https://status.ashbyhq.com/
+- type: Blog
+  url: https://www.ashbyhq.com/blog
+- type: Support
+  url: https://www.ashbyhq.com/support
+- type: GitHubOrganization
+  url: https://github.com/ashbyhq
+- type: PrivacyPolicy
+  url: https://www.ashbyhq.com/privacy
+- type: TermsOfService
+  url: https://www.ashbyhq.com/terms
+- type: Authentication
+  url: https://developers.ashbyhq.com/docs/authentication
+- type: Webhooks
+  url: https://developers.ashbyhq.com/docs/setting-up-webhooks
+- type: Plans
+  url: plans/ashby-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/ashby-rate-limits.yml
+- type: FinOps
+  url: finops/ashby-finops.yml
+- type: Features
+  data:
+  - JSON-RPC-style API at https://api.ashbyhq.com/
+  - HTTP Basic auth with API key (no password)
+  - Foundations plan at $400/month for up to 100 employees
+  - 10% discount for annual commitment
+  - Plus and Enterprise tiers custom-quoted
+  - Ashby Analytics standalone for non-Ashby ATS customers
+  - Advanced Scheduling and AI Notetaker add-ons
+  - Authenticated webhooks for application/offer/interview/survey events
+  - Dedicated partner job feeds and custom careers pages
+  sources:
+  - https://www.ashbyhq.com/pricing
+  - https://developers.ashbyhq.com/
+  updated: '2026-05-08'
+- type: Integrations
+  url: https://www.ashbyhq.com/integrations
+- type: LLMsTxt
+  url: https://developers.ashbyhq.com/llms.txt
 integrations:
-  - name: G2
-  - name: SoC2
+- name: G2
+- name: SoC2
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
