@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ashby-api-assessments-partner-implemented-endpoints",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "workflow.info (Implemented by Partner)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.ashbyhq.com/workflow.info",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Detailed information about the workflow"
+    },
+    {
+      "info": {
+        "name": "workflow.update",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.ashbyhq.com/workflow.update",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Called by the partner to tell Ashby about any status changes to the workflow"
+    },
+    {
+      "info": {
+        "name": "workflow.list (Implemented by Partner)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.ashbyhq.com/workflow.list"
+      },
+      "docs": "workflow.list (Implemented by Partner)"
+    },
+    {
+      "info": {
+        "name": "workflow.start (Implemented by Partner)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.ashbyhq.com/workflow.start",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "workflow.start (Implemented by Partner)"
+    }
+  ],
+  "bundled": true
+}

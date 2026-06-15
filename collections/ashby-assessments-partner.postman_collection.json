@@ -1,0 +1,554 @@
+{
+  "item": [
+    {
+      "id": "3af0ce6d-4414-416c-8fa7-7183e2b499fa",
+      "name": "workflow.info (Implemented by Partner)",
+      "request": {
+        "name": "workflow.info (Implemented by Partner)",
+        "description": {
+          "content": "Detailed information about the workflow",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "workflow.info"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"external_workflow_template_id\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "42c1cc8e-9c59-465e-83a1-aa3b89169ae2",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "workflow.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_workflow_template_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"results\\\": [\\n        {\\n            \\\"external_workflow_template_id\\\": \\\"<id>\\\",\\n            \\\"name\\\": \\\"Name of the workflow\\\",\\n            \\\"description\\\": \\\"Description of the workflow\\\",\\n            \\\"fields\\\": [\\n                {\\n                    \\\"id\\\": \\\"id\\\",\\n                    \\\"title\\\": \\\"title\\\",\\n                    \\\"description\\\": \\\"description\\\",\\n                    \\\"type\\\": \\\"type\\\",\\n                    \\\"isRequired\\\": true,\\n                    \\\"selectableValues\\\": [\\n                        {\\n                            \\\"label\\\": \\\"label\\\",\\n                            \\\"value\\\": \\\"value\\\"\\n                        }\\n                    ]\\n                }\\n            ]\\n        }\\n    ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "38716004-a2a2-45e4-a533-ac4f9427d685",
+      "name": "workflow.update",
+      "request": {
+        "name": "workflow.update",
+        "description": {
+          "content": "Called by the partner to tell Ashby about any status changes to the workflow",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "workflow.update"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"timestamp\": \"<integer>\",\n  \"external_workflow_id\": \"<string>\",\n  \"external_workflow_status\": \"<string>\",\n  \"external_workflow_profile_url\": \"<string>\",\n  \"metadata\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "dcab6c3d-1f33-4423-b472-d5587670d91d",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "workflow.update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timestamp\": \"<integer>\",\n  \"external_workflow_id\": \"<string>\",\n  \"external_workflow_status\": \"<string>\",\n  \"external_workflow_profile_url\": \"<string>\",\n  \"metadata\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "dcc61e5f-f1a9-48de-a426-bcfbb9e63148",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "workflow.update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timestamp\": \"<integer>\",\n  \"external_workflow_id\": \"<string>\",\n  \"external_workflow_status\": \"<string>\",\n  \"external_workflow_profile_url\": \"<string>\",\n  \"metadata\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": \"<string>\",\n      \"type\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "5e2433a6-03bd-41dc-92a9-d6327fab52dd",
+      "name": "workflow.list (Implemented by Partner)",
+      "request": {
+        "name": "workflow.list (Implemented by Partner)",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "workflow.list"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "cd8a4d17-7f8b-4bef-9426-555b3ebbc260",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "workflow.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"results\\\": [\\n        {\\n            \\\"external_workflow_template_id\\\": \\\"id\\\",\\n            \\\"name\\\": \\\"string\\\",\\n            \\\"description\\\": \\\"string\\\"\\n        }\\n    ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d8f0ac54-0bcd-481c-8fce-00e2d983d36d",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "workflow.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "375b3385-b29e-426c-a1fe-e0057f7dfb32",
+      "name": "workflow.start (Implemented by Partner)",
+      "request": {
+        "name": "workflow.start (Implemented by Partner)",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "workflow.start"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"external_workflow_template_id\": \"<string>\",\n  \"values\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "7193717b-a1cf-40d5-a9f6-ef92e784a711",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "workflow.start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_workflow_template_id\": \"<string>\",\n  \"values\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"success\\\": true,\\n    \\\"results\\\": {\\n        \\\"id\\\": \\\"string\\\"\\n    }\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "024a10e1-eea1-4e18-99b1-0e48b440d076",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "workflow.start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_workflow_template_id\": \"<string>\",\n  \"values\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f7cd62ff-df7b-4df6-b9ed-928381fba55e",
+    "name": "ashby-api-assessments-partner-implemented-endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

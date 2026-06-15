@@ -1,0 +1,2798 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Key",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "apiKey.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/apiKey.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve information about the API key being used to make the request.\n\n**Requires the [`apiKeysRead`](authentication#permissions-apikeyinfo) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "application.changeSource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.changeSource",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the source of an application.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationchangesource) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.changeStage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.changeStage",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the stage of an application\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationchangestage) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Consider a candidate for a job (eg when sourcing a candidate for a job posting).\n\nIf you're submitting an application as a job board, use the [`applicationForm.submit`](ref:applicationformsubmit) endpoint instead. See [Creating a custom careers page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page) for details.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationcreate) permission.**\n\nTo set values for custom fields on Applications, use the [`customFields"
+        },
+        {
+          "info": {
+            "name": "application.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch application details by application id or by submitted form instance id (which is return by the `applicationForm.submit` endpoint). If both applicationId and submittedFormInstanceId are provided, we will lookup by applicationId.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets all applications in the organization.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationlist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.transfer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer an application to a different job.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationtransfer) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an application\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationupdate) permission.**\n\nTo set values for custom fields on Applications, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "application.updateHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.updateHistory",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the history of an application. This endpoint is used to update the history of an application, such as setting the entered stage time or deleting a history event.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationupdatehistory) permission and the `Allow updating application history?` setting found in your admin API key permissions configuration.**\n"
+        },
+        {
+          "info": {
+            "name": "application.listHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.listHistory",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch a paginated list of application history items for an application.\n\nThis endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationListHistory) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.listCriteriaEvaluations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.listCriteriaEvaluations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch a paginated list of AI criteria evaluations for an application.\n\nThis endpoint returns the AI-generated criteria evaluations that assess how well a candidate meets specific job requirements. Each evaluation contains the outcome, reasoning, and other assessment details.\n\nThis endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.\n\n**Requires the [`candidatesRead`](authent"
+        },
+        {
+          "info": {
+            "name": "application.addHiringTeamMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.addHiringTeamMember",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an Ashby user to the hiring team at the application level. \n\n**Requires the [`candidateWrite`](authentication#permissions-applicationaddhiringteammember) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.removeHiringTeamMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.removeHiringTeamMember",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes an Ashby user to the hiring team at the application level. \n\n**Requires the [`candidateWrite`](authentication#permissions-applicationremovehiringteammember) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "applicationFeedback.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/applicationFeedback.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all interview scorecards and feedback submissions associated with an application.\n\nEach feedback submission contains:\n- **formDefinition**: The structure of the feedback form with all available fields\n- **submittedValues**: Responses to the form fields, which depending on the form configuration can include:\n  - Text feedback (e.g., \"Candidate showed strong technical skills...\")\n  - Numerical scores (e.g., \"4\" for a 1-4 rating scale)\n  - Structured selections (e.g., \"Strong Hire\" for overall"
+        },
+        {
+          "info": {
+            "name": "applicationFeedback.submit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/applicationFeedback.submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Application feedback forms support a variety of field types. \n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationfeedbacksubmit) permission.**\n\nThe values accepted for each field depend on the type of field that's being filled out:                                                                                                                                                                                                                 |\n- `Boolean` - A boolean value\n- `Co"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application Hiring Team Role",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "applicationHiringTeamRole.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/applicationHiringTeamRole.list"
+          },
+          "docs": "Gets all available hiring team roles for applications in the organization.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationHiringTeamRoleList) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application Form",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "applicationForm.submit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/applicationForm.submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an application for a job posting.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationformsubmit) permission.**\n\nThe Content-Type of this request must be `multipart/form-data` or `application/json`.\n\nWhen using `application/json`, file fields should contain a handle string obtained from [`file.createFileUploadHandle`](https://developers.ashbyhq.com/reference/filecreatefileuploadhandle) with `fileUploadContext` set to `ApplicationForm`. This allows files to be uploade"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Approval",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "approval.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/approval.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets all approvals in the organization. You can optionally filter by entity type and entity ID.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`approvalsRead`](authentication#permissions-approvallist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Approval Definition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "approvalDefinition.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/approvalDefinition.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update an approval definition for a specific entity that requires approval. The entity requiring approval must be within scope of an approval in Ashby that is marked as being managed by the API.\n\nIf the provided approval step definitions is an empty list, then approval will be skipped and the entity will proceed to the next stage.\n\n**Requires the [`approvalsWrite`](authentication#permissions-approvaldefinitionupdate) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Archive Reason",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "archiveReason.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/archiveReason.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists archive reasons\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-archivereasonlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Assessment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "assessment.addCompletedToCandidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.addCompletedToCandidate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a completed assessment to a candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-assessmentaddcompletedtocandidate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "assessment.start (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API for starting an assessment. Implemented by the partner, called by Ashby.\n"
+        },
+        {
+          "info": {
+            "name": "assessment.list (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API for listing assessments that the partner supports — implemented by the partner, but called by Ashby\n"
+        },
+        {
+          "info": {
+            "name": "assessment.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Ashby about the status of a started assessment.\n\n**Requires the [`candidatesWrite`](authentication#permissions-assessmentupdate) permission.**\n\n`assessment_status` is required unless `cancelled_reason` is provided.\n"
+        },
+        {
+          "info": {
+            "name": "assessment.cancel (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "(Optional) Cancels an assessment. Implemented by the partner, called by Ashby.\n"
+        },
+        {
+          "info": {
+            "name": "customField.list (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.customField.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API for listing custom fields that can be synced to Ashby — implemented by the assessment partner, but called by Ashby.\n\nThis endpoint is optional and must be enabled for your integration. Contact Ashby if you wish to use this feature.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Brand",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "brand.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/brand.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all brands for the organization.\n\n**Requires the [`organizationRead`](authentication#permissions-departmentinfo) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Candidate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "candidate.addEmailMessage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.addEmailMessage",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an email message to a candidate's profile.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddemailmessage) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.addProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.addProject",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the candidate to a project.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddproject) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.addTag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.addTag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a tag to a candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddtag) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.anonymize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.anonymize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Anonymizes a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateanonymize) permission.**\n\n**Note**: this action cannot be reversed and requires all of a candidate's applications to be in the archived or hired state.\n"
+        },
+        {
+          "info": {
+            "name": "candidate.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatecreate) permission.**\n\nTo set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "candidate.createNote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.createNote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a note on a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatecreatenote) permission.**\n\nFor notes submitted with a type of `text/html`, we support the elements listed below. Any unsupported elements will be stripped out of the note's content before posting.\n  - Bold `<b>`\n  - Italic `<i>`\n  - Underline `<u>`\n  - Links `<a>`\n  - Bulleted Lists - `<ul>`, `<li>`\n  - Ordered Lists - `<ol>`, `<li>`\n  - Code - `<code>`\n  - Code Block - `<pre>`\n"
+        },
+        {
+          "info": {
+            "name": "candidate.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets a single candidate by id.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidateinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all candidates in an organization.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.listClientInfo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.listClientInfo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all client info records for a candidate.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistclientinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.listFraudChecks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.listFraudChecks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetches a paginated list of fraud checks for a candidate, including the fraud signals detected in each check.\n\nEach fraud check contains a list of fraud signals with their category, name, description, and optional value.\n\n**Field Stability:**\n- `id` fields are stable and will not change.\n- `category`, `name`, `description`, and `value` fields on fraud signals are unstable and may change as signals are added, renamed, or recategorized.\n\nThis endpoint supports pagination only (not incremental sync"
+        },
+        {
+          "info": {
+            "name": "candidate.setFraudStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.setFraudStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint allows marking candidates as fraudulent, not fraudulent, or unsure after reviewing their fraud signals via `candidate.listFraudChecks`.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatesetfraudstatus) permission.**\n\n**Note:** This endpoint requires the Fraud Detection feature to be enabled for your organization.\n"
+        },
+        {
+          "info": {
+            "name": "candidate.listNotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.listNotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all notes on a candidate.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistnotes) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.listProjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.listProjects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all projects on a candidate.\n\nThis endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistprojects) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.removeProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.removeProject",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes the candidate from a project.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateremoveproject) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.removeTag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.removeTag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a tag from a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateremovetag) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for candidates by email and / or name. \n\n**Requires the [`candidatesRead`](authentication#permissions-candidatesearch) permission.**\n\nResponses are limited to 100 results. Consider refining your search or using /candidate.list to paginate through all candidates, if you approach this limit. This API is for use cases where you intend to operate on a final small set of candidates, like building a candidate autocomplete.\n\nNote: When multiple search parameters are provided, the parameters are "
+        },
+        {
+          "info": {
+            "name": "candidate.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateupdate) permission.**\n\nTo set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "candidate.uploadFile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.uploadFile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a file to attach to the candidate's profile.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateuploadfile) permission.**\n\n**Recommended: Presigned upload handle**\nUse `file.createFileUploadHandle` with `fileUploadContext: \"CandidateFiles\"` to get a presigned URL. Upload the file directly to that URL, then call this endpoint with the returned `fileHandle`. This avoids sending file bytes through the API, improving upload reliability and reducing latency for large file"
+        },
+        {
+          "info": {
+            "name": "candidate.uploadResume",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.uploadResume",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a candidate's resume, parses it, and updates their information.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateuploadresume) permission.**\n\n**Recommended: Presigned upload handle**\nUse `file.createFileUploadHandle` with `fileUploadContext: \"CandidateResume\"` to get a presigned URL. Upload the file directly to that URL, then call this endpoint with the returned `resumeHandle`. This avoids sending file bytes through the API, improving upload reliability and reducin"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Candidate Tag",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "candidateTag.archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidateTag.archive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Archives a candidate tag.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-candidatetagarchive) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidateTag.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidateTag.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a candidate tag.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-candidatetagcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidateTag.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidateTag.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all candidate tags.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-candidatetaglist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Close Reason",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "closeReason.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/closeReason.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all close reasons for jobs or openings.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-closereasonlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Communication Template",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "communicationTemplate.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/communicationTemplate.list"
+          },
+          "docs": "List all enabled communication templates.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-communicationtemplatelist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom Field",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "customField.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new custom field\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-customfieldcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "customField.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get information about a custom field\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "customField.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all custom fields.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldlist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "customField.setValue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.setValue",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the value of a custom field for a given object.\n\n**Note:** When updating multiple custom fields on the same object, use \n[`customField.setValues`](#operation/customFieldSetValues) instead to avoid \nrace conditions.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalue) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n  - Date - An ISO Date strin"
+        },
+        {
+          "info": {
+            "name": "customField.setValues",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.setValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the values of multiple custom fields for a given object in a single call.\nThis is the recommended approach when updating multiple fields on the same object\nto avoid race conditions that can occur with concurrent `customField.setValue` calls.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalues) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n"
+        },
+        {
+          "info": {
+            "name": "customField.updateSelectableValues",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.updateSelectableValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the selectable values for a custom field\n\nThis endpoint merges the provided selectable values with the existing values for a custom field.\n\n**Merge behavior:**\n- **New values** (values not present in the existing values) are added to the field\n- **Existing values** (matching by `value` field) have their `label` updated and `isArchived` status set from the request\n- **Omitted values** (existing values not included in the request) are marked as archived\n- Metadata such as substitution token"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Department & Team",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "department.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a department\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.archive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Archives a department\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentarchive) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.restore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restores a department\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentrestore) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.move",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves a department to another parent\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentmove) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a department\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentupdate) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Department",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "department.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch department details by id\n\n**Requires the [`organizationRead`](authentication#permissions-departmentinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all departments\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`organizationRead`](authentication#permissions-departmentlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "file.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/file.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the url of a file associated with a candidate\n\n**Requires the [`candidatesRead`](authentication#permissions-fileinfo) permission.**\n\n**Please note** that running this with Ashby-generated demo data in an Ashby demo account can result in errors. We would recommend manually creating a test candidate in Ashby when trying out this endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "file.createFileUploadHandle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/file.createFileUploadHandle",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a presigned upload URL that allows uploading a file directly to storage, bypassing the need to send file bytes through the API.\n\nBenefits over multipart upload:\n- **Reliability**: File bytes are uploaded directly to storage, avoiding timeouts and connection resets that can occur when proxying large files through the API.\n- **Compatibility**: Avoids issues with firewalls or proxies that block or scan multipart payloads containing binary content.\n- **Simplicity**: The follow-up call to, e."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Feedback Form Definition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "feedbackFormDefinition.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/feedbackFormDefinition.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a single feedback form by id\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-feedbackformdefinitioninfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "feedbackFormDefinition.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/feedbackFormDefinition.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all feedback forms.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-feedbackformdefinitionlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Hiring Team",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "hiringTeam.addMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/hiringTeam.addMember",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an Ashby user to the hiring team at the application or job-level. \n\n**Requires the [`organizationWrite`](authentication#permissions-hiringteamaddmember) permission.**\n\nHiring team members can be added to a hiring team at the application, job, or opening level. \n"
+        },
+        {
+          "info": {
+            "name": "hiringTeam.removeMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/hiringTeam.removeMember",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes an Ashby user from the hiring team at the application or job-level. \n\n**Requires the [`organizationWrite`](authentication#permissions-hiringteamremovemember) permission.**\n\nHiring team members can be removed from a hiring team at the application, job, or opening level. \n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Hiring Team Role",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "hiringTeamRole.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/hiringTeamRole.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the possible hiring team roles in an organization\n\n**Requires the [`organizationRead`](authentication#permissions-hiringteamrolelist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interview",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "interview.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interview.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch interview details by id\n\n**Requires the [`interviewsRead`](authentication#permissions-interviewinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interview.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interview.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all interviews.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`interviewsRead`](authentication#permissions-interviewlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interview Event",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "interviewEvent.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewEvent.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists interview events associated with an interview schedule\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`interviewsRead`](authentication#permissions-intervieweventlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interview Plan",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "interviewPlan.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewPlan.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List published interview plans. Draft interview plans are not returned. If `includeArchived` is true, archived interview plans are also included.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`interviewsRead`](authentication#permissions-interviewplanlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interview Schedule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "interviewSchedule.cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewSchedule.cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel an interview schedule by id\n\n**Requires the [`interviewsWrite`](authentication#permissions-interviewschedulecancel) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewSchedule.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewSchedule.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a scheduled interview in Ashby\n\n**Requires the [`interviewsWrite`](authentication#permissions-interviewschedulecreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewSchedule.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewSchedule.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets all interview schedules in the organization.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`interviewsRead`](authentication#permissions-interviewschedulelist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewSchedule.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewSchedule.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an interview schedule. This endpoint allows you to add, cancel, or update interview events associated with an interview schedule.\n\n**Requires the [`interviewsWrite`](authentication#permissions-interviewscheduleupdate) permission.**\n\nIn order to update an interview event on a schedule, the event's `interviewEventId` must be included when sending your request. \n`interviewEventId`s are included in the response of the `interviewSchedule.create` endpoint.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interview Stage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "interviewStage.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewStage.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all interview stages for an interview plan in order.\n\n**Requires the [`interviewsRead`](authentication#permissions-interviewstagelist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewStage.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewStage.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch interview stage details by id\n\n**Requires the [`interviewsRead`](authentication#permissions-interviewstageinfo) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interview Stage Group",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "interviewStageGroup.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewStageGroup.list"
+          },
+          "docs": "List all interview group stages for an interview plan in order.\n\n**Requires the [`interviewsRead`](authentication#permissions-interviewstagelist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interviewer Pool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "interviewerPool.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewerPool.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all interviewer pools.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-interviewerpoollist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewerPool.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewerPool.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get information about an interviewer pool.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-interviewerpoolinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewerPool.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewerPool.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an interviewer pool.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewerPool.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewerPool.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an interviewer pool.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolupdate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewerPool.archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewerPool.archive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Archives an interviewer pool.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolarchive) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewerPool.restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewerPool.restore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restores an archived interviewer pool.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolrestore) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewerPool.addUser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewerPool.addUser",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a user to an interviewer pool.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpooladduser) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "interviewerPool.removeUser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/interviewerPool.removeUser",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a user from an interviewer pool.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolremoveuser) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Job",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "job.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new job\n\n**Requires the [`jobsWrite`](authentication#permissions-jobcreate) permission.**\n\nTo set values for custom fields on Jobs, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "job.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns details about a single job by id\n\n**Requires the [`jobsRead`](authentication#permissions-jobinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "job.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all open, closed, and archived jobs.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`jobsRead`](authentication#permissions-joblist) permission.**\n\nTo include draft jobs, `Draft` must be specified in the `status` param.\n"
+        },
+        {
+          "info": {
+            "name": "job.setStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.setStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the status on a job by id.\n\n**Requires the [`jobsWrite`](authentication#permissions-jobsetstatus) permission.**\n\nAll jobs are drafts when they're first created. There are a few validations around the stages a job can be transitioned to:\n- Drafts can be changed to Open or Archived\n- Open jobs can be changed to Closed\n- Closed jobs can be changed to Draft or Archived\n- Archived jobs can be changed to a Draft \n"
+        },
+        {
+          "info": {
+            "name": "job.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing job\n\n**Requires the [`jobsWrite`](authentication#permissions-jobupdate) permission.**\n\nTo set values for custom fields on Jobs, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "job.updateCompensation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.updateCompensation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing job's compensation tiers\n\n**Requires the [`jobsWrite`](authentication#permissions-jobupdate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "job.search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for jobs by title\n\n**Requires the [`jobsRead`](authentication#permissions-jobsearch) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Job Board",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jobBoard.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobBoard.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all enabled job boards.\n\n**Requires the [`jobsRead`](authentication#permissions-jobboardlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Job Interview Plan",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jobInterviewPlan.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobInterviewPlan.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a job's interview plan, including activities and interviews that need to be scheduled at each stage\n\n**Requires the [`jobsRead`](authentication#permissions-jobinterviewplaninfo) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Job Posting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jobPosting.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobPosting.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve an individual job posting\n\n**Requires the [`jobsRead`](authentication#permissions-jobpostinginfo) permission.**\n\nResult fields:\n- `linkedData` - Object that can be used to populate \"rich results\" in search engines. [See more info here](https://developers.google.com/search/docs/data-types/job-posting).\n- `applicationFormDefinition` -\tSee the guide on [Creating a custom careers page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page).\n"
+        },
+        {
+          "info": {
+            "name": "jobPosting.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobPosting.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all published job postings\n\n**Requires the [`jobsRead`](authentication#permissions-jobpostinglist) permission.**\n\n**Important**: By default, this endpoint includes all listed and unlisted job postings. Unlisted job postings should not be displayed publicly. \nIf you are using the API to publicly expose job postings, set the `listedOnly` parameter to `true` when calling this API so that you only fetch listed job postings that can be displayed publicly.\n"
+        },
+        {
+          "info": {
+            "name": "jobPosting.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobPosting.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing job posting.\n\n**Requires the [`jobsWrite`](authentication#permissions-jobpostingupdate) permission.**\n\n**Note on updating the description**: When job description openings and closings are not suppressed, the `descriptionHtml` field returned in `jobPosting.info` may contain content that is not modifiable through the API. Only the content of the `descriptionParts.descriptionBody` field of the `jobPosting.info` endpoint is modifiable through this call. To completely customize th"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Job Template",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jobTemplate.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobTemplate.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all active and inactive job templates.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`jobsRead`](authentication#permissions-jobtemplatelist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Location",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "location.archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.archive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Archives a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationarchive) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets details for a single location by id.\n\n**Requires the [`organizationRead`](authentication#permissions-locationinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all locations. Regions are not returned.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`organizationRead`](authentication#permissions-locationlist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.move",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves a location in location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationmove) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.restore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restores an archived location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationrestore) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.updateAddress",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.updateAddress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an address of a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateaddress) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.updateName",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.updateName",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update location's name.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateName) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.updateExternalName",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.updateExternalName",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a location's external (candidate-facing) name.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateexternalname) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.updateWorkplaceType",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.updateWorkplaceType",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update location's workplace type.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateworkplacetype) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notetaker Transcript",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "notetakerTranscript.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/notetakerTranscript.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetches metadata and a pre-signed download URL for an AI\nNotetaker transcript recording.\n\n**Prerequisites:**\n- Your organization must have the **AI Notetaker add-on**. If your organization does not have\n  the add-on, requests will fail with the `notetaker_transcript_not_enabled` error.\n\nThe response includes a signed URL with the transcript JSON. Download the file promptly after calling\n  this endpoint. If the URL has expired, call the endpoint again to get a fresh one.\n\nOn the free tier, transc"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "offer.approve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.approve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approves an offer or a specific approval step within an offer's approval process.\n\nThis endpoint mimics the behavior of the \"Force Approve\" function in the Ashby app, where an admin can override approval for a specific step or entire approval process.\n\n**Requires the [`offersWrite`](authentication#permissions-offerapprove) permission.**\n\nThis endpoint can be used in two ways:\n1. **Approve entire offer**: Call without `approvalStepId` and `userId` to approve the entire offer approval process\n2. *"
+        },
+        {
+          "info": {
+            "name": "offer.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Offer\n\n**Requires the [`offersWrite`](authentication#permissions-offercreate) permission.**\n\nOffer forms support a variety of field types. The values accepted for each field depend on the type of field that's being filled out:\n- `Boolean` - A boolean value.\n- `Currency` - An object in the format `{ currencyCode: \"USD\", value: 100000 }` where currencyCode is a valid ISO 4217 currency code and value is an integer.\n- `Date` - A valid ISO Date string.\n- `Number` - An integer.\n- `String"
+        },
+        {
+          "info": {
+            "name": "offer.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns details about a single offer by id\n\n**Requires the [`offersRead`](authentication#permissions-offerinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "offer.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get a list of all offers with their latest version.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`offersRead`](authentication#permissions-offerlist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "offer.start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The offer.start endpoint creates and returns an offer version instance that can be filled out and submitted\nusing the `offer.create` endpoint. \n\n**Requires the [`offersWrite`](authentication#permissions-offerstart) permission.**\n\nIn order to create a new offer version for a candidate with an in-progress \noffer process, you can call the `offer.start` endpoint and then call the `offer.create` endpoint to fill out the\nnewly created offer version form.  \n"
+        },
+        {
+          "info": {
+            "name": "offer.startApprovalProcess",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.startApprovalProcess",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts the approval process for an offer in a \"WaitingOnApprovalStart\" state.\nOnce started, the approval is sent to the configured approvers.\n\nThe offer version ID can be obtained from the offer (e.g. `offer.info` or `offer.list` response's `latestVersion.id`).\n\n**Requires the [`offersWrite`](authentication#permissions-offerstartapprovalprocess) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "offer.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Offer\n\n**Requires the [`offersWrite`](authentication#permissions-offerupdate) permission.**\n\nOffer forms support a variety of field types. The values accepted for each field depend on the type of field that's being filled out:\n- `Boolean` - A boolean value.\n- `Currency` - An object in the format `{ currencyCode: \"USD\", value: 100000 }` where currencyCode is a valid ISO 4217 currency code and value is an integer.\n- `Date` - A valid ISO Date string.\n- `Number` - An integer.\n- `"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offer Process",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "offerProcess.start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offerProcess.start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts an offer process for a candidate.\n\n**Requires the [`offersWrite`](authentication#permissions-offerprocessstart) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Openings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "opening.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves an opening by its UUID.\n      \n**Requires the [`jobsRead`](authentication#permissions-openinginfo) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists openings.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n      \n**Requires the [`jobsRead`](authentication#permissions-openinglist) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for openings by identifier.\n      \n**Requires the [`jobsRead`](authentication#permissions-openingsearch) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingcreate) permission.**\n\nTo set values of custom fields on Openings, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint."
+        },
+        {
+          "info": {
+            "name": "opening.addJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.addJob",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a job to an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingaddjob) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.removeJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.removeJob",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a job from an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingremovejob) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.addLocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.addLocation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a location to an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingaddlocation) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.removeLocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.removeLocation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a location from an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingremovelocation) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.setOpeningState",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.setOpeningState",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the state of an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingsetopeningstate) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.setArchived",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.setArchived",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the archived state of an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingsetarchived) permission.**"
+        },
+        {
+          "info": {
+            "name": "opening.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/opening.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingupdate) permission.**\n\nTo set values for custom fields on Openings, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Project",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "project.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/project.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves an project by its UUID.\n      \n**Requires the [`jobsRead`](authentication#permissions-projectinfo) permission.**"
+        },
+        {
+          "info": {
+            "name": "project.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/project.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists projects.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n      \n**Requires the [`candidatesRead`](authentication#permissions-projectlist) permission.**"
+        },
+        {
+          "info": {
+            "name": "project.search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/project.search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for projects by title. \n\n**Requires the [`candidatesRead`](authentication#permissions-projectsearch) permission.**\n\nResponses are limited to 100 results. Consider refining your search or using /project.list to paginate through all projects, if you approach this limit. This API is for use cases where you intend operate on a final small set of projects, like building a project autocomplete.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Referral",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "referral.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/referral.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a referral\n\n**Requires the [`candidatesWrite`](authentication#permissions-referralcreate) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Referral Form",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "referralForm.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/referralForm.info"
+          },
+          "docs": "Fetches the default referral form or creates a default referral form if none exists.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-referralforminfo) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "report.generate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/report.generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "> ⚠️ Beta\n>\n> This endpoint is currently in beta and may change without notice.\n\nGenerates a new report or polls the status of an existing report generation.\n\n**Two-step process:**\n1. Call with only `reportId` to start generation → returns `requestId`\n2. Poll with both `reportId` and `requestId` every second until `status` is `complete` or `failed`\n\n**Example:**\n```\n// Step 1: Start generation\nPOST /report.generate\n{ \"reportId\": \"abc-123-def-456\" }\n→ { \"requestId\": \"rep_result:12345abc\", \"status"
+        },
+        {
+          "info": {
+            "name": "report.synchronous",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/report.synchronous",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "> ⚠️ Beta\n>\n> This endpoint is currently in beta and may change without notice.\n\nRetrieves report data synchronously.\n\n**Timeout:** 30 seconds. If a report is timing out, use the asynchronous [`report.generate`](ref:reportgenerate) instead.\n\n**Rate Limiting (Per Organization):**\n- **Request limit**: 15 requests per minute per organization\n- **Concurrent limit**: Maximum 3 report operations at once per organization (shared with [`report.generate`](ref:reportgenerate))\n- Rate limits are shared wit"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Source",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "source.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/source.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all sources\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-sourcelist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Source Tracking Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "sourceTrackingLink.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/sourceTrackingLink.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all source custom tracking links\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-sourcetrackinglinklist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Survey Form Definition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "surveyFormDefinition.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/surveyFormDefinition.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns details about a single survey form definition by id\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-surveyformdefinitioninfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "surveyFormDefinition.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/surveyFormDefinition.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all survey form definitions.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-surveyformdefinitionlist) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Survey Request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "surveyRequest.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/surveyRequest.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint generates a survey request and returns a survey URL. You can send this URL to a candidate to allow them to complete a survey. \n\n**Requires the [`candidatesWrite`](authentication#permissions-surveyrequestcreate) permission.**\n\n**Note that calling this endpoint will not automatically email the survey to the candidate.** It simply creates the request and gives you a URL to share with a candidate.\n"
+        },
+        {
+          "info": {
+            "name": "surveyRequest.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/surveyRequest.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all survey requests.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-surveyRequestList) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Survey Submission",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "surveySubmission.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/surveySubmission.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new survey submission.\n\n**Requires the [`candidatesWrite`](authentication#permissions-surveySubmissionCreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "surveySubmission.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/surveySubmission.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all survey submissions of a given `surveyType`.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-surveySubmissionList) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "user.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/user.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get an Ashby user by id\n\n**Requires the [`organizationRead`](authentication#permissions-userinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "user.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/user.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get a list of all Ashby users.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`organizationRead`](authentication#permissions-userlist) permission.**\n\nThe `globalRole` property in the response specifies the user's access level in Ashby.\nFor more details on the permissions granted with each role, see our [documentation here](https://docs.ashbyhq.com/user-permissions).\n"
+        },
+        {
+          "info": {
+            "name": "user.search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/user.search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for an Ashby user by email address\n\n**Requires the [`organizationRead`](authentication#permissions-usersearch) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "user.interviewerSettings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/user.interviewerSettings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get interviewer settings for a user.\n\n**Requires the [`organizationRead`](authentication#permissions-userinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "user.updateInterviewerSettings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/user.updateInterviewerSettings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update interviewer settings for a user. \n\nEither limit can be provided, or both can be provided. If only one is provided, the other will remain unchanged. If a limit is provided but set to null, it will be unset.\n\n**Requires the [`organizationWrite`](authentication#permissions-userinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "user.createInterviewerPause",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/user.createInterviewerPause",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an interviewer pause for a user. While paused, the user will not be scheduled for interviews.\n\nA user can only have one interviewer pause at a time (whether active or scheduled). Attempting to create a pause when one already exists will return an error.\n\n**Requires the [`organizationWrite`](authentication#permissions-usercreateinterviewerpause) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "user.listInterviewerPauses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/user.listInterviewerPauses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all active or scheduled interviewer pauses for a user.\n\n**Requires the [`organizationRead`](authentication#permissions-userlistinterviewerpauses) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "user.deleteInterviewerPause",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/user.deleteInterviewerPause",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes an interviewer pause.\n\n**Requires the [`organizationWrite`](authentication#permissions-userdeleteinterviewerpause) permission.**\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "webhook.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/webhook.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a webhook setting.\n\n**Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) scope.**\n"
+        },
+        {
+          "info": {
+            "name": "webhook.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/webhook.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves information about a specific webhook setting by its ID\n\n**Requires the [`apiKeysRead`](authentication#permissions-webhookinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "webhook.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/webhook.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a webhook setting. One of `enabled`, `requestUrl`, or `secretToken` must be provided.\n\n**Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "webhook.delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/webhook.delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes a webhook setting.\n\n**Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
