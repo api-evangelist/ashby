@@ -6,7 +6,7 @@ description: Ashby is an all-in-one talent strategy platform combining ATS, sour
   scheduling, and analytics. The Ashby API exposes candidates, applications, jobs,
   openings, offers, interviews, hiring teams, surveys, custom fields, and webhooks
   for recruiting operations teams.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - HR
 - ATS
