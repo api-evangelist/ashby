@@ -281,6 +281,14 @@ apis:
   description: Public read-only API for retrieving published jobs and posting content
     for embedding in custom careers pages.
 common:
+- type: TrustCenter
+  url: security/ashby-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/ashby-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/ashby-domain-security.yml
+- type: Authentication
+  url: authentication/ashby-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/ashbyhq
 - type: Website
