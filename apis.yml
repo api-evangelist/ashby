@@ -281,6 +281,8 @@ apis:
   description: Public read-only API for retrieving published jobs and posting content
     for embedding in custom careers pages.
 common:
+- type: AgenticAccess
+  url: agentic-access/ashby-agentic-access.yml
 - type: TrustCenter
   url: security/ashby-trust-center.yml
 - type: VulnerabilityDisclosure
