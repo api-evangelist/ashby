@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Approval API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Approval
+paths:
+  /approval.list:
+    post:
+      summary: approval.list
+      operationId: approvalList
+      description: 'Gets all approvals in the organization. You can optionally filter by entity type and entity ID.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`approvalsRead`](authentication#permissions-approvallist) permission.**
+
+        '
+      tags:
+      - Approval
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  entityType:
+                    type: string
+                    enum:
+                    - offer
+                    - job
+                    - opening
+                    description: Filter approvals by the type of entity they are associated with.
+                  entityId:
+                    type: string
+                    format: uuid
+                    description: Filter approvals to only those associated with this specific entity ID.
+      responses:
+        '200':
+          description: Responses from the approval.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success Response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            approvalDefinitionId:
+                              allOf:
+                              - description: The id of the approval definition associated to this approval.
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            entityId:
+                              allOf:
+                              - description: The id of the approval entity (e.g. the id of the offer version).
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            entityType:
+                              type: string
+                              enum:
+                              - offer
+                              - job
+                              - opening
+                            createdAt:
+                              allOf:
+                              - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                            submittedAt:
+                              allOf:
+                              - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                              - description: The date when the approval was submitted and sent to users for approval.
+                            completedAt:
+                              allOf:
+                              - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                              - description: The date when the approval was completed and approved by everyone.
+                            steps:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                  approvalsRequired:
+                                    type: integer
+                                    description: The number of approvers required to approve this step, before the approval moves on to the next step.
+                                  completedAt:
+                                    allOf:
+                                    - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                                    - description: The date when the step is completed based on the number of required approvals
+                                  approvers:
+                                    type: array
+                                    description: An unordered list of who can approve this step.
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                        userId:
+                                          allOf:
+                                          - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                          - description: The id of a user who is an approver for this step.
+                                        decision:
+                                          type: string
+                                          enum:
+                                          - approve
+                                          - reject
+                                          - pending
+                                        decidedAt:
+                                          allOf:
+                                          - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                                          - description: The date when the decision was taken by the user.
+                                        requestedAt:
+                                          allOf:
+                                          - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                                          - description: The date when the decision was sent to be approved by the user.
+                                      required:
+                                      - id
+                                      - userId
+                                      - decision
+                                required:
+                                - id
+                                - approvalsRequired
+                                - approvers
+                          required:
+                          - id
+                          - createdAt
+                          - approvalDefinitionId
+                          - entityId
+                          - entityType
+                          - steps
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

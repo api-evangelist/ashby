@@ -1,0 +1,164 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key File API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: File
+paths:
+  /file.info:
+    post:
+      summary: file.info
+      description: 'Retrieve the url of a file associated with a candidate
+
+
+        **Requires the [`candidatesRead`](authentication#permissions-fileinfo) permission.**
+
+
+        **Please note** that running this with Ashby-generated demo data in an Ashby demo account can result in errors. We would recommend manually creating a test candidate in Ashby when trying out this endpoint.
+
+        '
+      operationId: fileInfo
+      tags:
+      - File
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fileHandle:
+                  type: string
+                  description: A file handle retrieved from the public API
+                  example: 'eyJoYW5kbGUiOnsidHlwZSI6IkNhbmRpZGF0ZUZpbGUiLCJmaWxlSWQiOiIxNTk1ZTRmYy04MTQwLTQ1NGUtYTI1ZC04NTNiOTQ3ZWNmYzgiLCJvd25lcklkIjoiYmY5NGZlNmMtMjU3MS00NzQ1LWE1OWEtNTA5MjE3ODI3MDVlIn0sInNpZ25hdHVyZSI6IkFqclpjT0VlTXUwdWxLZlRCS05iMWRkbDdHcjVIWFVmZzNrS0NPL1dWWjg9IiwidmVyc2lvbiI6IjEilQ
+
+                    '
+              required:
+              - fileHandle
+      responses:
+        '200':
+          description: Responses for the file.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          url:
+                            type: string
+                            description: The url of the file
+                            example: https://s3.amazonaws.com/...
+                        required:
+                        - url
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /file.createFileUploadHandle:
+    post:
+      summary: file.createFileUploadHandle
+      operationId: fileCreateFileUploadHandle
+      description: "Creates a presigned upload URL that allows uploading a file directly to storage, bypassing the need to send file bytes through the API.\n\nBenefits over multipart upload:\n- **Reliability**: File bytes are uploaded directly to storage, avoiding timeouts and connection resets that can occur when proxying large files through the API.\n- **Compatibility**: Avoids issues with firewalls or proxies that block or scan multipart payloads containing binary content.\n- **Simplicity**: The follow-up call to, e.g., `candidate.uploadResume`, `candidate.uploadFile`, or `applicationForm.submit` is a plain `application/json` request rather than `multipart/form-data`.\n\n**Requires the [`candidatesWrite`](authentication#permissions-filecreatefileuploadhandle) permission.**\n\n**Usage flow:**\n\n1. Call `file.createFileUploadHandle` with the file metadata to get a presigned upload URL, form fields, and a handle.\n2. Upload the file directly to the returned `url` using a `multipart/form-data` POST request. Include all returned `fields` as form fields, and the file as the last field named `file`.\n3. Use the returned `handle` in a follow-up call:\n   - `candidate.uploadResume` with `{ candidateId, resumeHandle }` to attach a resume to a candidate.\n   - `candidate.uploadFile` with `{ candidateId, fileHandle }` to attach a file to a candidate.\n   - `applicationForm.submit` with `Content-Type: application/json`, where file field values in `fieldSubmissions` contain the handle string instead of a multipart file reference.\n\nThe presigned URL expires after 10 minutes. The `fileUploadContext` must be one of `CandidateResume`, `CandidateFiles`, or `ApplicationForm`.\n"
+      tags:
+      - File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fileUploadContext:
+                  type: string
+                  enum:
+                  - CandidateResume
+                  - CandidateFiles
+                  - ApplicationForm
+                  description: The context for the file upload. Use `CandidateResume` for resume uploads, `CandidateFiles` for general file uploads, and `ApplicationForm` for file fields in application form submissions.
+                filename:
+                  type: string
+                  description: The name of the file being uploaded, including extension.
+                  example: resume.pdf
+                contentType:
+                  type: string
+                  description: The MIME type of the file being uploaded.
+                  example: application/pdf
+                contentLength:
+                  type: integer
+                  description: The size of the file in bytes.
+                  example: 102400
+              required:
+              - fileUploadContext
+              - filename
+              - contentType
+              - contentLength
+      responses:
+        '200':
+          description: Responses from the file.createFileUploadHandle endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          handle:
+                            type: string
+                            description: An encrypted handle to pass to `candidate.uploadResume` (as `resumeHandle`), `candidate.uploadFile` (as `fileHandle`), or `applicationForm.submit` (as the file field value in `fieldSubmissions`) after the file has been uploaded.
+                          url:
+                            type: string
+                            description: The presigned URL to upload the file to via a `multipart/form-data` POST request.
+                          fields:
+                            type: object
+                            additionalProperties:
+                              type: string
+                            description: Form fields that must be included in the multipart upload request to the presigned URL. Include these as form fields before the file field.
+                        required:
+                        - handle
+                        - url
+                        - fields
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

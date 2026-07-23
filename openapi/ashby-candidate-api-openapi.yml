@@ -1,0 +1,1616 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Candidate API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Candidate
+paths:
+  /candidate.addEmailMessage:
+    post:
+      summary: candidate.addEmailMessage
+      description: 'Adds an email message to a candidate''s profile.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateaddemailmessage) permission.**
+
+        '
+      operationId: candidateAddEmailMessage
+      tags:
+      - Candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - candidateId
+              - emailProviderEmailId
+              - subject
+              - from
+              - to
+              - body
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The candidate to attach this email to.
+                emailProviderEmailId:
+                  type: string
+                  description: Unique identifier for this message in the partner system. Must be unique per API key.
+                subject:
+                  type: string
+                  description: The email subject line.
+                from:
+                  type: string
+                  description: The sender email address.
+                to:
+                  type: string
+                  description: The recipient email address.
+                body:
+                  type: string
+                  description: The html body of the email.
+                userId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The Ashby user ID to associate with this email. Defaults to the API key user.
+                sentAt:
+                  allOf:
+                  - type: string
+                    format: date-time
+                    example: '2022-07-21T17:32:28Z'
+                  - description: When the email was sent. Defaults to the current time.
+                cc:
+                  type: string
+                  description: CC recipients.
+                messageUrl:
+                  type: string
+                  format: uri
+                  description: URL to view the message in the partner application.
+                  example: https://example.com/messages/1234567890
+                messageIdHeader:
+                  type: string
+                  description: RFC 5322 message identifier.
+                  example: <CADkMx=Abc123@examplemail.com>
+                threadId:
+                  type: string
+                  description: Thread identifier to group this message with others. Defaults to emailProviderEmailId.
+                isPrivate:
+                  type: boolean
+                  description: Whether the email should be marked as private. Private emails require "Allow access to non-offer private fields?" API key permission to create and view. Defaults to false.
+                  default: false
+      responses:
+        '200':
+          description: Responses for the candidate.addEmailMessage endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        description: An email sent to or from a candidate.
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            description: The unique id of the email in Ashby.
+                          candidateId:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            description: The candidate this email is attached to.
+                          emailProviderEmailId:
+                            type: string
+                            description: The unique identifier for this message in the partner system.
+                          subject:
+                            type: string
+                            description: The email subject line.
+                          from:
+                            type: string
+                            description: The sender email address.
+                          to:
+                            type: string
+                            description: The recipient email address.
+                          body:
+                            type:
+                            - string
+                            - 'null'
+                            description: The body of the email. Can be HTML or plain text.
+                          sentAt:
+                            $ref: '#/paths/~1candidate.addEmailMessage/post/requestBody/content/application~1json/schema/properties/sentAt/allOf/0'
+                            description: When the email was sent.
+                          cc:
+                            type:
+                            - string
+                            - 'null'
+                            description: CC recipients.
+                          messageUrl:
+                            type:
+                            - string
+                            - 'null'
+                            format: uri
+                            description: URL to view the message in the partner application.
+                          messageIdHeader:
+                            type:
+                            - string
+                            - 'null'
+                            description: RFC 5322 Message-ID header value.
+                          threadId:
+                            type: string
+                            description: Thread identifier grouping this message with others.
+                          isPrivate:
+                            type: boolean
+                            description: Whether the email is marked as private.
+                          userIsSender:
+                            type: boolean
+                            description: Whether the associated user is the sender (true) or recipient (false).
+                        required:
+                        - id
+                        - candidateId
+                        - emailProviderEmailId
+                        - subject
+                        - from
+                        - to
+                        - sentAt
+                        - isPrivate
+                        - userIsSender
+                        - threadId
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.addProject:
+    post:
+      summary: candidate.addProject
+      operationId: candidateaddproject
+      description: 'Adds the candidate to a project.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateaddproject) permission.**
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate
+                projectId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the project
+              required:
+              - candidateId
+              - projectId
+              example:
+                candidateId: f9e52a51-a075-4116-a7b8-484deba69004
+                projectId: bcffca12-5b09-4a76-acf2-00a8e267b222
+      responses:
+        '200':
+          description: Responses from the candidate.addProject endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.addTag:
+    post:
+      summary: candidate.addTag
+      description: 'Adds a tag to a candidate
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateaddtag) permission.**
+
+        '
+      operationId: candidateAddTag
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - candidateId
+              - tagId
+              properties:
+                candidateId:
+                  type: string
+                  description: The unique id of the candidate to add the tag to.
+                  example: 5b591aed-88e3-4395-b9c6-7d529f93354a
+                tagId:
+                  type: string
+                  description: The unique id of the tag to add to the candidate.
+                  example: 38430ede-5bd2-41fc-b474-87591cb98cbc
+      responses:
+        '200':
+          description: Responses for the candidate.addTag endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.anonymize:
+    post:
+      summary: candidate.anonymize
+      description: 'Anonymizes a candidate.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateanonymize) permission.**
+
+
+        **Note**: this action cannot be reversed and requires all of a candidate''s applications to be in the archived or hired state.
+
+        '
+      operationId: candidateAnonymize
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - candidateId
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate to anonymize.
+      responses:
+        '200':
+          description: Responses for the candidate.anonymize endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    description: The anonymized candidate
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.create:
+    post:
+      summary: candidate.create
+      operationId: candidateCreate
+      description: 'Creates a new candidate
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidatecreate) permission.**
+
+
+        To set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Adam Hart
+                  description: The first and last name of the candidate to be created.
+                email:
+                  allOf:
+                  - type: string
+                    example: test@ashbyhq.com
+                  - description: Primary, personal email of the candidate to be created.
+                phoneNumber:
+                  allOf:
+                  - type: string
+                    example: 555-555-5555
+                  - description: Primary, personal phone number of the candidate to be created.
+                linkedInUrl:
+                  type: string
+                  example: https://linkedin.com/in/user
+                  description: Url to the candidate's LinkedIn profile. Must be a valid Url.
+                githubUrl:
+                  type: string
+                  example: https://github.com/user
+                  description: Url to the candidate's Github profile. Must be a valid Url.
+                website:
+                  type: string
+                  example: https://twitter.com/user
+                  description: Url of the candidate's website. Must be a valid Url.
+                alternateEmailAddresses:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - test.email@ashbyhq.com
+                  description: Array of alternate email address to add to the candidate's profile.
+                sourceId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The source to set on the candidate being created.
+                creditedToUserId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the user the candidate will be credited to.
+                location:
+                  type: object
+                  description: The location of the candidate.
+                  properties:
+                    city:
+                      type: string
+                      example: San Francisco
+                      description: The city of the candidate's location.
+                    region:
+                      type: string
+                      example: California
+                      description: The region (state, province, etc.) of the candidate's location.
+                    country:
+                      type: string
+                      example: United States
+                      description: The country of the candidate's location.
+                createdAt:
+                  allOf:
+                  - description: 'An ISO date string to set the candidate''s `createdAt` timestamp. When this value isn''t provided, the `createdAt` timestamp defaults to the time the call was made.
+
+                      '
+                  - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+              required:
+              - name
+      responses:
+        '200':
+          description: Responses for the candidate.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.createNote:
+    post:
+      summary: candidate.createNote
+      description: "Creates a note on a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatecreatenote) permission.**\n\nFor notes submitted with a type of `text/html`, we support the elements listed below. Any unsupported elements will be stripped out of the note's content before posting.\n  - Bold `<b>`\n  - Italic `<i>`\n  - Underline `<u>`\n  - Links `<a>`\n  - Bulleted Lists - `<ul>`, `<li>`\n  - Ordered Lists - `<ol>`, `<li>`\n  - Code - `<code>`\n  - Code Block - `<pre>`\n"
+      operationId: candidateCreateNote
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                note:
+                  oneOf:
+                  - type: string
+                    description: The note to add to the candidate
+                    example: Strong candidate, very interested in the company
+                  - type: object
+                    description: Note content
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - text/plain
+                        - text/html
+                        description: 'The content type of the note. For notes submitted with a type of text/html we support the elements listed below. Any unsupported elements will be stripped out of the note''s content before posting.
+
+                          - Bold `<b>`
+
+                          - Italic `<i>`
+
+                          - Underline `<u>`
+
+                          - Links `<a>`
+
+                          - Bulleted Lists - `<ul>`, `<li>`
+
+                          - Ordered Lists - `<ol>`, `<li>`
+
+                          - Code - `<code>`
+
+                          - Code Block - `<pre>`
+
+                          '
+                      value:
+                        type: string
+                    required:
+                    - type
+                    - value
+                sendNotifications:
+                  type: boolean
+                  description: Whether or not users who are subscribed to the candidate should be notified that the note was posted. Default is false.
+                  default: false
+                isPrivate:
+                  type: boolean
+                  description: Whether the note should be marked as private. Private notes require "Allow access to non-offer private fields?" API key permission to create and view. Default is false.
+                  default: false
+                createdAt:
+                  type: string
+                  example: '2022-08-12T20:29:56.964Z'
+                  format: date-time
+              required:
+              - candidateId
+              - note
+      responses:
+        '200':
+          description: Responses for the candidate.createNote endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          createdAt:
+                            $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                          isPrivate:
+                            type: boolean
+                            description: Whether the note is private. Private notes require "Allow access to non-offer private fields?" API key permission to create and view.
+                            example: false
+                          content:
+                            type: string
+                            example: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                          author:
+                            type: object
+                            properties:
+                              id:
+                                $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              firstName:
+                                type: string
+                                example: Joey
+                              lastName:
+                                type: string
+                                example: Joe
+                              email:
+                                $ref: '#/paths/~1candidate.create/post/requestBody/content/application~1json/schema/properties/email/allOf/0'
+                            required:
+                            - id
+                            - firstName
+                            - lastName
+                        required:
+                        - id
+                        - createdAt
+                        - isPrivate
+                        - author
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.info:
+    post:
+      summary: candidate.info
+      operationId: candidateInfo
+      description: 'Gets a single candidate by id.
+
+
+        **Requires the [`candidatesRead`](authentication#permissions-candidateinfo) permission.**
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: The id of the candidate to fetch
+                required:
+                - id
+                example:
+                  id: f9e52a51-a075-4116-a7b8-484deba69004
+              - type: object
+                properties:
+                  externalMappingId:
+                    type: string
+                    description: "An id assigned to a candidate outside of Ashby. \nUsed to associate Ashby candidates with their profiles in external systems (BambooHR, Rippling, Gusto, etc.)\n"
+                required:
+                - externalMappingId
+                example:
+                  externalMappingId: f9e52a51-a075-4116-a7b8-484deba69004
+      responses:
+        '200':
+          description: Responses from the candidate.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            description: The unique id of the candidate
+                          createdAt:
+                            $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                          updatedAt:
+                            $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                          name:
+                            type: string
+                            example: Adam Hart
+                            description: The candidate's name
+                          primaryEmailAddress:
+                            $ref: '#/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress'
+                          emailAddresses:
+                            type: array
+                            items:
+                              $ref: '#/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress'
+                          primaryPhoneNumber:
+                            $ref: '#/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress'
+                          phoneNumbers:
+                            type: array
+                            items:
+                              $ref: '#/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress'
+                          socialLinks:
+                            type: array
+                            items:
+                              $ref: '#/paths/~1candidate.update/post/requestBody/content/application~1json/schema/properties/socialLinks/items'
+                          tags:
+                            type: array
+                            items:
+                              $ref: '#/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                          position:
+                            type: string
+                            example: Software Engineer
+                          company:
+                            type: string
+                            example: Auction.com
+                          school:
+                            type: string
+                            example: Princeton University
+                          applicationIds:
+                            type: array
+                            description: The unique ids of all applications associated with the candidate
+                            items:
+                              $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          resumeFileHandle:
+                            description: The id, name and handle for the candidate's resume
+                            $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/fileHandles/items'
+                          fileHandles:
+                            description: The id, name and handle for each file associated with the candidate
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                                handle:
+                                  type: string
+                                  description: You can use the file handle to retrieve the file's URL by using the file.info endpoint.
+                              required:
+                              - id
+                              - name
+                              - handle
+                              example:
+                                id: 15d2624d-0a81-4f94-a2ed-94980f430b3f
+                                name: resume.pdf
+                                handle: eyJoYW5kbGUiOnsidHlwZSI6IkNhbmRpZGF0ZUZpbGUiLCJm
+                          customFields:
+                            type: array
+                            description: All custom field values associated with the candidate
+                            items:
+                              $ref: '#/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                          profileUrl:
+                            type: string
+                            description: The url of the candidate's profile in Ashby
+                          source:
+                            description: The source that created this candidate
+                            $ref: '#/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items'
+                          creditedToUser:
+                            description: The user who receives credit for this candidate
+                            $ref: '#/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                          timezone:
+                            description: The timezone of the candidate
+                            type: string
+                          location:
+                            description: The primary location of the candidate
+                            type: object
+                            properties:
+                              id:
+                                $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                description: The location's unique id.
+                              locationSummary:
+                                type: string
+                                description: A human-readable summary of the location.
+                                example: United States, California, San Francisco
+                              locationComponents:
+                                type: array
+                                description: The individual components of the location.
+                                items:
+                                  type: object
+                                  required:
+                                  - type
+                                  - name
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum:
+                                      - Country
+                                      - Region
+                                      - City
+                                      description: The type of the location component.
+                                    name:
+                                      type: string
+                                      description: The name of the location component.
+                                example:
+                                - type: Country
+                                  name: United States
+                                - type: Region
+                                  name: California
+                                - type: City
+                                  name: San Francisco
+                            required:
+                            - id
+                            - locationSummary
+                            - locationComponents
+                          fraudStatus:
+                            type:
+                            - string
+                            - 'null'
+                            description: 'The fraud status of the candidate.
+
+
+                              Possible values:
+
+                              - `Fraudulent` — Candidate has been marked as fraudulent.
+
+                              - `NotFraudulent` — Candidate has been marked as not fraudulent (false positive).
+
+                              - `Unsure` — Candidate has been marked as uncertain, flagged for continued monitoring.
+
+                              - `Unreviewed` — Fraud signals were detected and need a human review.
+
+                              - `PassedFraudCheck` — Candidate passed the fraud check.
+
+                              '
+                            enum:
+                            - Fraudulent
+                            - NotFraudulent
+                            - Unsure
+                            - Unreviewed
+                            - PassedFraudCheck
+                            - null
+                            example: Fraudulent
+                        required:
+                        - id
+                        - name
+                        - emailAddresses
+                        - phoneNumbers
+                        - socialLinks
+                        - tags
+                        - applicationIds
+                        - fileHandles
+                        - profileUrl
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.list:
+    post:
+      summary: candidate.list
+      operationId: candidateList
+      description: 'Lists all candidates in an organization.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`candidatesRead`](authentication#permissions-candidatelist) permission.**
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1opening.list/post/requestBody/content/application~1json/schema'
+      responses:
+        '200':
+          description: Responses for the candidate.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                  required:
+                  - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.listClientInfo:
+    post:
+      summary: candidate.listClientInfo
+      operationId: candidateListClientInfo
+      description: 'Lists all client info records for a candidate.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`candidatesRead`](authentication#permissions-candidatelistclientinfo) permission.**
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                properties:
+                  candidateId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the candidate to fetch client info for
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+              required:
+              - candidateId
+              example:
+                candidateId: f9e52a51-a075-4116-a7b8-484deba69004
+      responses:
+        '200':
+          description: Responses for the candidate.listClientInfo endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - properties:
+                      results:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              allOf:
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              - description: The ID of this client information record.
+                                example: 7d31034c-790b-4265-bf63-d65396d59d0b
+                            ipAddress:
+                              type: string
+                              description: The IP address (v4 or v6) that the client used to interact with the system.
+                              example: 86.234.23.243
+                            userAgent:
+                              type: string
+                              description: The user agent that was received from the client when it interacted with the system.
+                              example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+                            relatedEntityType:
+                              allOf:
+                              - type: string
+                                enum:
+                                - application
+                                - blocked_application_submission
+                                - meeting_availability_request
+                              - description: The type of the entity that the client interacted with. Might be expanded in the future if we start capturing new client interactions.
+                                example: application
+                            relatedEntityId:
+                              allOf:
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              - description: The ID of the entity that was related to the client interaction.
+                                example: 57133f77-9362-4397-b395-03bda1f72303
+                            candidateId:
+                              allOf:
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              - description: The ID of the candidate that interacted with the system.
+                                example: 9d22854f-c929-4b86-9f42-cb71cc0e4fc7
+                            createdAt:
+                              allOf:
+                              - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                          required:
+                          - id
+                          - ipAddress
+                          - relatedEntityType
+                          - relatedEntityId
+                          - candidateId
+                  required:
+                  - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.listFraudChecks:
+    post:
+      summary: candidate.listFraudChecks
+      operationId: candidateListFraudChecks
+      description: 'Fetches a paginated list of fraud checks for a candidate, including the fraud signals detected in each check.
+
+
+        Each fraud check contains a list of fraud signals with their category, name, description, and optional value.
+
+
+        **Field Stability:**
+
+        - `id` fields are stable and will not change.
+
+        - `category`, `name`, `description`, and `value` fields on fraud signals are unstable and may change as signals are added, renamed, or recategorized.
+
+
+        This endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.
+
+
+        **Requires the [`candidatesRead`](authentication#permissions-candidatelistfraudchecks) permission.**
+
+
+        **Note:** This endpoint requires Fraud Detection feature to be enabled for your organization.
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                properties:
+                  candidateId:
+                    allOf:
+                    - description: The id of the candidate to fetch fraud checks for.
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              - $ref: '#/paths/~1brand.list/post/requestBody/content/application~1json/schema'
+              required:
+              - candidateId
+      responses:
+        '200':
+          description: Responses for the candidate.listFraudChecks endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - allOf:
+                  - $ref: '#/paths/~1brand.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          type: object
+                          title: Fraud Check
+                          description: A fraud check performed on a candidate, containing the fraud signals that were detected.
+                          properties:
+                            id:
+                              allOf:
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              - description: The unique identifier of this fraud check.
+                            candidateId:
+                              allOf:
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              - description: The id of the candidate this fraud check belongs to.
+                            applicationId:
+                              type:
+                              - string
+                              - 'null'
+                              format: uuid
+                              description: The id of the application this fraud check is associated with, if any.
+                              example: f5b1e9a2-3c4d-4e5f-9a0b-1c2d3e4f5a6b
+                            createdAt:
+                              type: string
+                              format: date-time
+                              description: When this fraud check was performed.
+                              example: '2025-01-15T10:30:00.000Z'
+                            fraudSignals:
+                              type: array
+                              description: The fraud signals detected during this fraud check.
+                              items:
+                                type: object
+                                title: Fraud Signal
+                                description: A fraud signal detected during a candidate fraud check.
+                                properties:
+                                  id:
+                                    allOf:
+                                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                    - description: The unique identifier of this fraud signal instance.
+                                  category:
+                                    type: string
+                                    description: 'The category of the fraud signal. Possible values include "Social", "Automation", "Geographic", and "Spoofing".
+
+
+                                      **Note:** This field is unstable and may change over time.
+
+                                      '
+                                    example: Spoofing
+                                  name:
+                                    type: string
+                                    description: 'A human-readable name for this fraud signal.
+
+
+                                      **Note:** This field is unstable and may change over time.
+
+                                      '
+                                    example: VPN Connection Detected
+                                  description:
+                                    type: string
+                                    description: 'A description of what this fraud signal means.
+
+
+                                      **Note:** This field is unstable and may change over time.
+
+                                      '
+                                    example: Applicant is hiding their real location using a VPN.
+                                  value:
+                                    type: string
+                                    description: 'An optional value associated with this signal, providing additional context (e.g., location information, account counts).
+
+                                      Only present when a value exists for the signal.
+
+
+                                      **Note:** This field is unstable and may change over time.
+
+                                      '
+                                    example: Copenhagen, DK
+                                required:
+                                - id
+                                - category
+                                - name
+                                - description
+                          required:
+                          - id
+                          - candidateId
+                          - applicationId
+                          - createdAt
+                          - fraudSignals
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.setFraudStatus:
+    post:
+      summary: candidate.setFraudStatus
+      operationId: candidateSetFraudStatus
+      description: 'This endpoint allows marking candidates as fraudulent, not fraudulent, or unsure after reviewing their fraud signals via `candidate.listFraudChecks`.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidatesetfraudstatus) permission.**
+
+
+        **Note:** This endpoint requires the Fraud Detection feature to be enabled for your organization.
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  allOf:
+                  - description: The id of the candidate to set the fraud status for.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                fraudStatus:
+                  type: string
+                  enum:
+                  - Fraudulent
+                  - NotFraudulent
+                  - Unsure
+                  description: 'The fraud status to set for the candidate.
+
+
+                    - `Fraudulent` — Mark the candidate as fraudulent.
+
+                    - `NotFraudulent` — Mark the candidate as not fraudulent (false positive).
+
+                    - `Unsure` — Mark the candidate as unsure, flagged for continued monitoring.
+
+                    '
+                  example: Fraudulent
+              required:
+              - candidateId
+              - fraudStatus
+      responses:
+        '200':
+          description: Responses for the candidate.setFraudStatus endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.listNotes:
+    post:
+      summary: candidate.listNotes
+      operationId: candidateListNotes
+      description: 'Lists all notes on a candidate.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`candidatesRead`](authentication#permissions-candidatelistnotes) permission.**
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                properties:
+                  candidateId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the candidate to fetch notes for
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+              required:
+              - candidateId
+              example:
+                candidateId: f9e52a51-a075-4116-a7b8-484deba69004
+      responses:
+        '200':
+          description: Responses for the candidate.listNotes endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1candidate.createNote/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                  required:
+                  - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.listProjects:
+    post:
+      summary: candidate.listProjects
+      operationId: candidateListProjects
+      description: 'Lists all projects on a candidate.
+
+
+        This endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.
+
+
+        **Requires the [`candidatesRead`](authentication#permissions-candidatelistprojects) permission.**
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                properties:
+                  candidateId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the candidate to fetch projects for
+                required:
+                - candidateId
+                example:
+                  candidateId: f9e52a51-a075-4116-a7b8-484deba69004
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+      responses:
+        '200':
+          description: Responses for the candidate.listProjects endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - allOf:
+                  - $ref: '#/paths/~1brand.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1project.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.removeProject:
+    post:
+      summary: candidate.removeProject
+      operationId: candidateremoveproject
+      description: 'Removes the candidate from a project.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateremoveproject) permission.**
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate
+                projectId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the project
+              required:
+              - candidateId
+              - projectId
+              example:
+                candidateId: f9e52a51-a075-4116-a7b8-484deba69004
+                projectId: bcffca12-5b09-4a76-acf2-00a8e267b222
+      responses:
+        '200':
+          description: Responses from the candidate.removeProject endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.removeTag:
+    post:
+      summary: candidate.removeTag
+      description: 'Removes a tag from a candidate.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateremovetag) permission.**
+
+        '
+      operationId: candidateRemoveTag
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - candidateId
+              - tagId
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate to remove the tag from.
+                tagId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the tag to remove from the candidate.
+              example:
+                candidateId: 5b591aed-88e3-4395-b9c6-7d529f93354a
+                tagId: 38430ede-5bd2-41fc-b474-87591cb98cbc
+      responses:
+        '200':
+          description: Responses for the candidate.removeTag endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.search:
+    post:
+      summary: candidate.search
+      operationId: candidateSearch
+      description: "Search for candidates by email and / or name. \n\n**Requires the [`candidatesRead`](authentication#permissions-candidatesearch) permission.**\n\nResponses are limited to 100 results. Consider refining your search or using /candidate.list to paginate through all candidates, if you approach this limit. This API is for use cases where you intend to operate on a final small set of candidates, like building a candidate autocomplete.\n\nNote: When multiple search parameters are provided, the parameters are combined with the `AND` operator.\n"
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The candidate's email
+                name:
+                  type: string
+                  description: The candidate's name
+              example:
+                email: test@ashbyhq.com
+                name: Adam Hart
+      responses:
+        '200':
+          description: Responses for the candidate.search endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.update:
+    post:
+      summary: candidate.update
+      operationId: candidateUpdate
+      description: 'Updates an existing candidate
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateupdate) permission.**
+
+
+        To set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The unique id of the candidate to update.
+                name:
+                  type: string
+                  example: Adam Hart
+                  description: The first and last name of the candidate to update.
+                email:
+                  allOf:
+                  - $ref: '#/paths/~1candidate.create/post/requestBody/content/application~1json/schema/properties/email/allOf/0'
+                  - description: Primary, personal email of the candidate to update.
+                phoneNumber:
+                  allOf:
+                  - $ref: '#/paths/~1candidate.create/post/requestBody/content/application~1json/schema/properties/phoneNumber/allOf/0'
+                  - description: Primary, personal phone number of the candidate to update.
+                linkedInUrl:
+                  $ref: '#/paths/~1candidate.create/post/requestBody/content/application~1json/schema/properties/linkedInUrl'
+                githubUrl:
+                  $ref: '#/paths/~1candidate.create/post/requestBody/content/application~1json/schema/properties/githubUrl'
+                websiteUrl:
+                  $ref: '#/paths/~1candidate.create/post/requestBody/content/application~1json/schema/properties/website'
+                alternateEmail:
+                  type: string
+                  example: test.email@ashbyhq.com
+                  description: An alternate email address to add to the candidate's profile.
+                socialLinks:
+                  description: "An array of social links to set on the candidate. This value replaces existing socialLinks that have been set on the candidate. \nIf this value is submitted along with linkedInUrl, gitHubUrl or websiteUrl fields, those values will be ignored.\n"
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        enum:
+                        - LinkedIn
+                        - GitHub
+                        - Twitter
+                        - Medium
+                        - StackOverflow
+                        - YouTube
+                        - CodePen
+                        - Website
+                      url:
+                        type: string
+                    required:
+                    - type
+                    - url
+                    example:
+                      url: https://linkedin.com/in/user
+                      type: LinkedIn
+                sourceId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of source for this candidate.
+                creditedToUserId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the user the candidate will be credited to.
+                location:
+                  type: object
+                  description: The location of the candidate.
+                  properties:
+                    $ref: '#/paths/~1candidate.create/post/requestBody/content/application~1json/schema/properties/location/properties'
+                createdAt:
+                  allOf:
+                  - description: 'An ISO date string to set the candidate''s `createdAt` timestamp.
+
+                      '
+                  - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                sendNotifications:
+                  type: boolean
+                  default: true
+                  description: Whether or not users who are subscribed to the candidate should be notified that candidate was updated. Default is true.
+              required:
+              - candidateId
+      responses:
+        '200':
+          description: Responses for the candidate.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.uploadFile:
+    post:
+      summary: candidate.uploadFile
+      operationId: candidateUploadFile
+      description: 'Uploads a file to attach to the candidate''s profile.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateuploadfile) permission.**
+
+
+        **Recommended: Presigned upload handle**
+
+        Use `file.createFileUploadHandle` with `fileUploadContext: "CandidateFiles"` to get a presigned URL. Upload the file directly to that URL, then call this endpoint with the returned `fileHandle`. This avoids sending file bytes through the API, improving upload reliability and reducing latency for large files.
+
+
+        **Deprecated: Multipart upload**
+
+        Send the file as `multipart/form-data` with the file in a `file` field. This mode is deprecated and may be removed in a future API version.
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate
+                fileHandle:
+                  type: string
+                  description: A handle returned by `file.createFileUploadHandle` after uploading a file to the presigned URL.
+              required:
+              - candidateId
+              - fileHandle
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate
+                file:
+                  type: string
+                  format: binary
+                  deprecated: true
+                  description: 'Deprecated: Use `file.createFileUploadHandle` with `fileHandle` instead. The file to upload to the candidate''s profile.'
+              required:
+              - candidateId
+              - file
+              example:
+                candidateId: f9e52a51-a075-4116-a7b8-484deba69004
+                file: JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01
+      responses:
+        '200':
+          description: Responses from the candidate.uploadFile endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /candidate.uploadResume:
+    post:
+      summary: candidate.uploadResume
+      operationId: candidateUploadResume
+      description: 'Uploads a candidate''s resume, parses it, and updates their information.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-candidateuploadresume) permission.**
+
+
+        **Recommended: Presigned upload handle**
+
+        Use `file.createFileUploadHandle` with `fileUploadContext: "CandidateResume"` to get a presigned URL. Upload the file directly to that URL, then call this endpoint with the returned `resumeHandle`. This avoids sending file bytes through the API, improving upload reliability and reducing latency for large files.
+
+
+        **Deprecated: Multipart upload**
+
+        Send the resume as `multipart/form-data` with the file in a `resume` field. This mode is deprecated and may be removed in a future API version.
+
+
+        Note: Existing candidate data always takes precedence over data found by parsing the resume. Resume data only populates candidate data, if it''s data that was missing in the candidate model.
+
+        '
+      tags:
+      - Candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate
+                resumeHandle:
+                  type: string
+                  description: A handle returned by `file.createFileUploadHandle` after uploading a resume file to the presigned URL.
+              required:
+              - candidateId
+              - resumeHandle
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate
+                resume:
+                  type: string
+                  format: binary
+                  deprecated: true
+                  description: 'Deprecated: Use `file.createFileUploadHandle` with `resumeHandle` instead. The resume to upload to the candidate''s profile.'
+              required:
+              - candidateId
+              - resume
+              example:
+                candidateId: f9e52a51-a075-4116-a7b8-484deba69004
+                resume: JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50I
+      responses:
+        '200':
+          description: Responses from the candidate.uploadResume endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1candidate.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

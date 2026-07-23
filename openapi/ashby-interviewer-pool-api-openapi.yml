@@ -1,0 +1,503 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Interviewer Pool API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Interviewer Pool
+paths:
+  /interviewerPool.list:
+    post:
+      summary: interviewerPool.list
+      operationId: interviewerPoolList
+      description: 'List all interviewer pools.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-interviewerpoollist) permission.**
+
+        '
+      tags:
+      - Interviewer Pool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  includeArchivedPools:
+                    type: boolean
+                    description: When true, includes archived pools
+                    default: false
+                  includeArchivedTrainingStages:
+                    type: boolean
+                    description: When true, includes archived training stages
+                    default: false
+      responses:
+        '200':
+          description: Responses from the interviewerPool.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              allOf:
+                              - description: The pool's id
+                              - example: 3ae2b801-19f6-41ef-ad28-214bd731948f
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            title:
+                              type: string
+                              example: Backend Technical Screeners
+                              description: The pool's title
+                            isArchived:
+                              allOf:
+                              - $ref: '#/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived'
+                              - description: Whether or not the pool is archived
+                            trainingPath:
+                              type: object
+                              properties:
+                                id:
+                                  allOf:
+                                  - description: The training path's id
+                                  - example: 3ae2b801-19f6-41ef-ad28-214bd731948f
+                                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                enabled:
+                                  type: boolean
+                                  description: Whether or not the training path is enabled
+                                  example: true
+                                trainingStages:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        allOf:
+                                        - description: The training stage's id
+                                        - example: 3ae2b801-19f6-41ef-ad28-214bd731948f
+                                        - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                      interviewerRole:
+                                        type: string
+                                        enum:
+                                        - Shadow
+                                        - ReverseShadow
+                                        description: The role of the interviewer for this stage
+                                        example: Shadow
+                                      interviewsRequired:
+                                        type: integer
+                                        description: The number of interviews required for this stage
+                                        example: 2
+                                      isArchived:
+                                        type: boolean
+                                        description: Whether or not the training stage is archived
+                                        example: false
+                                      approvalRequired:
+                                        type: boolean
+                                        description: Whether or not approval is required for this stage
+                                        example: true
+                                      approvers:
+                                        type: array
+                                        items:
+                                          $ref: '#/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                                    required:
+                                    - id
+                                    - interviewerRole
+                                    - interviewsRequired
+                                    - isArchived
+                                    - approvalRequired
+                              required:
+                              - id
+                              - enabled
+                              - trainingStages
+                          required:
+                          - id
+                          - title
+                          - isArchived
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewerPool.info:
+    post:
+      summary: interviewerPool.info
+      operationId: interviewerPoolInfo
+      description: 'Get information about an interviewer pool.
+
+
+        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-interviewerpoolinfo) permission.**
+
+        '
+      tags:
+      - Interviewer Pool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewerPoolId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - interviewerPoolId
+      responses:
+        '200':
+          description: Responses from the interviewerPool.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        allOf:
+                        - $ref: '#/paths/~1interviewerPool.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items'
+                        - type: object
+                          properties:
+                            qualifiedMembers:
+                              type: array
+                              items:
+                                allOf:
+                                - $ref: '#/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                                - type: object
+                                  description: A user who is a qualified member of an interviewer pool.
+                                  properties:
+                                    isPaused:
+                                      type: boolean
+                                      description: Whether the user is currently paused from interviewing in this pool.
+                                      example: false
+                                  required:
+                                  - isPaused
+                            trainees:
+                              type: array
+                              items:
+                                allOf:
+                                - $ref: '#/paths/~1interviewerPool.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/allOf/1/properties/qualifiedMembers/items'
+                                - properties:
+                                    currentProgress:
+                                      type: object
+                                      properties:
+                                        trainingPathId:
+                                          $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                          description: The id of the training path the user is currently on
+                                        trainingPathStageId:
+                                          $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                          description: The id of the training stage the user is currently in
+                                        interviewsCompleted:
+                                          type: integer
+                                          description: The number of interviews the user has completed in the current stage
+                                          example: 1
+                                      required:
+                                      - trainingPathId
+                                      - trainingPathStageId
+                                      - interviewsCompleted
+                                required:
+                                - currentProgress
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewerPool.create:
+    post:
+      summary: interviewerPool.create
+      operationId: interviewerPoolCreate
+      description: 'Create an interviewer pool.
+
+
+        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolcreate) permission.**
+
+        '
+      tags:
+      - Interviewer Pool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the interviewer pool
+                  example: Engineering
+                requiresTraining:
+                  type: boolean
+                  description: Whether the interviewer pool requires training
+                  example: true
+              required:
+              - title
+      responses:
+        '200':
+          description: Responses from the interviewerPool.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1interviewerPool.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewerPool.update:
+    post:
+      summary: interviewerPool.update
+      operationId: interviewerPoolUpdate
+      description: 'Update an interviewer pool.
+
+
+        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolupdate) permission.**
+
+        '
+      tags:
+      - Interviewer Pool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewerPoolId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                title:
+                  type: string
+                  description: The title of the interviewer pool
+                  example: Engineering
+                requiresTraining:
+                  type: boolean
+                  description: Whether the interviewer pool requires training
+                  example: true
+              required:
+              - interviewerPoolId
+      responses:
+        '200':
+          description: Responses from the interviewerPool.update endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1interviewerPool.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewerPool.archive:
+    post:
+      summary: interviewerPool.archive
+      operationId: interviewerPoolArchive
+      description: 'Archives an interviewer pool.
+
+
+        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolarchive) permission.**
+
+        '
+      tags:
+      - Interviewer Pool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewerPoolId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - interviewerPoolId
+      responses:
+        '200':
+          description: Responses from the interviewerPool.archive endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1interviewerPool.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewerPool.restore:
+    post:
+      summary: interviewerPool.restore
+      operationId: interviewerPool.restore
+      description: 'Restores an archived interviewer pool.
+
+
+        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolrestore) permission.**
+
+        '
+      tags:
+      - Interviewer Pool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewerPoolId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - interviewerPoolId
+      responses:
+        '200':
+          description: Responses from the interviewerPool.restore endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1interviewerPool.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewerPool.addUser:
+    post:
+      summary: interviewerPool.addUser
+      operationId: interviewerPoolAddUser
+      description: 'Add a user to an interviewer pool.
+
+
+        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpooladduser) permission.**
+
+        '
+      tags:
+      - Interviewer Pool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewerPoolId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                userId:
+                  type: string
+                  format: uuid
+                  example: e9ed20fd-d45f-4aad-8a00-a19bfba0083e
+                interviewerPoolTrainingPathStageId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  description: The ID of the training path stage to add the user to. If this is not provided, the user will be added as a fully qualified member of the pool.
+              required:
+              - interviewerPoolId
+              - userId
+      responses:
+        '200':
+          description: Responses from the interviewerPool.removeUser endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1interviewerPool.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewerPool.removeUser:
+    post:
+      summary: interviewerPool.removeUser
+      operationId: interviewerPoolRemoveUser
+      description: 'Remove a user from an interviewer pool.
+
+
+        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolremoveuser) permission.**
+
+        '
+      tags:
+      - Interviewer Pool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewerPoolId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                userId:
+                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - interviewerPoolId
+              - userId
+      responses:
+        '200':
+          description: Responses from the interviewerPool.removeUser endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1interviewerPool.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

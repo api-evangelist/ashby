@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Interview API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Interview
+paths:
+  /interview.info:
+    post:
+      summary: interview.info
+      operationId: interviewInfo
+      description: 'Fetch interview details by id
+
+
+        **Requires the [`interviewsRead`](authentication#permissions-interviewinfo) permission.**
+
+        '
+      tags:
+      - Interview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The unique id of the interview whose details will be fetched
+              required:
+              - id
+              example:
+                id: 3ae2b801-19f6-41ef-ad28-214bd731948f
+      responses:
+        '200':
+          description: Responses from the interview.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            allOf:
+                            - description: The interview's id
+                            - example: 3ae2b801-19f6-41ef-ad28-214bd731948f
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          title:
+                            type: string
+                            example: Technical Phone Interview
+                            description: The interview's title
+                          externalTitle:
+                            type: string
+                            example: Technical Interview
+                            description: Alternate candidate-facing interview title displayed in email/interview communications.  If not specified, the primary title will be returned.
+                          isArchived:
+                            allOf:
+                            - $ref: '#/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived'
+                            - description: Whether or not the interview is archived
+                          isDebrief:
+                            type: boolean
+                            example: false
+                            description: Whether the interview is a debrief
+                          isFeedbackRequired:
+                            type: boolean
+                            example: true
+                            description: Whether feedback is required by default for interviewers assigned to this interview
+                          isFeedbackRequested:
+                            type: boolean
+                            example: true
+                            description: Whether feedback is requested by default for interviewers assigned to this interview
+                          instructionsHtml:
+                            type: string
+                            description: An HTML version of the interview's description
+                            example: '<p>The technical phone interview consists of a 60-minute series of technical questions</p>
+
+                              '
+                          instructionsPlain:
+                            type: string
+                            description: A plaintext version of the interview's description
+                            example: The technical phone interview consists of a 60-minute series of technical questions
+                          jobId:
+                            allOf:
+                            - description: 'The id of the job the interview is associated with. If null, the interview is not associated with a specific job
+
+                                and is a shared interview. Interviews that are associated with particular jobs can only be scheduled for applications
+
+                                to those jobs.
+
+                                '
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          feedbackFormDefinitionId:
+                            allOf:
+                            - description: "The id of the feedback form definition associated with the interview. \n"
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                        required:
+                        - id
+                        - title
+                        - isArchived
+                        - isFeedbackRequired
+                        - isFeedbackRequested
+                        - feedbackFormDefinitionId
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interview.list:
+    post:
+      summary: interview.list
+      operationId: interviewList
+      description: 'List all interviews.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`interviewsRead`](authentication#permissions-interviewlist) permission.**
+
+        '
+      tags:
+      - Interview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  includeArchived:
+                    $ref: '#/paths/~1source.list/post/requestBody/content/application~1json/schema/properties/includeArchived'
+                  includeNonSharedInterviews:
+                    type: boolean
+                    default: false
+                    description: "If true, interviews that are associated with specific jobs will be included in the response. \nShared interviews that are not associated with a specific job can be scheduled for applications to any job.\nInterviews that are not shared can only be scheduled for applications to the job they are associated with.\n"
+                  excludeArchivedScheduleTemplateInterviews:
+                    type: boolean
+                    default: false
+                    description: "If true, interviews local to archived schedule templates are omitted from the response. \nThis parameter only has an effect when `includeNonSharedInterviews` is also set to true.\nShared interviews (not associated with any schedule template) are always included regardless of this setting.\n"
+      responses:
+        '200':
+          description: Responses from the interview.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1interview.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Project API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Project
+paths:
+  /project.info:
+    post:
+      summary: project.info
+      description: "Retrieves an project by its UUID.\n      \n**Requires the [`jobsRead`](authentication#permissions-projectinfo) permission.**"
+      operationId: projectinfo
+      tags:
+      - Project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - projectId
+              properties:
+                projectId:
+                  type: string
+                  description: The id of the project
+      responses:
+        '200':
+          description: Responses for the project.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          title:
+                            type: string
+                            example: Office Event
+                          description:
+                            type: string
+                            example: Folks invited to office for an event
+                          isArchived:
+                            $ref: '#/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived'
+                          confidential:
+                            type: boolean
+                            example: false
+                          authorId:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          createdAt:
+                            $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                          customFieldEntries:
+                            type: array
+                            description: All custom field values associated with the project
+                            items:
+                              $ref: '#/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                        required:
+                        - id
+                        - title
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /project.list:
+    post:
+      summary: project.list
+      description: "Lists projects.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n      \n**Requires the [`candidatesRead`](authentication#permissions-projectlist) permission.**"
+      operationId: projectlist
+      tags:
+      - Project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1opening.list/post/requestBody/content/application~1json/schema'
+      responses:
+        '200':
+          description: Responses for the project.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1project.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /project.search:
+    post:
+      summary: project.search
+      operationId: projectSearch
+      description: "Search for projects by title. \n\n**Requires the [`candidatesRead`](authentication#permissions-projectsearch) permission.**\n\nResponses are limited to 100 results. Consider refining your search or using /project.list to paginate through all projects, if you approach this limit. This API is for use cases where you intend operate on a final small set of projects, like building a project autocomplete.\n"
+      tags:
+      - Project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The project's title
+              example:
+                title: My Project
+      responses:
+        '200':
+          description: Responses for the project.search endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1project.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

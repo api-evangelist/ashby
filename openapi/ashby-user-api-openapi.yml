@@ -1,0 +1,511 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key User API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: User
+paths:
+  /user.info:
+    post:
+      summary: user.info
+      description: 'Get an Ashby user by id
+
+
+        **Requires the [`organizationRead`](authentication#permissions-userinfo) permission.**
+
+        '
+      operationId: userInfo
+      tags:
+      - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id to lookup the user
+              required:
+              - userId
+      responses:
+        '200':
+          description: Responses for the user.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          firstName:
+                            type: string
+                            example: Test
+                          lastName:
+                            type: string
+                            example: User
+                          email:
+                            $ref: '#/paths/~1candidate.create/post/requestBody/content/application~1json/schema/properties/email/allOf/0'
+                          globalRole:
+                            type: string
+                            enum:
+                            - Organization Admin
+                            - Elevated Access
+                            - Limited Access
+                            - External Recruiter
+                          isEnabled:
+                            type: boolean
+                          updatedAt:
+                            $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                          managerId:
+                            description: The user id of the user's manager
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          customFields:
+                            type: array
+                            description: Custom field values associated with the user. **Note:** This field requires a feature to be enabled for your organization. If it is not present in the response, please contact Ashby support to have it enabled.
+                            items:
+                              $ref: '#/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                        required:
+                        - id
+                        - firstName
+                        - lastName
+                        - globalRole
+                        - isEnabled
+                        - updatedAt
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /user.list:
+    post:
+      summary: user.list
+      description: 'Get a list of all Ashby users.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`organizationRead`](authentication#permissions-userlist) permission.**
+
+
+        The `globalRole` property in the response specifies the user''s access level in Ashby.
+
+        For more details on the permissions granted with each role, see our [documentation here](https://docs.ashbyhq.com/user-permissions).
+
+        '
+      operationId: userList
+      tags:
+      - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  includeDeactivated:
+                    type: boolean
+                    default: false
+                    description: "If set to true, deactivated users are included in the response. \nBy default, deactivated users are not included.\n"
+      responses:
+        '200':
+          description: Responses for the user.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /user.search:
+    post:
+      summary: user.search
+      description: 'Search for an Ashby user by email address
+
+
+        **Requires the [`organizationRead`](authentication#permissions-usersearch) permission.**
+
+        '
+      operationId: userSearch
+      tags:
+      - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The email to use to search for the user
+                  example: test@ashbyhq.com
+              required:
+              - email
+      responses:
+        '200':
+          description: Responses for the user.search endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /user.interviewerSettings:
+    post:
+      summary: user.interviewerSettings
+      description: 'Get interviewer settings for a user.
+
+
+        **Requires the [`organizationRead`](authentication#permissions-userinfo) permission.**
+
+        '
+      operationId: userInterviewerSettings
+      tags:
+      - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the user to get interviewer settings for
+              required:
+              - userId
+      responses:
+        '200':
+          description: Responses for the user.interviewerSettings endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          dailyLimit:
+                            type:
+                            - integer
+                            - 'null'
+                            description: Maximum number of interviews per day for this interviewer
+                          weeklyLimit:
+                            type:
+                            - integer
+                            - 'null'
+                            description: Maximum number of interviews per week for this interviewer
+                        required:
+                        - id
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /user.updateInterviewerSettings:
+    post:
+      summary: user.updateInterviewerSettings
+      description: "Update interviewer settings for a user. \n\nEither limit can be provided, or both can be provided. If only one is provided, the other will remain unchanged. If a limit is provided but set to null, it will be unset.\n\n**Requires the [`organizationWrite`](authentication#permissions-userinfo) permission.**\n"
+      operationId: userUpdateInterviewerSettings
+      tags:
+      - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the user to update interviewer settings for
+                dailyLimit:
+                  type:
+                  - integer
+                  - 'null'
+                  description: Maximum number of interviews per day for this interviewer
+                weeklyLimit:
+                  type:
+                  - integer
+                  - 'null'
+                  description: Maximum number of interviews per week for this interviewer
+              required:
+              - userId
+      responses:
+        '200':
+          description: Responses for the user.updateInterviewerSettings endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1user.interviewerSettings/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /user.createInterviewerPause:
+    post:
+      summary: user.createInterviewerPause
+      description: 'Creates an interviewer pause for a user. While paused, the user will not be scheduled for interviews.
+
+
+        A user can only have one interviewer pause at a time (whether active or scheduled). Attempting to create a pause when one already exists will return an error.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-usercreateinterviewerpause) permission.**
+
+        '
+      operationId: userCreateInterviewerPause
+      tags:
+      - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the user to pause.
+                startsAt:
+                  type: string
+                  format: date-time
+                  description: The start date and time of the pause. Defaults to the current time if not provided.
+                  example: '2024-01-15T00:00:00.000Z'
+                endsAt:
+                  type: string
+                  format: date-time
+                  description: The end date and time of the pause. If not provided, the pause is indefinite.
+                  example: '2024-02-15T00:00:00.000Z'
+                comment:
+                  type: string
+                  description: An optional comment describing the reason for the pause.
+                  example: On vacation
+              required:
+              - userId
+      responses:
+        '200':
+          description: Responses for the user.createInterviewerPause endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        description: Represents an interviewer pause period during which the user will not be scheduled for interviews.
+                        properties:
+                          id:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            - description: The unique id of the interviewer pause.
+                          userId:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            - description: The id of the user who is paused.
+                          startsAt:
+                            type: string
+                            format: date-time
+                            description: The start date and time of the pause period.
+                            example: '2024-01-15T00:00:00.000Z'
+                          endsAt:
+                            type:
+                            - string
+                            - 'null'
+                            format: date-time
+                            description: The end date and time of the pause period. If null, the pause is indefinite.
+                            example: '2024-02-15T00:00:00.000Z'
+                          comment:
+                            type:
+                            - string
+                            - 'null'
+                            description: An optional comment describing the reason for the pause.
+                            example: On vacation
+                          createdAt:
+                            type: string
+                            format: date-time
+                            description: The date and time when the pause was created.
+                            example: '2024-01-14T10:30:00.000Z'
+                        required:
+                        - id
+                        - userId
+                        - startsAt
+                        - createdAt
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /user.listInterviewerPauses:
+    post:
+      summary: user.listInterviewerPauses
+      description: 'Lists all active or scheduled interviewer pauses for a user.
+
+
+        **Requires the [`organizationRead`](authentication#permissions-userlistinterviewerpauses) permission.**
+
+        '
+      operationId: userListInterviewerPauses
+      tags:
+      - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the user to list pauses for.
+              required:
+              - userId
+      responses:
+        '200':
+          description: Responses for the user.listInterviewerPauses endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1user.createInterviewerPause/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /user.deleteInterviewerPause:
+    post:
+      summary: user.deleteInterviewerPause
+      description: 'Deletes an interviewer pause.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-userdeleteinterviewerpause) permission.**
+
+        '
+      operationId: userDeleteInterviewerPause
+      tags:
+      - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewerPauseId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the interviewer pause to delete.
+              required:
+              - interviewerPauseId
+      responses:
+        '200':
+          description: Responses for the user.deleteInterviewerPause endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            - description: The id of the interviewer pause that was deleted.
+                        required:
+                        - id
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

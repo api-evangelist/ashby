@@ -1,0 +1,588 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Offer API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Offer
+paths:
+  /offer.approve:
+    post:
+      summary: offer.approve
+      operationId: offerApprove
+      description: 'Approves an offer or a specific approval step within an offer''s approval process.
+
+
+        This endpoint mimics the behavior of the "Force Approve" function in the Ashby app, where an admin can override approval for a specific step or entire approval process.
+
+
+        **Requires the [`offersWrite`](authentication#permissions-offerapprove) permission.**
+
+
+        This endpoint can be used in two ways:
+
+        1. **Approve entire offer**: Call without `approvalStepId` and `userId` to approve the entire offer approval process
+
+        2. **Approve specific step**: Provide both `approvalStepId` and `userId` to approve a specific step in the approval process
+
+
+        When approving a specific step, the step must be the current step in the approval process and the user must be an approver for that step.
+
+        '
+      tags:
+      - Offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offerVersionId:
+                  allOf:
+                  - description: The id of the offer version that needs approval. This can be obtained as the `entityId` from the `approval.list` endpoint.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                approvalStepId:
+                  allOf:
+                  - description: 'The id of the specific approval step to approve. If provided, `userId` must also be provided.
+
+                      If omitted, the entire offer approval process will be approved. This can be obtained from the `approval.list` endpoint.
+
+                      '
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                userId:
+                  allOf:
+                  - description: 'The id of the user approving the step. Required if `approvalStepId` is provided.
+
+                      Must be an approver for the specified approval step.
+
+                      '
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - offerVersionId
+      responses:
+        '200':
+          description: Responses for the offer.approve endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/offerCreate/post/requestBody/content/application~1json/schema/properties/data/properties/offer'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /offer.create:
+    post:
+      summary: offer.create
+      operationId: offerCreate
+      description: 'Creates a new Offer
+
+
+        **Requires the [`offersWrite`](authentication#permissions-offercreate) permission.**
+
+
+        Offer forms support a variety of field types. The values accepted for each field depend on the type of field that''s being filled out:
+
+        - `Boolean` - A boolean value.
+
+        - `Currency` - An object in the format `{ currencyCode: "USD", value: 100000 }` where currencyCode is a valid ISO 4217 currency code and value is an integer.
+
+        - `Date` - A valid ISO Date string.
+
+        - `Number` - An integer.
+
+        - `String` - A string.
+
+        - `ValueSelect` - A string that matches the value of one of the ValueSelect field''s selectable options.
+
+        - `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field''s selectable options.
+
+
+        **Error codes:**
+
+
+        | Code | Description |
+
+        |---|---|
+
+        | `opening_in_use` | The opening is already in use by another offer. |
+
+        | `opening_state_invalid` | The opening has already been closed or filled by a different application.. |
+
+        '
+      tags:
+      - Offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offerProcessId:
+                  allOf:
+                  - description: "The id of the offer process associated with the offer you're creating. \nThis value is the id included in the response of the `offerProcess.start` API.\n"
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                offerFormId:
+                  allOf:
+                  - description: 'The id of the form associated with the offer.
+
+                      This value is the id included in the response of the `offer.start` API.
+
+                      '
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                offerForm:
+                  type: object
+                  properties:
+                    fieldSubmissions:
+                      type: array
+                      items:
+                        properties:
+                          path:
+                            type: string
+                            description: The form field's "path" value
+                          value:
+                            type: string
+                            description: This is often a primitive but the value depends on the type of field being submitted. See the description above for details on the values accepted in this field.
+                        required:
+                        - path
+                        - value
+                  required:
+                  - fieldSubmissions
+              required:
+              - offerProcessId
+              - offerFormId
+              - offerForm
+      responses:
+        '200':
+          description: Responses for the offer.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/offerCreate/post/requestBody/content/application~1json/schema/properties/data/properties/offer'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /offer.info:
+    post:
+      summary: offer.info
+      operationId: offerInfo
+      description: 'Returns details about a single offer by id
+
+
+        **Requires the [`offersRead`](authentication#permissions-offerinfo) permission.**
+
+        '
+      tags:
+      - Offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offerId:
+                  allOf:
+                  - description: The id of the offer to fetch
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - offerId
+      responses:
+        '200':
+          description: Responses for the offer.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/offerCreate/post/requestBody/content/application~1json/schema/properties/data/properties/offer'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /offer.list:
+    post:
+      summary: offer.list
+      description: 'Get a list of all offers with their latest version.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`offersRead`](authentication#permissions-offerlist) permission.**
+
+        '
+      operationId: offerList
+      tags:
+      - Offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1opening.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  offerStatus:
+                    type: array
+                    minItems: 1
+                    description: When supplied, only offers with provided offer-status(es) will be returned. Array must contain at least one value.
+                    items:
+                      allOf:
+                      - type: string
+                        enum:
+                        - WaitingOnApprovalStart
+                        - WaitingOnOfferApproval
+                        - WaitingOnApprovalDefinition
+                        - WaitingOnCandidateResponse
+                        - CandidateRejected
+                        - CandidateAccepted
+                        - OfferCancelled
+                      - title: OfferStatus
+                  acceptanceStatus:
+                    type: array
+                    minItems: 1
+                    description: When supplied, only offers with provided acceptance-status(es) will be returned. Array must contain at least one value.
+                    items:
+                      allOf:
+                      - type: string
+                        enum:
+                        - Accepted
+                        - Declined
+                        - Pending
+                        - Created
+                        - Cancelled
+                        - WaitingOnResponse
+                      - title: AcceptanceStatus
+                  applicationId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: If provided, only returns the offers for the application with the supplied id
+                  approvalStatus:
+                    type: array
+                    minItems: 1
+                    description: When supplied, only offers whose latest version has one of the provided approval status(es) will be returned. Array must contain at least one value.
+                    items:
+                      type: string
+                      enum:
+                      - Approved
+                      - WaitingOnApprovals
+                      - Declined
+      responses:
+        '200':
+          description: Responses for the offer.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            decidedAt:
+                              type: string
+                            applicationId:
+                              allOf:
+                              - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              - description: The id of the application associated with the offer
+                            acceptanceStatus:
+                              allOf:
+                              - $ref: '#/paths/~1offer.list/post/requestBody/content/application~1json/schema/allOf/1/properties/acceptanceStatus/items/allOf/0'
+                              - title: AcceptanceStatus
+                            offerStatus:
+                              allOf:
+                              - title: OfferStatus
+                              - $ref: '#/paths/~1offer.list/post/requestBody/content/application~1json/schema/allOf/1/properties/offerStatus/items/allOf/0'
+                            latestVersion:
+                              $ref: '#/webhooks/offerCreate/post/requestBody/content/application~1json/schema/properties/data/properties/offer/allOf/1/properties/versions/items'
+                          required:
+                          - id
+                          - applicationId
+                          - acceptanceStatus
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /offer.start:
+    post:
+      summary: offer.start
+      operationId: offerStart
+      description: "The offer.start endpoint creates and returns an offer version instance that can be filled out and submitted\nusing the `offer.create` endpoint. \n\n**Requires the [`offersWrite`](authentication#permissions-offerstart) permission.**\n\nIn order to create a new offer version for a candidate with an in-progress \noffer process, you can call the `offer.start` endpoint and then call the `offer.create` endpoint to fill out the\nnewly created offer version form.  \n"
+      tags:
+      - Offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offerProcessId:
+                  allOf:
+                  - description: The ID of the offer process to start. This value is the id included in the response of the `offerProcess.start` API.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - offerProcessId
+      responses:
+        '200':
+          description: Responses for the offer.start endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          formDefinition:
+                            type: object
+                            properties:
+                              sections:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    title:
+                                      type: string
+                                    descriptionHtml:
+                                      type: string
+                                    descriptionPlain:
+                                      type: string
+                                    fields:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          isRequired:
+                                            type: boolean
+                                            example: true
+                                            default: true
+                                          descriptionHtml:
+                                            type: string
+                                          descriptionPlain:
+                                            type: string
+                                          field:
+                                            type: object
+                                            properties:
+                                              id:
+                                                $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                              type:
+                                                type: string
+                                                example: String
+                                                description: The type of the form definition field.
+                                              path:
+                                                type: string
+                                                example: _systemfield_name
+                                              humanReadablePath:
+                                                type: string
+                                                example: Name
+                                              title:
+                                                type: string
+                                                example: Name
+                                              isNullable:
+                                                type: boolean
+                                                example: false
+                                                default: true
+                                              selectableValues:
+                                                type: array
+                                                items:
+                                                  type: object
+                                                  properties:
+                                                    label:
+                                                      type: string
+                                                    value:
+                                                      type: string
+                                                  required:
+                                                  - label
+                                                  - value
+                                            required:
+                                            - id
+                                            - type
+                                            - path
+                                            - humanReadablePath
+                                            - title
+                                            - isNullable
+                                        required:
+                                        - isRequired
+                                        - field
+                                  required:
+                                  - fields
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /offer.startApprovalProcess:
+    post:
+      summary: offer.startApprovalProcess
+      operationId: offerStartApprovalProcess
+      description: 'Starts the approval process for an offer in a "WaitingOnApprovalStart" state.
+
+        Once started, the approval is sent to the configured approvers.
+
+
+        The offer version ID can be obtained from the offer (e.g. `offer.info` or `offer.list` response''s `latestVersion.id`).
+
+
+        **Requires the [`offersWrite`](authentication#permissions-offerstartapprovalprocess) permission.**
+
+        '
+      tags:
+      - Offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                offerVersionId:
+                  allOf:
+                  - description: The id of the offer version whose approval process should be started.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                note:
+                  type: string
+                  description: Optional note to attach to the approval request.
+              required:
+              - offerVersionId
+      responses:
+        '200':
+          description: Responses for the offer.startApprovalProcess endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/offerCreate/post/requestBody/content/application~1json/schema/properties/data/properties/offer'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /offer.update:
+    post:
+      summary: offer.update
+      operationId: offerUpdate
+      description: 'Updates an existing Offer
+
+
+        **Requires the [`offersWrite`](authentication#permissions-offerupdate) permission.**
+
+
+        Offer forms support a variety of field types. The values accepted for each field depend on the type of field that''s being filled out:
+
+        - `Boolean` - A boolean value.
+
+        - `Currency` - An object in the format `{ currencyCode: "USD", value: 100000 }` where currencyCode is a valid ISO 4217 currency code and value is an integer.
+
+        - `Date` - A valid ISO Date string.
+
+        - `Number` - An integer.
+
+        - `String` - A string.
+
+        - `ValueSelect` - A string that matches the value of one of the ValueSelect field''s selectable options.
+
+        - `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field''s selectable options.
+
+
+        Calling this endpoint will create a new version of the offer and retrigger any necessary approval steps.
+
+        '
+      tags:
+      - Offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offerId:
+                  allOf:
+                  - description: 'The id of the offer you''re updating.
+
+                      '
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                offerForm:
+                  $ref: '#/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm'
+                  description: The form submission for the offer. Can be retrieved from `offer.info`.
+              required:
+              - offerId
+              - offerForm
+      responses:
+        '200':
+          description: Responses for the offer.update endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/offerCreate/post/requestBody/content/application~1json/schema/properties/data/properties/offer'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

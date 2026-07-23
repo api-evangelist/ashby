@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Job Template API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Job Template
+paths:
+  /jobTemplate.list:
+    post:
+      summary: jobTemplate.list
+      description: 'List all active and inactive job templates.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`jobsRead`](authentication#permissions-jobtemplatelist) permission.**
+
+        '
+      operationId: jobTemplateList
+      tags:
+      - Job Template
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  expand:
+                    type: array
+                    description: "Choose to expand the result and include additional data for related objects. \n"
+                    items:
+                      type: string
+                      enum:
+                      - location
+      responses:
+        '200':
+          description: Responses for the jobTemplate.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          allOf:
+                          - type: object
+                            properties:
+                              id:
+                                $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              title:
+                                type: string
+                              status:
+                                type: string
+                                enum:
+                                - Active
+                                - Inactive
+                              locationId:
+                                allOf:
+                                - description: The id of the location of the job template
+                                - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              departmentId:
+                                allOf:
+                                - description: The id of the department or team associated with the job template
+                                - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              defaultInterviewPlanId:
+                                allOf:
+                                - description: "The id of the default interview plan for this job template. \nA job cannot be opened without a default interview plan.\n"
+                                - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              interviewPlanIds:
+                                type: array
+                                items:
+                                  allOf:
+                                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                  - description: The ids of all interview plans associated with a job template
+                              createdAt:
+                                $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                              updatedAt:
+                                $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                            required:
+                            - id
+                            - title
+                            - status
+                          - type: object
+                            properties:
+                              location:
+                                allOf:
+                                - $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                                - description: The location will only be included if the `location` expand parameter is included when the request is made.
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

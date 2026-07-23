@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Application Form API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Application Form
+paths:
+  /applicationForm.submit:
+    post:
+      summary: applicationForm.submit
+      description: 'Submit an application for a job posting.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-applicationformsubmit) permission.**
+
+
+        The Content-Type of this request must be `multipart/form-data` or `application/json`.
+
+
+        When using `application/json`, file fields should contain a handle string obtained from [`file.createFileUploadHandle`](https://developers.ashbyhq.com/reference/filecreatefileuploadhandle) with `fileUploadContext` set to `ApplicationForm`. This allows files to be uploaded directly to storage, bypassing the need to send file bytes through the API.
+
+
+        When using `multipart/form-data`, file fields should reference a file part included in the multipart request body (existing behavior).
+
+
+        **Important:** Please ensure that you check the response''s `success` field and display any validation errors to candidates if it is `false`. Not doing so will result in applications not being recorded, without any notification to the candidate prompting them to resubmit. For testing purposes, you can simulate a validation failure by submitting the email address `testing-fail-validation@example.com`.
+
+
+        **Note: The requests generated from this documentation will not work for this endpoint.**
+
+
+        The values accepted for each field depend on the type of field that''s being filled out:
+
+        - `Boolean` - A boolean value
+
+        - `Date` - A date string in the format YYYY-MM-DD
+
+        - `Email` - A valid email address
+
+        - `Number` - An integer
+
+        - `RichText` - We do not support submitting rich text documents via the API but we do support submitting plain text values for these fields. Plain text values must be submitted in the format `{ type: "PlainText", value: "A plain text string" }`
+
+        - `Score` - An integer between 1 and 4 submitted in the format `{ score: 4 }`
+
+        - `Phone`, `String` A string
+
+        - `ValueSelect` - A string that matches the value of one of the ValueSelect field''s selectable options
+
+        - `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field''s selectable options
+
+        - `Location` - An object with the following properties: `{ country: "USA", city: "San Francisco", region: "California" }`. You may provide any combination of these properties and we will attempt to geocode the location. For best results, provide all three properties.
+
+        - `EducationHistory` - [Early Access] An array of objects with the following properties: `{ schoolName: "University of California, Berkeley", degree: "Bachelor of Science", major: "Computer Science", startDate: "2020-09-01", endDate: "2024-05-15", isCurrent: true }`. Only `schoolName` is required. We will attempt to match the school name to a known school in our database. If `isCurrent` is true, `endDate` must not be provided.
+
+        '
+      operationId: applicationformsubmit
+      tags:
+      - Application Form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - jobPostingId
+              - applicationForm
+              properties:
+                jobPostingId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the job posting to submit an application for
+                applicationForm:
+                  $ref: '#/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm'
+                utmData:
+                  type: object
+                  properties:
+                    utm_source:
+                      type: string
+                    utm_campaign:
+                      type: string
+                    utm_medium:
+                      type: string
+                    utm_term:
+                      type: string
+                    utm_content:
+                      type: string
+                tagIds:
+                  type: array
+                  description: The ids of the tags to apply to the candidate
+                  items:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                allowSubmissionForUnpublishedJobPosting:
+                  type: boolean
+                  example: true
+                  description: Defaults to true. If you are running a custom built careers page that is statically generated, you may want to set this to true to allow applications to be submitted in the time a job is unpublished and your careers page is refreshed. If set to false, applications submitted for unpublished job postings will return a `job_posting_not_published` error.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - jobPostingId
+              - applicationForm
+              properties:
+                jobPostingId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the job posting to submit an application for
+                applicationForm:
+                  $ref: '#/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm'
+                utmData:
+                  type: object
+                  properties:
+                    utm_source:
+                      type: string
+                    utm_campaign:
+                      type: string
+                    utm_medium:
+                      type: string
+                    utm_term:
+                      type: string
+                    utm_content:
+                      type: string
+                tagIds:
+                  type: array
+                  description: The ids of the tags to apply to the candidate
+                  items:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                allowSubmissionForUnpublishedJobPosting:
+                  type: boolean
+                  example: true
+                  description: Defaults to true. If you are running a custom built careers page that is statically generated, you may want to set this to true to allow applications to be submitted in the time a job is unpublished and your careers page is refreshed. If set to false, applications submitted for unpublished job postings will return a `job_posting_not_published` error.
+                <file key>:
+                  type: string
+                  description: Any file referenced in the `applicationForm`. The name of this field must exactly match the `value` on the `fieldSubmission` that references this file.
+                  format: binary
+      responses:
+        '200':
+          description: Responses from the applicationFeedback.submit endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          submittedFormInstance:
+                            type: object
+                            properties:
+                              id:
+                                $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              formDefinition:
+                                $ref: '#/paths/~1offer.start/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/formDefinition'
+                              submittedValues:
+                                type: object
+                                example:
+                                  _systemfield_name: Gob Bluth
+                            required:
+                            - id
+                            - formDefinition
+                            - submittedValues
+                          formMessages:
+                            allOf:
+                            - type: object
+                              description: Messages related to the application form submission. Check if the application was blocked before submitting any surveys.
+                              properties:
+                                blocked:
+                                  type: boolean
+                                  description: Whether the application was blocked due to configured application limits (eg too many applications submitted for a single candidate). If true, do not attempt to submit any surveys, if any.
+                                  example: true
+                                blockMessageForCandidateHtml:
+                                  type: string
+                                  description: A message to display to the candidates regarding the application limits. If there is no message, then the candidate should not be informed that they were blocked.
+                                  example: '<div><p>Please Note: we have set up limits for applications for this role. Candidates may not apply more than 2 times in any 60 day span for any job in the Application Limit Group.</p></div>
+
+                                    '
+                              required:
+                              - blocked
+                            - description: "Contains information about the form submission. When `blocked` is true, \nthe application was blocked by organizational rules and no Application \nrecord was created. Do not attempt to call `application.info` with the \n`submittedFormInstanceId` as it will return an `application_blocked` error. \nThe submission is saved as a blocked submission and can be reviewed by \nadministrators.\n"
+                        required:
+                        - submittedFormInstance
+                        - formMessages
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

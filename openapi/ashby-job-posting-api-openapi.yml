@@ -1,0 +1,510 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Job Posting API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Job Posting
+paths:
+  /jobPosting.info:
+    post:
+      summary: jobPosting.info
+      description: "Retrieve an individual job posting\n\n**Requires the [`jobsRead`](authentication#permissions-jobpostinginfo) permission.**\n\nResult fields:\n- `linkedData` - Object that can be used to populate \"rich results\" in search engines. [See more info here](https://developers.google.com/search/docs/data-types/job-posting).\n- `applicationFormDefinition` -\tSee the guide on [Creating a custom careers page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page).\n"
+      operationId: jobPostingInfo
+      tags:
+      - Job Posting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jobPostingId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the job posting to return
+                jobBoardId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: If provided, returns the job posting data for the specified job board. If omitted, defaults to an external job board.
+                expand:
+                  type: array
+                  description: "Choose to expand the result and include additional data for related objects. \n"
+                  items:
+                    type: string
+                    enum:
+                    - job
+              required:
+              - jobPostingId
+      responses:
+        '200':
+          description: Responses for the jobPosting.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        properties:
+                          id:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            - description: The job posting's id
+                          title:
+                            type: string
+                            description: The job posting's title
+                            example: Posting Title
+                          descriptionPlain:
+                            type: string
+                            description: A plaintext version of the job posting's description
+                            example: "This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.\n\n\n\nREQUIREMENTS\n\n - Experience writing good example job descriptions\n\n - Other exemplary skills\n\n - 3-5 years prior experience in this role\n\n - Motivation\n\n - Great english language skills\n   \n\n\nABOUT THE TEAM\n\n\nExample org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.\n\n"
+                          descriptionHtml:
+                            type: string
+                            description: An HTML version of the job posting's description
+                            example: <p style="min-height:1.5em">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style="min-height:1.5em"><li><p style="min-height:1.5em">Experience writing good example job descriptions</p></li><li><p style="min-height:1.5em">Other exemplary skills</p></li><li><p style="min-height:1.5em">3-5 years prior experience in this role</p></li><li><p style="min-height:1.5em">Motivation</p></li><li><p style="min-height:1.5em">Great english language skills<br /></p></li></ul><h1>About the Team</h1><p style="min-height:1.5em"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p><p style="min-height:1.5em"></p>
+                          descriptionSocial:
+                            type: string
+                            description: A shortened job posting description displayed when shared on social media, limited to 200 characters.
+                            example: Example org allows real-time collaboration on important example workflows. When you join as an example role, part of the example team, you will perform a critical role in various example workflows.
+                          descriptionParts:
+                            type: object
+                            description: The above description broken down into the actual description on the job, and the Job Post Description Opening and Closing that is set by the admin in Ashby's Job Boards → Theme → Messaging settings.
+                            properties:
+                              descriptionOpening:
+                                allOf:
+                                - $ref: '#/paths/~1jobPosting.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/descriptionParts/properties/descriptionBody/allOf/0'
+                                - description: The content set in the Job Post Description Opening theme settings
+                                - properties:
+                                    html:
+                                      description: An HTML version of the Job Post Description Opening theme settings
+                                      example: null
+                                    plain:
+                                      description: A plaintext version of the Job Post Description Opening theme settings
+                                      example: null
+                              descriptionBody:
+                                allOf:
+                                - type: object
+                                  properties:
+                                    html:
+                                      type: string
+                                    plain:
+                                      type: string
+                                  required:
+                                  - html
+                                  - plain
+                                - description: The description set on the job posting
+                                - properties:
+                                    html:
+                                      description: An HTML version of the description set on the job posting
+                                      example: <p style="min-height:1.5em">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style="min-height:1.5em"><li><p style="min-height:1.5em">Experience writing good example job descriptions</p></li><li><p style="min-height:1.5em">Other exemplary skills</p></li><li><p style="min-height:1.5em">3-5 years prior experience in this role</p></li><li><p style="min-height:1.5em">Motivation</p></li><li><p style="min-height:1.5em">Great english language skills<br /></p></li></ul></p>
+                                    plain:
+                                      description: An plaintext version of the description set on the job posting
+                                      example: This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.\n\n\n\nREQUIREMENTS\n\n - Experience writing good example job descriptions\n\n - Other exemplary skills\n\n - 3-5 years prior experience in this role\n\n - Motivation\n\n - Great english language skills\n
+                              descriptionClosing:
+                                allOf:
+                                - $ref: '#/paths/~1jobPosting.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/descriptionParts/properties/descriptionBody/allOf/0'
+                                - description: The content set in the Job Post Description Closing theme settings
+                                - properties:
+                                    html:
+                                      description: An HTML version of the Job Post Description Closing theme settings
+                                      example: <h1>About the Team</h1><p style="min-height:1.5em"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p>
+                                    plain:
+                                      description: A plaintext version of the Job Post Description Closing theme settings
+                                      example: ABOUT THE TEAM\n\n\nExample org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.\n\n
+                          departmentName:
+                            type: string
+                            example: People
+                            description: The name of the department associated with the job posting
+                          teamName:
+                            type: string
+                            example: Recruiting Operations
+                            description: The name of the team associated with the job posting
+                          teamNameHierarchy:
+                            type: array
+                            items:
+                              type: string
+                            example:
+                            - People
+                            - Recruiting
+                            - Recruiting Operations
+                            description: The hierarchy of team names associated with the job posting.
+                          jobId:
+                            allOf:
+                            - description: The id of the job associated with the job posting
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          locationName:
+                            type: string
+                            example: Springfield
+                            description: The name of the primary location associated with the job posting
+                          locationIds:
+                            $ref: '#/webhooks/jobPostingUpdate/post/requestBody/content/application~1json/schema/properties/data/properties/jobPosting/properties/locationIds'
+                          linkedData:
+                            type: object
+                            description: An object that can be used to populate "rich results" in search engines. (https://developers.google.com/search/docs/data-types/job-posting)
+                            properties:
+                              '@context':
+                                type: string
+                                example: https://schema.org/
+                              '@type':
+                                type: string
+                                example: JobPosting
+                              title:
+                                type: string
+                                example: Posting Title
+                              description:
+                                type: string
+                                example: <p style="min-height:1.5em">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style="min-height:1.5em"><li><p style="min-height:1.5em">Experience writing good example job descriptions</p></li><li><p style="min-height:1.5em">Other exemplary skills</p></li><li><p style="min-height:1.5em">3-5 years prior experience in this role</p></li><li><p style="min-height:1.5em">Motivation</p></li><li><p style="min-height:1.5em">Great english language skills<br /></p></li></ul><h1>About the Team</h1><p style="min-height:1.5em"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p><p style="min-height:1.5em"></p>
+                              identifier:
+                                type: object
+                                properties:
+                                  '@type':
+                                    type: string
+                                    example: PropertyValue
+                                  name:
+                                    type: string
+                                    example: Posting Title
+                                  value:
+                                    type: string
+                                    example: 4be0e8c0-9323-43a0-ab48-506789ab9c16
+                              datePosted:
+                                type: string
+                                example: '2022-07-22'
+                              hiringOrganization:
+                                type: object
+                                properties:
+                                  '@type':
+                                    type: string
+                                    example: Organization
+                                  name:
+                                    type: string
+                                    example: Example org
+                                  sameAs:
+                                    type: string
+                                    example: 34d7c77d-e9b2-5a09-a882-cb23a225f2ec.com
+                              jobLocation:
+                                type: object
+                                properties:
+                                  '@type':
+                                    type: string
+                                    example: Place
+                                  address:
+                                    type: object
+                                    properties:
+                                      '@type':
+                                        type: string
+                                        example: PostalAddress
+                              employmentType:
+                                type: string
+                                enum:
+                                - FULL_TIME
+                                - PART_TIME
+                                - CONTRACTOR
+                                - TEMPORARY
+                                - INTERN
+                                example: FULL_TIME
+                          publishedDate:
+                            type: string
+                            example: '2022-07-22'
+                            description: The date the job posting was published
+                          applicationDeadline:
+                            type: string
+                            example: '2024-08-12T20:00:00.000Z'
+                            format: date-time
+                            description: The date and time when applications will no longer be accepted
+                          address:
+                            allOf:
+                            - description: The address of the job posting
+                            - $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/address'
+                          isRemote:
+                            description: Whether or not the job posting location is remote
+                            type: boolean
+                          workplaceType:
+                            allOf:
+                            - description: The type of workplace.
+                            - $ref: '#/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/workplaceType/allOf/1'
+                          employmentType:
+                            $ref: '#/webhooks/jobCreate/post/requestBody/content/application~1json/schema/properties/data/properties/job/properties/employmentType'
+                          applicationFormDefinition:
+                            allOf:
+                            - $ref: '#/paths/~1offer.start/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/formDefinition'
+                            - description: See the guide on [Creating a Custom Careers Page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page)
+                          surveyFormDefinitions:
+                            type: array
+                            items:
+                              $ref: '#/paths/~1surveyFormDefinition.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                            description: Additional survey forms to be collected alongside the application form. See the guide on [Creating a Custom Careers Page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page)
+                          isListed:
+                            type: boolean
+                            example: true
+                            description: Whether or not the job posting is listed
+                          suppressDescriptionOpening:
+                            type: boolean
+                            example: true
+                            description: When true, the job description opening from the brand will be suppressed. descriptionOpening will be returned as null.
+                          suppressDescriptionClosing:
+                            type: boolean
+                            example: true
+                            description: When true, the job description closing from the brand will be suppressed. descriptionClosing will be returned as null.
+                          externalLink:
+                            type: string
+                            example: https://jobs.ashbyhq.com/70b51cc4-7f34-5567-92bd-96f354f7439a/4be0e8c0-9323-43a0-ab48-506789ab9c16
+                            description: The external link to the job posting. Will be null if the job posting is on an internal job board.
+                          applyLink:
+                            type: string
+                            example: https://jobs.ashbyhq.com/6eec82ac-9713-512d-ac2e-405618935375/d5a6bc97-4259-4bc5-b3fe-6d3edfd538e3
+                            description: The link to apply to the job posting. Will be to the public job board if the job posting is on an external job board, or to the internal job board if the job posting is on an internal job board.
+                          compensation:
+                            type: object
+                            description: Compensation ranges associated with the job posting and related settings
+                            required:
+                            - compensationTiers
+                            - shouldDisplayCompensationOnJobBoard
+                            properties:
+                              compensationTierSummary:
+                                type: string
+                                example: $72K – $270K • 1% – 2.25% • Offers Bonus • Multiple Ranges
+                                description: 'A summary of *all* the job posting''s valid `compensationTiers` in the same format shown on
+
+                                  Ashby-hosted Job Boards
+
+                                  '
+                              summaryComponents:
+                                type: array
+                                items:
+                                  allOf:
+                                  - $ref: '#/paths/~1job.updateCompensation/post/requestBody/content/application~1json/schema/properties/compensationTiers/items/properties/components/items/allOf/0'
+                                  - type: object
+                                    description: 'A part of a compensation tier that represents one specific type of compensation, e.g. the "Salary"
+
+                                      or the "Bonus."
+
+                                      '
+                                    properties:
+                                      summary:
+                                        type: string
+                                        example: €72K – €100K
+                                        description: The summary of this component in the same format shown on Ashby-hosted Job Boards
+                                    required:
+                                    - summary
+                                description: 'The maximum and minimum compensation ranges across *all* the posting''s `compensationTiers`
+
+                                  that make up `compensationTierSummary`
+
+                                  '
+                                example:
+                                - summary: €72K – €270K
+                                  compensationType: Salary
+                                  interval: 1 YEAR
+                                  currencyCode: EUR
+                                  minValue: 72023.45
+                                  maxValue: 270450
+                                - summary: 1% – 2.25%
+                                  compensationType: EquityPercentage
+                                  interval: NONE
+                                  minValue: 1
+                                  maxValue: 2.25
+                                - summary: Offers Bonus
+                                  compensationType: Bonus
+                                  interval: 1 YEAR
+                                  minValue: null
+                                  maxValue: null
+                              compensationTiers:
+                                $ref: '#/paths/~1job.updateCompensation/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/allOf/0/properties/compensationTiers'
+                                description: The compensation ranges that can be offered to applicants for this posting
+                              shouldDisplayCompensationOnJobBoard:
+                                type: boolean
+                                example: true
+                                description: 'Whether the job posting''s settings specify that compensation should be shown to applicants
+
+                                  '
+                          updatedAt:
+                            $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                          applicationLimitCalloutHtml:
+                            type: string
+                            description: An HTML version of any communication you would like to show to applicants about the application limit for this job posting
+                            example: "<div>\n  <p>Please Note: we have set up limits for applications for this role. It is in the <strong>Product Limit </strong> group. The following limits apply to applications for all jobs within this group:</p>\n  <ul>\n    <li>\n      <p>Candidates may not apply more than 1 time in any 60 day span for any job in the <strong>Product Limit </strong> Group.</p>\n    </li>\n  </ul>\n</div>\n"
+                        required:
+                        - id
+                        - title
+                        - descriptionPlain
+                        - descriptionHtml
+                        - descriptionParts
+                        - departmentName
+                        - teamName
+                        - jobId
+                        - locationName
+                        - locationIds
+                        - linkedData
+                        - publishedDate
+                        - employmentType
+                        - applicationFormDefinition
+                        - surveyFormDefinitions
+                        - isListed
+                        - applyLink
+                        - compensation
+                        - updatedAt
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /jobPosting.list:
+    post:
+      summary: jobPosting.list
+      description: "Lists all published job postings\n\n**Requires the [`jobsRead`](authentication#permissions-jobpostinglist) permission.**\n\n**Important**: By default, this endpoint includes all listed and unlisted job postings. Unlisted job postings should not be displayed publicly. \nIf you are using the API to publicly expose job postings, set the `listedOnly` parameter to `true` when calling this API so that you only fetch listed job postings that can be displayed publicly.\n"
+      operationId: jobPostingList
+      tags:
+      - Job Posting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                location:
+                  type: string
+                  description: filter by location name (case sensitive)
+                department:
+                  type: string
+                  description: filter by department name (case sensitive)
+                listedOnly:
+                  type: boolean
+                  description: If true, filter out unlisted job postings.
+                  default: false
+                jobBoardId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: If provided, only returns the job postings on the specified job board.  If omitted, this API will return the job postings on the primary external job board.
+      responses:
+        '200':
+          description: Responses for the jobPosting.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/webhooks/jobPostingUpdate/post/requestBody/content/application~1json/schema/properties/data/properties/jobPosting'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /jobPosting.update:
+    post:
+      summary: jobPosting.update
+      operationId: jobPostingUpdate
+      description: 'Updates an existing job posting.
+
+
+        **Requires the [`jobsWrite`](authentication#permissions-jobpostingupdate) permission.**
+
+
+        **Note on updating the description**: When job description openings and closings are not suppressed, the `descriptionHtml` field returned in `jobPosting.info` may contain content that is not modifiable through the API. Only the content of the `descriptionParts.descriptionBody` field of the `jobPosting.info` endpoint is modifiable through this call. To completely customize the description, set both suppressDescriptionOpening and suppressDescriptionClosing to true.
+
+        '
+      tags:
+      - Job Posting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jobPostingId:
+                  allOf:
+                  - description: The unique id of the job posting to update.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                title:
+                  type: string
+                  example: Software Engineer
+                  description: A new title for the job posting.
+                workplaceType:
+                  allOf:
+                  - description: The type of workplace. LocationHierarchies cannot be labeled with a workplaceType.
+                  - $ref: '#/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/workplaceType/allOf/1'
+                suppressDescriptionOpening:
+                  type: boolean
+                  example: true
+                  description: When true, the job description opening from the brand will be suppressed. descriptionOpening will be returned as null.
+                suppressDescriptionClosing:
+                  type: boolean
+                  example: true
+                  description: When true, the job description closing from the brand will be suppressed. descriptionClosing will be returned as null.
+                description:
+                  type: object
+                  description: 'An HTML block of the job posting description. Please see below for supported tags.
+
+
+                    **Note**: When job description openings and closings are not suppressed, the `descriptionHtml` field returned in `jobPosting.info` may contain content that is not modifiable through the API. Only the content of the `descriptionParts.descriptionBody` field of the `jobPosting.info` endpoint is modifiable through this call. To completely customize the description, set both suppressDescriptionOpening and suppressDescriptionClosing to true.
+
+                    '
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - text/html
+                    content:
+                      type: string
+                      description: "The HTML content of the Job Posting. The following tags will accept updates. Updates to any other tags will be stripped out or not applied. \n- Headings - `<h[1-6]>`\n- Bold - `<b>`\n- Italic - `<i>`\n- Underline - `<u>`\n- Links - `<a>`\n- Bulleted Lists - `<ul>`, `<li>`\n- Ordered Lists - `<ol>`, `<li>`\n- Code - `<code>`\n- Code blocks - `<pre>`\n"
+                  required:
+                  - type
+                  - content
+              required:
+              - jobPostingId
+      responses:
+        '200':
+          description: Responses for the jobPosting.update endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1jobPosting.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

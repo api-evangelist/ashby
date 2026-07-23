@@ -1,0 +1,164 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Survey Submission API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Survey Submission
+paths:
+  /surveySubmission.create:
+    post:
+      summary: surveySubmission.create
+      description: 'Create a new survey submission.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-surveySubmissionCreate) permission.**
+
+        '
+      operationId: surveySubmissionCreate
+      tags:
+      - Survey Submission
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - candidateId
+              - applicationId
+              - surveyFormDefinitionId
+              - submittedValues
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate to create a survey submission for.
+                applicationId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the application to associate with the survey submission.
+                surveyFormDefinitionId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: 'The ID of the survey form definition that submissions are being provided for.
+
+                      '
+                submittedValues:
+                  type: object
+                  description: "The values that the candidate submitted in the survey form. \nThe keys of this object should be the IDs from the associated survey's form definition, and the values should be the answers to the questions.\nThe information on what values are expected can be obtained by calling the `surveyFormDefinition.info` endpoint.\n"
+                  additionalProperties: true
+                  example:
+                    _systemfield_name: Gob Bluth
+      responses:
+        '200':
+          description: Responses for the surveySubmission.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/surveySubmit/post/requestBody/content/application~1json/schema/properties/data/properties/surveySubmission'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /surveySubmission.list:
+    post:
+      summary: surveySubmission.list
+      operationId: surveySubmissionList
+      description: 'Lists all survey submissions of a given `surveyType`.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`candidatesRead`](authentication#permissions-surveySubmissionList) permission.**
+
+        '
+      tags:
+      - Survey Submission
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                description: 'The type of survey submissions to fetch.
+
+                  Supported values: CandidateExperience, Questionnaire.
+
+                  '
+                properties:
+                  surveyType:
+                    type: string
+                    description: 'The survey types supported by surveySubmission.list.
+
+                      '
+                    enum:
+                    - CandidateExperience
+                    - Questionnaire
+                    example: CandidateExperience
+                required:
+                - surveyType
+              - $ref: '#/paths/~1opening.list/post/requestBody/content/application~1json/schema'
+      responses:
+        '200':
+          description: Responses for the surveySubmission.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          allOf:
+                          - $ref: '#/webhooks/surveySubmit/post/requestBody/content/application~1json/schema/properties/data/properties/surveySubmission'
+                          - type: object
+                            properties:
+                              surveyType:
+                                $ref: '#/paths/~1surveySubmission.list/post/requestBody/content/application~1json/schema/allOf/0/properties/surveyType'
+                            required:
+                            - surveyType
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

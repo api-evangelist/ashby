@@ -1,0 +1,288 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Webhook API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Webhook
+paths:
+  /webhook.create:
+    post:
+      summary: webhook.create
+      description: 'Creates a webhook setting.
+
+
+        **Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) scope.**
+
+        '
+      operationId: webhookcreate
+      tags:
+      - Webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                webhookType:
+                  type: string
+                  enum:
+                  - applicationSubmit
+                  - applicationUpdate
+                  - candidateHire
+                  - candidateStageChange
+                  - candidateDelete
+                  - candidateMerge
+                  - interviewPlanTransition
+                  - interviewScheduleCreate
+                  - interviewScheduleUpdate
+                  - jobPostingUpdate
+                  - jobPostingPublish
+                  - jobPostingUnpublish
+                  - offerCreate
+                  - offerUpdate
+                  - offerDelete
+                  - pushToHRIS
+                  - surveySubmit
+                requestUrl:
+                  type: string
+                  description: The URL the webhook will send requests to.
+                secretToken:
+                  type: string
+                  description: 'The secret token used to sign the webhook request. See our documentation [here](https://developers.ashbyhq.com/docs/authenticating-webhooks) for more information.
+
+                    '
+              required:
+              - webhookType
+              - requestUrl
+              - secretToken
+      responses:
+        '200':
+          description: Responses from the webhook.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          enabled:
+                            type: boolean
+                            description: Whether or not the webhook setting is enabled.
+                          requestUrl:
+                            type: string
+                            description: The URL the webhook will send requests to.
+                            example: https://example.com/webhook
+                          secretToken:
+                            type: string
+                            description: 'The secret token used to sign the webhook request. See our documentation [here](https://developers.ashbyhq.com/docs/authenticating-webhooks) for more information.
+
+                              '
+                            example: 0c2f9463f87641919f8106a2c49d7a57
+                          webhookType:
+                            type: string
+                            description: The type of webhook.
+                            $ref: '#/paths/~1webhook.create/post/requestBody/content/application~1json/schema/properties/webhookType'
+                        required:
+                        - id
+                        - enabled
+                        - requestUrl
+                        - secretToken
+                        - webhookType
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /webhook.info:
+    post:
+      summary: webhook.info
+      description: 'Retrieves information about a specific webhook setting by its ID
+
+
+        **Requires the [`apiKeysRead`](authentication#permissions-webhookinfo) permission.**
+
+        '
+      operationId: webhookInfo
+      tags:
+      - Webhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                webhookId:
+                  allOf:
+                  - description: The id of the webhook setting to retrieve.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - webhookId
+      responses:
+        '200':
+          description: Responses from the webhook.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          enabled:
+                            type: boolean
+                            description: Whether or not the webhook setting is enabled.
+                          requestUrl:
+                            type: string
+                            description: The URL the webhook will send requests to.
+                            example: https://example.com/webhook
+                          webhookType:
+                            type: string
+                            description: The type of webhook.
+                            $ref: '#/paths/~1webhook.create/post/requestBody/content/application~1json/schema/properties/webhookType'
+                        required:
+                        - id
+                        - enabled
+                        - requestUrl
+                        - webhookType
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /webhook.update:
+    post:
+      summary: webhook.update
+      description: 'Updates a webhook setting. One of `enabled`, `requestUrl`, or `secretToken` must be provided.
+
+
+        **Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) permission.**
+
+        '
+      operationId: webhookupdate
+      tags:
+      - Webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                webhookId:
+                  allOf:
+                  - description: The id of the webhook setting to update.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                enabled:
+                  type: boolean
+                  description: Whether or not the webhook is enabled.
+                requestUrl:
+                  type: string
+                  description: The URL the webhook will send requests to.
+                secretToken:
+                  type: string
+                  description: 'The secret token used to sign the webhook request. See our documentation [here](https://developers.ashbyhq.com/docs/authenticating-webhooks) for more information.
+
+                    '
+              required:
+              - webhookId
+      responses:
+        '200':
+          description: Responses from the webhook.update endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1webhook.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /webhook.delete:
+    post:
+      summary: webhook.delete
+      description: 'Deletes a webhook setting.
+
+
+        **Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) permission.**
+
+        '
+      operationId: webhookdelete
+      tags:
+      - Webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                webhookId:
+                  allOf:
+                  - description: The id of the webhook setting to delete.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+              required:
+              - webhookId
+      responses:
+        '200':
+          description: Responses from the webhook.delete endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          webhookId:
+                            allOf:
+                            - description: The id of the webhook setting that was deleted.
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

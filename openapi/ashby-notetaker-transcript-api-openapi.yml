@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Notetaker Transcript API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Notetaker Transcript
+paths:
+  /notetakerTranscript.info:
+    post:
+      summary: notetakerTranscript.info
+      operationId: notetakerTranscriptInfo
+      description: "Fetches metadata and a pre-signed download URL for an AI\nNotetaker transcript recording.\n\n**Prerequisites:**\n- Your organization must have the **AI Notetaker add-on**. If your organization does not have\n  the add-on, requests will fail with the `notetaker_transcript_not_enabled` error.\n\nThe response includes a signed URL with the transcript JSON. Download the file promptly after calling\n  this endpoint. If the URL has expired, call the endpoint again to get a fresh one.\n\nOn the free tier, transcripts expire after a retention period. Requesting an expired\ntranscript returns the `notetaker_transcript_expired` error. Organizations with unlimited\nAI Notetaker access are not subject to this expiry.\n\nUse the `notetakerTranscriptId` field from\n[`interviewEvent.list`](ref:intervieweventlist) or [`interviewSchedule.list`](ref:interviewschedulelist) to discover\ntranscript IDs for interview events.\n\n**Error codes:**\n\n| Code | Description |\n|---|---|\n| `notetaker_transcript_not_enabled` | Your organization does not have the AI Notetaker add-on. |\n| `notetaker_transcript_not_found` | No transcript exists with the given ID, or you do not have access to it. |\n| `notetaker_transcript_expired` | The transcript has expired. Upgrade to unlimited AI Notetaker to retain transcripts indefinitely. |\n| `invalid_input` | The provided `notetakerTranscriptId` is not a valid UUID. |\n\n**Requires the [`notetakerRead`](authentication#permissions-notetakertranscriptinfo) permission.**\n"
+      tags:
+      - Notetaker Transcript
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                notetakerTranscriptId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The unique id of the notetaker transcript to fetch
+              required:
+              - notetakerTranscriptId
+            example:
+              notetakerTranscriptId: 3ae2b801-19f6-41ef-ad28-214bd731948f
+      responses:
+        '200':
+          description: Responses from the notetakerTranscript.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            - description: The unique id of the notetaker transcript recording
+                          interviewEventId:
+                            description: The id of the interview event this transcript is associated with
+                            oneOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            - type: 'null'
+                          interviewScheduleId:
+                            description: The id of the interview schedule this transcript is associated with
+                            oneOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            - type: 'null'
+                          createdAt:
+                            allOf:
+                            - $ref: '#/paths/~1candidate.addEmailMessage/post/requestBody/content/application~1json/schema/properties/sentAt/allOf/0'
+                            - description: The time the transcript recording was created
+                            type: string
+                          participants:
+                            type: array
+                            description: The participants in the interview, resolved from the interview schedule. Includes interviewers and the candidate.
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  allOf:
+                                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                  - description: The id of the participant. For interviewers, this is the Ashby user id. For candidates, this is the candidate id.
+                                type:
+                                  type: string
+                                  enum:
+                                  - interviewer
+                                  - candidate
+                                  description: Whether this participant is an interviewer or the candidate
+                                  example: interviewer
+                                name:
+                                  type: string
+                                  description: The display name of the participant
+                                  example: Jane Smith
+                                email:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: The primary email address of the participant, or null if not available
+                                  example: jane.smith@example.com
+                              required:
+                              - id
+                              - type
+                              - name
+                              - email
+                          transcriptUrl:
+                            type: string
+                            description: A signed URL to download the transcript JSON. The URL expires after 5 minutes. Download promptly after receiving the response. If the URL has expired, call the endpoint again to get a fresh one.
+                            example: https://s3.amazonaws.com/...
+                        required:
+                        - id
+                        - interviewEventId
+                        - interviewScheduleId
+                        - createdAt
+                        - participants
+                        - transcriptUrl
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

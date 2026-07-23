@@ -1,0 +1,290 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Interview Schedule API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Interview Schedule
+paths:
+  /interviewSchedule.cancel:
+    post:
+      summary: interviewSchedule.cancel
+      operationId: interviewScheduleCancel
+      description: 'Cancel an interview schedule by id
+
+
+        **Requires the [`interviewsWrite`](authentication#permissions-interviewschedulecancel) permission.**
+
+        '
+      tags:
+      - Interview Schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the interview schedule to cancel
+                allowReschedule:
+                  type: boolean
+                  description: Whether or not this interview schedule can be rescheduled.
+                  default: false
+              required:
+              - id
+              example:
+                id: 3ae2b801-19f6-41ef-ad28-214bd731948f
+      responses:
+        '200':
+          description: Responses from the interviewSchedule.cancel endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewSchedule.create:
+    post:
+      summary: interviewSchedule.create
+      operationId: interviewScheduleCreate
+      description: 'Create a scheduled interview in Ashby
+
+
+        **Requires the [`interviewsWrite`](authentication#permissions-interviewschedulecreate) permission.**
+
+        '
+      tags:
+      - Interview Schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                applicationId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the application for this interview schedule
+                interviewEvents:
+                  type: array
+                  description: The list of events that make up this interview schedule
+                  items:
+                    type: object
+                    required:
+                    - startTime
+                    - endTime
+                    - interviewers
+                    properties:
+                      startTime:
+                        type: string
+                        description: The start time of this event
+                        example: '2023-01-30T15:00:00.000Z'
+                      endTime:
+                        type: string
+                        description: The end time of this event
+                        example: '2023-01-30T16:00:00.000Z'
+                      interviewers:
+                        type: array
+                        description: The interviewers for this event
+                        items:
+                          type: object
+                          required:
+                          - email
+                          properties:
+                            email:
+                              type: string
+                              description: The email address of the user in Ashby
+                              example: test@ashbyhq.com
+                            feedbackRequired:
+                              type: boolean
+                              description: Whether this interviewer is required to provide feedback
+                      extraData:
+                        $ref: '#/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/extraData'
+                      interviewId:
+                        allOf:
+                        - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                        - description: The id of the interview used in this event. If no value is provided, the organization's default interview will be used.
+                        - example: 46648e83-f28f-43c4-a2a0-58e0599cff41
+              required:
+              - applicationId
+              - interviewEvents
+      responses:
+        '200':
+          description: Responses from the interviewSchedule.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewSchedule.list:
+    post:
+      summary: interviewSchedule.list
+      operationId: interviewScheduleList
+      description: 'Gets all interview schedules in the organization.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`interviewsRead`](authentication#permissions-interviewschedulelist) permission.**
+
+        '
+      tags:
+      - Interview Schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1opening.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  applicationId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the application, for which to fetch interview schedules
+                  interviewStageId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the interview stage, for which to fetch interview schedules
+      responses:
+        '200':
+          description: Responses from the interviewSchedule.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule'
+                  required:
+                  - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewSchedule.update:
+    post:
+      summary: interviewSchedule.update
+      operationId: interviewScheduleUpdate
+      description: "Update an interview schedule. This endpoint allows you to add, cancel, or update interview events associated with an interview schedule.\n\n**Requires the [`interviewsWrite`](authentication#permissions-interviewscheduleupdate) permission.**\n\nIn order to update an interview event on a schedule, the event's `interviewEventId` must be included when sending your request. \n`interviewEventId`s are included in the response of the `interviewSchedule.create` endpoint.\n"
+      tags:
+      - Interview Schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewScheduleId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: 'The id of the interview schedule to update.
+
+                      Only interview schedules created using the API key making the request can be updated.
+
+                      '
+                interviewEvent:
+                  description: 'An event on the interview schedule to create or update.
+
+                    To update an event, the event''s `interviewEventId` must be included in the request.
+
+                    '
+                  oneOf:
+                  - $ref: '#/paths/~1interviewSchedule.create/post/requestBody/content/application~1json/schema/properties/interviewEvents/items'
+                  - type: array
+                    items:
+                      $ref: '#/paths/~1interviewSchedule.create/post/requestBody/content/application~1json/schema/properties/interviewEvents/items'
+                  properties:
+                    interviewEventId:
+                      allOf:
+                      - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                      - description: 'The id of an interview event to update.
+
+                          '
+                interviewEventIdToCancel:
+                  description: 'The ids of interview events to cancel.
+
+                    '
+                  oneOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - type: array
+                    items:
+                      $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                allowFeedbackDeletion:
+                  type: boolean
+                  default: false
+                  description: By default, we do not allow interview events with submitted feedback to be canceled because canceling an event causes its associated feedback to be deleted. If you want to allow events with submitted feedback to be canceled, this flag can be passed in and set to `true`. In this case, events with feedback will be canceled, and any associated feedback will be deleted.
+              oneOf:
+              - required:
+                - interviewScheduleId
+                - interviewEvent
+              - required:
+                - interviewScheduleId
+                - interviewEventIdToCancel
+      responses:
+        '200':
+          description: Responses from the interviewSchedule.update endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

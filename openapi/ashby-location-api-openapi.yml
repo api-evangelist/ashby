@@ -1,0 +1,627 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Location API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Location
+paths:
+  /location.archive:
+    post:
+      summary: location.archive
+      description: 'Archives a location or location hierarchy.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-locationarchive) permission.**
+
+        '
+      operationId: locationarchive
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - locationId
+              properties:
+                locationId:
+                  type: string
+                  description: The id of the location
+      responses:
+        '200':
+          description: Responses for the location.archive endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.create:
+    post:
+      summary: location.create
+      description: 'Creates a location or location hierarchy.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-locationcreate) permission.**
+
+        '
+      operationId: locationcreate
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - type
+              properties:
+                name:
+                  type: string
+                  description: The name of the location.
+                type:
+                  type: string
+                  description: A Location represents an actual location that jobs and employees can be associated with. A Location Hierarchy is a grouping of locations or other location hierarchies.
+                  enum:
+                  - Location
+                  - LocationHierarchy
+                address:
+                  type: object
+                  description: The address of the location.
+                  properties:
+                    postalAddress:
+                      type: object
+                      properties:
+                        addressCountry:
+                          type: string
+                          description: The country the location is in. Must be a valid country name or two-letter country code.
+                        addressRegion:
+                          type: string
+                          description: The region the location is in (for instance, a state or province).
+                        addressLocality:
+                          type: string
+                          description: The city or town of the location.
+                        postalCode:
+                          type: string
+                          description: The postal code of the address.
+                        streetAddress:
+                          type: string
+                          description: The street address of the location.
+                parentLocationId:
+                  type: string
+                  description: The id of the location's parent.
+                isRemote:
+                  type: boolean
+                  description: Whether the location should be labeled as remote. LocationHierarchies cannot be labeled as remote.
+                  default: false
+                workplaceType:
+                  allOf:
+                  - description: The type of workplace. LocationHierarchies cannot be labeled with a workplaceType.
+                  - type: string
+                    enum:
+                    - OnSite
+                    - Hybrid
+                    - Remote
+                externalName:
+                  type: string
+                  description: An alternate candidate-facing name for this location used on job boards and in the API.
+                extraData:
+                  type: object
+                  description: 'This field stores information, structured as key-value pairs, for your own use and reference, for example a unique identifier for your own system.
+
+                    Do not store personally identifiable information (PII) in this field. In addition, the following constraints apply:
+
+                    - Keys must be strings of at most 100 characters.
+
+                    - Values must be strings of at most 512 characters.
+
+                    - The total size of the extra data must be less than 1kb.
+
+
+                    We recommend using a prefix for your keys to avoid collisions with other systems, as data stored in this field is available to all API users with permission to access the underlying object.
+
+                    '
+                  additionalProperties:
+                    type: string
+                  example:
+                    partner_external_object_id: '12345'
+                    partner_additional_data: f763ba0e4
+      responses:
+        '200':
+          description: Responses for the location.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.info:
+    post:
+      summary: location.info
+      description: 'Gets details for a single location by id.
+
+
+        **Requires the [`organizationRead`](authentication#permissions-locationinfo) permission.**
+
+        '
+      operationId: locationInfo
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locationId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the location to fetch
+              required:
+              - locationId
+      responses:
+        '200':
+          description: Responses for the location.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          name:
+                            type: string
+                            example: Bay Area Office
+                          externalName:
+                            type: string
+                            example: San Francisco Office
+                            description: An alternate candidate-facing name for this location used on job boards and in the API
+                          isArchived:
+                            $ref: '#/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived'
+                          address:
+                            type: object
+                            properties:
+                              postalAddress:
+                                type: object
+                                properties:
+                                  addressCountry:
+                                    type: string
+                                    example: United States
+                                  addressRegion:
+                                    type: string
+                                    example: California
+                                  addressLocality:
+                                    type: string
+                                    example: San Francisco
+                                  postalCode:
+                                    type: string
+                                    example: '94108'
+                                  streetAddress:
+                                    type: string
+                                    example: 49 Geary St Suite 411
+                          isRemote:
+                            type: boolean
+                            example: false
+                            deprecated: true
+                            description: Use `workplaceType` instead
+                          workplaceType:
+                            description: The type of workplace.
+                            example: Hybrid
+                            $ref: '#/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/workplaceType/allOf/1'
+                          parentLocationId:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          type:
+                            type: string
+                            enum:
+                            - Location
+                            - LocationHierarchy
+                            description: The type of the location component.
+                            example: Location
+                          extraData:
+                            $ref: '#/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/extraData'
+                        required:
+                        - id
+                        - name
+                        - isArchived
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.list:
+    post:
+      summary: location.list
+      description: 'List all locations. Regions are not returned.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`organizationRead`](authentication#permissions-locationlist) permission.**
+
+        '
+      operationId: locationlist
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                additionalProperties: false
+                properties:
+                  includeArchived:
+                    $ref: '#/paths/~1source.list/post/requestBody/content/application~1json/schema/properties/includeArchived'
+                  includeLocationHierarchy:
+                    type: boolean
+                    description: 'If true, the response will include the location hierarchy (regions).
+
+                      '
+                    default: false
+                    example: false
+      responses:
+        '200':
+          description: Responses for the location.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.move:
+    post:
+      summary: location.move
+      description: 'Moves a location in location hierarchy.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-locationmove) permission.**
+
+        '
+      operationId: locationmove
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - locationId
+              - parentLocationHierarchyId
+              properties:
+                locationId:
+                  type: string
+                  description: The id of the location
+                parentLocationHierarchyId:
+                  type: string
+                  description: The id of the parent location hierarchy
+      responses:
+        '200':
+          description: Responses for the location.move endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.restore:
+    post:
+      summary: location.restore
+      description: 'Restores an archived location or location hierarchy.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-locationrestore) permission.**
+
+        '
+      operationId: locationrestore
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - locationId
+              properties:
+                locationId:
+                  type: string
+                  description: The id of the location
+      responses:
+        '200':
+          description: Responses for the location.restore endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.updateAddress:
+    post:
+      summary: location.updateAddress
+      description: 'Update an address of a location or location hierarchy.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-locationupdateaddress) permission.**
+
+        '
+      operationId: locationupdateaddress
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - locationId
+              - address
+              properties:
+                locationId:
+                  type: string
+                  description: The id of the location
+                address:
+                  type: object
+                  description: The address of the location
+                  properties:
+                    postalAddress:
+                      type: object
+                      properties:
+                        addressCountry:
+                          type: string
+                          description: The country of the location. Must be a valid country name or two-letter country code.
+                        addressRegion:
+                          type: string
+                          description: The region of the location (for instance, a state or province).
+                        addressLocality:
+                          type: string
+                          description: The city or town of the location.
+                        postalCode:
+                          type: string
+                          description: The postal code of the location.
+                        streetAddress:
+                          type: string
+                          description: The street address of the location.
+      responses:
+        '200':
+          description: Responses for the location.updateAddress endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.updateName:
+    post:
+      summary: location.updateName
+      description: 'Update location''s name.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-locationupdateName) permission.**
+
+        '
+      operationId: locationupdateName
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - locationId
+              - name
+              properties:
+                locationId:
+                  type: string
+                  description: The id of the location
+                name:
+                  type: string
+                  description: The name of the location
+      responses:
+        '200':
+          description: Responses for the location.updateName endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.updateExternalName:
+    post:
+      summary: location.updateExternalName
+      description: 'Update a location''s external (candidate-facing) name.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-locationupdateexternalname) permission.**
+
+        '
+      operationId: locationupdateexternalname
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - locationId
+              properties:
+                locationId:
+                  type: string
+                  description: The id of the location
+                externalName:
+                  type: string
+                  description: An alternate candidate-facing name for this location used on job boards and in the API. Pass `null` to clear.
+      responses:
+        '200':
+          description: Responses for the location.updateExternalName endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /location.updateWorkplaceType:
+    post:
+      summary: location.updateWorkplaceType
+      description: 'Update location''s workplace type.
+
+
+        **Requires the [`organizationWrite`](authentication#permissions-locationupdateworkplacetype) permission.**
+
+        '
+      operationId: locationupdateworkplacetype
+      tags:
+      - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - locationId
+              - workplaceType
+              properties:
+                locationId:
+                  type: string
+                  description: The id of the location
+                workplaceType:
+                  allOf:
+                  - description: The type of workplace. LocationHierarchies cannot be labeled with a workplaceType.
+                  - $ref: '#/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/workplaceType/allOf/1'
+      responses:
+        '200':
+          description: Responses for the location.updateWorkplaceType endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

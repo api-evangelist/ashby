@@ -1,0 +1,795 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Custom Field API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Custom Field
+paths:
+  /customField.create:
+    post:
+      summary: customField.create
+      operationId: customFieldCreate
+      description: 'Create a new custom field
+
+
+        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-customfieldcreate) permission.**
+
+        '
+      tags:
+      - Custom Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - fieldType
+              - objectType
+              - title
+              properties:
+                fieldType:
+                  type: string
+                  description: The type of field being created. This value is case-sensitive.
+                  enum:
+                  - Boolean
+                  - CompensationRange
+                  - Currency
+                  - Date
+                  - LongText
+                  - MultiValueSelect
+                  - Number
+                  - NumberRange
+                  - String
+                  - ValueSelect
+                  - Url
+                  - UUID
+                objectType:
+                  type: string
+                  description: The type of object the field can be associated with.
+                  enum:
+                  - Application
+                  - Candidate
+                  - Job
+                  - Employee
+                  - Talent_Project
+                  - Opening_Version
+                  - Offer_Version
+                title:
+                  type: string
+                  description: The name of the field
+                description:
+                  type: string
+                  description: A description for the field
+                selectableValues:
+                  type: array
+                  description: Required when the field type is ValueSelect or MultiValueSelect. An array of selectable values for the field.
+                  items:
+                    properties:
+                      label:
+                        type: string
+                      value:
+                        type: string
+                    required:
+                    - label
+                    - value
+                    type: object
+                isDateOnlyField:
+                  type: boolean
+                  description: Only applies to fields with an objectType of Date. Whether or not the field includes content other than a date
+                isExposableToCandidate:
+                  type: boolean
+                  description: Determines whether the field can be exposed to a candidate in certain contexts. In order for a custom field to be available in an email template this value must be true.
+                  default: false
+      responses:
+        '200':
+          description: Responses for the customField.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1customField.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /customField.info:
+    post:
+      summary: customField.info
+      operationId: customFieldInfo
+      description: 'Get information about a custom field
+
+
+        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldinfo) permission.**
+
+        '
+      tags:
+      - Custom Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                properties:
+                  customFieldId:
+                    type: string
+                    format: uuid
+                    description: The id of the custom field to fetch
+      responses:
+        '200':
+          description: Responses for the customField.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success Response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          isPrivate:
+                            type: boolean
+                            example: false
+                            description: "A boolean indicating whether the custom field is private. If not set, this value defaults to false.\nPrivate custom fields can only be created and viewed by API keys with the \"Allow access to non-offer \nprivate fields?\" permission.\n"
+                          title:
+                            type: string
+                            example: Preferred Teams
+                          objectType:
+                            type: string
+                            description: The type of object in Ashby the custom field is associated with
+                            enum:
+                            - Application
+                            - Candidate
+                            - Employee
+                            - Job
+                            - Offer
+                            - Opening
+                            - Talent_Project
+                          isArchived:
+                            $ref: '#/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived'
+                          fieldType:
+                            type: string
+                            description: The type of data stored in the custom field
+                            enum:
+                            - MultiValueSelect
+                            - NumberRange
+                            - String
+                            - Date
+                            - ValueSelect
+                            - Number
+                            - Currency
+                            - Boolean
+                            - LongText
+                            - CompensationRange
+                            - NumberRange
+                          isRequired:
+                            type: boolean
+                            example: false
+                            description: 'Indicates whether a value for this custom field must be provided in order to take certain actions on the object it is associated with.
+
+                              '
+                          selectableValues:
+                            description: 'An array of values that can be selected for custom fields with a fieldType of MultiValueSelect.
+
+                              If the fieldType is not MultiValueSelect, `selectableValues` will not be present in the response
+
+                              '
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                label:
+                                  type: string
+                                  example: Backend Engineering
+                                value:
+                                  type: string
+                                  example: Backend Engineering
+                                isArchived:
+                                  $ref: '#/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived'
+                        required:
+                        - id
+                        - title
+                        - objectType
+                        - isArchived
+                        - fieldType
+                        - isRequired
+                  - required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /customField.list:
+    post:
+      summary: customField.list
+      operationId: customFieldList
+      description: 'Lists all custom fields.
+
+
+        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+
+
+        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldlist) permission.**
+
+        '
+      tags:
+      - Custom Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                $ref: '#/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema'
+                properties:
+                  includeArchived:
+                    type: boolean
+                    description: If true, archived custom fields will be included in the response
+                    default: false
+      responses:
+        '200':
+          description: Responses for the customField.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success Response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1customField.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                  - required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /customField.setValue:
+    post:
+      summary: customField.setValue
+      operationId: customFieldSetValue
+      description: "Set the value of a custom field for a given object.\n\n**Note:** When updating multiple custom fields on the same object, use \n[`customField.setValues`](#operation/customFieldSetValues) instead to avoid \nrace conditions.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalue) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n  - Date - An ISO Date string\n  - Email, LongText, Phone, String - String\n  - ValueSelect - A string that matches the value of one of the ValueSelect field's options\n  - MultiValueSelect - An array of strings that exist in the MultiValueSelect field's options\n  - Number - A number\n  - Currency - An object with the following properties:\n    - value: A number\n    - currencyCode: A valid ISO 4217 currency code\n  - NumberRange - An object with the following properties:\n    - type: \"number-range\"\n    - minValue: A number\n    - maxValue: A number\n  - CompensationRange - An object with the following properties:\n    - type: \"compensation-range\"\n    - minValue: A number\n    - maxValue: A number\n    - currencyCode: A string\n    - interval: A valid interval string\n  - Url - A valid http or https URL (e.g., https://example.com)\n  - UUID - A valid UUID string (e.g., for Employee fields)\n"
+      tags:
+      - Custom Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - objectId
+              - objectType
+              - fieldId
+              - fieldValue
+              properties:
+                objectId:
+                  allOf:
+                  - description: The id of the object the field value is being set on.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                objectType:
+                  type: string
+                  description: The type of object the field is associated with.
+                  enum:
+                  - Application
+                  - Candidate
+                  - Job
+                  - Opening
+                fieldId:
+                  allOf:
+                  - description: The unique id of the Custom Field definition for the field
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                fieldValue:
+                  description: The value to store in the field
+                  oneOf:
+                  - type: boolean
+                    title: Boolean
+                    description: A boolean value
+                  - type: string
+                    title: Date
+                    format: date-time
+                    description: An ISO Date string
+                  - type: string
+                    title: String, Email, LongText, Phone
+                    description: A string
+                  - type: string
+                    title: Url
+                    format: uri
+                    description: A valid http or https URL (e.g., https://example.com)
+                  - type: array
+                    title: MultiValueSelect
+                    items:
+                      type: string
+                      description: An array of strings that exist in the MultiValueSelect field's options
+                  - type: number
+                    title: Number
+                    description: A number
+                  - type: object
+                    title: Currency
+                    required:
+                    - value
+                    - currencyCode
+                    properties:
+                      value:
+                        type: number
+                        example: 100000
+                      currencyCode:
+                        type: string
+                        example: USD
+                    description: An object describing a currency amount
+                  - type: string
+                    title: ValueSelect
+                    description: A string that matches the value of one of the ValueSelect field's options
+                  - type: object
+                    title: NumberRange
+                    required:
+                    - type
+                    - minValue
+                    - maxValue
+                    properties:
+                      type:
+                        type: string
+                        example: number-range
+                      minValue:
+                        type: number
+                        example: 10000
+                      maxValue:
+                        type: number
+                        example: 100000
+                    description: An object describing the number range
+                  - type: string
+                    title: UUID
+                    format: uuid
+                    description: A valid UUID string (e.g., for Employee fields)
+                  - type: object
+                    title: CompensationRange
+                    required:
+                    - type
+                    - minValue
+                    - maxValue
+                    - currencyCode
+                    - interval
+                    properties:
+                      type:
+                        type: string
+                        example: compensation-range
+                      minValue:
+                        type: number
+                        example: 10000
+                      maxValue:
+                        type: number
+                        example: 100000
+                      currencyCode:
+                        type: string
+                        example: USD
+                      interval:
+                        type: string
+                        enum:
+                        - NONE
+                        - 1 TIME
+                        - 1 HOUR
+                        - 1 DAY
+                        - 1 WEEK
+                        - 2 WEEK
+                        - 1 MONTH
+                        - 2 MONTH
+                        - 1 YEAR
+                        - 6 MONTH
+                        - 0.5 MONTH
+                        - 3 MONTH
+                        example: 1 YEAR
+                    description: An object describing the compensation range
+      responses:
+        '200':
+          description: Responses for the customField.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          id:
+                            $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          isPrivate:
+                            type: boolean
+                            example: false
+                          title:
+                            type: string
+                          valueLabel:
+                            description: The label of the custom field value. This is only present for value select custom fields.
+                            oneOf:
+                            - type: string
+                              title: String
+                            - type: array
+                              title: MultiValueSelect
+                              items:
+                                type: string
+                          value:
+                            oneOf:
+                            - type: boolean
+                              title: Boolean
+                            - type: object
+                              title: Currency
+                              properties:
+                                value:
+                                  type: number
+                                  example: 1000000
+                                  format: currency
+                                currencyCode:
+                                  type: string
+                                  example: USD
+                            - type: string
+                              title: Date
+                              format: date-time
+                            - type: string
+                              title: String
+                            - type: string
+                              title: LongText
+                            - type: array
+                              title: MultiValueSelect
+                              items:
+                                type: string
+                            - type: number
+                              title: Number
+                            - type: object
+                              title: NumberRange
+                              properties:
+                                type:
+                                  type: string
+                                  example: number-range
+                                minValue:
+                                  type: number
+                                  example: 10000
+                                maxValue:
+                                  type: number
+                                  example: 100000
+                              required:
+                              - type
+                              - minValue
+                              - maxValue
+                            - type: object
+                              title: CompensationRange
+                              properties:
+                                type:
+                                  type: string
+                                  example: compensation-range
+                                minValue:
+                                  type: number
+                                  example: 40000
+                                maxValue:
+                                  type: number
+                                  example: 50000
+                                currencyCode:
+                                  type: string
+                                  example: USD
+                                interval:
+                                  type: string
+                                  enum:
+                                  - NONE
+                                  - 1 TIME
+                                  - 1 HOUR
+                                  - 1 DAY
+                                  - 1 WEEK
+                                  - 2 WEEK
+                                  - 1 MONTH
+                                  - 2 MONTH
+                                  - 1 YEAR
+                                  - 6 MONTH
+                                  - 0.5 MONTH
+                                  - 3 MONTH
+                                  example: 1 YEAR
+                              required:
+                              - type
+                              - minValue
+                              - maxValue
+                              - currencyCode
+                              - interval
+                            - type: string
+                              title: ValueSelect
+                        required:
+                        - id
+                        - title
+                        - value
+                        examples:
+                        - id: 650e5f74-32db-4a0a-b61b-b9afece05023
+                          title: Is actively looking
+                          value: true
+                        - id: 650e5f74-32db-4a0a-b61b-b9afece05024
+                          title: Years of experience
+                          value: 5
+                        - id: 650e5f74-32db-4a0a-b61b-b9afece05025
+                          title: Salary expectation
+                          value:
+                            value: 100000
+                            currencyCode: USD
+                        - id: 650e5f74-32db-4a0a-b61b-b9afece05026
+                          title: Expected start date
+                          value: '2022-11-10T19:47:56.795Z'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /customField.setValues:
+    post:
+      summary: customField.setValues
+      operationId: customFieldSetValues
+      description: "Set the values of multiple custom fields for a given object in a single call.\nThis is the recommended approach when updating multiple fields on the same object\nto avoid race conditions that can occur with concurrent `customField.setValue` calls.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalues) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n  - Date - An ISO Date string\n  - Email, LongText, Phone, String - String\n  - ValueSelect - A string that matches the value of one of the ValueSelect field's options\n  - MultiValueSelect - An array of strings that exist in the MultiValueSelect field's options\n  - Number - A number\n  - Currency - An object with the following properties:\n    - value: A number\n    - currencyCode: A valid ISO 4217 currency code\n  - NumberRange - An object with the following properties:\n    - type: \"number-range\"\n    - minValue: A number\n    - maxValue: A number\n  - CompensationRange - An object with the following properties:\n    - type: \"compensation-range\"\n    - minValue: A number\n    - maxValue: A number\n    - currencyCode: A string\n    - interval: A valid interval string\n  - Url - A valid http or https URL (e.g., https://example.com)\n  - UUID - A valid UUID string (e.g., for Employee fields)\n"
+      tags:
+      - Custom Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - objectId
+              - objectType
+              - values
+              properties:
+                objectId:
+                  allOf:
+                  - description: The id of the object the field values are being set on.
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                objectType:
+                  type: string
+                  description: The type of object the fields are associated with.
+                  enum:
+                  - Application
+                  - Candidate
+                  - Job
+                  - Opening
+                values:
+                  type: array
+                  description: Array of custom field updates to apply
+                  minItems: 1
+                  items:
+                    type: object
+                    required:
+                    - fieldId
+                    - fieldValue
+                    properties:
+                      fieldId:
+                        allOf:
+                        - description: The unique id of the Custom Field definition for the field
+                        - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                      fieldValue:
+                        description: The value to store in the field
+                        oneOf:
+                        - type: boolean
+                          title: Boolean
+                          description: A boolean value
+                        - type: string
+                          title: Date
+                          format: date-time
+                          description: An ISO Date string
+                        - type: string
+                          title: String, Email, LongText, Phone
+                          description: A string
+                        - type: string
+                          title: Url
+                          format: uri
+                          description: A valid http or https URL (e.g., https://example.com)
+                        - type: array
+                          title: MultiValueSelect
+                          items:
+                            type: string
+                            description: An array of strings that exist in the MultiValueSelect field's options
+                        - type: number
+                          title: Number
+                          description: A number
+                        - type: object
+                          title: Currency
+                          required:
+                          - value
+                          - currencyCode
+                          properties:
+                            value:
+                              type: number
+                              example: 100000
+                            currencyCode:
+                              type: string
+                              example: USD
+                          description: An object describing a currency amount
+                        - type: string
+                          title: ValueSelect
+                          description: A string that matches the value of one of the ValueSelect field's options
+                        - type: object
+                          title: NumberRange
+                          required:
+                          - type
+                          - minValue
+                          - maxValue
+                          properties:
+                            type:
+                              type: string
+                              example: number-range
+                            minValue:
+                              type: number
+                              example: 10000
+                            maxValue:
+                              type: number
+                              example: 100000
+                          description: An object describing the number range
+                        - type: string
+                          title: UUID
+                          format: uuid
+                          description: A valid UUID string (e.g., for Employee fields)
+                        - type: object
+                          title: CompensationRange
+                          required:
+                          - type
+                          - minValue
+                          - maxValue
+                          - currencyCode
+                          - interval
+                          properties:
+                            type:
+                              type: string
+                              example: compensation-range
+                            minValue:
+                              type: number
+                              example: 10000
+                            maxValue:
+                              type: number
+                              example: 100000
+                            currencyCode:
+                              type: string
+                              example: USD
+                            interval:
+                              type: string
+                              enum:
+                              - NONE
+                              - 1 TIME
+                              - 1 HOUR
+                              - 1 DAY
+                              - 1 WEEK
+                              - 2 WEEK
+                              - 1 MONTH
+                              - 2 MONTH
+                              - 1 YEAR
+                              - 6 MONTH
+                              - 0.5 MONTH
+                              - 3 MONTH
+                              example: 1 YEAR
+                          description: An object describing the compensation range
+      responses:
+        '200':
+          description: Responses for the customField.setValues endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /customField.updateSelectableValues:
+    post:
+      summary: customField.updateSelectableValues
+      operationId: customFieldUpdateSelectableValues
+      description: 'Update the selectable values for a custom field
+
+
+        This endpoint merges the provided selectable values with the existing values for a custom field.
+
+
+        **Merge behavior:**
+
+        - **New values** (values not present in the existing values) are added to the field
+
+        - **Existing values** (matching by `value` field) have their `label` updated and `isArchived` status set from the request
+
+        - **Omitted values** (existing values not included in the request) are marked as archived
+
+        - Metadata such as substitution tokens are preserved for existing values
+
+
+        The `isArchived` field defaults to `false` if not provided.
+
+
+        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-customfieldupdateselectablevalues) permission.**
+
+        '
+      tags:
+      - Custom Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - customFieldId
+              - selectableValues
+              properties:
+                customFieldId:
+                  type: string
+                  format: uuid
+                  description: The id of the custom field to update
+                selectableValues:
+                  type: array
+                  description: An array of selectable values to merge with the existing values. Only `label`, `value`, and optionally `isArchived` should be provided.
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required:
+                    - label
+                    - value
+                    properties:
+                      label:
+                        type: string
+                        description: The display label for this selectable value
+                      value:
+                        type: string
+                        description: The internal value for this selectable value (used as the unique identifier)
+                      isArchived:
+                        type: boolean
+                        description: Whether this value should be archived. Defaults to false if not provided.
+                        default: false
+      responses:
+        '200':
+          description: Responses for the customField.updateSelectableValues endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/paths/~1customField.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

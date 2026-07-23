@@ -1,0 +1,427 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Report API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Report
+paths:
+  /report.generate:
+    post:
+      summary: report.generate
+      operationId: reportGenerate
+      description: '> ⚠️ Beta
+
+        >
+
+        > This endpoint is currently in beta and may change without notice.
+
+
+        Generates a new report or polls the status of an existing report generation.
+
+
+        **Two-step process:**
+
+        1. Call with only `reportId` to start generation → returns `requestId`
+
+        2. Poll with both `reportId` and `requestId` every second until `status` is `complete` or `failed`
+
+
+        **Example:**
+
+        ```
+
+        // Step 1: Start generation
+
+        POST /report.generate
+
+        { "reportId": "abc-123-def-456" }
+
+        → { "requestId": "rep_result:12345abc", "status": "in_progress", "reportData": null }
+
+
+        // Step 2: Poll for results
+
+        POST /report.generate
+
+        { "reportId": "abc-123-def-456", "requestId": "rep_result:12345abc" }
+
+        → { "requestId": "rep_result:12345abc", "status": "complete", "reportData": {...} }
+
+        ```
+
+
+        **Rate Limiting (Per Organization):**
+
+        - **Start generation requests** (without `requestId`): 15 requests per minute per organization
+
+        - **Concurrent limit**: Maximum 3 report operations at once per organization (shared with [`report.synchronous`](ref:reportsynchronous))
+
+        - **Polling requests** (with `requestId`): Bypass all limits
+
+
+        **Usage Notes:**
+
+        - If you receive a 429 error, your organization has hit its limit - wait and retry or use [`report.synchronous`](ref:reportsynchronous)
+
+        - For synchronous retrieval of existing data, use [`report.synchronous`](ref:reportsynchronous)
+
+        - Use this async endpoint for reports that may exceed 30 seconds
+
+
+        **Requires the [`reportsRead`](authentication#permissions-reportgenerate) permission.**
+
+        '
+      tags:
+      - Report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1report.synchronous/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  requestId:
+                    type: string
+                    description: Request ID for polling existing report generation status (optional - only used when polling)
+            examples:
+              start_generation:
+                summary: Standard report request
+                value:
+                  reportId: f9e52a51-a075-4116-a7b8-484deba69004
+              start_generation_no_headers:
+                $ref: '#/paths/~1report.synchronous/post/requestBody/content/application~1json/examples/no_headers_request'
+              poll_generation:
+                summary: Poll generation status
+                value:
+                  reportId: f9e52a51-a075-4116-a7b8-484deba69004
+                  requestId: rep_result:12345abc
+      responses:
+        '200':
+          description: Responses for the report.generate endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          requestId:
+                            type: string
+                            description: Unique identifier for this report generation request
+                          status:
+                            type: string
+                            enum:
+                            - complete
+                            - failed
+                            - in_progress
+                            description: Current status of the report generation
+                          reportData:
+                            anyOf:
+                            - type: object
+                              properties:
+                                data:
+                                  type: array
+                                  items:
+                                    type: array
+                                    items:
+                                      oneOf:
+                                      - type: string
+                                      - type: number
+                                  description: Report data rows as arrays of values. When includeHeadersInData is true (default), the first row contains column headers.
+                                columnNames:
+                                  type: array
+                                  items:
+                                    type: string
+                                  description: Column names/headers for the report data.
+                                metadata:
+                                  type: object
+                                  properties:
+                                    updatedAt:
+                                      type: string
+                                      format: date-time
+                                      description: When the report data was last updated
+                                    title:
+                                      type: string
+                                      description: Report title
+                                    reportGeneratedAt:
+                                      type: string
+                                      format: date-time
+                                      description: ISO 8601 timestamp indicating when the report data was generated. Only present when status is complete.
+                                    cacheExpiresAt:
+                                      type: string
+                                      format: date-time
+                                      description: 'ISO 8601 timestamp indicating when the cached report data will expire (estimated).
+
+                                        Calculated as reportGeneratedAt + cache duration (1 hour for successful reports, 15 minutes for failed reports).
+
+                                        This is an estimate with typical accuracy within 1 second of actual Redis TTL expiration.
+
+                                        Only present when status is complete or failed.
+
+                                        '
+                                  required:
+                                  - updatedAt
+                                  - title
+                              required:
+                              - data
+                              - columnNames
+                              - metadata
+                            - type: 'null'
+                            description: Report data (only present when status is complete)
+                          failureReason:
+                            type:
+                            - string
+                            - 'null'
+                            description: Error information if report generation failed
+                        required:
+                        - requestId
+                        - status
+                        - reportData
+                    required:
+                    - results
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+              examples:
+                initial_request:
+                  summary: Report generation in progress
+                  value:
+                    success: true
+                    results:
+                      requestId: rep_result:12345abc
+                      status: in_progress
+                      reportData: null
+                      failureReason: null
+                complete:
+                  summary: Completed report with cache metadata
+                  description: "When includeHeadersInData=false, the data array would be:\n```\nreportData.data: [\n  [ \"Q1 2024\", \"Engineering\", 45 ],\n  [ \"Q1 2024\", \"Sales\", 32 ],\n  [ \"Q2 2024\", \"Engineering\", 52 ]\n]\n```\n"
+                  value:
+                    success: true
+                    results:
+                      requestId: rep_result:12345abc
+                      status: complete
+                      reportData:
+                        data:
+                        - - Timeframe
+                          - Department
+                          - Hired
+                        - - Q1 2024
+                          - Engineering
+                          - 45
+                        - - Q1 2024
+                          - Sales
+                          - 32
+                        - - Q2 2024
+                          - Engineering
+                          - 52
+                        columnNames:
+                        - Timeframe
+                        - Department
+                        - Hired
+                        metadata:
+                          updatedAt: '2024-01-15T10:30:00Z'
+                          title: Quarterly Hiring Report
+                          reportGeneratedAt: '2024-01-15T14:25:33.123Z'
+                          cacheExpiresAt: '2024-01-15T15:25:33.123Z'
+                failed:
+                  summary: Failed report generation (timeout or error)
+                  value:
+                    success: true
+                    results:
+                      requestId: rep_result:12345abc
+                      status: failed
+                      reportData: null
+                      failureReason: QueryTimeout
+        '429':
+          description: Rate limit or concurrent limit exceeded
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                - title: Error response
+                - type: object
+                  required:
+                  - errors
+                  - errorInfo
+                  properties:
+                    errors:
+                      description: A list of error codes
+                      type: array
+                      items:
+                        type: string
+                      deprecated: true
+                    errorInfo:
+                      description: A single error code and additional error information
+                      type: object
+                      required:
+                      - code
+                      properties:
+                        code:
+                          type: string
+                        message:
+                          type: string
+                        requestId:
+                          type: string
+                          description: Opaque identifier for the API request, which can be provided to Ashby support to help them diagnose the issue
+                        meta:
+                          type: object
+                example:
+                  success: false
+                  errors:
+                  - invalid_input
+                  errorInfo:
+                    code: invalid_input
+                    message: Request payload is malformed
+                    requestId: 01JSJ8FDK5ZN4XQBZP7DBKK7ZC
+              examples:
+                rate_limit_exceeded:
+                  summary: Rate limit exceeded (15 requests per minute per organization)
+                  value:
+                    success: false
+                    errors:
+                    - Rate limit exceeded
+                    errorInfo:
+                      code: rate_limit_exceeded
+                      message: Your organization has exceeded the rate limit of 15 report requests per minute. Try again in 60 seconds.
+                      requestId: rep_result:12345abc
+                concurrent_limit_exceeded:
+                  summary: Concurrent operation limit exceeded (3 maximum per organization)
+                  value:
+                    success: false
+                    errors:
+                    - Concurrent limit exceeded
+                    errorInfo:
+                      code: concurrent_limit_exceeded
+                      message: Your organization has reached the maximum of 3 concurrent report operations. Please wait for existing operations to complete or try again in 30 seconds.
+                      requestId: rep_result:12345abc
+  /report.synchronous:
+    post:
+      summary: report.synchronous
+      operationId: reportSynchronous
+      description: '> ⚠️ Beta
+
+        >
+
+        > This endpoint is currently in beta and may change without notice.
+
+
+        Retrieves report data synchronously.
+
+
+        **Timeout:** 30 seconds. If a report is timing out, use the asynchronous [`report.generate`](ref:reportgenerate) instead.
+
+
+        **Rate Limiting (Per Organization):**
+
+        - **Request limit**: 15 requests per minute per organization
+
+        - **Concurrent limit**: Maximum 3 report operations at once per organization (shared with [`report.generate`](ref:reportgenerate))
+
+        - Rate limits are shared with [`report.generate`](ref:reportgenerate) for starting new generations
+
+
+        **Usage Notes:**
+
+        - If you receive a 429 error, your organization has hit its limit - wait briefly and retry
+
+        - For long-running reports, use [`report.generate`](ref:reportgenerate) for async processing
+
+        - Concurrent limit is released when the HTTP request completes
+
+
+        **Requires the [`reportsRead`](authentication#permissions-reportsynchronous) permission.**
+
+        '
+      tags:
+      - Report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The ID of the report
+                includeHeadersInData:
+                  type: boolean
+                  default: true
+                  description: When true (default), column headers are included as the first row in the data array. When false, headers are only in the columnNames property.
+              required:
+              - reportId
+            examples:
+              standard_request:
+                $ref: '#/paths/~1report.generate/post/requestBody/content/application~1json/examples/start_generation'
+              no_headers_request:
+                summary: Request without headers in data
+                value:
+                  reportId: f9e52a51-a075-4116-a7b8-484deba69004
+                  includeHeadersInData: false
+      responses:
+        '200':
+          description: Responses for the report.synchronous endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  $ref: '#/paths/~1report.generate/post/responses/200/content/application~1json/schema/oneOf/0'
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+              examples:
+                success_response:
+                  $ref: '#/paths/~1report.generate/post/responses/200/content/application~1json/examples/complete'
+                timeout_response:
+                  $ref: '#/paths/~1report.generate/post/responses/200/content/application~1json/examples/initial_request'
+        '429':
+          description: Rate limit or concurrent limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+              examples:
+                rate_limit_exceeded:
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/examples/rate_limit_exceeded'
+                concurrent_limit_exceeded:
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/examples/concurrent_limit_exceeded'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

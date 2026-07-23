@@ -1,0 +1,237 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Application Feedback API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Application Feedback
+paths:
+  /applicationFeedback.list:
+    post:
+      summary: applicationFeedback.list
+      operationId: applicationFeedbackList
+      description: "List all interview scorecards and feedback submissions associated with an application.\n\nEach feedback submission contains:\n- **formDefinition**: The structure of the feedback form with all available fields\n- **submittedValues**: Responses to the form fields, which depending on the form configuration can include:\n  - Text feedback (e.g., \"Candidate showed strong technical skills...\")\n  - Numerical scores (e.g., \"4\" for a 1-4 rating scale)\n  - Structured selections (e.g., \"Strong Hire\" for overall recommendation)\n- **Interview context**: Links to associated interviews, events, and the submitting user\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationfeedbacklist) permission.**\n"
+      tags:
+      - Application Feedback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/paths/~1opening.list/post/requestBody/content/application~1json/schema'
+              - type: object
+                properties:
+                  applicationId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the application you'd like to fetch feedback for
+      responses:
+        '200':
+          description: Responses from the applicationFeedback.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          allOf:
+                          - type: object
+                            allOf:
+                            - $ref: '#/paths/~1applicationForm.submit/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/submittedFormInstance'
+                            - type: object
+                              properties:
+                                submittedByUser:
+                                  $ref: '#/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                                interviewId:
+                                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                interviewEventId:
+                                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                feedbackFormDefinitionId:
+                                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                applicationHistoryId:
+                                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                applicationId:
+                                  $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                                submittedAt:
+                                  $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+                            required:
+                            - submittedByUser
+                            - applicationId
+                        example:
+                        - id: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                          applicationId: 550e8400-e29b-41d4-a716-446655440000
+                          feedbackFormDefinitionId: 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+                          interviewId: 6ba7b811-9dad-11d1-80b4-00c04fd430c8
+                          interviewEventId: 6ba7b812-9dad-11d1-80b4-00c04fd430c8
+                          submittedAt: '2023-11-15T14:30:00.000Z'
+                          submittedByUser:
+                            id: 123e4567-e89b-12d3-a456-426614174000
+                            firstName: Sarah
+                            lastName: Johnson
+                            email: sarah.johnson@company.com
+                            globalRole: Elevated Access
+                            isEnabled: true
+                            updatedAt: '2023-11-15T14:30:00.000Z'
+                          formDefinition:
+                            sections:
+                            - title: Technical Assessment
+                              fields:
+                              - isRequired: true
+                                field:
+                                  id: 550e8400-e29b-41d4-a716-446655440001
+                                  type: ValueSelect
+                                  path: overall_recommendation
+                                  title: Overall Recommendation
+                                  humanReadablePath: Overall Recommendation
+                                  isNullable: false
+                                  selectableValues:
+                                  - label: Strong Hire
+                                    value: strong_hire
+                                  - label: Hire
+                                    value: hire
+                                  - label: No Hire
+                                    value: no_hire
+                              - isRequired: false
+                                field:
+                                  id: 550e8400-e29b-41d4-a716-446655440002
+                                  type: Score
+                                  path: technical_skills
+                                  title: Technical Skills
+                                  humanReadablePath: Technical Skills
+                                  isNullable: false
+                              - isRequired: false
+                                field:
+                                  id: 550e8400-e29b-41d4-a716-446655440003
+                                  type: RichText
+                                  path: detailed_feedback
+                                  title: Detailed Feedback
+                                  humanReadablePath: Detailed Feedback
+                                  isNullable: false
+                          submittedValues:
+                            overall_recommendation: hire
+                            technical_skills: '4'
+                            detailed_feedback: Candidate demonstrated strong problem-solving skills and wrote clean, efficient code. Good understanding of algorithms and data structures. Communication was clear throughout the interview.
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /applicationFeedback.submit:
+    post:
+      summary: applicationFeedback.submit
+      description: "Application feedback forms support a variety of field types. \n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationfeedbacksubmit) permission.**\n\nThe values accepted for each field depend on the type of field that's being filled out:                                                                                                                                                                                                                 |\n- `Boolean` - A boolean value\n- `CompensationRange` - An object in the format `{ type: \"compensation-range\", minValue: 100000, maxValue: 150000, currencyCode: \"USD\", interval: \"1 YEAR\" }`. `currencyCode` must be a valid ISO 4217 code and `interval` must be a valid compensation interval (e.g. `\"1 HOUR\"`, `\"1 YEAR\"`).\n- `Currency` - An object in the format `{ value: 100000, currencyCode: \"USD\" }`. `currencyCode` must be a valid ISO 4217 code.\n- `Date` - A date string in the format YYYY-MM-DD\n- `Email` - A valid email address\n- `LongText`, `Phone`, `String` - A string\n- `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field's selectable options\n- `Number` - An integer\n- `NumberRange` - An object in the format `{ type: \"number-range\", minValue: 1, maxValue: 10 }`\n- `RichText` - We do not support submitting rich text documents via the API but we do support submitting plain text values for these fields. Plain text values must be submitted in the format `{ type: \"PlainText\", value: \"A plain text string\" }`\n- `Score` - An integer between 1 and 4 submitted in the format `{ score: 4 }`\n- `Url` - A valid URL string. The empty string is also accepted.\n- `UUID` - A UUID string, or an object in the format `{ value: \"<uuid>\" }`\n- `ValueSelect` - A string that matches the value of one of the ValueSelect field's selectable options\n\nThe `submittedValues` field in the response contains the submitted feedback in an object where the key is the path of the field and the value is the value submitted for that field.\n"
+      operationId: applicationfeedbacksubmit
+      tags:
+      - Application Feedback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                required:
+                - feedbackForm
+                - formDefinitionId
+                - applicationId
+                properties:
+                  feedbackForm:
+                    $ref: '#/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm'
+                  formDefinitionId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the feedback form definition associated with the form submission
+                  applicationId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the application you're submitting feedback for
+                  userId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: 'The id of the user the feedback will be credited to.
+
+                        If a userId is not provided, the feedback will be credited to the API key user.
+
+                        '
+              - type: object
+                required:
+                - feedbackForm
+                - formDefinitionId
+                - applicationId
+                - userId
+                - interviewEventId
+                properties:
+                  feedbackForm:
+                    $ref: '#/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm'
+                  formDefinitionId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the feedback form definition associated with the form submission
+                  applicationId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: The id of the application you're submitting feedback for
+                  userId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: "The id of the user the feedback will be credited to. \nThe user must be an interviewer on the interview event that feedback is being submitted for.\n"
+                  interviewEventId:
+                    allOf:
+                    - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    - description: 'The id of the interview event you''re submitting feedback for.
+
+                        '
+      responses:
+        '200':
+          description: Responses from the applicationFeedback.submit endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: object
+                        properties:
+                          submittedFormInstance:
+                            $ref: '#/paths/~1applicationForm.submit/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/submittedFormInstance'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

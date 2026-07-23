@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Hiring Team Role API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Hiring Team Role
+paths:
+  /hiringTeamRole.list:
+    post:
+      summary: hiringTeamRole.list
+      description: 'Lists the possible hiring team roles in an organization
+
+
+        **Requires the [`organizationRead`](authentication#permissions-hiringteamrolelist) permission.**
+
+        '
+      operationId: hiringteamrolelist
+      tags:
+      - Hiring Team Role
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                namesOnly:
+                  type: boolean
+                  description: When set to true (the default), an array of role titles is returned. When set to false, an array of objects that include the id and title of the role is returned.
+                  default: true
+      responses:
+        '200':
+          description: Responses for the hiringTeamRole.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: 'namesOnly: true'
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - Recruiter
+                    required:
+                    - results
+                - title: 'namesOnly: false'
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                            title:
+                              type: string
+                              example: Recruiter
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

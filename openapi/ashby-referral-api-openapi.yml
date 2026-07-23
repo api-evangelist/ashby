@@ -1,0 +1,115 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Referral API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Referral
+paths:
+  /referral.create:
+    post:
+      summary: referral.create
+      operationId: referralCreate
+      description: 'Creates a referral
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-referralcreate) permission.**
+
+        '
+      tags:
+      - Referral
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  allOf:
+                  - description: The id of the referral form, from /referralForm.info
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                creditedToUserId:
+                  allOf:
+                  - description: The id of the user submitting the referral
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                fieldSubmissions:
+                  type: array
+                  items:
+                    properties:
+                      path:
+                        type: string
+                        description: The form field's "path" value
+                      value:
+                        type: string
+                        description: 'The value depends on the field type:
+
+                          - Most fields: A primitive value (string, number, boolean)
+
+                          - Job field: An object with { title: job.title, value: job.id }
+
+                          - Location field: An object with the following properties: `{ country: "USA", city: "San Francisco", region: "California" }`. You may provide any combination of these properties and we will attempt to geocode the location. For best results, provide all three properties.
+
+                          - EducationHistory field: [Early Access] An array of objects with the following properties: `{ schoolName: "University of California, Berkeley", degree: "Bachelor of Science", major: "Computer Science", startDate: "2020-09-01", endDate: "2024-05-15", isCurrent: true }`. Only `schoolName` is required. We will attempt to match the school name to a known school in our database. If `isCurrent` is true, `endDate` must not be provided.
+
+                          '
+                    required:
+                    - path
+                    - value
+                createdAt:
+                  allOf:
+                  - description: 'An ISO date string to set the referral''s createdAt timestamp to. When this value isn''t provided, the createdAt timestamp defaults to the time the referral was created.
+
+                      '
+                  - $ref: '#/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt'
+              required:
+              - id
+              - creditedToUserId
+              - fieldSubmissions
+      responses:
+        '200':
+          description: Responses for the referral.create endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        $ref: '#/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application'
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Workflow.info API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Workflow.info
+paths:
+  /workflow.info:
+    post:
+      summary: workflow.info (Implemented by Partner)
+      description: Detailed information about the workflow
+      operationId: workflowinfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                external_workflow_template_id:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"results\": [\n        {\n            \"external_workflow_template_id\": \"<id>\",\n            \"name\": \"Name of the workflow\",\n            \"description\": \"Description of the workflow\",\n            \"fields\": [\n                {\n                    \"id\": \"id\",\n                    \"title\": \"title\",\n                    \"description\": \"description\",\n                    \"type\": \"type\",\n                    \"isRequired\": true,\n                    \"selectableValues\": [\n                        {\n                            \"label\": \"label\",\n                            \"value\": \"value\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        external_workflow_template_id:
+                          type: string
+                          example: <id>
+                        name:
+                          type: string
+                          example: Name of the workflow
+                        description:
+                          type: string
+                          example: Description of the workflow
+                        fields:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                example: id
+                              title:
+                                type: string
+                                example: title
+                              description:
+                                type: string
+                                example: description
+                              type:
+                                type: string
+                                example: type
+                              isRequired:
+                                type: boolean
+                                example: true
+                                default: true
+                              selectableValues:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    label:
+                                      type: string
+                                      example: label
+                                    value:
+                                      type: string
+                                      example: value
+      deprecated: false
+      tags:
+      - Workflow.info
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

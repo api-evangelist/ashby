@@ -1,0 +1,557 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Assessment API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Assessment
+paths:
+  /assessment.addCompletedToCandidate:
+    post:
+      summary: assessment.addCompletedToCandidate
+      operationId: assessmentAddCompletedToCandidate
+      description: 'Add a completed assessment to a candidate
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-assessmentaddcompletedtocandidate) permission.**
+
+        '
+      tags:
+      - Assessment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                candidateId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the candidate, to whom to add the completed assessment
+                partnerId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the partner adding the assessment
+                assessment:
+                  type: object
+                  description: The completed assessment
+                  required:
+                  - assessmentTypeId
+                  - assessmentId
+                  - assessmentName
+                  - result
+                  - metadata
+                  properties:
+                    assessmentTypeId:
+                      allOf:
+                      - description: An identifier that uniquely identifies the assessment type
+                      - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    assessmentId:
+                      allOf:
+                      - description: An identifier that uniquely identifies the completed assessment
+                      - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                    assessmentName:
+                      type: string
+                      example: Node Assessment
+                      description: The name of the assessment that was taken that will be displayed in the UI
+                    result:
+                      allOf:
+                      - description: The assessment's result
+                      - $ref: '#/paths/~1assessment.addCompletedToCandidate/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/result'
+                    metadata:
+                      type: array
+                      description: An array of metadata associated with this completed assessment
+                      items:
+                        $ref: '#/paths/~1assessment.addCompletedToCandidate/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/result'
+                timestamp:
+                  allOf:
+                  - description: The timestamp in milliseconds since the unix epoch, when the assessment was completed
+                  - type: integer
+                    description: The timestamp in milliseconds since the unix epoch, when the update occurred
+                    format: int64
+                    example: 1665680638489
+              required:
+              - candidateId
+              - partnerId
+              - assessment
+              - timestamp
+      responses:
+        '200':
+          description: Responses for the assessment.addCompletedToCandidate endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success Response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - properties:
+                      results:
+                        type: object
+                        required:
+                        - assessmentTypeId
+                        - assessmentId
+                        - assessmentName
+                        - candidateId
+                        - metadata
+                        properties:
+                          applicationId:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          assessmentId:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          assessmentName:
+                            type: string
+                            example: test-assessment-name
+                          assessmentTypeId:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          candidateId:
+                            allOf:
+                            - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          metadata:
+                            type: array
+                            items:
+                              $ref: '#/paths/~1assessment.addCompletedToCandidate/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/result'
+                          result:
+                            type: object
+                            properties:
+                              identifier:
+                                type: string
+                                description: Uniquely identifies this field, for this partner
+                                example: result-max
+                              label:
+                                type: string
+                                description: Label for the assessment metadata to be displayed in the UI
+                                example: Max Score
+                              description:
+                                type: string
+                                description: Description of the assessment metadata, which may be displayed in the UI
+                                example: The maximum possible score for the assessment
+                              type:
+                                type: string
+                                description: The type of the value. Please reach out if you'd like us to support a new type!
+                                enum:
+                                - numeric_score
+                                - numeric_duration_minutes
+                                - url
+                                - string
+                                - boolean_success
+                              value:
+                                allOf:
+                                - oneOf:
+                                  - type: string
+                                  - type: number
+                                  - type: boolean
+                                  description: 'The raw value — one of string, number, or boolean
+
+                                    '
+                                - example: 10
+                            required:
+                            - identifier
+                            - label
+                            - type
+                            - value
+                  - required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /assessment.start:
+    post:
+      summary: assessment.start (Implemented by Partner)
+      operationId: assessmentStart
+      description: 'The API for starting an assessment. Implemented by the partner, called by Ashby.
+
+        '
+      tags:
+      - Assessment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - assessment_type_id
+              - candidate
+              - application
+              - job
+              properties:
+                assessment_type_id:
+                  allOf:
+                  - description: The id of the type of assessment to start (retrieved from calling /assessment.list)
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                candidate:
+                  allOf:
+                  - description: Identifier of the assessment being started
+                  - type: object
+                    description: A description of the candidate
+                    required:
+                    - ashby_id
+                    - first_name
+                    - last_name
+                    - email
+                    - ashby_profile_url
+                    properties:
+                      ashby_id:
+                        allOf:
+                        - type: string
+                        - description: The identifier of the candidate in Ashby
+                      first_name:
+                        allOf:
+                        - type: string
+                        - description: The first name of the candidate being assessed
+                      last_name:
+                        allOf:
+                        - type: string
+                        - description: The last name of the candidate being assessed
+                      email:
+                        allOf:
+                        - type: string
+                        - description: The email of the candidate being assessed
+                      ashby_profile_url:
+                        allOf:
+                        - type: string
+                        - description: The url back into Ashby of the candidate being assessed
+                application:
+                  allOf:
+                  - description: The application for which the candidate is being assessed
+                  - type: object
+                    description: The application for which the candidate is being assessed
+                    required:
+                    - ashby_id
+                    - status
+                    properties:
+                      ashby_id:
+                        allOf:
+                        - type: string
+                        - description: The id of the application in Ashby
+                      status:
+                        allOf:
+                        - $ref: '#/paths/~1application.list/post/requestBody/content/application~1json/schema/allOf/1/properties/status'
+                        - description: The status of the application in Ashby
+                job:
+                  allOf:
+                  - description: The job for which the candidate is being assessed
+                  - type: object
+                    description: The job for which the candidate is being assessed
+                    required:
+                    - ashby_id
+                    - name
+                    - ashby_job_url
+                    properties:
+                      ashby_id:
+                        allOf:
+                        - type: string
+                        - description: The id of the job in Ashby
+                      name:
+                        allOf:
+                        - type: string
+                        - description: The name of the job in Ashby
+                      req_id:
+                        allOf:
+                        - type: string
+                        - description: The customer-defined requisition id for the job
+                      ashby_job_url:
+                        allOf:
+                        - type: string
+                        - description: The url of the job, internal to Ashby
+                      hiringTeam:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1hiringTeam.addMember/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+      responses:
+        '200':
+          description: Responses for the assessment.start endpoint
+          content:
+            application/json:
+              schema:
+                title: Success Response
+                type: object
+                required:
+                - success
+                - results
+                properties:
+                  success:
+                    type: boolean
+                  results:
+                    required:
+                    - assessment_id
+                    properties:
+                      assessment_id:
+                        type: string
+                      update_request:
+                        $ref: '#/paths/~1assessment.update/post/requestBody/content/application~1json/schema'
+        '409':
+          description: 'The assessment could not be started because the candidate is already being assessed.
+
+            '
+        '422':
+          description: 'A custom error message that will be shown to the user in Ashby.
+
+            '
+          content:
+            application/json:
+              schema:
+                title: Custom Error Response
+                type: object
+                required:
+                - message
+                properties:
+                  message:
+                    type: string
+                    description: The message to be shown to the user in Ashby.
+  /assessment.list:
+    post:
+      summary: assessment.list (Implemented by Partner)
+      operationId: assessmentList
+      description: 'The API for listing assessments that the partner supports — implemented by the partner, but called by Ashby
+
+        '
+      tags:
+      - Assessment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Responses for the assessment.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          allOf:
+                          - type: object
+                            description: List of available assessments
+                            properties:
+                              assessment_type_id:
+                                allOf:
+                                - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                              name:
+                                type: string
+                              description:
+                                type: string
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /assessment.update:
+    post:
+      summary: assessment.update
+      operationId: assessmentUpdate
+      description: 'Update Ashby about the status of a started assessment.
+
+
+        **Requires the [`candidatesWrite`](authentication#permissions-assessmentupdate) permission.**
+
+
+        `assessment_status` is required unless `cancelled_reason` is provided.
+
+        '
+      tags:
+      - Assessment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - assessment_id
+              - timestamp
+              properties:
+                assessment_id:
+                  allOf:
+                  - description: Identifier of the assessment being updated
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                timestamp:
+                  $ref: '#/paths/~1assessment.addCompletedToCandidate/post/requestBody/content/application~1json/schema/properties/timestamp/allOf/1'
+                assessment_status:
+                  allOf:
+                  - description: The current status of the assessment. Setting this with a value of "Started" will signal Ashby to store the timestamp the assessment started. Required when `cancelled_reason` is not set.
+                  - $ref: '#/paths/~1assessment.addCompletedToCandidate/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/result'
+                assessment_profile_url:
+                  allOf:
+                  - description: The url back to the assessment/candidate on the partner's website. This value should always be of type url. Required when `assessment_result` is set.
+                  - $ref: '#/paths/~1assessment.addCompletedToCandidate/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/result'
+                assessment_result:
+                  allOf:
+                  - description: The result of the assessment. Sending an update with this field will signal to Ashby that the assessment is complete.
+                  - $ref: '#/paths/~1assessment.addCompletedToCandidate/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/result'
+                cancelled_reason:
+                  allOf:
+                  - description: The reason the assessment was cancelled. This field will signal to Ashby that the assessment is cancelled.
+                  - $ref: '#/paths/~1assessment.addCompletedToCandidate/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/result'
+                metadata:
+                  type: array
+                  description: Any other metadata about the assessment (e.g. ETA until complete). All assessment data should have unique identifiers.
+                  items:
+                    $ref: '#/paths/~1assessment.addCompletedToCandidate/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/result'
+      responses:
+        '200':
+          description: Responses for the assessment.start endpoint
+  /assessment.cancel:
+    post:
+      summary: assessment.cancel (Implemented by Partner)
+      operationId: assessmentCancel
+      description: '(Optional) Cancels an assessment. Implemented by the partner, called by Ashby.
+
+        '
+      tags:
+      - Assessment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - assessment_id
+              properties:
+                assessment_id:
+                  allOf:
+                  - description: The id of the started assessment to cancel
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+      responses:
+        '200':
+          description: Responses for the assessment.cancel endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success Response
+                  type: object
+                  $ref: '#/paths/~1assessment.start/post/responses/200/content/application~1json/schema'
+                - title: Error Response
+                  type: object
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /assessment.customField.list:
+    post:
+      summary: customField.list (Implemented by Partner)
+      operationId: assessmentPartnerCustomFieldList
+      description: 'The API for listing custom fields that can be synced to Ashby — implemented by the assessment partner, but called by Ashby.
+
+
+        This endpoint is optional and must be enabled for your integration. Contact Ashby if you wish to use this feature.
+
+        '
+      tags:
+      - Assessment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Responses for the customField.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success Response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          description: A custom field specification provided by an assessment partner
+                          properties:
+                            id:
+                              type: string
+                              minLength: 1
+                              description: Unique identifier for this custom field. This id will be used as the key in `additional_fields` when calling `/assessment.start`.
+                              example: department
+                            name:
+                              type: string
+                              minLength: 1
+                              description: Display name of the custom field shown to users in Ashby
+                              example: Department
+                            type:
+                              type: string
+                              description: The type of the custom field
+                              enum:
+                              - String
+                              - Date
+                              - DateRange
+                              - Number
+                              - ValueSelect
+                              - MultiValueSelect
+                              - Boolean
+                              - LongText
+                              - Email
+                              - Phone
+                              - Score
+                              - SocialLink
+                              - Url
+                              - Currency
+                              - Location
+                              example: ValueSelect
+                            possible_values:
+                              type: array
+                              description: Required for `ValueSelect` and `MultiValueSelect` types. An array of possible values the user can choose from.
+                              items:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    minLength: 1
+                                    description: Internal identifier for this option. This value will be sent in `additional_fields` when the assessment is started.
+                                    example: eng
+                                  value:
+                                    type: string
+                                    minLength: 1
+                                    description: Display value shown to users in Ashby
+                                    example: Engineering
+                                required:
+                                - key
+                                - value
+                            isRequired:
+                              type: boolean
+                              description: Whether this field is required. Defaults to false if not specified.
+                              example: false
+                          required:
+                          - id
+                          - name
+                          - type
+                    required:
+                    - fields
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '

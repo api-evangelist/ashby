@@ -1,0 +1,135 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Ashby API Key Interview Stage API
+  description: The public API for accessing resources in your Ashby instance.
+  contact:
+    name: Ashby Support
+    url: https://app.ashbyhq.com/support
+    email: support@ashbyhq.com
+servers:
+- url: https://api.ashbyhq.com
+security:
+- BasicAuth: []
+tags:
+- name: Interview Stage
+paths:
+  /interviewStage.list:
+    post:
+      summary: interviewStage.list
+      description: 'List all interview stages for an interview plan in order.
+
+
+        **Requires the [`interviewsRead`](authentication#permissions-interviewstagelist) permission.**
+
+        '
+      operationId: interviewStageList
+      tags:
+      - Interview Stage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interviewPlanId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The id of the interview plan to list stages for
+              required:
+              - interviewPlanId
+      responses:
+        '200':
+          description: Responses for the interviewStage.list endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1interviewStage.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results'
+                      moreDataAvailable:
+                        $ref: '#/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/moreDataAvailable'
+                    required:
+                    - results
+                    - moreDataAvailable
+                - title: Error response
+                  $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+  /interviewStage.info:
+    post:
+      summary: interviewStage.info
+      operationId: interviewStageInfo
+      description: 'Fetch interview stage details by id
+
+
+        **Requires the [`interviewsRead`](authentication#permissions-interviewstageinfo) permission.**
+
+        '
+      tags:
+      - Interview Stage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                interviewStageId:
+                  allOf:
+                  - $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                  - description: The unique id of the interview stage whose details will be fetched
+              required:
+              - interviewStageId
+              example:
+                interviewStageId: 3ae2b801-19f6-41ef-ad28-214bd731948f
+      responses:
+        '200':
+          description: Responses from the interviewStage.info endpoint
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: Success response
+                  allOf:
+                  - $ref: '#/paths/~1job.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/0'
+                  - type: object
+                    properties:
+                      results:
+                        allOf:
+                        - $ref: '#/paths/~1jobInterviewPlan.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/stages/items/allOf/0'
+                        - type: object
+                          properties:
+                            interviewPlanId:
+                              $ref: '#/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId'
+                          required:
+                          - interviewPlanId
+                    required:
+                    - results
+                - $ref: '#/paths/~1report.generate/post/responses/429/content/application~1json/schema'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: "Use HTTP Basic Auth to authenticate with our API. You must send your API key with every request. \nPut your API key as the basic auth username and leave the password blank.\n"
+    WebhookSignature:
+      type: apiKey
+      in: header
+      name: Ashby-Signature
+      description: '[Optional] If you provide a secret token when configuring your webhook, this will be used to create a digest of the JSON payload sent with each webhook request.
+
+        The digest will be included in the request under the `Ashby-Signature` http header.
+
+
+        It will look like this:
+
+        `Ashby-Signature: sha256=f3124911d2956f10aa3a49c43a88bdf13bba846e94f0ae2bd7c034f90239bd04`
+
+
+        The part before the = indicates the algorithm that was used to compute the hash digest.
+
+        '
