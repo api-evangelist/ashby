@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Source API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Source",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "source.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/source.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all sources\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-sourcelist) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

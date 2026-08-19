@@ -1,0 +1,243 @@
+{
+  "item": [
+    {
+      "id": "91a16319-337e-4a51-8f9d-d50190134e94",
+      "name": "Survey Form Definition",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dadb63a0-cf0b-4ad7-aa2d-efdc43fc9b3a",
+          "name": "surveyFormDefinition.info",
+          "request": {
+            "name": "surveyFormDefinition.info",
+            "description": {
+              "content": "Returns details about a single survey form definition by id\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-surveyformdefinitioninfo) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "surveyFormDefinition.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"surveyFormDefinitionId\": {\n    \"description\": \"The id of the survey form to fetch\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e451e40-17cf-463b-92e4-78d96d0eea5b",
+              "name": "Responses for the surveyFormDefinition.info endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "surveyFormDefinition.info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"surveyFormDefinitionId\": {\n    \"description\": \"The id of the survey form to fetch\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"surveyType\": {\n      \"value\": \"reference #/webhooks/surveySubmit/post/requestBody/content/application~1json/schema/properties/data/properties/surveySubmission/properties/surveyType not found in the OpenAPI spec\"\n    },\n    \"id\": \"string\",\n    \"title\": true,\n    \"isArchived\": 5665,\n    \"formDefinition\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b197de6-5cbf-47a6-b4fe-5247765b5696",
+          "name": "surveyFormDefinition.list",
+          "request": {
+            "name": "surveyFormDefinition.list",
+            "description": {
+              "content": "Lists all survey form definitions.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-surveyformdefinitionlist) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "surveyFormDefinition.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cursor\": {\n    \"value\": \"reference #/paths/~1brand.list/post/requestBody/content/application~1json/schema/properties/cursor not found in the OpenAPI spec\"\n  },\n  \"syncToken\": {\n    \"value\": \"reference #/paths/~1opening.list/post/requestBody/content/application~1json/schema/properties/syncToken not found in the OpenAPI spec\"\n  },\n  \"limit\": {\n    \"value\": \"reference #/paths/~1brand.list/post/requestBody/content/application~1json/schema/properties/limit not found in the OpenAPI spec\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c823dd77-8a0d-4472-ad1d-19975338cfc4",
+              "name": "Responses for the surveyFormDefinition.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "surveyFormDefinition.list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"syncToken\": \"6W05prn4d\",\n  \"cursor\": \"qA\",\n  \"limit\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"surveyType\": {\n        \"value\": \"reference #/webhooks/surveySubmit/post/requestBody/content/application~1json/schema/properties/data/properties/surveySubmission/properties/surveyType not found in the OpenAPI spec\"\n      },\n      \"id\": 6953,\n      \"title\": \"string\",\n      \"isArchived\": true,\n      \"formDefinition\": true\n    },\n    {\n      \"surveyType\": {\n        \"value\": \"reference #/webhooks/surveySubmit/post/requestBody/content/application~1json/schema/properties/data/properties/surveySubmission/properties/surveyType not found in the OpenAPI spec\"\n      },\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"isArchived\": \"string\",\n      \"formDefinition\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "616f4935-017c-4fb8-94bb-bb9267011b46",
+    "name": "Ashby API Key Survey Form Definition API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

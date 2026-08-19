@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Application API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Application",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "application.changeSource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.changeSource",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the source of an application.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationchangesource) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.changeStage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.changeStage",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the stage of an application\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationchangestage) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Consider a candidate for a job (eg when sourcing a candidate for a job posting).\n\nIf you're submitting an application as a job board, use the [`applicationForm.submit`](ref:applicationformsubmit) endpoint instead. See [Creating a custom careers page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page) for details.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationcreate) permission.**\n\nTo set values for custom fields on Applications, use the [`customFields"
+        },
+        {
+          "info": {
+            "name": "application.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch application details by application id or by submitted form instance id (which is return by the `applicationForm.submit` endpoint). If both applicationId and submittedFormInstanceId are provided, we will lookup by applicationId.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets all applications in the organization.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationlist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.transfer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer an application to a different job.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationtransfer) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an application\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationupdate) permission.**\n\nTo set values for custom fields on Applications, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "application.updateHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.updateHistory",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the history of an application. This endpoint is used to update the history of an application, such as setting the entered stage time or deleting a history event.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationupdatehistory) permission and the `Allow updating application history?` setting found in your admin API key permissions configuration.**\n"
+        },
+        {
+          "info": {
+            "name": "application.listHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.listHistory",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch a paginated list of application history items for an application.\n\nThis endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationListHistory) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.listCriteriaEvaluations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.listCriteriaEvaluations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch a paginated list of AI criteria evaluations for an application.\n\nThis endpoint returns the AI-generated criteria evaluations that assess how well a candidate meets specific job requirements. Each evaluation contains the outcome, reasoning, and other assessment details.\n\nThis endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.\n\n**Requires the [`candidatesRead`](authent"
+        },
+        {
+          "info": {
+            "name": "application.addHiringTeamMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.addHiringTeamMember",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an Ashby user to the hiring team at the application level. \n\n**Requires the [`candidateWrite`](authentication#permissions-applicationaddhiringteammember) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "application.removeHiringTeamMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/application.removeHiringTeamMember",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes an Ashby user to the hiring team at the application level. \n\n**Requires the [`candidateWrite`](authentication#permissions-applicationremovehiringteammember) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

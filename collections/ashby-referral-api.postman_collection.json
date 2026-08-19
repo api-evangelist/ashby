@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "f4fd6bb1-6453-4cef-b4b4-af6234f98742",
+      "name": "Referral",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20913733-8a5f-4532-b72e-9b5d99852142",
+          "name": "referral.create",
+          "request": {
+            "name": "referral.create",
+            "description": {
+              "content": "Creates a referral\n\n**Requires the [`candidatesWrite`](authentication#permissions-referralcreate) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "referral.create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": {\n    \"description\": \"The id of the referral form, from /referralForm.info\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"creditedToUserId\": {\n    \"description\": \"The id of the user submitting the referral\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"fieldSubmissions\": [\n    {\n      \"path\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"path\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"createdAt\": {\n    \"description\": \"An ISO date string to set the referral's createdAt timestamp to. When this value isn't provided, the createdAt timestamp defaults to the time the referral was created.\\n\",\n    \"value\": \"reference #/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt not found in the OpenAPI spec\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b48f3227-a509-4233-a992-8bf5549272f5",
+              "name": "Responses for the referral.create endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "referral.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": {\n    \"description\": \"The id of the referral form, from /referralForm.info\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"creditedToUserId\": {\n    \"description\": \"The id of the user submitting the referral\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"fieldSubmissions\": [\n    {\n      \"path\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"path\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"createdAt\": {\n    \"description\": \"An ISO date string to set the referral's createdAt timestamp to. When this value isn't provided, the createdAt timestamp defaults to the time the referral was created.\\n\",\n    \"value\": \"reference #/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt not found in the OpenAPI spec\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "800c5504-4ebb-4645-9521-48bc13f50d68",
+    "name": "Ashby API Key Referral API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

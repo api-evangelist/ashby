@@ -1,0 +1,243 @@
+{
+  "item": [
+    {
+      "id": "4a4e851a-1f04-4562-8975-241c9b0b3de9",
+      "name": "Application Feedback",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5b47b977-c537-4426-92d0-88558f89348c",
+          "name": "applicationFeedback.list",
+          "request": {
+            "name": "applicationFeedback.list",
+            "description": {
+              "content": "List all interview scorecards and feedback submissions associated with an application.\n\nEach feedback submission contains:\n- **formDefinition**: The structure of the feedback form with all available fields\n- **submittedValues**: Responses to the form fields, which depending on the form configuration can include:\n  - Text feedback (e.g., \"Candidate showed strong technical skills...\")\n  - Numerical scores (e.g., \"4\" for a 1-4 rating scale)\n  - Structured selections (e.g., \"Strong Hire\" for overall recommendation)\n- **Interview context**: Links to associated interviews, events, and the submitting user\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationfeedbacklist) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applicationFeedback.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the application you'd like to fetch feedback for\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fbd45187-f9db-4e02-8dd2-0309bb9d85e4",
+              "name": "Responses from the applicationFeedback.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applicationFeedback.list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the application you'd like to fetch feedback for\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"applicationId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"feedbackFormDefinitionId\": \"6ba7b810-9dad-11d1-80b4-00c04fd430c8\",\n      \"interviewId\": \"6ba7b811-9dad-11d1-80b4-00c04fd430c8\",\n      \"interviewEventId\": \"6ba7b812-9dad-11d1-80b4-00c04fd430c8\",\n      \"submittedAt\": \"2023-11-15T14:30:00.000Z\",\n      \"submittedByUser\": {\n        \"firstName\": \"Sarah\",\n        \"lastName\": \"Johnson\",\n        \"email\": \"sarah.johnson@company.com\",\n        \"globalRole\": \"Elevated Access\",\n        \"isEnabled\": true,\n        \"updatedAt\": \"2023-11-15T14:30:00.000Z\"\n      },\n      \"formDefinition\": {\n        \"sections\": [\n          {\n            \"title\": \"Technical Assessment\",\n            \"fields\": [\n              {\n                \"isRequired\": true,\n                \"field\": {\n                  \"type\": \"ValueSelect\",\n                  \"path\": \"overall_recommendation\",\n                  \"title\": \"Overall Recommendation\",\n                  \"humanReadablePath\": \"Overall Recommendation\",\n                  \"isNullable\": false,\n                  \"selectableValues\": [\n                    {\n                      \"label\": \"Strong Hire\",\n                      \"value\": \"strong_hire\"\n                    },\n                    {\n                      \"label\": \"Hire\",\n                      \"value\": \"hire\"\n                    },\n                    {\n                      \"label\": \"No Hire\",\n                      \"value\": \"no_hire\"\n                    }\n                  ]\n                }\n              },\n              {\n                \"isRequired\": false,\n                \"field\": {\n                  \"type\": \"Score\",\n                  \"path\": \"technical_skills\",\n                  \"title\": \"Technical Skills\",\n                  \"humanReadablePath\": \"Technical Skills\",\n                  \"isNullable\": false\n                }\n              },\n              {\n                \"isRequired\": false,\n                \"field\": {\n                  \"type\": \"RichText\",\n                  \"path\": \"detailed_feedback\",\n                  \"title\": \"Detailed Feedback\",\n                  \"humanReadablePath\": \"Detailed Feedback\",\n                  \"isNullable\": false\n                }\n              }\n            ]\n          }\n        ]\n      },\n      \"submittedValues\": {\n        \"overall_recommendation\": \"hire\",\n        \"technical_skills\": \"4\",\n        \"detailed_feedback\": \"Candidate demonstrated strong problem-solving skills and wrote clean, efficient code. Good understanding of algorithms and data structures. Communication was clear throughout the interview.\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30184da1-58f8-4824-b039-eb6c3493850f",
+          "name": "applicationFeedback.submit",
+          "request": {
+            "name": "applicationFeedback.submit",
+            "description": {
+              "content": "Application feedback forms support a variety of field types. \n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationfeedbacksubmit) permission.**\n\nThe values accepted for each field depend on the type of field that's being filled out:                                                                                                                                                                                                                 |\n- `Boolean` - A boolean value\n- `CompensationRange` - An object in the format `{ type: \"compensation-range\", minValue: 100000, maxValue: 150000, currencyCode: \"USD\", interval: \"1 YEAR\" }`. `currencyCode` must be a valid ISO 4217 code and `interval` must be a valid compensation interval (e.g. `\"1 HOUR\"`, `\"1 YEAR\"`).\n- `Currency` - An object in the format `{ value: 100000, currencyCode: \"USD\" }`. `currencyCode` must be a valid ISO 4217 code.\n- `Date` - A date string in the format YYYY-MM-DD\n- `Email` - A valid email address\n- `LongText`, `Phone`, `String` - A string\n- `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field's selectable options\n- `Number` - An integer\n- `NumberRange` - An object in the format `{ type: \"number-range\", minValue: 1, maxValue: 10 }`\n- `RichText` - We do not support submitting rich text documents via the API but we do support submitting plain text values for these fields. Plain text values must be submitted in the format `{ type: \"PlainText\", value: \"A plain text string\" }`\n- `Score` - An integer between 1 and 4 submitted in the format `{ score: 4 }`\n- `Url` - A valid URL string. The empty string is also accepted.\n- `UUID` - A UUID string, or an object in the format `{ value: \"<uuid>\" }`\n- `ValueSelect` - A string that matches the value of one of the ValueSelect field's selectable options\n\nThe `submittedValues` field in the response contains the submitted feedback in an object where the key is the path of the field and the value is the value submitted for that field.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applicationFeedback.submit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"feedbackForm\": {\n    \"value\": \"reference #/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm not found in the OpenAPI spec\"\n  },\n  \"formDefinitionId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the feedback form definition associated with the form submission\"\n  },\n  \"applicationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the application you're submitting feedback for\"\n  },\n  \"userId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the user the feedback will be credited to.\\nIf a userId is not provided, the feedback will be credited to the API key user.\\n\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9e50275-f7f3-4da6-bdca-8cf013939239",
+              "name": "Responses from the applicationFeedback.submit endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applicationFeedback.submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feedbackForm\": {\n    \"value\": \"reference #/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm not found in the OpenAPI spec\"\n  },\n  \"formDefinitionId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the feedback form definition associated with the form submission\"\n  },\n  \"applicationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the application you're submitting feedback for\"\n  },\n  \"userId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the user the feedback will be credited to.\\nIf a userId is not provided, the feedback will be credited to the API key user.\\n\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"submittedFormInstance\": {\n      \"value\": \"reference #/paths/~1applicationForm.submit/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/submittedFormInstance not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "944e00d0-3a3a-4c16-815f-f2303d776d99",
+    "name": "Ashby API Key Application Feedback API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

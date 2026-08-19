@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Hiring Team API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hiring Team",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "hiringTeam.addMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/hiringTeam.addMember",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an Ashby user to the hiring team at the application or job-level. \n\n**Requires the [`organizationWrite`](authentication#permissions-hiringteamaddmember) permission.**\n\nHiring team members can be added to a hiring team at the application, job, or opening level. \n"
+        },
+        {
+          "info": {
+            "name": "hiringTeam.removeMember",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/hiringTeam.removeMember",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes an Ashby user from the hiring team at the application or job-level. \n\n**Requires the [`organizationWrite`](authentication#permissions-hiringteamremovemember) permission.**\n\nHiring team members can be removed from a hiring team at the application, job, or opening level. \n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

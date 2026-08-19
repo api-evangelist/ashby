@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Referral Form API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Referral Form",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "referralForm.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/referralForm.info"
+          },
+          "docs": "Fetches the default referral form or creates a default referral form if none exists.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-referralforminfo) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

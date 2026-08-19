@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Application Feedback API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Application Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "applicationFeedback.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/applicationFeedback.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all interview scorecards and feedback submissions associated with an application.\n\nEach feedback submission contains:\n- **formDefinition**: The structure of the feedback form with all available fields\n- **submittedValues**: Responses to the form fields, which depending on the form configuration can include:\n  - Text feedback (e.g., \"Candidate showed strong technical skills...\")\n  - Numerical scores (e.g., \"4\" for a 1-4 rating scale)\n  - Structured selections (e.g., \"Strong Hire\" for overall"
+        },
+        {
+          "info": {
+            "name": "applicationFeedback.submit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/applicationFeedback.submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Application feedback forms support a variety of field types. \n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationfeedbacksubmit) permission.**\n\nThe values accepted for each field depend on the type of field that's being filled out:                                                                                                                                                                                                                 |\n- `Boolean` - A boolean value\n- `Co"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Workflow.update API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflow.update",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "workflow.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/workflow.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Called by the partner to tell Ashby about any status changes to the workflow"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

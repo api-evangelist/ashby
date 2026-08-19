@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Job Posting API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Job Posting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jobPosting.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobPosting.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve an individual job posting\n\n**Requires the [`jobsRead`](authentication#permissions-jobpostinginfo) permission.**\n\nResult fields:\n- `linkedData` - Object that can be used to populate \"rich results\" in search engines. [See more info here](https://developers.google.com/search/docs/data-types/job-posting).\n- `applicationFormDefinition` -\tSee the guide on [Creating a custom careers page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page).\n"
+        },
+        {
+          "info": {
+            "name": "jobPosting.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobPosting.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all published job postings\n\n**Requires the [`jobsRead`](authentication#permissions-jobpostinglist) permission.**\n\n**Important**: By default, this endpoint includes all listed and unlisted job postings. Unlisted job postings should not be displayed publicly. \nIf you are using the API to publicly expose job postings, set the `listedOnly` parameter to `true` when calling this API so that you only fetch listed job postings that can be displayed publicly.\n"
+        },
+        {
+          "info": {
+            "name": "jobPosting.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobPosting.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing job posting.\n\n**Requires the [`jobsWrite`](authentication#permissions-jobpostingupdate) permission.**\n\n**Note on updating the description**: When job description openings and closings are not suppressed, the `descriptionHtml` field returned in `jobPosting.info` may contain content that is not modifiable through the API. Only the content of the `descriptionParts.descriptionBody` field of the `jobPosting.info` endpoint is modifiable through this call. To completely customize th"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

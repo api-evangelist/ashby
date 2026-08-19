@@ -1,0 +1,243 @@
+{
+  "item": [
+    {
+      "id": "8bcb9a1a-a974-476e-bb50-38bc60aea0be",
+      "name": "File",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e616555-8ea8-44dd-b553-333f754f63a0",
+          "name": "file.info",
+          "request": {
+            "name": "file.info",
+            "description": {
+              "content": "Retrieve the url of a file associated with a candidate\n\n**Requires the [`candidatesRead`](authentication#permissions-fileinfo) permission.**\n\n**Please note** that running this with Ashby-generated demo data in an Ashby demo account can result in errors. We would recommend manually creating a test candidate in Ashby when trying out this endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "file.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileHandle\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b906b8f-f1d7-44da-b70f-5eefb6a75ed9",
+              "name": "Responses for the file.info endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "file.info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fileHandle\": \"eyJoYW5kbGUiOnsidHlwZSI6IkNhbmRpZGF0ZUZpbGUiLCJmaWxlSWQiOiIxNTk1ZTRmYy04MTQwLTQ1NGUtYTI1ZC04NTNiOTQ3ZWNmYzgiLCJvd25lcklkIjoiYmY5NGZlNmMtMjU3MS00NzQ1LWE1OWEtNTA5MjE3ODI3MDVlIn0sInNpZ25hdHVyZSI6IkFqclpjT0VlTXUwdWxLZlRCS05iMWRkbDdHcjVIWFVmZzNrS0NPL1dWWjg9IiwidmVyc2lvbiI6IjEilQ\\n\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"url\": \"https://s3.amazonaws.com/...\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e370ea5-4742-4a8d-9f46-aeecb189d50a",
+          "name": "file.createFileUploadHandle",
+          "request": {
+            "name": "file.createFileUploadHandle",
+            "description": {
+              "content": "Creates a presigned upload URL that allows uploading a file directly to storage, bypassing the need to send file bytes through the API.\n\nBenefits over multipart upload:\n- **Reliability**: File bytes are uploaded directly to storage, avoiding timeouts and connection resets that can occur when proxying large files through the API.\n- **Compatibility**: Avoids issues with firewalls or proxies that block or scan multipart payloads containing binary content.\n- **Simplicity**: The follow-up call to, e.g., `candidate.uploadResume`, `candidate.uploadFile`, or `applicationForm.submit` is a plain `application/json` request rather than `multipart/form-data`.\n\n**Requires the [`candidatesWrite`](authentication#permissions-filecreatefileuploadhandle) permission.**\n\n**Usage flow:**\n\n1. Call `file.createFileUploadHandle` with the file metadata to get a presigned upload URL, form fields, and a handle.\n2. Upload the file directly to the returned `url` using a `multipart/form-data` POST request. Include all returned `fields` as form fields, and the file as the last field named `file`.\n3. Use the returned `handle` in a follow-up call:\n   - `candidate.uploadResume` with `{ candidateId, resumeHandle }` to attach a resume to a candidate.\n   - `candidate.uploadFile` with `{ candidateId, fileHandle }` to attach a file to a candidate.\n   - `applicationForm.submit` with `Content-Type: application/json`, where file field values in `fieldSubmissions` contain the handle string instead of a multipart file reference.\n\nThe presigned URL expires after 10 minutes. The `fileUploadContext` must be one of `CandidateResume`, `CandidateFiles`, or `ApplicationForm`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "file.createFileUploadHandle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileUploadContext\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"contentType\": \"<string>\",\n  \"contentLength\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8dab5676-4ead-4c70-81af-97d05fb163d6",
+              "name": "Responses from the file.createFileUploadHandle endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "file.createFileUploadHandle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fileUploadContext\": \"<string>\",\n  \"filename\": \"resume.pdf\",\n  \"contentType\": \"application/pdf\",\n  \"contentLength\": 102400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"handle\": \"string\",\n    \"url\": \"string\",\n    \"fields\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "03586f1e-a599-4160-b6a9-64e83bfc4542",
+    "name": "Ashby API Key File API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

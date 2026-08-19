@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Report API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "report.generate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/report.generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "> ⚠️ Beta\n>\n> This endpoint is currently in beta and may change without notice.\n\nGenerates a new report or polls the status of an existing report generation.\n\n**Two-step process:**\n1. Call with only `reportId` to start generation → returns `requestId`\n2. Poll with both `reportId` and `requestId` every second until `status` is `complete` or `failed`\n\n**Example:**\n```\n// Step 1: Start generation\nPOST /report.generate\n{ \"reportId\": \"abc-123-def-456\" }\n→ { \"requestId\": \"rep_result:12345abc\", \"status"
+        },
+        {
+          "info": {
+            "name": "report.synchronous",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/report.synchronous",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "> ⚠️ Beta\n>\n> This endpoint is currently in beta and may change without notice.\n\nRetrieves report data synchronously.\n\n**Timeout:** 30 seconds. If a report is timing out, use the asynchronous [`report.generate`](ref:reportgenerate) instead.\n\n**Rate Limiting (Per Organization):**\n- **Request limit**: 15 requests per minute per organization\n- **Concurrent limit**: Maximum 3 report operations at once per organization (shared with [`report.generate`](ref:reportgenerate))\n- Rate limits are shared wit"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

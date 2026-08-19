@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Survey Submission API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Survey Submission",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "surveySubmission.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/surveySubmission.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new survey submission.\n\n**Requires the [`candidatesWrite`](authentication#permissions-surveySubmissionCreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "surveySubmission.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/surveySubmission.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all survey submissions of a given `surveyType`.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-surveySubmissionList) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

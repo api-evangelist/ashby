@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Approval Definition API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Approval Definition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "approvalDefinition.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/approvalDefinition.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update an approval definition for a specific entity that requires approval. The entity requiring approval must be within scope of an approval in Ashby that is marked as being managed by the API.\n\nIf the provided approval step definitions is an empty list, then approval will be skipped and the entity will proceed to the next stage.\n\n**Requires the [`approvalsWrite`](authentication#permissions-approvaldefinitionupdate) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

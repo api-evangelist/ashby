@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Department & Team API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Department & Team",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "department.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a department\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.archive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Archives a department\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentarchive) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.restore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restores a department\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentrestore) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.move",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves a department to another parent\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentmove) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "department.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/department.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a department\n\n**Requires the [`organizationWrite`](authentication#permissions-departmentupdate) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

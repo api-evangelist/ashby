@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "da90e563-001e-47d3-909f-419f8c987edb",
+      "name": "Workflow.info",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "61a6f19b-e4a7-47a4-a709-98cdb2cf342d",
+          "name": "workflow.info (Implemented by Partner)",
+          "request": {
+            "name": "workflow.info (Implemented by Partner)",
+            "description": {
+              "content": "Detailed information about the workflow",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workflow.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_workflow_template_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cc2180f1-6c8d-4d46-ac06-1fe6cf7c1320",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workflow.info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_workflow_template_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n    \\\"results\\\": [\\n        {\\n            \\\"external_workflow_template_id\\\": \\\"<id>\\\",\\n            \\\"name\\\": \\\"Name of the workflow\\\",\\n            \\\"description\\\": \\\"Description of the workflow\\\",\\n            \\\"fields\\\": [\\n                {\\n                    \\\"id\\\": \\\"id\\\",\\n                    \\\"title\\\": \\\"title\\\",\\n                    \\\"description\\\": \\\"description\\\",\\n                    \\\"type\\\": \\\"type\\\",\\n                    \\\"isRequired\\\": true,\\n                    \\\"selectableValues\\\": [\\n                        {\\n                            \\\"label\\\": \\\"label\\\",\\n                            \\\"value\\\": \\\"value\\\"\\n                        }\\n                    ]\\n                }\\n            ]\\n        }\\n    ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "95370f4f-8539-479a-8afc-e17a87ad51b0",
+    "name": "Ashby API Key Workflow.info API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

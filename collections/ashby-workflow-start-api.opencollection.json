@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Workflow.start API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflow.start",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "workflow.start (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/workflow.start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "workflow.start (Implemented by Partner)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Job API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Job",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "job.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new job\n\n**Requires the [`jobsWrite`](authentication#permissions-jobcreate) permission.**\n\nTo set values for custom fields on Jobs, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "job.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns details about a single job by id\n\n**Requires the [`jobsRead`](authentication#permissions-jobinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "job.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all open, closed, and archived jobs.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`jobsRead`](authentication#permissions-joblist) permission.**\n\nTo include draft jobs, `Draft` must be specified in the `status` param.\n"
+        },
+        {
+          "info": {
+            "name": "job.setStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.setStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the status on a job by id.\n\n**Requires the [`jobsWrite`](authentication#permissions-jobsetstatus) permission.**\n\nAll jobs are drafts when they're first created. There are a few validations around the stages a job can be transitioned to:\n- Drafts can be changed to Open or Archived\n- Open jobs can be changed to Closed\n- Closed jobs can be changed to Draft or Archived\n- Archived jobs can be changed to a Draft \n"
+        },
+        {
+          "info": {
+            "name": "job.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing job\n\n**Requires the [`jobsWrite`](authentication#permissions-jobupdate) permission.**\n\nTo set values for custom fields on Jobs, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "job.updateCompensation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.updateCompensation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing job's compensation tiers\n\n**Requires the [`jobsWrite`](authentication#permissions-jobupdate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "job.search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/job.search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for jobs by title\n\n**Requires the [`jobsRead`](authentication#permissions-jobsearch) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

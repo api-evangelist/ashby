@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key File API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "File",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "file.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/file.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the url of a file associated with a candidate\n\n**Requires the [`candidatesRead`](authentication#permissions-fileinfo) permission.**\n\n**Please note** that running this with Ashby-generated demo data in an Ashby demo account can result in errors. We would recommend manually creating a test candidate in Ashby when trying out this endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "file.createFileUploadHandle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/file.createFileUploadHandle",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a presigned upload URL that allows uploading a file directly to storage, bypassing the need to send file bytes through the API.\n\nBenefits over multipart upload:\n- **Reliability**: File bytes are uploaded directly to storage, avoiding timeouts and connection resets that can occur when proxying large files through the API.\n- **Compatibility**: Avoids issues with firewalls or proxies that block or scan multipart payloads containing binary content.\n- **Simplicity**: The follow-up call to, e."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

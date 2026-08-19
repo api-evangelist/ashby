@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Application Form API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Application Form",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "applicationForm.submit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/applicationForm.submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an application for a job posting.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationformsubmit) permission.**\n\nThe Content-Type of this request must be `multipart/form-data` or `application/json`.\n\nWhen using `application/json`, file fields should contain a handle string obtained from [`file.createFileUploadHandle`](https://developers.ashbyhq.com/reference/filecreatefileuploadhandle) with `fileUploadContext` set to `ApplicationForm`. This allows files to be uploade"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

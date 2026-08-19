@@ -1,0 +1,345 @@
+{
+  "item": [
+    {
+      "id": "9dfe16b5-01c3-4e1b-a552-cd424629daba",
+      "name": "Report",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0562aff-6fb2-4590-b9ff-5c289d49494f",
+          "name": "report.generate",
+          "request": {
+            "name": "report.generate",
+            "description": {
+              "content": "> ⚠️ Beta\n>\n> This endpoint is currently in beta and may change without notice.\n\nGenerates a new report or polls the status of an existing report generation.\n\n**Two-step process:**\n1. Call with only `reportId` to start generation → returns `requestId`\n2. Poll with both `reportId` and `requestId` every second until `status` is `complete` or `failed`\n\n**Example:**\n```\n// Step 1: Start generation\nPOST /report.generate\n{ \"reportId\": \"abc-123-def-456\" }\n→ { \"requestId\": \"rep_result:12345abc\", \"status\": \"in_progress\", \"reportData\": null }\n\n// Step 2: Poll for results\nPOST /report.generate\n{ \"reportId\": \"abc-123-def-456\", \"requestId\": \"rep_result:12345abc\" }\n→ { \"requestId\": \"rep_result:12345abc\", \"status\": \"complete\", \"reportData\": {...} }\n```\n\n**Rate Limiting (Per Organization):**\n- **Start generation requests** (without `requestId`): 15 requests per minute per organization\n- **Concurrent limit**: Maximum 3 report operations at once per organization (shared with [`report.synchronous`](ref:reportsynchronous))\n- **Polling requests** (with `requestId`): Bypass all limits\n\n**Usage Notes:**\n- If you receive a 429 error, your organization has hit its limit - wait and retry or use [`report.synchronous`](ref:reportsynchronous)\n- For synchronous retrieval of existing data, use [`report.synchronous`](ref:reportsynchronous)\n- Use this async endpoint for reports that may exceed 30 seconds\n\n**Requires the [`reportsRead`](authentication#permissions-reportgenerate) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "report.generate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reportId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The ID of the report\"\n  },\n  \"includeHeadersInData\": true,\n  \"requestId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad4251d6-1f4f-4ab9-8dd8-df986bd170b2",
+              "name": "Responses for the report.generate endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "report.generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportId\": \"f9e52a51-a075-4116-a7b8-484deba69004\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"results\": {\n    \"requestId\": \"rep_result:12345abc\",\n    \"status\": \"in_progress\",\n    \"reportData\": null,\n    \"failureReason\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fbf0420-75fe-4e0a-899e-9978b7b6846f",
+              "name": "Rate limit or concurrent limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "report.generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportId\": \"f9e52a51-a075-4116-a7b8-484deba69004\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"Rate limit exceeded\"\n  ],\n  \"errorInfo\": {\n    \"code\": \"rate_limit_exceeded\",\n    \"message\": \"Your organization has exceeded the rate limit of 15 report requests per minute. Try again in 60 seconds.\",\n    \"requestId\": \"rep_result:12345abc\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f5c8976-2529-48e4-8631-f61c366e47c2",
+          "name": "report.synchronous",
+          "request": {
+            "name": "report.synchronous",
+            "description": {
+              "content": "> ⚠️ Beta\n>\n> This endpoint is currently in beta and may change without notice.\n\nRetrieves report data synchronously.\n\n**Timeout:** 30 seconds. If a report is timing out, use the asynchronous [`report.generate`](ref:reportgenerate) instead.\n\n**Rate Limiting (Per Organization):**\n- **Request limit**: 15 requests per minute per organization\n- **Concurrent limit**: Maximum 3 report operations at once per organization (shared with [`report.generate`](ref:reportgenerate))\n- Rate limits are shared with [`report.generate`](ref:reportgenerate) for starting new generations\n\n**Usage Notes:**\n- If you receive a 429 error, your organization has hit its limit - wait briefly and retry\n- For long-running reports, use [`report.generate`](ref:reportgenerate) for async processing\n- Concurrent limit is released when the HTTP request completes\n\n**Requires the [`reportsRead`](authentication#permissions-reportsynchronous) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "report.synchronous"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reportId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The ID of the report\"\n  },\n  \"includeHeadersInData\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "abb0f98c-60ca-4674-948c-62d30732f886",
+              "name": "Responses for the report.synchronous endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "report.synchronous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportId\": \"f9e52a51-a075-4116-a7b8-484deba69004\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"results\": {\n    \"requestId\": \"rep_result:12345abc\",\n    \"status\": \"complete\",\n    \"reportData\": {\n      \"data\": [\n        [\n          \"Timeframe\",\n          \"Department\",\n          \"Hired\"\n        ],\n        [\n          \"Q1 2024\",\n          \"Engineering\",\n          45\n        ],\n        [\n          \"Q1 2024\",\n          \"Sales\",\n          32\n        ],\n        [\n          \"Q2 2024\",\n          \"Engineering\",\n          52\n        ]\n      ],\n      \"columnNames\": [\n        \"Timeframe\",\n        \"Department\",\n        \"Hired\"\n      ],\n      \"metadata\": {\n        \"updatedAt\": \"2024-01-15T10:30:00Z\",\n        \"title\": \"Quarterly Hiring Report\",\n        \"reportGeneratedAt\": \"2024-01-15T14:25:33.123Z\",\n        \"cacheExpiresAt\": \"2024-01-15T15:25:33.123Z\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "992e36ab-781e-44fd-976c-507d8e27cd74",
+              "name": "Rate limit or concurrent limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "report.synchronous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportId\": \"f9e52a51-a075-4116-a7b8-484deba69004\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    \"Rate limit exceeded\"\n  ],\n  \"errorInfo\": {\n    \"code\": \"rate_limit_exceeded\",\n    \"message\": \"Your organization has exceeded the rate limit of 15 report requests per minute. Try again in 60 seconds.\",\n    \"requestId\": \"rep_result:12345abc\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f1adddba-4f52-4603-8121-3d273b1bccbb",
+    "name": "Ashby API Key Report API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Job Board API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Job Board",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jobBoard.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobBoard.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all enabled job boards.\n\n**Requires the [`jobsRead`](authentication#permissions-jobboardlist) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

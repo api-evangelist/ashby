@@ -1,0 +1,310 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Candidate API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Candidate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "candidate.addEmailMessage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.addEmailMessage",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an email message to a candidate's profile.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddemailmessage) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.addProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.addProject",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the candidate to a project.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddproject) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.addTag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.addTag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a tag to a candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddtag) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.anonymize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.anonymize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Anonymizes a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateanonymize) permission.**\n\n**Note**: this action cannot be reversed and requires all of a candidate's applications to be in the archived or hired state.\n"
+        },
+        {
+          "info": {
+            "name": "candidate.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatecreate) permission.**\n\nTo set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "candidate.createNote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.createNote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a note on a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatecreatenote) permission.**\n\nFor notes submitted with a type of `text/html`, we support the elements listed below. Any unsupported elements will be stripped out of the note's content before posting.\n  - Bold `<b>`\n  - Italic `<i>`\n  - Underline `<u>`\n  - Links `<a>`\n  - Bulleted Lists - `<ul>`, `<li>`\n  - Ordered Lists - `<ol>`, `<li>`\n  - Code - `<code>`\n  - Code Block - `<pre>`\n"
+        },
+        {
+          "info": {
+            "name": "candidate.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets a single candidate by id.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidateinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all candidates in an organization.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.listClientInfo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.listClientInfo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all client info records for a candidate.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistclientinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.listFraudChecks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.listFraudChecks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetches a paginated list of fraud checks for a candidate, including the fraud signals detected in each check.\n\nEach fraud check contains a list of fraud signals with their category, name, description, and optional value.\n\n**Field Stability:**\n- `id` fields are stable and will not change.\n- `category`, `name`, `description`, and `value` fields on fraud signals are unstable and may change as signals are added, renamed, or recategorized.\n\nThis endpoint supports pagination only (not incremental sync"
+        },
+        {
+          "info": {
+            "name": "candidate.setFraudStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.setFraudStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint allows marking candidates as fraudulent, not fraudulent, or unsure after reviewing their fraud signals via `candidate.listFraudChecks`.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatesetfraudstatus) permission.**\n\n**Note:** This endpoint requires the Fraud Detection feature to be enabled for your organization.\n"
+        },
+        {
+          "info": {
+            "name": "candidate.listNotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.listNotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all notes on a candidate.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistnotes) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.listProjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.listProjects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all projects on a candidate.\n\nThis endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistprojects) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.removeProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.removeProject",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes the candidate from a project.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateremoveproject) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.removeTag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.removeTag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a tag from a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateremovetag) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "candidate.search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for candidates by email and / or name. \n\n**Requires the [`candidatesRead`](authentication#permissions-candidatesearch) permission.**\n\nResponses are limited to 100 results. Consider refining your search or using /candidate.list to paginate through all candidates, if you approach this limit. This API is for use cases where you intend to operate on a final small set of candidates, like building a candidate autocomplete.\n\nNote: When multiple search parameters are provided, the parameters are "
+        },
+        {
+          "info": {
+            "name": "candidate.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateupdate) permission.**\n\nTo set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "candidate.uploadFile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.uploadFile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a file to attach to the candidate's profile.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateuploadfile) permission.**\n\n**Recommended: Presigned upload handle**\nUse `file.createFileUploadHandle` with `fileUploadContext: \"CandidateFiles\"` to get a presigned URL. Upload the file directly to that URL, then call this endpoint with the returned `fileHandle`. This avoids sending file bytes through the API, improving upload reliability and reducing latency for large file"
+        },
+        {
+          "info": {
+            "name": "candidate.uploadResume",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/candidate.uploadResume",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a candidate's resume, parses it, and updates their information.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateuploadresume) permission.**\n\n**Recommended: Presigned upload handle**\nUse `file.createFileUploadHandle` with `fileUploadContext: \"CandidateResume\"` to get a presigned URL. Upload the file directly to that URL, then call this endpoint with the returned `resumeHandle`. This avoids sending file bytes through the API, improving upload reliability and reducin"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,342 @@
+{
+  "item": [
+    {
+      "id": "966cb2a1-376d-475d-a060-9e26eb116684",
+      "name": "Job Posting",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c0842a7e-6596-472a-adcf-2e700841ea7f",
+          "name": "jobPosting.info",
+          "request": {
+            "name": "jobPosting.info",
+            "description": {
+              "content": "Retrieve an individual job posting\n\n**Requires the [`jobsRead`](authentication#permissions-jobpostinginfo) permission.**\n\nResult fields:\n- `linkedData` - Object that can be used to populate \"rich results\" in search engines. [See more info here](https://developers.google.com/search/docs/data-types/job-posting).\n- `applicationFormDefinition` -\tSee the guide on [Creating a custom careers page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobPosting.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobPostingId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the job posting to return\"\n  },\n  \"jobBoardId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"If provided, returns the job posting data for the specified job board. If omitted, defaults to an external job board.\"\n  },\n  \"expand\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45419300-7a3a-4e80-b3d1-39b10465880d",
+              "name": "Responses for the jobPosting.info endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobPosting.info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobPostingId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the job posting to return\"\n  },\n  \"jobBoardId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"If provided, returns the job posting data for the specified job board. If omitted, defaults to an external job board.\"\n  },\n  \"expand\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n      \"description\": \"The job posting's id\"\n    },\n    \"title\": \"Posting Title\",\n    \"descriptionPlain\": \"This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.\\n\\n\\n\\nREQUIREMENTS\\n\\n - Experience writing good example job descriptions\\n\\n - Other exemplary skills\\n\\n - 3-5 years prior experience in this role\\n\\n - Motivation\\n\\n - Great english language skills\\n   \\n\\n\\nABOUT THE TEAM\\n\\n\\nExample org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.\\n\\n\",\n    \"descriptionHtml\": \"<p style=\\\"min-height:1.5em\\\">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style=\\\"min-height:1.5em\\\"><li><p style=\\\"min-height:1.5em\\\">Experience writing good example job descriptions</p></li><li><p style=\\\"min-height:1.5em\\\">Other exemplary skills</p></li><li><p style=\\\"min-height:1.5em\\\">3-5 years prior experience in this role</p></li><li><p style=\\\"min-height:1.5em\\\">Motivation</p></li><li><p style=\\\"min-height:1.5em\\\">Great english language skills<br /></p></li></ul><h1>About the Team</h1><p style=\\\"min-height:1.5em\\\"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p><p style=\\\"min-height:1.5em\\\"></p>\",\n    \"descriptionParts\": {\n      \"descriptionOpening\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"descriptionBody\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"descriptionClosing\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      }\n    },\n    \"departmentName\": \"People\",\n    \"teamName\": \"Recruiting Operations\",\n    \"jobId\": {\n      \"description\": \"The id of the job associated with the job posting\",\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"locationName\": \"Springfield\",\n    \"locationIds\": {\n      \"value\": \"reference #/webhooks/jobPostingUpdate/post/requestBody/content/application~1json/schema/properties/data/properties/jobPosting/properties/locationIds not found in the OpenAPI spec\"\n    },\n    \"linkedData\": {\n      \"@context\": \"https://schema.org/\",\n      \"@type\": \"JobPosting\",\n      \"title\": \"Posting Title\",\n      \"description\": \"<p style=\\\"min-height:1.5em\\\">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style=\\\"min-height:1.5em\\\"><li><p style=\\\"min-height:1.5em\\\">Experience writing good example job descriptions</p></li><li><p style=\\\"min-height:1.5em\\\">Other exemplary skills</p></li><li><p style=\\\"min-height:1.5em\\\">3-5 years prior experience in this role</p></li><li><p style=\\\"min-height:1.5em\\\">Motivation</p></li><li><p style=\\\"min-height:1.5em\\\">Great english language skills<br /></p></li></ul><h1>About the Team</h1><p style=\\\"min-height:1.5em\\\"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p><p style=\\\"min-height:1.5em\\\"></p>\",\n      \"identifier\": {\n        \"@type\": \"PropertyValue\",\n        \"name\": \"Posting Title\",\n        \"value\": \"4be0e8c0-9323-43a0-ab48-506789ab9c16\"\n      },\n      \"datePosted\": \"2022-07-22\",\n      \"hiringOrganization\": {\n        \"@type\": \"Organization\",\n        \"name\": \"Example org\",\n        \"sameAs\": \"34d7c77d-e9b2-5a09-a882-cb23a225f2ec.com\"\n      },\n      \"jobLocation\": {\n        \"@type\": \"Place\",\n        \"address\": {\n          \"@type\": \"PostalAddress\"\n        }\n      },\n      \"employmentType\": \"FULL_TIME\"\n    },\n    \"publishedDate\": \"2022-07-22\",\n    \"employmentType\": {\n      \"value\": \"reference #/webhooks/jobCreate/post/requestBody/content/application~1json/schema/properties/data/properties/job/properties/employmentType not found in the OpenAPI spec\"\n    },\n    \"applicationFormDefinition\": {\n      \"value\": \"reference #/paths/~1offer.start/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/formDefinition not found in the OpenAPI spec\",\n      \"description\": \"See the guide on [Creating a Custom Careers Page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page)\"\n    },\n    \"surveyFormDefinitions\": [\n      {\n        \"value\": \"reference #/paths/~1surveyFormDefinition.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1surveyFormDefinition.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"isListed\": true,\n    \"applyLink\": \"https://jobs.ashbyhq.com/6eec82ac-9713-512d-ac2e-405618935375/d5a6bc97-4259-4bc5-b3fe-6d3edfd538e3\",\n    \"compensation\": {\n      \"compensationTiers\": {\n        \"value\": \"reference #/paths/~1job.updateCompensation/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/allOf/0/properties/compensationTiers not found in the OpenAPI spec\"\n      },\n      \"shouldDisplayCompensationOnJobBoard\": true,\n      \"compensationTierSummary\": \"$72K – $270K • 1% – 2.25% • Offers Bonus • Multiple Ranges\",\n      \"summaryComponents\": [\n        {\n          \"summary\": \"€72K – €270K\",\n          \"compensationType\": \"Salary\",\n          \"interval\": \"1 YEAR\",\n          \"currencyCode\": \"EUR\",\n          \"minValue\": 72023.45,\n          \"maxValue\": 270450\n        },\n        {\n          \"summary\": \"1% – 2.25%\",\n          \"compensationType\": \"EquityPercentage\",\n          \"interval\": \"NONE\",\n          \"minValue\": 1,\n          \"maxValue\": 2.25\n        },\n        {\n          \"summary\": \"Offers Bonus\",\n          \"compensationType\": \"Bonus\",\n          \"interval\": \"1 YEAR\",\n          \"minValue\": null,\n          \"maxValue\": null\n        }\n      ]\n    },\n    \"updatedAt\": {\n      \"value\": \"reference #/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt not found in the OpenAPI spec\"\n    },\n    \"descriptionSocial\": \"Example org allows real-time collaboration on important example workflows. When you join as an example role, part of the example team, you will perform a critical role in various example workflows.\",\n    \"teamNameHierarchy\": [\n      \"People\",\n      \"Recruiting\",\n      \"Recruiting Operations\"\n    ],\n    \"applicationDeadline\": \"2024-08-12T20:00:00.000Z\",\n    \"address\": {\n      \"description\": \"The address of the job posting\",\n      \"value\": \"reference #/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/address not found in the OpenAPI spec\"\n    },\n    \"isRemote\": false,\n    \"workplaceType\": {\n      \"description\": \"The type of workplace.\",\n      \"value\": \"reference #/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/workplaceType/allOf/1 not found in the OpenAPI spec\"\n    },\n    \"suppressDescriptionOpening\": true,\n    \"suppressDescriptionClosing\": true,\n    \"externalLink\": \"https://jobs.ashbyhq.com/70b51cc4-7f34-5567-92bd-96f354f7439a/4be0e8c0-9323-43a0-ab48-506789ab9c16\",\n    \"applicationLimitCalloutHtml\": \"<div>\\n  <p>Please Note: we have set up limits for applications for this role. It is in the <strong>Product Limit </strong> group. The following limits apply to applications for all jobs within this group:</p>\\n  <ul>\\n    <li>\\n      <p>Candidates may not apply more than 1 time in any 60 day span for any job in the <strong>Product Limit </strong> Group.</p>\\n    </li>\\n  </ul>\\n</div>\\n\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02ea725f-f8a6-41de-aba7-7d8ff841f927",
+          "name": "jobPosting.list",
+          "request": {
+            "name": "jobPosting.list",
+            "description": {
+              "content": "Lists all published job postings\n\n**Requires the [`jobsRead`](authentication#permissions-jobpostinglist) permission.**\n\n**Important**: By default, this endpoint includes all listed and unlisted job postings. Unlisted job postings should not be displayed publicly. \nIf you are using the API to publicly expose job postings, set the `listedOnly` parameter to `true` when calling this API so that you only fetch listed job postings that can be displayed publicly.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobPosting.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location\": \"<string>\",\n  \"department\": \"<string>\",\n  \"listedOnly\": false,\n  \"jobBoardId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"If provided, only returns the job postings on the specified job board.  If omitted, this API will return the job postings on the primary external job board.\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a17066e-713a-4ac2-8564-33e38cde8afb",
+              "name": "Responses for the jobPosting.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobPosting.list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"location\": \"<string>\",\n  \"department\": \"<string>\",\n  \"listedOnly\": false,\n  \"jobBoardId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"If provided, only returns the job postings on the specified job board.  If omitted, this API will return the job postings on the primary external job board.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"value\": \"reference #/webhooks/jobPostingUpdate/post/requestBody/content/application~1json/schema/properties/data/properties/jobPosting not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/webhooks/jobPostingUpdate/post/requestBody/content/application~1json/schema/properties/data/properties/jobPosting not found in the OpenAPI spec\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "686cdb7d-7446-49c0-97f9-8e5049462b00",
+          "name": "jobPosting.update",
+          "request": {
+            "name": "jobPosting.update",
+            "description": {
+              "content": "Updates an existing job posting.\n\n**Requires the [`jobsWrite`](authentication#permissions-jobpostingupdate) permission.**\n\n**Note on updating the description**: When job description openings and closings are not suppressed, the `descriptionHtml` field returned in `jobPosting.info` may contain content that is not modifiable through the API. Only the content of the `descriptionParts.descriptionBody` field of the `jobPosting.info` endpoint is modifiable through this call. To completely customize the description, set both suppressDescriptionOpening and suppressDescriptionClosing to true.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobPosting.update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobPostingId\": {\n    \"description\": \"The unique id of the job posting to update.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"title\": \"<string>\",\n  \"workplaceType\": {\n    \"description\": \"The type of workplace. LocationHierarchies cannot be labeled with a workplaceType.\",\n    \"value\": \"reference #/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/workplaceType/allOf/1 not found in the OpenAPI spec\"\n  },\n  \"suppressDescriptionOpening\": \"<boolean>\",\n  \"suppressDescriptionClosing\": \"<boolean>\",\n  \"description\": {\n    \"type\": \"<string>\",\n    \"content\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a8378f8-f20c-4702-bbcb-a3d4c98c45b9",
+              "name": "Responses for the jobPosting.update endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobPosting.update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobPostingId\": {\n    \"description\": \"The unique id of the job posting to update.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"title\": \"Software Engineer\",\n  \"workplaceType\": {\n    \"description\": \"The type of workplace. LocationHierarchies cannot be labeled with a workplaceType.\",\n    \"value\": \"reference #/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/workplaceType/allOf/1 not found in the OpenAPI spec\"\n  },\n  \"suppressDescriptionOpening\": true,\n  \"suppressDescriptionClosing\": true,\n  \"description\": {\n    \"type\": \"<string>\",\n    \"content\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n      \"description\": \"The job posting's id\"\n    },\n    \"title\": \"Posting Title\",\n    \"descriptionPlain\": \"This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.\\n\\n\\n\\nREQUIREMENTS\\n\\n - Experience writing good example job descriptions\\n\\n - Other exemplary skills\\n\\n - 3-5 years prior experience in this role\\n\\n - Motivation\\n\\n - Great english language skills\\n   \\n\\n\\nABOUT THE TEAM\\n\\n\\nExample org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.\\n\\n\",\n    \"descriptionHtml\": \"<p style=\\\"min-height:1.5em\\\">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style=\\\"min-height:1.5em\\\"><li><p style=\\\"min-height:1.5em\\\">Experience writing good example job descriptions</p></li><li><p style=\\\"min-height:1.5em\\\">Other exemplary skills</p></li><li><p style=\\\"min-height:1.5em\\\">3-5 years prior experience in this role</p></li><li><p style=\\\"min-height:1.5em\\\">Motivation</p></li><li><p style=\\\"min-height:1.5em\\\">Great english language skills<br /></p></li></ul><h1>About the Team</h1><p style=\\\"min-height:1.5em\\\"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p><p style=\\\"min-height:1.5em\\\"></p>\",\n    \"descriptionParts\": {\n      \"descriptionOpening\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"descriptionBody\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      },\n      \"descriptionClosing\": {\n        \"value\": \"<Error: Could not resolve allOf schema\"\n      }\n    },\n    \"departmentName\": \"People\",\n    \"teamName\": \"Recruiting Operations\",\n    \"jobId\": {\n      \"description\": \"The id of the job associated with the job posting\",\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"locationName\": \"Springfield\",\n    \"locationIds\": {\n      \"value\": \"reference #/webhooks/jobPostingUpdate/post/requestBody/content/application~1json/schema/properties/data/properties/jobPosting/properties/locationIds not found in the OpenAPI spec\"\n    },\n    \"linkedData\": {\n      \"@context\": \"https://schema.org/\",\n      \"@type\": \"JobPosting\",\n      \"title\": \"Posting Title\",\n      \"description\": \"<p style=\\\"min-height:1.5em\\\">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style=\\\"min-height:1.5em\\\"><li><p style=\\\"min-height:1.5em\\\">Experience writing good example job descriptions</p></li><li><p style=\\\"min-height:1.5em\\\">Other exemplary skills</p></li><li><p style=\\\"min-height:1.5em\\\">3-5 years prior experience in this role</p></li><li><p style=\\\"min-height:1.5em\\\">Motivation</p></li><li><p style=\\\"min-height:1.5em\\\">Great english language skills<br /></p></li></ul><h1>About the Team</h1><p style=\\\"min-height:1.5em\\\"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p><p style=\\\"min-height:1.5em\\\"></p>\",\n      \"identifier\": {\n        \"@type\": \"PropertyValue\",\n        \"name\": \"Posting Title\",\n        \"value\": \"4be0e8c0-9323-43a0-ab48-506789ab9c16\"\n      },\n      \"datePosted\": \"2022-07-22\",\n      \"hiringOrganization\": {\n        \"@type\": \"Organization\",\n        \"name\": \"Example org\",\n        \"sameAs\": \"34d7c77d-e9b2-5a09-a882-cb23a225f2ec.com\"\n      },\n      \"jobLocation\": {\n        \"@type\": \"Place\",\n        \"address\": {\n          \"@type\": \"PostalAddress\"\n        }\n      },\n      \"employmentType\": \"FULL_TIME\"\n    },\n    \"publishedDate\": \"2022-07-22\",\n    \"employmentType\": {\n      \"value\": \"reference #/webhooks/jobCreate/post/requestBody/content/application~1json/schema/properties/data/properties/job/properties/employmentType not found in the OpenAPI spec\"\n    },\n    \"applicationFormDefinition\": {\n      \"value\": \"reference #/paths/~1offer.start/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/formDefinition not found in the OpenAPI spec\",\n      \"description\": \"See the guide on [Creating a Custom Careers Page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page)\"\n    },\n    \"surveyFormDefinitions\": [\n      {\n        \"value\": \"reference #/paths/~1surveyFormDefinition.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1surveyFormDefinition.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"isListed\": true,\n    \"applyLink\": \"https://jobs.ashbyhq.com/6eec82ac-9713-512d-ac2e-405618935375/d5a6bc97-4259-4bc5-b3fe-6d3edfd538e3\",\n    \"compensation\": {\n      \"compensationTiers\": {\n        \"value\": \"reference #/paths/~1job.updateCompensation/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/allOf/0/properties/compensationTiers not found in the OpenAPI spec\"\n      },\n      \"shouldDisplayCompensationOnJobBoard\": true,\n      \"compensationTierSummary\": \"$72K – $270K • 1% – 2.25% • Offers Bonus • Multiple Ranges\",\n      \"summaryComponents\": [\n        {\n          \"summary\": \"€72K – €270K\",\n          \"compensationType\": \"Salary\",\n          \"interval\": \"1 YEAR\",\n          \"currencyCode\": \"EUR\",\n          \"minValue\": 72023.45,\n          \"maxValue\": 270450\n        },\n        {\n          \"summary\": \"1% – 2.25%\",\n          \"compensationType\": \"EquityPercentage\",\n          \"interval\": \"NONE\",\n          \"minValue\": 1,\n          \"maxValue\": 2.25\n        },\n        {\n          \"summary\": \"Offers Bonus\",\n          \"compensationType\": \"Bonus\",\n          \"interval\": \"1 YEAR\",\n          \"minValue\": null,\n          \"maxValue\": null\n        }\n      ]\n    },\n    \"updatedAt\": {\n      \"value\": \"reference #/paths/~1candidate.createNote/post/requestBody/content/application~1json/schema/properties/createdAt not found in the OpenAPI spec\"\n    },\n    \"descriptionSocial\": \"Example org allows real-time collaboration on important example workflows. When you join as an example role, part of the example team, you will perform a critical role in various example workflows.\",\n    \"teamNameHierarchy\": [\n      \"People\",\n      \"Recruiting\",\n      \"Recruiting Operations\"\n    ],\n    \"applicationDeadline\": \"2024-08-12T20:00:00.000Z\",\n    \"address\": {\n      \"description\": \"The address of the job posting\",\n      \"value\": \"reference #/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/address not found in the OpenAPI spec\"\n    },\n    \"isRemote\": false,\n    \"workplaceType\": {\n      \"description\": \"The type of workplace.\",\n      \"value\": \"reference #/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/workplaceType/allOf/1 not found in the OpenAPI spec\"\n    },\n    \"suppressDescriptionOpening\": true,\n    \"suppressDescriptionClosing\": true,\n    \"externalLink\": \"https://jobs.ashbyhq.com/70b51cc4-7f34-5567-92bd-96f354f7439a/4be0e8c0-9323-43a0-ab48-506789ab9c16\",\n    \"applicationLimitCalloutHtml\": \"<div>\\n  <p>Please Note: we have set up limits for applications for this role. It is in the <strong>Product Limit </strong> group. The following limits apply to applications for all jobs within this group:</p>\\n  <ul>\\n    <li>\\n      <p>Candidates may not apply more than 1 time in any 60 day span for any job in the <strong>Product Limit </strong> Group.</p>\\n    </li>\\n  </ul>\\n</div>\\n\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dca675cd-224d-42ef-a538-dd25cdba39dc",
+    "name": "Ashby API Key Job Posting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Custom Field API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Field",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "customField.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new custom field\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-customfieldcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "customField.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get information about a custom field\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "customField.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all custom fields.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldlist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "customField.setValue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.setValue",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the value of a custom field for a given object.\n\n**Note:** When updating multiple custom fields on the same object, use \n[`customField.setValues`](#operation/customFieldSetValues) instead to avoid \nrace conditions.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalue) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n  - Date - An ISO Date strin"
+        },
+        {
+          "info": {
+            "name": "customField.setValues",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.setValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the values of multiple custom fields for a given object in a single call.\nThis is the recommended approach when updating multiple fields on the same object\nto avoid race conditions that can occur with concurrent `customField.setValue` calls.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalues) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n"
+        },
+        {
+          "info": {
+            "name": "customField.updateSelectableValues",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/customField.updateSelectableValues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the selectable values for a custom field\n\nThis endpoint merges the provided selectable values with the existing values for a custom field.\n\n**Merge behavior:**\n- **New values** (values not present in the existing values) are added to the field\n- **Existing values** (matching by `value` field) have their `label` updated and `isArchived` status set from the request\n- **Omitted values** (existing values not included in the request) are marked as archived\n- Metadata such as substitution token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

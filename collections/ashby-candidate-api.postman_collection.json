@@ -1,0 +1,1968 @@
+{
+  "item": [
+    {
+      "id": "e747a94b-5441-482e-8733-9d2e04c6d3f5",
+      "name": "Candidate",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d9b42a1-3c9c-4003-969d-81e0ee8a4c6b",
+          "name": "candidate.addEmailMessage",
+          "request": {
+            "name": "candidate.addEmailMessage",
+            "description": {
+              "content": "Adds an email message to a candidate's profile.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddemailmessage) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.addEmailMessage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The candidate to attach this email to.\"\n  },\n  \"emailProviderEmailId\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"userId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The Ashby user ID to associate with this email. Defaults to the API key user.\"\n  },\n  \"sentAt\": \"<dateTime>\",\n  \"cc\": \"<string>\",\n  \"messageUrl\": \"<uri>\",\n  \"messageIdHeader\": \"<string>\",\n  \"threadId\": \"<string>\",\n  \"isPrivate\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21867f4a-540b-435b-ad58-caf776924527",
+              "name": "Responses for the candidate.addEmailMessage endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.addEmailMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The candidate to attach this email to.\"\n  },\n  \"emailProviderEmailId\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"userId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The Ashby user ID to associate with this email. Defaults to the API key user.\"\n  },\n  \"sentAt\": \"2022-07-21T17:32:28Z\",\n  \"cc\": \"<string>\",\n  \"messageUrl\": \"https://example.com/messages/1234567890\",\n  \"messageIdHeader\": \"<CADkMx=Abc123@examplemail.com>\",\n  \"threadId\": \"<string>\",\n  \"isPrivate\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"candidateId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"emailProviderEmailId\": \"string\",\n    \"subject\": \"string\",\n    \"from\": \"string\",\n    \"to\": \"string\",\n    \"sentAt\": \"2022-07-21T17:32:28Z\",\n    \"isPrivate\": false,\n    \"userIsSender\": false,\n    \"threadId\": \"string\",\n    \"body\": \"string\",\n    \"cc\": \"string\",\n    \"messageUrl\": \"https://RHijfdmYifLOfPibCXWEsKnNzhoK.rfpbgK0FERp5rd8nmLdtN1Xxv\",\n    \"messageIdHeader\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36079b12-38ae-477f-8170-98b045259e82",
+          "name": "candidate.addProject",
+          "request": {
+            "name": "candidate.addProject",
+            "description": {
+              "content": "Adds the candidate to a project.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddproject) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.addProject"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the candidate\"\n  },\n  \"projectId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the project\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a8f5b76-8ad8-4e6c-8a6b-274a79485e8b",
+              "name": "Responses from the candidate.addProject endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.addProject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": \"f9e52a51-a075-4116-a7b8-484deba69004\",\n  \"projectId\": \"bcffca12-5b09-4a76-acf2-00a8e267b222\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a59603d-3d13-44f3-afd3-354a4c946c38",
+          "name": "candidate.addTag",
+          "request": {
+            "name": "candidate.addTag",
+            "description": {
+              "content": "Adds a tag to a candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateaddtag) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.addTag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": \"<string>\",\n  \"tagId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0ec5236-b5ff-4af2-a6d3-304c14c416ac",
+              "name": "Responses for the candidate.addTag endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.addTag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": \"5b591aed-88e3-4395-b9c6-7d529f93354a\",\n  \"tagId\": \"38430ede-5bd2-41fc-b474-87591cb98cbc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57679906-6cf9-44f9-bc1d-e8585a8699e6",
+          "name": "candidate.anonymize",
+          "request": {
+            "name": "candidate.anonymize",
+            "description": {
+              "content": "Anonymizes a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateanonymize) permission.**\n\n**Note**: this action cannot be reversed and requires all of a candidate's applications to be in the archived or hired state.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.anonymize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the candidate to anonymize.\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f906bec4-9011-4dd0-88a7-e3cd81616d7c",
+              "name": "Responses for the candidate.anonymize endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the candidate to anonymize.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49d1065b-07b8-4d4f-92dc-054adeb37277",
+          "name": "candidate.create",
+          "request": {
+            "name": "candidate.create",
+            "description": {
+              "content": "Creates a new candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatecreate) permission.**\n\nTo set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"linkedInUrl\": \"<string>\",\n  \"githubUrl\": \"<string>\",\n  \"website\": \"<string>\",\n  \"alternateEmailAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sourceId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The source to set on the candidate being created.\"\n  },\n  \"creditedToUserId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the user the candidate will be credited to.\"\n  },\n  \"location\": {\n    \"city\": \"<string>\",\n    \"region\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a59ba7e1-6a92-4b84-9b9a-da63a8114ccf",
+              "name": "Responses for the candidate.create endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Adam Hart\",\n  \"email\": \"test@ashbyhq.com\",\n  \"phoneNumber\": \"555-555-5555\",\n  \"linkedInUrl\": \"https://linkedin.com/in/user\",\n  \"githubUrl\": \"https://github.com/user\",\n  \"website\": \"https://twitter.com/user\",\n  \"alternateEmailAddresses\": [\n    \"test.email@ashbyhq.com\"\n  ],\n  \"sourceId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The source to set on the candidate being created.\"\n  },\n  \"creditedToUserId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the user the candidate will be credited to.\"\n  },\n  \"location\": {\n    \"city\": \"San Francisco\",\n    \"region\": \"California\",\n    \"country\": \"United States\"\n  },\n  \"createdAt\": \"2022-08-12T20:29:56.964Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3136d1c6-313d-4dc5-be2e-70dc1fb37c70",
+          "name": "candidate.createNote",
+          "request": {
+            "name": "candidate.createNote",
+            "description": {
+              "content": "Creates a note on a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatecreatenote) permission.**\n\nFor notes submitted with a type of `text/html`, we support the elements listed below. Any unsupported elements will be stripped out of the note's content before posting.\n  - Bold `<b>`\n  - Italic `<i>`\n  - Underline `<u>`\n  - Links `<a>`\n  - Bulleted Lists - `<ul>`, `<li>`\n  - Ordered Lists - `<ol>`, `<li>`\n  - Code - `<code>`\n  - Code Block - `<pre>`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.createNote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"note\": \"<string>\",\n  \"sendNotifications\": false,\n  \"isPrivate\": false,\n  \"createdAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d293da3a-62b5-4750-8b02-8c005eefd065",
+              "name": "Responses for the candidate.createNote endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.createNote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"note\": \"Strong candidate, very interested in the company\",\n  \"sendNotifications\": false,\n  \"isPrivate\": false,\n  \"createdAt\": \"2022-08-12T20:29:56.964Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"isPrivate\": false,\n    \"author\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"firstName\": \"Joey\",\n      \"lastName\": \"Joe\",\n      \"email\": \"test@ashbyhq.com\"\n    },\n    \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "769ed370-7db3-46b2-9b0b-59b89e0c6542",
+          "name": "candidate.info",
+          "request": {
+            "name": "candidate.info",
+            "description": {
+              "content": "Gets a single candidate by id.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidateinfo) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39e47f48-7bf2-42d8-8746-9438b9ea0479",
+              "name": "Responses from the candidate.info endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f44239be-984e-4e26-81df-daac5ce6d84f",
+          "name": "candidate.list",
+          "request": {
+            "name": "candidate.list",
+            "description": {
+              "content": "Lists all candidates in an organization.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelist) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f11075dc-01b4-4ebc-9e5d-b4bbaa4d4abb",
+              "name": "Responses for the candidate.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"name\": \"Adam Hart\",\n      \"emailAddresses\": [\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        }\n      ],\n      \"phoneNumbers\": [\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        }\n      ],\n      \"socialLinks\": [\n        {\n          \"url\": \"https://linkedin.com/in/user\",\n          \"type\": \"LinkedIn\"\n        },\n        {\n          \"url\": \"https://linkedin.com/in/user\",\n          \"type\": \"LinkedIn\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        }\n      ],\n      \"applicationIds\": [\n        {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        }\n      ],\n      \"fileHandles\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"handle\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"handle\": \"string\"\n        }\n      ],\n      \"profileUrl\": \"string\",\n      \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n      \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n      \"primaryEmailAddress\": {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      \"primaryPhoneNumber\": {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      \"position\": \"Software Engineer\",\n      \"company\": \"Auction.com\",\n      \"school\": \"Princeton University\",\n      \"resumeFileHandle\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      \"customFields\": [\n        {\n          \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        }\n      ],\n      \"source\": {\n        \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n      },\n      \"creditedToUser\": {\n        \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      \"timezone\": \"string\",\n      \"location\": {\n        \"id\": {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        \"locationSummary\": \"United States, California, San Francisco\",\n        \"locationComponents\": [\n          {\n            \"type\": \"Country\",\n            \"name\": \"United States\"\n          },\n          {\n            \"type\": \"Region\",\n            \"name\": \"California\"\n          },\n          {\n            \"type\": \"City\",\n            \"name\": \"San Francisco\"\n          }\n        ]\n      },\n      \"fraudStatus\": \"Fraudulent\"\n    },\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"name\": \"Adam Hart\",\n      \"emailAddresses\": [\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        }\n      ],\n      \"phoneNumbers\": [\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        }\n      ],\n      \"socialLinks\": [\n        {\n          \"url\": \"https://linkedin.com/in/user\",\n          \"type\": \"LinkedIn\"\n        },\n        {\n          \"url\": \"https://linkedin.com/in/user\",\n          \"type\": \"LinkedIn\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        }\n      ],\n      \"applicationIds\": [\n        {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        }\n      ],\n      \"fileHandles\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"handle\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"handle\": \"string\"\n        }\n      ],\n      \"profileUrl\": \"string\",\n      \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n      \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n      \"primaryEmailAddress\": {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      \"primaryPhoneNumber\": {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      \"position\": \"Software Engineer\",\n      \"company\": \"Auction.com\",\n      \"school\": \"Princeton University\",\n      \"resumeFileHandle\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      \"customFields\": [\n        {\n          \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        }\n      ],\n      \"source\": {\n        \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n      },\n      \"creditedToUser\": {\n        \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      \"timezone\": \"string\",\n      \"location\": {\n        \"id\": {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        \"locationSummary\": \"United States, California, San Francisco\",\n        \"locationComponents\": [\n          {\n            \"type\": \"Country\",\n            \"name\": \"United States\"\n          },\n          {\n            \"type\": \"Region\",\n            \"name\": \"California\"\n          },\n          {\n            \"type\": \"City\",\n            \"name\": \"San Francisco\"\n          }\n        ]\n      },\n      \"fraudStatus\": \"Fraudulent\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc46c921-2b56-44d7-ad31-6d7e386b7191",
+          "name": "candidate.listClientInfo",
+          "request": {
+            "name": "candidate.listClientInfo",
+            "description": {
+              "content": "Lists all client info records for a candidate.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistclientinfo) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.listClientInfo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the candidate to fetch client info for\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f4ecad4-b22b-4f8f-abcd-de85ddfb3673",
+              "name": "Responses for the candidate.listClientInfo endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.listClientInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": \"f9e52a51-a075-4116-a7b8-484deba69004\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"7d31034c-790b-4265-bf63-d65396d59d0b\",\n      \"ipAddress\": \"86.234.23.243\",\n      \"relatedEntityType\": \"application\",\n      \"relatedEntityId\": \"57133f77-9362-4397-b395-03bda1f72303\",\n      \"candidateId\": \"9d22854f-c929-4b86-9f42-cb71cc0e4fc7\",\n      \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\",\n      \"createdAt\": \"2022-08-12T20:29:56.964Z\"\n    },\n    {\n      \"id\": \"7d31034c-790b-4265-bf63-d65396d59d0b\",\n      \"ipAddress\": \"86.234.23.243\",\n      \"relatedEntityType\": \"application\",\n      \"relatedEntityId\": \"57133f77-9362-4397-b395-03bda1f72303\",\n      \"candidateId\": \"9d22854f-c929-4b86-9f42-cb71cc0e4fc7\",\n      \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\",\n      \"createdAt\": \"2022-08-12T20:29:56.964Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4279258f-b02f-442f-930b-1736b99794ca",
+          "name": "candidate.listFraudChecks",
+          "request": {
+            "name": "candidate.listFraudChecks",
+            "description": {
+              "content": "Fetches a paginated list of fraud checks for a candidate, including the fraud signals detected in each check.\n\nEach fraud check contains a list of fraud signals with their category, name, description, and optional value.\n\n**Field Stability:**\n- `id` fields are stable and will not change.\n- `category`, `name`, `description`, and `value` fields on fraud signals are unstable and may change as signals are added, renamed, or recategorized.\n\nThis endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistfraudchecks) permission.**\n\n**Note:** This endpoint requires Fraud Detection feature to be enabled for your organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.listFraudChecks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"description\": \"The id of the candidate to fetch fraud checks for.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f7a7d10-d23c-4efe-b9a8-f3d0b6b1201e",
+              "name": "Responses for the candidate.listFraudChecks endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.listFraudChecks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": {\n    \"description\": \"The id of the candidate to fetch fraud checks for.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n        \"description\": \"The unique identifier of this fraud check.\"\n      },\n      \"candidateId\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n        \"description\": \"The id of the candidate this fraud check belongs to.\"\n      },\n      \"applicationId\": \"f5b1e9a2-3c4d-4e5f-9a0b-1c2d3e4f5a6b\",\n      \"createdAt\": \"2025-01-15T10:30:00.000Z\",\n      \"fraudSignals\": [\n        {\n          \"id\": {\n            \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n            \"description\": \"The unique identifier of this fraud signal instance.\"\n          },\n          \"category\": \"Spoofing\",\n          \"name\": \"VPN Connection Detected\",\n          \"description\": \"Applicant is hiding their real location using a VPN.\",\n          \"value\": \"Copenhagen, DK\"\n        },\n        {\n          \"id\": {\n            \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n            \"description\": \"The unique identifier of this fraud signal instance.\"\n          },\n          \"category\": \"Spoofing\",\n          \"name\": \"VPN Connection Detected\",\n          \"description\": \"Applicant is hiding their real location using a VPN.\",\n          \"value\": \"Copenhagen, DK\"\n        }\n      ]\n    },\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n        \"description\": \"The unique identifier of this fraud check.\"\n      },\n      \"candidateId\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n        \"description\": \"The id of the candidate this fraud check belongs to.\"\n      },\n      \"applicationId\": \"f5b1e9a2-3c4d-4e5f-9a0b-1c2d3e4f5a6b\",\n      \"createdAt\": \"2025-01-15T10:30:00.000Z\",\n      \"fraudSignals\": [\n        {\n          \"id\": {\n            \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n            \"description\": \"The unique identifier of this fraud signal instance.\"\n          },\n          \"category\": \"Spoofing\",\n          \"name\": \"VPN Connection Detected\",\n          \"description\": \"Applicant is hiding their real location using a VPN.\",\n          \"value\": \"Copenhagen, DK\"\n        },\n        {\n          \"id\": {\n            \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n            \"description\": \"The unique identifier of this fraud signal instance.\"\n          },\n          \"category\": \"Spoofing\",\n          \"name\": \"VPN Connection Detected\",\n          \"description\": \"Applicant is hiding their real location using a VPN.\",\n          \"value\": \"Copenhagen, DK\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f726209e-b9c1-4bab-841b-c518bc59c333",
+          "name": "candidate.setFraudStatus",
+          "request": {
+            "name": "candidate.setFraudStatus",
+            "description": {
+              "content": "This endpoint allows marking candidates as fraudulent, not fraudulent, or unsure after reviewing their fraud signals via `candidate.listFraudChecks`.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatesetfraudstatus) permission.**\n\n**Note:** This endpoint requires the Fraud Detection feature to be enabled for your organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.setFraudStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"description\": \"The id of the candidate to set the fraud status for.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"fraudStatus\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ffad7c8-658c-4bb3-a9b0-90c51e7033b8",
+              "name": "Responses for the candidate.setFraudStatus endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.setFraudStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": {\n    \"description\": \"The id of the candidate to set the fraud status for.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"fraudStatus\": \"Fraudulent\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dda0be07-18f7-429e-baf8-67521f5aa1b7",
+          "name": "candidate.listNotes",
+          "request": {
+            "name": "candidate.listNotes",
+            "description": {
+              "content": "Lists all notes on a candidate.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistnotes) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.listNotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the candidate to fetch notes for\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c2a13974-84b1-4998-9d92-fa31e6d18928",
+              "name": "Responses for the candidate.listNotes endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.listNotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": \"f9e52a51-a075-4116-a7b8-484deba69004\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n      \"isPrivate\": false,\n      \"author\": {\n        \"id\": {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        \"firstName\": \"Joey\",\n        \"lastName\": \"Joe\",\n        \"email\": \"test@ashbyhq.com\"\n      },\n      \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"\n    },\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n      \"isPrivate\": false,\n      \"author\": {\n        \"id\": {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        \"firstName\": \"Joey\",\n        \"lastName\": \"Joe\",\n        \"email\": \"test@ashbyhq.com\"\n      },\n      \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68e53c1e-6212-4d46-aa30-7b026431918a",
+          "name": "candidate.listProjects",
+          "request": {
+            "name": "candidate.listProjects",
+            "description": {
+              "content": "Lists all projects on a candidate.\n\nThis endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-candidatelistprojects) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.listProjects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the candidate to fetch projects for\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8014a382-9b9b-45e9-9d5e-76f52f27e0e2",
+              "name": "Responses for the candidate.listProjects endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.listProjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": \"f9e52a51-a075-4116-a7b8-484deba69004\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"value\": \"reference #/paths/~1project.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/paths/~1project.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c54a286-1a09-46b1-97ec-91bcc9ff49d6",
+          "name": "candidate.removeProject",
+          "request": {
+            "name": "candidate.removeProject",
+            "description": {
+              "content": "Removes the candidate from a project.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateremoveproject) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.removeProject"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the candidate\"\n  },\n  \"projectId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the project\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7974b83-a3e6-4d93-8f33-592c38cd3d13",
+              "name": "Responses from the candidate.removeProject endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.removeProject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": \"f9e52a51-a075-4116-a7b8-484deba69004\",\n  \"projectId\": \"bcffca12-5b09-4a76-acf2-00a8e267b222\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c16e54f-24d2-4da5-af4c-ee95313be80f",
+          "name": "candidate.removeTag",
+          "request": {
+            "name": "candidate.removeTag",
+            "description": {
+              "content": "Removes a tag from a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateremovetag) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.removeTag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the candidate to remove the tag from.\"\n  },\n  \"tagId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the tag to remove from the candidate.\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4b7ccdc-a572-4039-ab44-2cb0f1e970df",
+              "name": "Responses for the candidate.removeTag endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.removeTag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": \"5b591aed-88e3-4395-b9c6-7d529f93354a\",\n  \"tagId\": \"38430ede-5bd2-41fc-b474-87591cb98cbc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fef67bf0-ddd4-43ba-8d76-88e8c7f72b00",
+          "name": "candidate.search",
+          "request": {
+            "name": "candidate.search",
+            "description": {
+              "content": "Search for candidates by email and / or name. \n\n**Requires the [`candidatesRead`](authentication#permissions-candidatesearch) permission.**\n\nResponses are limited to 100 results. Consider refining your search or using /candidate.list to paginate through all candidates, if you approach this limit. This API is for use cases where you intend to operate on a final small set of candidates, like building a candidate autocomplete.\n\nNote: When multiple search parameters are provided, the parameters are combined with the `AND` operator.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1420ee8e-ed87-462a-8c05-d47368c153a0",
+              "name": "Responses for the candidate.search endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test@ashbyhq.com\",\n  \"name\": \"Adam Hart\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"name\": \"Adam Hart\",\n      \"emailAddresses\": [\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        }\n      ],\n      \"phoneNumbers\": [\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        }\n      ],\n      \"socialLinks\": [\n        {\n          \"url\": \"https://linkedin.com/in/user\",\n          \"type\": \"LinkedIn\"\n        },\n        {\n          \"url\": \"https://linkedin.com/in/user\",\n          \"type\": \"LinkedIn\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        }\n      ],\n      \"applicationIds\": [\n        {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        }\n      ],\n      \"fileHandles\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"handle\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"handle\": \"string\"\n        }\n      ],\n      \"profileUrl\": \"string\",\n      \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n      \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n      \"primaryEmailAddress\": {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      \"primaryPhoneNumber\": {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      \"position\": \"Software Engineer\",\n      \"company\": \"Auction.com\",\n      \"school\": \"Princeton University\",\n      \"resumeFileHandle\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      \"customFields\": [\n        {\n          \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        }\n      ],\n      \"source\": {\n        \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n      },\n      \"creditedToUser\": {\n        \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      \"timezone\": \"string\",\n      \"location\": {\n        \"id\": {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        \"locationSummary\": \"United States, California, San Francisco\",\n        \"locationComponents\": [\n          {\n            \"type\": \"Country\",\n            \"name\": \"United States\"\n          },\n          {\n            \"type\": \"Region\",\n            \"name\": \"California\"\n          },\n          {\n            \"type\": \"City\",\n            \"name\": \"San Francisco\"\n          }\n        ]\n      },\n      \"fraudStatus\": \"Fraudulent\"\n    },\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"name\": \"Adam Hart\",\n      \"emailAddresses\": [\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        }\n      ],\n      \"phoneNumbers\": [\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n        }\n      ],\n      \"socialLinks\": [\n        {\n          \"url\": \"https://linkedin.com/in/user\",\n          \"type\": \"LinkedIn\"\n        },\n        {\n          \"url\": \"https://linkedin.com/in/user\",\n          \"type\": \"LinkedIn\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        }\n      ],\n      \"applicationIds\": [\n        {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        }\n      ],\n      \"fileHandles\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"handle\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"handle\": \"string\"\n        }\n      ],\n      \"profileUrl\": \"string\",\n      \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n      \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n      \"primaryEmailAddress\": {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      \"primaryPhoneNumber\": {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      \"position\": \"Software Engineer\",\n      \"company\": \"Auction.com\",\n      \"school\": \"Princeton University\",\n      \"resumeFileHandle\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      \"customFields\": [\n        {\n          \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n        }\n      ],\n      \"source\": {\n        \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n      },\n      \"creditedToUser\": {\n        \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      \"timezone\": \"string\",\n      \"location\": {\n        \"id\": {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n        },\n        \"locationSummary\": \"United States, California, San Francisco\",\n        \"locationComponents\": [\n          {\n            \"type\": \"Country\",\n            \"name\": \"United States\"\n          },\n          {\n            \"type\": \"Region\",\n            \"name\": \"California\"\n          },\n          {\n            \"type\": \"City\",\n            \"name\": \"San Francisco\"\n          }\n        ]\n      },\n      \"fraudStatus\": \"Fraudulent\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebc5f1da-96bb-4d93-a714-dc069d57aa4c",
+          "name": "candidate.update",
+          "request": {
+            "name": "candidate.update",
+            "description": {
+              "content": "Updates an existing candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateupdate) permission.**\n\nTo set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The unique id of the candidate to update.\"\n  },\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"linkedInUrl\": \"<string>\",\n  \"githubUrl\": \"<string>\",\n  \"websiteUrl\": \"<string>\",\n  \"alternateEmail\": \"<string>\",\n  \"socialLinks\": [\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ],\n  \"sourceId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of source for this candidate.\"\n  },\n  \"creditedToUserId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the user the candidate will be credited to.\"\n  },\n  \"location\": {\n    \"$ref\": {}\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"sendNotifications\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "527cc5dc-0812-4c2e-8f8b-a518466aaca2",
+              "name": "Responses for the candidate.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"candidateId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The unique id of the candidate to update.\"\n  },\n  \"name\": \"Adam Hart\",\n  \"email\": \"test@ashbyhq.com\",\n  \"phoneNumber\": \"555-555-5555\",\n  \"linkedInUrl\": \"https://linkedin.com/in/user\",\n  \"githubUrl\": \"https://github.com/user\",\n  \"websiteUrl\": \"https://twitter.com/user\",\n  \"alternateEmail\": \"test.email@ashbyhq.com\",\n  \"socialLinks\": [\n    {\n      \"url\": \"https://linkedin.com/in/user\",\n      \"type\": \"LinkedIn\"\n    },\n    {\n      \"url\": \"https://linkedin.com/in/user\",\n      \"type\": \"LinkedIn\"\n    }\n  ],\n  \"sourceId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of source for this candidate.\"\n  },\n  \"creditedToUserId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the user the candidate will be credited to.\"\n  },\n  \"location\": {\n    \"$ref\": {}\n  },\n  \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n  \"sendNotifications\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5696e8dd-f558-4dd6-aed3-580dead862f2",
+          "name": "candidate.uploadFile",
+          "request": {
+            "name": "candidate.uploadFile",
+            "description": {
+              "content": "Uploads a file to attach to the candidate's profile.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateuploadfile) permission.**\n\n**Recommended: Presigned upload handle**\nUse `file.createFileUploadHandle` with `fileUploadContext: \"CandidateFiles\"` to get a presigned URL. Upload the file directly to that URL, then call this endpoint with the returned `fileHandle`. This avoids sending file bytes through the API, improving upload reliability and reducing latency for large files.\n\n**Deprecated: Multipart upload**\nSend the file as `multipart/form-data` with the file in a `file` field. This mode is deprecated and may be removed in a future API version.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.uploadFile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "candidateId",
+                  "value": "{\"value\":\"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\"description\":\"The id of the candidate\"}",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Deprecated: Use `file.createFileUploadHandle` with `fileHandle` instead. The file to upload to the candidate's profile."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "372f00b2-485c-4610-b387-0b43fa9a4135",
+              "name": "Responses from the candidate.uploadFile endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.uploadFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "candidateId",
+                      "value": "f9e52a51-a075-4116-a7b8-484deba69004",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Deprecated: Use `file.createFileUploadHandle` with `fileHandle` instead. The file to upload to the candidate's profile.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f807670-b9b8-4be8-a0e0-d1db5458b40a",
+          "name": "candidate.uploadResume",
+          "request": {
+            "name": "candidate.uploadResume",
+            "description": {
+              "content": "Uploads a candidate's resume, parses it, and updates their information.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidateuploadresume) permission.**\n\n**Recommended: Presigned upload handle**\nUse `file.createFileUploadHandle` with `fileUploadContext: \"CandidateResume\"` to get a presigned URL. Upload the file directly to that URL, then call this endpoint with the returned `resumeHandle`. This avoids sending file bytes through the API, improving upload reliability and reducing latency for large files.\n\n**Deprecated: Multipart upload**\nSend the resume as `multipart/form-data` with the file in a `resume` field. This mode is deprecated and may be removed in a future API version.\n\nNote: Existing candidate data always takes precedence over data found by parsing the resume. Resume data only populates candidate data, if it's data that was missing in the candidate model.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "candidate.uploadResume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "candidateId",
+                  "value": "{\"value\":\"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\"description\":\"The id of the candidate\"}",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "resume",
+                  "type": "file",
+                  "description": "(Required) Deprecated: Use `file.createFileUploadHandle` with `resumeHandle` instead. The resume to upload to the candidate's profile."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e3565ff8-fb9f-446b-aab3-9ffa7fa5b5da",
+              "name": "Responses from the candidate.uploadResume endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "candidate.uploadResume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "candidateId",
+                      "value": "f9e52a51-a075-4116-a7b8-484deba69004",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Deprecated: Use `file.createFileUploadHandle` with `resumeHandle` instead. The resume to upload to the candidate's profile.",
+                        "type": "text/plain"
+                      },
+                      "key": "resume",
+                      "value": "JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50I",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Adam Hart\",\n    \"emailAddresses\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"phoneNumbers\": [\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n      }\n    ],\n    \"socialLinks\": [\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      },\n      {\n        \"url\": \"https://linkedin.com/in/user\",\n        \"type\": \"LinkedIn\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1candidateTag.create/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"applicationIds\": [\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      }\n    ],\n    \"fileHandles\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"handle\": \"string\"\n      }\n    ],\n    \"profileUrl\": \"string\",\n    \"createdAt\": \"2022-08-12T20:29:56.964Z\",\n    \"updatedAt\": \"2022-08-12T20:29:56.964Z\",\n    \"primaryEmailAddress\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"primaryPhoneNumber\": {\n      \"value\": \"reference #/webhooks/pushToHRIS/post/requestBody/content/application~1json/schema/properties/data/properties/application/properties/candidate/properties/primaryEmailAddress not found in the OpenAPI spec\"\n    },\n    \"position\": \"Software Engineer\",\n    \"company\": \"Auction.com\",\n    \"school\": \"Princeton University\",\n    \"resumeFileHandle\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"handle\": \"string\"\n    },\n    \"customFields\": [\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/paths/~1customField.setValue/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n      }\n    ],\n    \"source\": {\n      \"value\": \"reference #/paths/~1source.list/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/items not found in the OpenAPI spec\"\n    },\n    \"creditedToUser\": {\n      \"value\": \"reference #/paths/~1user.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\"\n    },\n    \"timezone\": \"string\",\n    \"location\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"locationSummary\": \"United States, California, San Francisco\",\n      \"locationComponents\": [\n        {\n          \"type\": \"Country\",\n          \"name\": \"United States\"\n        },\n        {\n          \"type\": \"Region\",\n          \"name\": \"California\"\n        },\n        {\n          \"type\": \"City\",\n          \"name\": \"San Francisco\"\n        }\n      ]\n    },\n    \"fraudStatus\": \"Fraudulent\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7985751d-9bf0-4d28-91bc-28462c2ba59f",
+    "name": "Ashby API Key Candidate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

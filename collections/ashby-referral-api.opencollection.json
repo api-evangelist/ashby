@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Referral API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Referral",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "referral.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/referral.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a referral\n\n**Requires the [`candidatesWrite`](authentication#permissions-referralcreate) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,738 @@
+{
+  "item": [
+    {
+      "id": "ee227fae-7679-484a-a62f-8cfd67202b69",
+      "name": "Job",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "33982591-e963-46d8-a4b2-6d17a15076d0",
+          "name": "job.create",
+          "request": {
+            "name": "job.create",
+            "description": {
+              "content": "Creates a new job\n\n**Requires the [`jobsWrite`](authentication#permissions-jobcreate) permission.**\n\nTo set values for custom fields on Jobs, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job.create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"teamId\": {\n    \"description\": \"The id of the department or team associated with the job\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"locationId\": {\n    \"description\": \"The id of the location of the job\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"defaultInterviewPlanId\": {\n    \"description\": \"The id of the default interview plan for this job. \\nA job cannot be opened without a default interview plan.\\n\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"jobTemplateId\": {\n    \"description\": \"The id of the job template to use for this job.\\nOnly active job templates can be used to create a job.\\n\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"brandId\": {\n    \"description\": \"The id of the brand to use for this job\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1bf385ec-828f-44ce-9c10-793f54a27205",
+              "name": "Responses for the job.create endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Software Engineer\",\n  \"teamId\": {\n    \"description\": \"The id of the department or team associated with the job\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"locationId\": {\n    \"description\": \"The id of the location of the job\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"defaultInterviewPlanId\": {\n    \"description\": \"The id of the default interview plan for this job. \\nA job cannot be opened without a default interview plan.\\n\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"jobTemplateId\": {\n    \"description\": \"The id of the job template to use for this job.\\nOnly active job templates can be used to create a job.\\n\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"brandId\": {\n    \"description\": \"The id of the brand to use for this job\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"value\": \"reference #/webhooks/jobCreate/post/requestBody/content/application~1json/schema/properties/data/properties/job not found in the OpenAPI spec\"\n  },\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbb882aa-22fd-4edf-90a4-034d7d8128ef",
+          "name": "job.info",
+          "request": {
+            "name": "job.info",
+            "description": {
+              "content": "Returns details about a single job by id\n\n**Requires the [`jobsRead`](authentication#permissions-jobinfo) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": {\n    \"description\": \"The id of the job to fetch\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"includeUnpublishedJobPostingsIds\": \"<boolean>\",\n  \"expand\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "912a83a9-9cd4-418a-ab79-064bd69edc8a",
+              "name": "Responses for the job.info endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job.info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": {\n    \"description\": \"The id of the job to fetch\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"includeUnpublishedJobPostingsIds\": \"<boolean>\",\n  \"expand\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"location\": {\n      \"value\": \"reference #/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\",\n      \"description\": \"The location will only be included if the `location` expand parameter is included when the request is made.\"\n    },\n    \"openings\": [\n      {\n        \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening not found in the OpenAPI spec\"\n      },\n      {\n        \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening not found in the OpenAPI spec\"\n      }\n    ],\n    \"compensation\": {\n      \"compensationTiers\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"components\": [\n            {\n              \"summary\": \"€72K – €100K\",\n              \"compensationType\": \"Salary\",\n              \"interval\": \"1 YEAR\",\n              \"currencyCode\": \"EUR\",\n              \"minValue\": 72023.45,\n              \"maxValue\": 100000\n            },\n            {\n              \"summary\": \"1% – 2.511%\",\n              \"compensationType\": \"EquityPercentage\",\n              \"interval\": \"NONE\",\n              \"minValue\": 1,\n              \"maxValue\": 2.511\n            },\n            {\n              \"summary\": \"Offers Bonus\",\n              \"compensationType\": \"Bonus\",\n              \"interval\": \"1 YEAR\",\n              \"minValue\": null,\n              \"maxValue\": null\n            }\n          ],\n          \"tierSummary\": \"€72K – €100K • 1% – 2.511% • Offers Bonus\",\n          \"title\": \"Zone A\",\n          \"additionalInformation\": \"Signing bonus available\"\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"components\": [\n            {\n              \"summary\": \"€72K – €100K\",\n              \"compensationType\": \"Salary\",\n              \"interval\": \"1 YEAR\",\n              \"currencyCode\": \"EUR\",\n              \"minValue\": 72023.45,\n              \"maxValue\": 100000\n            },\n            {\n              \"summary\": \"1% – 2.511%\",\n              \"compensationType\": \"EquityPercentage\",\n              \"interval\": \"NONE\",\n              \"minValue\": 1,\n              \"maxValue\": 2.511\n            },\n            {\n              \"summary\": \"Offers Bonus\",\n              \"compensationType\": \"Bonus\",\n              \"interval\": \"1 YEAR\",\n              \"minValue\": null,\n              \"maxValue\": null\n            }\n          ],\n          \"tierSummary\": \"€72K – €100K • 1% – 2.511% • Offers Bonus\",\n          \"title\": \"Zone A\",\n          \"additionalInformation\": \"Signing bonus available\"\n        }\n      ]\n    }\n  },\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "001878c0-1cce-47e2-894a-d655836609bf",
+          "name": "job.list",
+          "request": {
+            "name": "job.list",
+            "description": {
+              "content": "List all open, closed, and archived jobs.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`jobsRead`](authentication#permissions-joblist) permission.**\n\nTo include draft jobs, `Draft` must be specified in the `status` param.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"openedAfter\": \"<long>\",\n  \"openedBefore\": \"<long>\",\n  \"closedAfter\": \"<long>\",\n  \"closedBefore\": \"<long>\",\n  \"includeUnpublishedJobPostingsIds\": \"<boolean>\",\n  \"expand\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12d6fc54-6f9e-4e0b-bb80-f6a62ba88390",
+              "name": "Responses for the jobPosting.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job.list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": [\n    \"Closed\",\n    \"Closed\"\n  ],\n  \"openedAfter\": \"<long>\",\n  \"openedBefore\": \"<long>\",\n  \"closedAfter\": \"<long>\",\n  \"closedBefore\": \"<long>\",\n  \"includeUnpublishedJobPostingsIds\": \"<boolean>\",\n  \"expand\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"location\": {\n        \"value\": \"reference #/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\",\n        \"description\": \"The location will only be included if the `location` expand parameter is included when the request is made.\"\n      },\n      \"openings\": [\n        {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening not found in the OpenAPI spec\"\n        }\n      ],\n      \"compensation\": {\n        \"compensationTiers\": [\n          {\n            \"title\": \"Zone A\",\n            \"components\": [\n              {\n                \"summary\": \"€72K – €100K\",\n                \"compensationType\": \"Salary\",\n                \"interval\": \"1 YEAR\",\n                \"currencyCode\": \"EUR\",\n                \"minValue\": 72023.45,\n                \"maxValue\": 100000\n              },\n              {\n                \"summary\": \"1% – 1.4%\",\n                \"compensationType\": \"EquityPercentage\",\n                \"interval\": \"NONE\",\n                \"minValue\": 1,\n                \"maxValue\": 1.4\n              }\n            ],\n            \"tierSummary\": \"€72K – €100K • 1% – 1.4%\"\n          },\n          {\n            \"title\": \"Zone B\",\n            \"additionalInformation\": \"Commuter Benefits\",\n            \"components\": [\n              {\n                \"summary\": \"€72K – €100K\",\n                \"compensationType\": \"Salary\",\n                \"interval\": \"1 YEAR\",\n                \"currencyCode\": \"EUR\",\n                \"minValue\": 95010.12,\n                \"maxValue\": 270450\n              },\n              {\n                \"summary\": \"1.8% – 2.511%\",\n                \"compensationType\": \"EquityPercentage\",\n                \"interval\": \"NONE\",\n                \"minValue\": 1.8,\n                \"maxValue\": 2.511\n              },\n              {\n                \"summary\": \"Offers Bonus\",\n                \"compensationType\": \"Bonus\",\n                \"interval\": \"1 YEAR\",\n                \"minValue\": null,\n                \"maxValue\": null\n              }\n            ],\n            \"tierSummary\": \"€95K – €270K • 1.8% – 2.511% • Offers Bonus • Commuter Benefits\"\n          }\n        ]\n      }\n    },\n    {\n      \"location\": {\n        \"value\": \"reference #/paths/~1location.info/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results not found in the OpenAPI spec\",\n        \"description\": \"The location will only be included if the `location` expand parameter is included when the request is made.\"\n      },\n      \"openings\": [\n        {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening not found in the OpenAPI spec\"\n        },\n        {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening not found in the OpenAPI spec\"\n        }\n      ],\n      \"compensation\": {\n        \"compensationTiers\": [\n          {\n            \"title\": \"Zone A\",\n            \"components\": [\n              {\n                \"summary\": \"€72K – €100K\",\n                \"compensationType\": \"Salary\",\n                \"interval\": \"1 YEAR\",\n                \"currencyCode\": \"EUR\",\n                \"minValue\": 72023.45,\n                \"maxValue\": 100000\n              },\n              {\n                \"summary\": \"1% – 1.4%\",\n                \"compensationType\": \"EquityPercentage\",\n                \"interval\": \"NONE\",\n                \"minValue\": 1,\n                \"maxValue\": 1.4\n              }\n            ],\n            \"tierSummary\": \"€72K – €100K • 1% – 1.4%\"\n          },\n          {\n            \"title\": \"Zone B\",\n            \"additionalInformation\": \"Commuter Benefits\",\n            \"components\": [\n              {\n                \"summary\": \"€72K – €100K\",\n                \"compensationType\": \"Salary\",\n                \"interval\": \"1 YEAR\",\n                \"currencyCode\": \"EUR\",\n                \"minValue\": 95010.12,\n                \"maxValue\": 270450\n              },\n              {\n                \"summary\": \"1.8% – 2.511%\",\n                \"compensationType\": \"EquityPercentage\",\n                \"interval\": \"NONE\",\n                \"minValue\": 1.8,\n                \"maxValue\": 2.511\n              },\n              {\n                \"summary\": \"Offers Bonus\",\n                \"compensationType\": \"Bonus\",\n                \"interval\": \"1 YEAR\",\n                \"minValue\": null,\n                \"maxValue\": null\n              }\n            ],\n            \"tierSummary\": \"€95K – €270K • 1.8% – 2.511% • Offers Bonus • Commuter Benefits\"\n          }\n        ]\n      }\n    }\n  ],\n  \"syncToken\": {\n    \"value\": \"reference #/paths/~1opening.list/post/requestBody/content/application~1json/schema/properties/syncToken not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ccc87ec-4f4e-4a06-b5cd-9074aef99b88",
+          "name": "job.setStatus",
+          "request": {
+            "name": "job.setStatus",
+            "description": {
+              "content": "Sets the status on a job by id.\n\n**Requires the [`jobsWrite`](authentication#permissions-jobsetstatus) permission.**\n\nAll jobs are drafts when they're first created. There are a few validations around the stages a job can be transitioned to:\n- Drafts can be changed to Open or Archived\n- Open jobs can be changed to Closed\n- Closed jobs can be changed to Draft or Archived\n- Archived jobs can be changed to a Draft \n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job.setStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobId\": {\n    \"description\": \"The unique id of the job to set the status of.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ec35b07-e8f5-4147-bfe7-2328b4bd4fc1",
+              "name": "Responses for the job.setStatus endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job.setStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobId\": {\n    \"description\": \"The unique id of the job to set the status of.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"value\": \"reference #/webhooks/jobCreate/post/requestBody/content/application~1json/schema/properties/data/properties/job not found in the OpenAPI spec\"\n  },\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1308987-d5b8-4679-8c28-7d8c3c1e3adf",
+          "name": "job.update",
+          "request": {
+            "name": "job.update",
+            "description": {
+              "content": "Updates an existing job\n\n**Requires the [`jobsWrite`](authentication#permissions-jobupdate) permission.**\n\nTo set values for custom fields on Jobs, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job.update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobId\": {\n    \"description\": \"The unique id of the job to update.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"title\": \"<string>\",\n  \"teamId\": {\n    \"description\": \"The new team to associate with the job.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"locationId\": {\n    \"description\": \"The new location to associate with the job.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"defaultInterviewPlanId\": {\n    \"description\": \"The new default interview plan to associate with the job.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"customRequisitionId\": {\n    \"description\": \"The new default custom requisition id for the job.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0437dfe0-0c83-48d4-8623-5c0a3042a69f",
+              "name": "Responses for the job.update endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job.update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobId\": {\n    \"description\": \"The unique id of the job to update.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"title\": \"Software Engineer\",\n  \"teamId\": {\n    \"description\": \"The new team to associate with the job.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"locationId\": {\n    \"description\": \"The new location to associate with the job.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"defaultInterviewPlanId\": {\n    \"description\": \"The new default interview plan to associate with the job.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"customRequisitionId\": {\n    \"description\": \"The new default custom requisition id for the job.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"value\": \"reference #/webhooks/jobCreate/post/requestBody/content/application~1json/schema/properties/data/properties/job not found in the OpenAPI spec\"\n  },\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b694a09b-ef79-4806-819a-1d9ed1c5e789",
+          "name": "job.updateCompensation",
+          "request": {
+            "name": "job.updateCompensation",
+            "description": {
+              "content": "Updates an existing job's compensation tiers\n\n**Requires the [`jobsWrite`](authentication#permissions-jobupdate) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job.updateCompensation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobId\": {\n    \"description\": \"The unique id of the job to update.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"compensationTiers\": [\n    {\n      \"components\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"title\": \"<string>\",\n      \"additionalInformation\": \"<string>\"\n    },\n    {\n      \"components\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"title\": \"<string>\",\n      \"additionalInformation\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad5f60a7-f61a-4f51-81d4-6eacf349edf0",
+              "name": "Responses for the job.update endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job.updateCompensation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobId\": {\n    \"description\": \"The unique id of the job to update.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"compensationTiers\": [\n    {\n      \"components\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"title\": \"Zone A\",\n      \"additionalInformation\": \"Signing bonus available\"\n    },\n    {\n      \"components\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"title\": \"Zone A\",\n      \"additionalInformation\": \"Signing bonus available\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"compensationTiers\": [\n      {\n        \"id\": {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n          \"description\": \"The compensation tier's unique id\"\n        },\n        \"components\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tierSummary\": \"€72K – €100K • 1% – 2.511% • Offers Bonus\",\n        \"title\": \"Zone A\",\n        \"additionalInformation\": \"Signing bonus available\"\n      },\n      {\n        \"id\": {\n          \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n          \"description\": \"The compensation tier's unique id\"\n        },\n        \"components\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tierSummary\": \"€72K – €100K • 1% – 2.511% • Offers Bonus\",\n        \"title\": \"Zone A\",\n        \"additionalInformation\": \"Signing bonus available\"\n      }\n    ]\n  },\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3062b54c-0541-42de-8a0e-4a6f791a48c3",
+          "name": "job.search",
+          "request": {
+            "name": "job.search",
+            "description": {
+              "content": "Searches for jobs by title\n\n**Requires the [`jobsRead`](authentication#permissions-jobsearch) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job.search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f64a2d6-0828-46ab-bc4c-15a6d391b69c",
+              "name": "Responses for the job.search endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job.search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"value\": \"reference #/webhooks/jobCreate/post/requestBody/content/application~1json/schema/properties/data/properties/job not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/webhooks/jobCreate/post/requestBody/content/application~1json/schema/properties/data/properties/job not found in the OpenAPI spec\"\n    }\n  ],\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "443f6736-1457-4c64-af7a-9c8b9d4f87af",
+    "name": "Ashby API Key Job API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

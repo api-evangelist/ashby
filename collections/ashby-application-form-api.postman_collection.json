@@ -1,0 +1,225 @@
+{
+  "item": [
+    {
+      "id": "a49793f0-2dcc-4ff3-a2ac-a5ea04a5cddb",
+      "name": "Application Form",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "336c8e0d-7a94-4559-954b-46c66d2c6627",
+          "name": "applicationForm.submit",
+          "request": {
+            "name": "applicationForm.submit",
+            "description": {
+              "content": "Submit an application for a job posting.\n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationformsubmit) permission.**\n\nThe Content-Type of this request must be `multipart/form-data` or `application/json`.\n\nWhen using `application/json`, file fields should contain a handle string obtained from [`file.createFileUploadHandle`](https://developers.ashbyhq.com/reference/filecreatefileuploadhandle) with `fileUploadContext` set to `ApplicationForm`. This allows files to be uploaded directly to storage, bypassing the need to send file bytes through the API.\n\nWhen using `multipart/form-data`, file fields should reference a file part included in the multipart request body (existing behavior).\n\n**Important:** Please ensure that you check the response's `success` field and display any validation errors to candidates if it is `false`. Not doing so will result in applications not being recorded, without any notification to the candidate prompting them to resubmit. For testing purposes, you can simulate a validation failure by submitting the email address `testing-fail-validation@example.com`.\n\n**Note: The requests generated from this documentation will not work for this endpoint.**\n\nThe values accepted for each field depend on the type of field that's being filled out:\n- `Boolean` - A boolean value\n- `Date` - A date string in the format YYYY-MM-DD\n- `Email` - A valid email address\n- `Number` - An integer\n- `RichText` - We do not support submitting rich text documents via the API but we do support submitting plain text values for these fields. Plain text values must be submitted in the format `{ type: \"PlainText\", value: \"A plain text string\" }`\n- `Score` - An integer between 1 and 4 submitted in the format `{ score: 4 }`\n- `Phone`, `String` A string\n- `ValueSelect` - A string that matches the value of one of the ValueSelect field's selectable options\n- `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field's selectable options\n- `Location` - An object with the following properties: `{ country: \"USA\", city: \"San Francisco\", region: \"California\" }`. You may provide any combination of these properties and we will attempt to geocode the location. For best results, provide all three properties.\n- `EducationHistory` - [Early Access] An array of objects with the following properties: `{ schoolName: \"University of California, Berkeley\", degree: \"Bachelor of Science\", major: \"Computer Science\", startDate: \"2020-09-01\", endDate: \"2024-05-15\", isCurrent: true }`. Only `schoolName` is required. We will attempt to match the school name to a known school in our database. If `isCurrent` is true, `endDate` must not be provided.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applicationForm.submit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "jobPostingId",
+                  "value": "{\"value\":\"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\"description\":\"The id of the job posting to submit an application for\"}",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "applicationForm",
+                  "value": "{\"value\":\"reference #/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm not found in the OpenAPI spec\"}",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "utmData",
+                  "value": "{\"utm_source\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_term\":\"<string>\",\"utm_content\":\"<string>\"}",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "tagIds",
+                  "value": "[{\"value\":\"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"},{\"value\":\"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"}]",
+                  "type": "text",
+                  "description": "The ids of the tags to apply to the candidate"
+                },
+                {
+                  "key": "allowSubmissionForUnpublishedJobPosting",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "Defaults to true. If you are running a custom built careers page that is statically generated, you may want to set this to true to allow applications to be submitted in the time a job is unpublished and your careers page is refreshed. If set to false, applications submitted for unpublished job postings will return a `job_posting_not_published` error."
+                },
+                {
+                  "key": "<file key>",
+                  "type": "file",
+                  "description": "Any file referenced in the `applicationForm`. The name of this field must exactly match the `value` on the `fieldSubmission` that references this file."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "09585f32-73e2-4f83-a0b2-84f6fd400cb5",
+              "name": "Responses from the applicationFeedback.submit endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applicationForm.submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "jobPostingId",
+                      "value": "{\"value\":\"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\"description\":\"The id of the job posting to submit an application for\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "applicationForm",
+                      "value": "{\"value\":\"reference #/paths/~1offer.create/post/requestBody/content/application~1json/schema/properties/offerForm not found in the OpenAPI spec\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "utmData",
+                      "value": "{\"utm_source\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_term\":\"<string>\",\"utm_content\":\"<string>\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The ids of the tags to apply to the candidate",
+                        "type": "text/plain"
+                      },
+                      "key": "tagIds",
+                      "value": "[{\"value\":\"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"},{\"value\":\"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Defaults to true. If you are running a custom built careers page that is statically generated, you may want to set this to true to allow applications to be submitted in the time a job is unpublished and your careers page is refreshed. If set to false, applications submitted for unpublished job postings will return a `job_posting_not_published` error.",
+                        "type": "text/plain"
+                      },
+                      "key": "allowSubmissionForUnpublishedJobPosting",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Any file referenced in the `applicationForm`. The name of this field must exactly match the `value` on the `fieldSubmission` that references this file.",
+                        "type": "text/plain"
+                      },
+                      "key": "<file key>",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"submittedFormInstance\": {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"formDefinition\": {\n        \"value\": \"reference #/paths/~1offer.start/post/responses/200/content/application~1json/schema/oneOf/0/allOf/1/properties/results/properties/formDefinition not found in the OpenAPI spec\"\n      },\n      \"submittedValues\": {\n        \"_systemfield_name\": \"Gob Bluth\"\n      }\n    },\n    \"formMessages\": {\n      \"blocked\": true,\n      \"blockMessageForCandidateHtml\": \"<div><p>Please Note: we have set up limits for applications for this role. Candidates may not apply more than 2 times in any 60 day span for any job in the Application Limit Group.</p></div>\\n\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "768a2a4e-a273-437a-9a94-76194680e5d2",
+    "name": "Ashby API Key Application Form API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

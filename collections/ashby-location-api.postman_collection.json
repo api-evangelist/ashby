@@ -1,0 +1,1035 @@
+{
+  "item": [
+    {
+      "id": "92e4c473-db54-4d22-9e61-2583ea8bdec4",
+      "name": "Location",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7fc0bbee-a5b7-42d5-b520-da93f668c009",
+          "name": "location.archive",
+          "request": {
+            "name": "location.archive",
+            "description": {
+              "content": "Archives a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationarchive) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66c913cc-583f-47b7-a744-25282749ea86",
+              "name": "Responses for the location.archive endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e51fa743-85a1-4cf2-8a11-cee008045ac8",
+          "name": "location.create",
+          "request": {
+            "name": "location.create",
+            "description": {
+              "content": "Creates a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationcreate) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"address\": {\n    \"postalAddress\": {\n      \"addressCountry\": \"<string>\",\n      \"addressRegion\": \"<string>\",\n      \"addressLocality\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"streetAddress\": \"<string>\"\n    }\n  },\n  \"parentLocationId\": \"<string>\",\n  \"isRemote\": false,\n  \"workplaceType\": \"<string>\",\n  \"externalName\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10736d0b-e3dc-4d02-8a27-4fbcc962a45e",
+              "name": "Responses for the location.create endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"address\": {\n    \"postalAddress\": {\n      \"addressCountry\": \"<string>\",\n      \"addressRegion\": \"<string>\",\n      \"addressLocality\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"streetAddress\": \"<string>\"\n    }\n  },\n  \"parentLocationId\": \"<string>\",\n  \"isRemote\": false,\n  \"workplaceType\": \"<string>\",\n  \"externalName\": \"<string>\",\n  \"extraData\": {\n    \"partner_external_object_id\": \"12345\",\n    \"partner_additional_data\": \"f763ba0e4\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c1f246c-2a27-4b1f-a14a-56aa53d84cf0",
+          "name": "location.info",
+          "request": {
+            "name": "location.info",
+            "description": {
+              "content": "Gets details for a single location by id.\n\n**Requires the [`organizationRead`](authentication#permissions-locationinfo) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the location to fetch\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "08837f33-0de1-456e-9302-226525f854d5",
+              "name": "Responses for the location.info endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the location to fetch\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d7b9e18-3568-46bf-bda6-150fa0914164",
+          "name": "location.list",
+          "request": {
+            "name": "location.list",
+            "description": {
+              "content": "List all locations. Regions are not returned.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`organizationRead`](authentication#permissions-locationlist) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"includeArchived\": {\n    \"value\": \"reference #/paths/~1source.list/post/requestBody/content/application~1json/schema/properties/includeArchived not found in the OpenAPI spec\"\n  },\n  \"includeLocationHierarchy\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1eae5824-3056-4bf6-8e62-99a0e14b0be6",
+              "name": "Responses for the location.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"includeArchived\": {\n    \"value\": \"reference #/paths/~1source.list/post/requestBody/content/application~1json/schema/properties/includeArchived not found in the OpenAPI spec\"\n  },\n  \"includeLocationHierarchy\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"name\": \"Bay Area Office\",\n      \"isArchived\": {\n        \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n      },\n      \"externalName\": \"San Francisco Office\",\n      \"address\": {\n        \"postalAddress\": {\n          \"addressCountry\": \"United States\",\n          \"addressRegion\": \"California\",\n          \"addressLocality\": \"San Francisco\",\n          \"postalCode\": \"94108\",\n          \"streetAddress\": \"49 Geary St Suite 411\"\n        }\n      },\n      \"isRemote\": false,\n      \"workplaceType\": \"Hybrid\",\n      \"parentLocationId\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"type\": \"Location\",\n      \"extraData\": {\n        \"partner_external_object_id\": \"12345\",\n        \"partner_additional_data\": \"f763ba0e4\"\n      }\n    },\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"name\": \"Bay Area Office\",\n      \"isArchived\": {\n        \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n      },\n      \"externalName\": \"San Francisco Office\",\n      \"address\": {\n        \"postalAddress\": {\n          \"addressCountry\": \"United States\",\n          \"addressRegion\": \"California\",\n          \"addressLocality\": \"San Francisco\",\n          \"postalCode\": \"94108\",\n          \"streetAddress\": \"49 Geary St Suite 411\"\n        }\n      },\n      \"isRemote\": false,\n      \"workplaceType\": \"Hybrid\",\n      \"parentLocationId\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"type\": \"Location\",\n      \"extraData\": {\n        \"partner_external_object_id\": \"12345\",\n        \"partner_additional_data\": \"f763ba0e4\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9e8ffd6-aaf6-48cb-98a5-a1c9a3b524b5",
+          "name": "location.move",
+          "request": {
+            "name": "location.move",
+            "description": {
+              "content": "Moves a location in location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationmove) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.move"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<string>\",\n  \"parentLocationHierarchyId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ab034c2c-c243-4bad-8f14-a51c40e05ef1",
+              "name": "Responses for the location.move endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"<string>\",\n  \"parentLocationHierarchyId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "458b850f-f603-4cb1-ab47-52b9e0c65b5d",
+          "name": "location.restore",
+          "request": {
+            "name": "location.restore",
+            "description": {
+              "content": "Restores an archived location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationrestore) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be28e125-6310-4585-8995-fb13400b369d",
+              "name": "Responses for the location.restore endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17407e97-3593-4b9e-8929-5674407223b8",
+          "name": "location.updateAddress",
+          "request": {
+            "name": "location.updateAddress",
+            "description": {
+              "content": "Update an address of a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateaddress) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.updateAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<string>\",\n  \"address\": {\n    \"postalAddress\": {\n      \"addressCountry\": \"<string>\",\n      \"addressRegion\": \"<string>\",\n      \"addressLocality\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"streetAddress\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "28bdc54e-01eb-4d48-802a-5a499c69277e",
+              "name": "Responses for the location.updateAddress endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.updateAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"<string>\",\n  \"address\": {\n    \"postalAddress\": {\n      \"addressCountry\": \"<string>\",\n      \"addressRegion\": \"<string>\",\n      \"addressLocality\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"streetAddress\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae720d83-1539-43dc-8c23-479b8f31fe0a",
+          "name": "location.updateName",
+          "request": {
+            "name": "location.updateName",
+            "description": {
+              "content": "Update location's name.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateName) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.updateName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e75a1f9e-71ad-4238-9cea-fdca197303f5",
+              "name": "Responses for the location.updateName endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.updateName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dacccd0-a159-4e66-a99e-6d13e442a677",
+          "name": "location.updateExternalName",
+          "request": {
+            "name": "location.updateExternalName",
+            "description": {
+              "content": "Update a location's external (candidate-facing) name.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateexternalname) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.updateExternalName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<string>\",\n  \"externalName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "11866075-9e58-494f-ad77-801409e2bb9c",
+              "name": "Responses for the location.updateExternalName endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.updateExternalName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"<string>\",\n  \"externalName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "058cff0b-8c73-4f19-8d04-28ca19cf43da",
+          "name": "location.updateWorkplaceType",
+          "request": {
+            "name": "location.updateWorkplaceType",
+            "description": {
+              "content": "Update location's workplace type.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateworkplacetype) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.updateWorkplaceType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<string>\",\n  \"workplaceType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4584c01b-5b5a-4875-9323-7d01d5e9bab9",
+              "name": "Responses for the location.updateWorkplaceType endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.updateWorkplaceType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"<string>\",\n  \"workplaceType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"name\": \"Bay Area Office\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"externalName\": \"San Francisco Office\",\n    \"address\": {\n      \"postalAddress\": {\n        \"addressCountry\": \"United States\",\n        \"addressRegion\": \"California\",\n        \"addressLocality\": \"San Francisco\",\n        \"postalCode\": \"94108\",\n        \"streetAddress\": \"49 Geary St Suite 411\"\n      }\n    },\n    \"isRemote\": false,\n    \"workplaceType\": \"Hybrid\",\n    \"parentLocationId\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"type\": \"Location\",\n    \"extraData\": {\n      \"partner_external_object_id\": \"12345\",\n      \"partner_additional_data\": \"f763ba0e4\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64ba1902-f707-4ebc-bd18-fb15560630ee",
+    "name": "Ashby API Key Location API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Location API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Location",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "location.archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.archive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Archives a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationarchive) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationcreate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets details for a single location by id.\n\n**Requires the [`organizationRead`](authentication#permissions-locationinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List all locations. Regions are not returned.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`organizationRead`](authentication#permissions-locationlist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.move",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves a location in location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationmove) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.restore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restores an archived location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationrestore) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.updateAddress",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.updateAddress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an address of a location or location hierarchy.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateaddress) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.updateName",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.updateName",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update location's name.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateName) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.updateExternalName",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.updateExternalName",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a location's external (candidate-facing) name.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateexternalname) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "location.updateWorkplaceType",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/location.updateWorkplaceType",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update location's workplace type.\n\n**Requires the [`organizationWrite`](authentication#permissions-locationupdateworkplacetype) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

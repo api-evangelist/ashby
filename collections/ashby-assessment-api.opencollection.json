@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Assessment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assessment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "assessment.addCompletedToCandidate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.addCompletedToCandidate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a completed assessment to a candidate\n\n**Requires the [`candidatesWrite`](authentication#permissions-assessmentaddcompletedtocandidate) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "assessment.start (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API for starting an assessment. Implemented by the partner, called by Ashby.\n"
+        },
+        {
+          "info": {
+            "name": "assessment.list (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API for listing assessments that the partner supports — implemented by the partner, but called by Ashby\n"
+        },
+        {
+          "info": {
+            "name": "assessment.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Ashby about the status of a started assessment.\n\n**Requires the [`candidatesWrite`](authentication#permissions-assessmentupdate) permission.**\n\n`assessment_status` is required unless `cancelled_reason` is provided.\n"
+        },
+        {
+          "info": {
+            "name": "assessment.cancel (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "(Optional) Cancels an assessment. Implemented by the partner, called by Ashby.\n"
+        },
+        {
+          "info": {
+            "name": "customField.list (Implemented by Partner)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/assessment.customField.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API for listing custom fields that can be synced to Ashby — implemented by the assessment partner, but called by Ashby.\n\nThis endpoint is optional and must be enabled for your integration. Contact Ashby if you wish to use this feature.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

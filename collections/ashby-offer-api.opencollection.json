@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Offer API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "offer.approve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.approve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approves an offer or a specific approval step within an offer's approval process.\n\nThis endpoint mimics the behavior of the \"Force Approve\" function in the Ashby app, where an admin can override approval for a specific step or entire approval process.\n\n**Requires the [`offersWrite`](authentication#permissions-offerapprove) permission.**\n\nThis endpoint can be used in two ways:\n1. **Approve entire offer**: Call without `approvalStepId` and `userId` to approve the entire offer approval process\n2. *"
+        },
+        {
+          "info": {
+            "name": "offer.create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Offer\n\n**Requires the [`offersWrite`](authentication#permissions-offercreate) permission.**\n\nOffer forms support a variety of field types. The values accepted for each field depend on the type of field that's being filled out:\n- `Boolean` - A boolean value.\n- `Currency` - An object in the format `{ currencyCode: \"USD\", value: 100000 }` where currencyCode is a valid ISO 4217 currency code and value is an integer.\n- `Date` - A valid ISO Date string.\n- `Number` - An integer.\n- `String"
+        },
+        {
+          "info": {
+            "name": "offer.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns details about a single offer by id\n\n**Requires the [`offersRead`](authentication#permissions-offerinfo) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "offer.list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get a list of all offers with their latest version.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`offersRead`](authentication#permissions-offerlist) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "offer.start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The offer.start endpoint creates and returns an offer version instance that can be filled out and submitted\nusing the `offer.create` endpoint. \n\n**Requires the [`offersWrite`](authentication#permissions-offerstart) permission.**\n\nIn order to create a new offer version for a candidate with an in-progress \noffer process, you can call the `offer.start` endpoint and then call the `offer.create` endpoint to fill out the\nnewly created offer version form.  \n"
+        },
+        {
+          "info": {
+            "name": "offer.startApprovalProcess",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.startApprovalProcess",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts the approval process for an offer in a \"WaitingOnApprovalStart\" state.\nOnce started, the approval is sent to the configured approvers.\n\nThe offer version ID can be obtained from the offer (e.g. `offer.info` or `offer.list` response's `latestVersion.id`).\n\n**Requires the [`offersWrite`](authentication#permissions-offerstartapprovalprocess) permission.**\n"
+        },
+        {
+          "info": {
+            "name": "offer.update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/offer.update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Offer\n\n**Requires the [`offersWrite`](authentication#permissions-offerupdate) permission.**\n\nOffer forms support a variety of field types. The values accepted for each field depend on the type of field that's being filled out:\n- `Boolean` - A boolean value.\n- `Currency` - An object in the format `{ currencyCode: \"USD\", value: 100000 }` where currencyCode is a valid ISO 4217 currency code and value is an integer.\n- `Date` - A valid ISO Date string.\n- `Number` - An integer.\n- `"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

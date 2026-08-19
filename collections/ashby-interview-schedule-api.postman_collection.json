@@ -1,0 +1,441 @@
+{
+  "item": [
+    {
+      "id": "ff8aba78-e40e-485c-8779-a16ffeffb78e",
+      "name": "Interview Schedule",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41b0d9f9-683c-42b6-bdcb-d17039032153",
+          "name": "interviewSchedule.cancel",
+          "request": {
+            "name": "interviewSchedule.cancel",
+            "description": {
+              "content": "Cancel an interview schedule by id\n\n**Requires the [`interviewsWrite`](authentication#permissions-interviewschedulecancel) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "interviewSchedule.cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the interview schedule to cancel\"\n  },\n  \"allowReschedule\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2cc3009b-8372-40bf-a053-fc86eb0e09b9",
+              "name": "Responses from the interviewSchedule.cancel endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interviewSchedule.cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the interview schedule to cancel\"\n  },\n  \"allowReschedule\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"value\": \"reference #/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d20d26d7-53af-4720-844a-521dec7d7dae",
+          "name": "interviewSchedule.create",
+          "request": {
+            "name": "interviewSchedule.create",
+            "description": {
+              "content": "Create a scheduled interview in Ashby\n\n**Requires the [`interviewsWrite`](authentication#permissions-interviewschedulecreate) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "interviewSchedule.create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the application for this interview schedule\"\n  },\n  \"interviewEvents\": [\n    {\n      \"startTime\": \"<string>\",\n      \"endTime\": \"<string>\",\n      \"interviewers\": [\n        {\n          \"email\": \"<string>\",\n          \"feedbackRequired\": \"<boolean>\"\n        },\n        {\n          \"email\": \"<string>\",\n          \"feedbackRequired\": \"<boolean>\"\n        }\n      ],\n      \"extraData\": {\n        \"value\": \"reference #/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/extraData not found in the OpenAPI spec\"\n      },\n      \"interviewId\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n        \"description\": \"The id of the interview used in this event. If no value is provided, the organization's default interview will be used.\",\n        \"example\": \"46648e83-f28f-43c4-a2a0-58e0599cff41\"\n      }\n    },\n    {\n      \"startTime\": \"<string>\",\n      \"endTime\": \"<string>\",\n      \"interviewers\": [\n        {\n          \"email\": \"<string>\",\n          \"feedbackRequired\": \"<boolean>\"\n        },\n        {\n          \"email\": \"<string>\",\n          \"feedbackRequired\": \"<boolean>\"\n        }\n      ],\n      \"extraData\": {\n        \"value\": \"reference #/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/extraData not found in the OpenAPI spec\"\n      },\n      \"interviewId\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n        \"description\": \"The id of the interview used in this event. If no value is provided, the organization's default interview will be used.\",\n        \"example\": \"46648e83-f28f-43c4-a2a0-58e0599cff41\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "748c4b59-7078-44bc-a307-7ac74a00f639",
+              "name": "Responses from the interviewSchedule.create endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interviewSchedule.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the application for this interview schedule\"\n  },\n  \"interviewEvents\": [\n    {\n      \"startTime\": \"2023-01-30T15:00:00.000Z\",\n      \"endTime\": \"2023-01-30T16:00:00.000Z\",\n      \"interviewers\": [\n        {\n          \"email\": \"test@ashbyhq.com\",\n          \"feedbackRequired\": \"<boolean>\"\n        },\n        {\n          \"email\": \"test@ashbyhq.com\",\n          \"feedbackRequired\": \"<boolean>\"\n        }\n      ],\n      \"extraData\": {\n        \"value\": \"reference #/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/extraData not found in the OpenAPI spec\"\n      },\n      \"interviewId\": \"46648e83-f28f-43c4-a2a0-58e0599cff41\"\n    },\n    {\n      \"startTime\": \"2023-01-30T15:00:00.000Z\",\n      \"endTime\": \"2023-01-30T16:00:00.000Z\",\n      \"interviewers\": [\n        {\n          \"email\": \"test@ashbyhq.com\",\n          \"feedbackRequired\": \"<boolean>\"\n        },\n        {\n          \"email\": \"test@ashbyhq.com\",\n          \"feedbackRequired\": \"<boolean>\"\n        }\n      ],\n      \"extraData\": {\n        \"value\": \"reference #/paths/~1location.create/post/requestBody/content/application~1json/schema/properties/extraData not found in the OpenAPI spec\"\n      },\n      \"interviewId\": \"46648e83-f28f-43c4-a2a0-58e0599cff41\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"value\": \"reference #/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ecdb90f-4815-45b2-b0d1-be38db6afc65",
+          "name": "interviewSchedule.list",
+          "request": {
+            "name": "interviewSchedule.list",
+            "description": {
+              "content": "Gets all interview schedules in the organization.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`interviewsRead`](authentication#permissions-interviewschedulelist) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "interviewSchedule.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the application, for which to fetch interview schedules\"\n  },\n  \"interviewStageId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the interview stage, for which to fetch interview schedules\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c84fe49d-ac98-43f3-8470-b90b85a15b7e",
+              "name": "Responses from the interviewSchedule.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interviewSchedule.list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the application, for which to fetch interview schedules\"\n  },\n  \"interviewStageId\": {\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\",\n    \"description\": \"The id of the interview stage, for which to fetch interview schedules\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"value\": \"reference #/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule not found in the OpenAPI spec\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d483793b-2256-4215-af0a-b1ae66a5ae72",
+          "name": "interviewSchedule.update",
+          "request": {
+            "name": "interviewSchedule.update",
+            "description": {
+              "content": "Update an interview schedule. This endpoint allows you to add, cancel, or update interview events associated with an interview schedule.\n\n**Requires the [`interviewsWrite`](authentication#permissions-interviewscheduleupdate) permission.**\n\nIn order to update an interview event on a schedule, the event's `interviewEventId` must be included when sending your request. \n`interviewEventId`s are included in the response of the `interviewSchedule.create` endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "interviewSchedule.update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "414db4fc-cbce-4e43-b390-d4bf33383fb1",
+              "name": "Responses from the interviewSchedule.update endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interviewSchedule.update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"value\": \"reference #/webhooks/interviewScheduleCreate/post/requestBody/content/application~1json/schema/properties/data/properties/interviewSchedule not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7b02e021-4afc-40b3-8385-5ac2214f417f",
+    "name": "Ashby API Key Interview Schedule API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}

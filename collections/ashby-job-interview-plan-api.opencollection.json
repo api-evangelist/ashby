@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ashby API Key Job Interview Plan API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Job Interview Plan",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jobInterviewPlan.info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ashbyhq.com/jobInterviewPlan.info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a job's interview plan, including activities and interviews that need to be scheduled at each stage\n\n**Requires the [`jobsRead`](authentication#permissions-jobinterviewplaninfo) permission.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

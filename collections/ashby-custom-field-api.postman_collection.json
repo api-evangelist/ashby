@@ -1,0 +1,639 @@
+{
+  "item": [
+    {
+      "id": "174efbdd-e65f-4004-84ab-5ed4025440e7",
+      "name": "Custom Field",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd677d39-5d4c-4d15-b952-349b886d3aef",
+          "name": "customField.create",
+          "request": {
+            "name": "customField.create",
+            "description": {
+              "content": "Create a new custom field\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-customfieldcreate) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customField.create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fieldType\": \"<string>\",\n  \"objectType\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"selectableValues\": [\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"isDateOnlyField\": \"<boolean>\",\n  \"isExposableToCandidate\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8136e1cd-3d57-4458-ae64-39b56d4c716f",
+              "name": "Responses for the customField.create endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customField.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fieldType\": \"<string>\",\n  \"objectType\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"selectableValues\": [\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"isDateOnlyField\": \"<boolean>\",\n  \"isExposableToCandidate\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"title\": \"Preferred Teams\",\n    \"objectType\": \"Opening\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"fieldType\": \"ValueSelect\",\n    \"isRequired\": false,\n    \"isPrivate\": false,\n    \"selectableValues\": [\n      {\n        \"label\": \"Backend Engineering\",\n        \"value\": \"Backend Engineering\",\n        \"isArchived\": {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n        }\n      },\n      {\n        \"label\": \"Backend Engineering\",\n        \"value\": \"Backend Engineering\",\n        \"isArchived\": {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6eef0856-5b2d-4201-9949-9c3058c0db9c",
+          "name": "customField.info",
+          "request": {
+            "name": "customField.info",
+            "description": {
+              "content": "Get information about a custom field\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldinfo) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customField.info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customFieldId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3240772-b1b8-469b-b08c-780fab5bf508",
+              "name": "Responses for the customField.info endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customField.info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customFieldId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"title\": \"Preferred Teams\",\n    \"objectType\": \"Application\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"fieldType\": \"String\",\n    \"isRequired\": false,\n    \"isPrivate\": false,\n    \"selectableValues\": [\n      {\n        \"label\": \"Backend Engineering\",\n        \"value\": \"Backend Engineering\",\n        \"isArchived\": {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n        }\n      },\n      {\n        \"label\": \"Backend Engineering\",\n        \"value\": \"Backend Engineering\",\n        \"isArchived\": {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e13f09c8-a915-4075-b7ae-8d3f1dad996b",
+          "name": "customField.list",
+          "request": {
+            "name": "customField.list",
+            "description": {
+              "content": "Lists all custom fields.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldlist) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customField.list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"reference #/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema not found in the OpenAPI spec\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6b5f7cac-81bc-47ba-838b-0514db2433d1",
+              "name": "Responses for the customField.list endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customField.list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"reference #/paths/~1surveyFormDefinition.list/post/requestBody/content/application~1json/schema not found in the OpenAPI spec\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"title\": \"Preferred Teams\",\n      \"objectType\": \"Candidate\",\n      \"isArchived\": {\n        \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n      },\n      \"fieldType\": \"Date\",\n      \"isRequired\": false,\n      \"isPrivate\": false,\n      \"selectableValues\": [\n        {\n          \"label\": \"Backend Engineering\",\n          \"value\": \"Backend Engineering\",\n          \"isArchived\": {\n            \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n          }\n        },\n        {\n          \"label\": \"Backend Engineering\",\n          \"value\": \"Backend Engineering\",\n          \"isArchived\": {\n            \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"title\": \"Preferred Teams\",\n      \"objectType\": \"Offer\",\n      \"isArchived\": {\n        \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n      },\n      \"fieldType\": \"Currency\",\n      \"isRequired\": false,\n      \"isPrivate\": false,\n      \"selectableValues\": [\n        {\n          \"label\": \"Backend Engineering\",\n          \"value\": \"Backend Engineering\",\n          \"isArchived\": {\n            \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n          }\n        },\n        {\n          \"label\": \"Backend Engineering\",\n          \"value\": \"Backend Engineering\",\n          \"isArchived\": {\n            \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41a373dc-5929-4fa6-a25d-6453b1f31113",
+          "name": "customField.setValue",
+          "request": {
+            "name": "customField.setValue",
+            "description": {
+              "content": "Set the value of a custom field for a given object.\n\n**Note:** When updating multiple custom fields on the same object, use \n[`customField.setValues`](#operation/customFieldSetValues) instead to avoid \nrace conditions.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalue) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n  - Date - An ISO Date string\n  - Email, LongText, Phone, String - String\n  - ValueSelect - A string that matches the value of one of the ValueSelect field's options\n  - MultiValueSelect - An array of strings that exist in the MultiValueSelect field's options\n  - Number - A number\n  - Currency - An object with the following properties:\n    - value: A number\n    - currencyCode: A valid ISO 4217 currency code\n  - NumberRange - An object with the following properties:\n    - type: \"number-range\"\n    - minValue: A number\n    - maxValue: A number\n  - CompensationRange - An object with the following properties:\n    - type: \"compensation-range\"\n    - minValue: A number\n    - maxValue: A number\n    - currencyCode: A string\n    - interval: A valid interval string\n  - Url - A valid http or https URL (e.g., https://example.com)\n  - UUID - A valid UUID string (e.g., for Employee fields)\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customField.setValue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"objectId\": {\n    \"description\": \"The id of the object the field value is being set on.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"objectType\": \"<string>\",\n  \"fieldId\": {\n    \"description\": \"The unique id of the Custom Field definition for the field\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"fieldValue\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e6ad4fe-d8e8-468c-ae10-b1f0f7e5a3cd",
+              "name": "Responses for the customField.create endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customField.setValue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectId\": {\n    \"description\": \"The id of the object the field value is being set on.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"objectType\": \"<string>\",\n  \"fieldId\": {\n    \"description\": \"The unique id of the Custom Field definition for the field\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"fieldValue\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"title\": \"string\",\n    \"value\": true,\n    \"isPrivate\": false,\n    \"valueLabel\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "537686e7-95f0-43cc-9c5f-07664e0a0f44",
+          "name": "customField.setValues",
+          "request": {
+            "name": "customField.setValues",
+            "description": {
+              "content": "Set the values of multiple custom fields for a given object in a single call.\nThis is the recommended approach when updating multiple fields on the same object\nto avoid race conditions that can occur with concurrent `customField.setValue` calls.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalues) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n  - Date - An ISO Date string\n  - Email, LongText, Phone, String - String\n  - ValueSelect - A string that matches the value of one of the ValueSelect field's options\n  - MultiValueSelect - An array of strings that exist in the MultiValueSelect field's options\n  - Number - A number\n  - Currency - An object with the following properties:\n    - value: A number\n    - currencyCode: A valid ISO 4217 currency code\n  - NumberRange - An object with the following properties:\n    - type: \"number-range\"\n    - minValue: A number\n    - maxValue: A number\n  - CompensationRange - An object with the following properties:\n    - type: \"compensation-range\"\n    - minValue: A number\n    - maxValue: A number\n    - currencyCode: A string\n    - interval: A valid interval string\n  - Url - A valid http or https URL (e.g., https://example.com)\n  - UUID - A valid UUID string (e.g., for Employee fields)\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customField.setValues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"objectId\": {\n    \"description\": \"The id of the object the field values are being set on.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"objectType\": \"<string>\",\n  \"values\": [\n    {\n      \"fieldId\": {\n        \"description\": \"The unique id of the Custom Field definition for the field\",\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"fieldValue\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "89180e3d-b8d8-4c07-b90a-cb261cd8bd0f",
+              "name": "Responses for the customField.setValues endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customField.setValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectId\": {\n    \"description\": \"The id of the object the field values are being set on.\",\n    \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n  },\n  \"objectType\": \"<string>\",\n  \"values\": [\n    {\n      \"fieldId\": {\n        \"description\": \"The unique id of the Custom Field definition for the field\",\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"fieldValue\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"title\": \"string\",\n      \"value\": false,\n      \"isPrivate\": false,\n      \"valueLabel\": \"string\"\n    },\n    {\n      \"id\": {\n        \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n      },\n      \"title\": \"string\",\n      \"value\": true,\n      \"isPrivate\": false,\n      \"valueLabel\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a302f8c2-5bdb-4e93-915b-8b2022ea2c85",
+          "name": "customField.updateSelectableValues",
+          "request": {
+            "name": "customField.updateSelectableValues",
+            "description": {
+              "content": "Update the selectable values for a custom field\n\nThis endpoint merges the provided selectable values with the existing values for a custom field.\n\n**Merge behavior:**\n- **New values** (values not present in the existing values) are added to the field\n- **Existing values** (matching by `value` field) have their `label` updated and `isArchived` status set from the request\n- **Omitted values** (existing values not included in the request) are marked as archived\n- Metadata such as substitution tokens are preserved for existing values\n\nThe `isArchived` field defaults to `false` if not provided.\n\n**Requires the [`hiringProcessMetadataWrite`](authentication#permissions-customfieldupdateselectablevalues) permission.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customField.updateSelectableValues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customFieldId\": \"<uuid>\",\n  \"selectableValues\": [\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\",\n      \"isArchived\": false\n    },\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\",\n      \"isArchived\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16c944e8-bd44-4e4c-aea8-04fa5561115d",
+              "name": "Responses for the customField.updateSelectableValues endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customField.updateSelectableValues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customFieldId\": \"<uuid>\",\n  \"selectableValues\": [\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\",\n      \"isArchived\": false\n    },\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\",\n      \"isArchived\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": {\n    \"id\": {\n      \"value\": \"reference #/paths/~1interviewerPool.addUser/post/requestBody/content/application~1json/schema/properties/userId not found in the OpenAPI spec\"\n    },\n    \"title\": \"Preferred Teams\",\n    \"objectType\": \"Candidate\",\n    \"isArchived\": {\n      \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n    },\n    \"fieldType\": \"LongText\",\n    \"isRequired\": false,\n    \"isPrivate\": false,\n    \"selectableValues\": [\n      {\n        \"label\": \"Backend Engineering\",\n        \"value\": \"Backend Engineering\",\n        \"isArchived\": {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n        }\n      },\n      {\n        \"label\": \"Backend Engineering\",\n        \"value\": \"Backend Engineering\",\n        \"isArchived\": {\n          \"value\": \"reference #/webhooks/openingCreate/post/requestBody/content/application~1json/schema/properties/data/properties/opening/properties/isArchived not found in the OpenAPI spec\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ashbyhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e6e02d89-8ec3-44bc-81a0-f9f0d305d411",
+    "name": "Ashby API Key Custom Field API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The public API for accessing resources in your Ashby instance.\n\nContact Support:\n Name: Ashby Support\n Email: support@ashbyhq.com",
+      "type": "text/plain"
+    }
+  }
+}
