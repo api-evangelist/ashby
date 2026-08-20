@@ -35,6 +35,8 @@ apis:
   name: Ashby API Key API
   description: The API Key API from Ashby — 1 operation(s) for api key.
   tags:
+  - APIKeys
+  tags_raw:
   - API Key
   properties:
   - type: OpenAPI
