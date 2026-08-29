@@ -1107,6 +1107,14 @@ apis:
     url: https://developers.ashbyhq.com/docs/dedicated-partner-job-feeds
   - type: Documentation
     url: https://developers.ashbyhq.com/docs/custom-careers-page
+- aid: ashby:ashby-webhook-payloads-api
+  name: Ashby Webhook Payloads API
+  description: The Webhook Payloads API from Ashby — 0 operation(s) for webhook payloads.
+  tags:
+  - Webhook Payloads
+  properties:
+  - type: OpenAPI
+    url: openapi/ashby-webhook-payloads-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/ashby-capability-edges.yml
