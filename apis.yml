@@ -34,6 +34,13 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ashby.png
 tags:
+- Human Resources
+- ATS
+- Recruiting
+- Analytics
+- Sourcing
+- Scheduling
+tags_raw:
 - HR
 - ATS
 - Recruiting
@@ -231,6 +238,8 @@ apis:
   name: Ashby Brand API
   description: The Brand API from Ashby — 1 operation(s) for brand.
   tags:
+  - Brands
+  tags_raw:
   - Brand
   properties:
   - type: OpenAPI
@@ -832,6 +841,8 @@ apis:
   name: Ashby Referral API
   description: The Referral API from Ashby — 1 operation(s) for referral.
   tags:
+  - Referrals
+  tags_raw:
   - Referral
   properties:
   - type: OpenAPI
