@@ -1,132 +1,50 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Ashby
-providerId: ashby
-created: '2026-05-08'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-08, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-08'
-reconciled: true
-tags:
-  - HR
-  - ATS
-  - Recruiting
-  - Analytics
-  - Plans
-description: >-
-  Ashby publishes a flat-rate Foundations plan and custom-quoted Plus and
-  Enterprise tiers, plus a standalone Ashby Analytics offering for non-Ashby
-  ATS customers. Add-ons include Advanced Scheduling and AI Notetaker.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.ashbyhq.com/pricing
 sources:
-  - https://www.ashbyhq.com/pricing
+- https://www.ashbyhq.com/pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+note: 'Only the Foundations plan shows a numeric total ($400/Month, varies by company size selector);
+  other tiers are ''Get in Touch''. Add-on prices listed: SMS $90 per 1,000, SSO $100/month. API Access
+  listed as a feature, not separately priced.'
+plan_count: 5
+currency: USD
 plans:
-  - id: ashby-foundations
-    name: Foundations
-    type: subscription
-    description: >-
-      Entry tier for organizations up to 100 employees. Flat $400/month,
-      10% off for annual commitments. Emerging-market pricing available.
-    entries:
-      - label: Monthly
-        name: ashby_foundations_monthly
-        type: flat
-        metric: subscription
-        timeFrame: monthly
-        unit: 1
-        price: '400'
-        currency: USD
-        userMultiplied: false
-      - label: Annual (10% off)
-        name: ashby_foundations_annual
-        type: flat
-        metric: subscription
-        timeFrame: yearly
-        unit: 1
-        price: '4320'
-        currency: USD
-        userMultiplied: false
-    elements:
-      - name: ATS, sourcing, scheduling, analytics included
-      - name: API and webhook access
-      - name: Up to 100 employees
-  - id: ashby-plus
-    name: Plus
-    type: subscription
-    description: >-
-      For organizations of 101-1,000 employees. Pricing scales with company
-      size, usage, and commitment term — quote required.
-    entries:
-      - label: Custom Quote
-        name: ashby_plus
-        type: flat
-        metric: subscription
-        timeFrame: yearly
-        unit: 1
-        price: contact-sales
-        currency: USD
-        userMultiplied: false
-  - id: ashby-enterprise
-    name: Enterprise
-    type: subscription
-    description: >-
-      For organizations of 1,000+ employees. Predictable enterprise pricing
-      with premium support and security.
-    entries:
-      - label: Custom Quote
-        name: ashby_enterprise
-        type: flat
-        metric: subscription
-        timeFrame: yearly
-        unit: 1
-        price: contact-sales
-        currency: USD
-        userMultiplied: false
-  - id: ashby-analytics
-    name: Ashby Analytics (standalone)
-    type: subscription
-    description: >-
-      Standalone Ashby Analytics for customers using a different ATS;
-      designed for organizations of 100+ employees.
-    entries:
-      - label: Custom Quote
-        name: ashby_analytics
-        type: flat
-        metric: subscription
-        timeFrame: yearly
-        unit: 1
-        price: contact-sales
-        currency: USD
-        userMultiplied: false
-  - id: ashby-advanced-scheduling-addon
-    name: Advanced Scheduling Add-On
-    type: addon
-    description: Multi-interview scheduling automation and reschedule flows.
-    entries:
-      - label: Per Tenant / Year
-        name: ashby_advanced_scheduling
-        type: flat
-        metric: addon
-        timeFrame: yearly
-        unit: 1
-        price: contact-sales
-        currency: USD
-        userMultiplied: false
-  - id: ashby-ai-notetaker-addon
-    name: AI Notetaker Add-On
-    type: addon
-    description: AI-driven interview transcription and summarization.
-    entries:
-      - label: Per Tenant / Year
-        name: ashby_ai_notetaker
-        type: flat
-        metric: addon
-        timeFrame: yearly
-        unit: 1
-        price: contact-sales
-        currency: USD
-        userMultiplied: false
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: All-In-One Foundations Plan
+  price_text: '400'
+  price: 400
+  currency: USD
+  period: month
+  unit: up to 100 employees
+  included_quota: Up to 100 employees; 1,000 outbound msgs per month; 1,500 credits per mo.; 200 sourcing
+    email lookups included
+  overage: Candidate Texting additional messages $90 per 1,000
+- name: All-In-One Plus Plan
+  price_text: Get in Touch
+  period: none
+  included_quota: Best for 101 - 1000 employees; 2,000 outbound msg per seat per year; 2,500 credits per
+    seat per year
+  overage: $90 per 1,000
+- name: All-In-One Enterprise Plan
+  price_text: Get in Touch
+  period: none
+  included_quota: Best for 1,000+ employees; 3,000 outbound msgs per seat per year; 12,500 credits per
+    seat per year
+  overage: $90 per 1,000
+- name: Ashby Analytics
+  price_text: Get in Touch
+  period: none
+  included_quota: For your existing ATS, 100+ Employees; pricing based on usage
+- name: SSO
+  price_text: $100/month
+  price: 100
+  currency: USD
+  period: month
+  included_quota: SAML or OIDC SSO (Foundations)
