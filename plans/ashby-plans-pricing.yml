@@ -10,6 +10,10 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: keyword-prefilter
+  read: '2026-09-20'
 published: true
 note: 'Only the Foundations plan shows a numeric total ($400/Month, varies by company size selector);
   other tiers are ''Get in Touch''. Add-on prices listed: SMS $90 per 1,000, SSO $100/month. API Access
