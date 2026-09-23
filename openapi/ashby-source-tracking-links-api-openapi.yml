@@ -20,9 +20,7 @@ paths:
       description: 'List all source custom tracking links
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-sourcetrackinglinklist) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       operationId: sourcetrackinglinklist
       tags:
       - Source Tracking Links

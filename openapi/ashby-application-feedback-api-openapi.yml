@@ -18,7 +18,28 @@ paths:
     post:
       summary: applicationFeedback.list
       operationId: applicationFeedbackList
-      description: "List all interview scorecards and feedback submissions associated with an application.\n\nEach feedback submission contains:\n- **formDefinition**: The structure of the feedback form with all available fields\n- **submittedValues**: Responses to the form fields, which depending on the form configuration can include:\n  - Text feedback (e.g., \"Candidate showed strong technical skills...\")\n  - Numerical scores (e.g., \"4\" for a 1-4 rating scale)\n  - Structured selections (e.g., \"Strong Hire\" for overall recommendation)\n- **Interview context**: Links to associated interviews, events, and the submitting user\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n\n**Requires the [`candidatesRead`](authentication#permissions-applicationfeedbacklist) permission.**\n"
+      description: 'List all interview scorecards and feedback submissions associated with an application.
+
+
+        Each feedback submission contains:
+
+        - **formDefinition**: The structure of the feedback form with all available fields
+
+        - **submittedValues**: Responses to the form fields, which depending on the form configuration can include:
+
+        - Text feedback (e.g., "Candidate showed strong technical skills...")
+
+        - Numerical scores (e.g., "4" for a 1-4 rating scale)
+
+        - Structured selections (e.g., "Strong Hire" for overall recommendation)
+
+        - **Interview context**: Links to associated interviews, events, and the submitting user
+
+
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
+
+
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Application Feedback
       requestBody:
@@ -131,7 +152,44 @@ paths:
   /applicationFeedback.submit:
     post:
       summary: applicationFeedback.submit
-      description: "Application feedback forms support a variety of field types. \n\n**Requires the [`candidatesWrite`](authentication#permissions-applicationfeedbacksubmit) permission.**\n\nThe values accepted for each field depend on the type of field that's being filled out:                                                                                                                                                                                                                 |\n- `Boolean` - A boolean value\n- `CompensationRange` - An object in the format `{ type: \"compensation-range\", minValue: 100000, maxValue: 150000, currencyCode: \"USD\", interval: \"1 YEAR\" }`. `currencyCode` must be a valid ISO 4217 code and `interval` must be a valid compensation interval (e.g. `\"1 HOUR\"`, `\"1 YEAR\"`).\n- `Currency` - An object in the format `{ value: 100000, currencyCode: \"USD\" }`. `currencyCode` must be a valid ISO 4217 code.\n- `Date` - A date string in the format YYYY-MM-DD\n- `Email` - A valid email address\n- `LongText`, `Phone`, `String` - A string\n- `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field's selectable options\n- `Number` - An integer\n- `NumberRange` - An object in the format `{ type: \"number-range\", minValue: 1, maxValue: 10 }`\n- `RichText` - We do not support submitting rich text documents via the API but we do support submitting plain text values for these fields. Plain text values must be submitted in the format `{ type: \"PlainText\", value: \"A plain text string\" }`\n- `Score` - An integer between 1 and 4 submitted in the format `{ score: 4 }`\n- `Url` - A valid URL string. The empty string is also accepted.\n- `UUID` - A UUID string, or an object in the format `{ value: \"<uuid>\" }`\n- `ValueSelect` - A string that matches the value of one of the ValueSelect field's selectable options\n\nThe `submittedValues` field in the response contains the submitted feedback in an object where the key is the path of the field and the value is the value submitted for that field.\n"
+      description: 'Application feedback forms support a variety of field types.
+
+
+        **Requires the `candidatesWrite` permission.**
+
+
+        The values accepted for each field depend on the type of field that''s being filled out: |
+
+        - `Boolean` - A boolean value
+
+        - `CompensationRange` - An object in the format `{ type: "compensation-range", minValue: 100000, maxValue: 150000, currencyCode: "USD", interval: "1 YEAR" }`. `currencyCode` must be a valid ISO 4217 code and `interval` must be a valid compensation interval (e.g. `"1 HOUR"`, `"1 YEAR"`).
+
+        - `Currency` - An object in the format `{ value: 100000, currencyCode: "USD" }`. `currencyCode` must be a valid ISO 4217 code.
+
+        - `Date` - A date string in the format YYYY-MM-DD
+
+        - `Email` - A valid email address
+
+        - `LongText`, `Phone`, `String` - A string
+
+        - `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field''s selectable options
+
+        - `Number` - An integer
+
+        - `NumberRange` - An object in the format `{ type: "number-range", minValue: 1, maxValue: 10 }`
+
+        - `RichText` - We do not support submitting rich text documents via the API but we do support submitting plain text values for these fields. Plain text values must be submitted in the format `{ type: "PlainText", value: "A plain text string" }`
+
+        - `Score` - An integer between 1 and 4 submitted in the format `{ score: 4 }`
+
+        - `Url` - A valid URL string. The empty string is also accepted.
+
+        - `UUID` - A UUID string, or an object in the format `{ value: "" }`
+
+        - `ValueSelect` - A string that matches the value of one of the ValueSelect field''s selectable options
+
+
+        The `submittedValues` field in the response contains the submitted feedback in an object where the key is the path of the field and the value is the value submitted for that field.'
       operationId: applicationfeedbacksubmit
       tags:
       - Application Feedback

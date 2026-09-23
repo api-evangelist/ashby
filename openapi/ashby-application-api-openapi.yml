@@ -21,9 +21,7 @@ paths:
       description: 'Change the source of an application.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-applicationchangesource) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       tags:
       - Application
       requestBody:
@@ -69,9 +67,7 @@ paths:
       description: 'Change the stage of an application
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-applicationchangestage) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       tags:
       - Application
       requestBody:
@@ -199,15 +195,13 @@ paths:
       description: 'Consider a candidate for a job (eg when sourcing a candidate for a job posting).
 
 
-        If you''re submitting an application as a job board, use the [`applicationForm.submit`](ref:applicationformsubmit) endpoint instead. See [Creating a custom careers page](https://developers.ashbyhq.com/docs/creating-a-custom-careers-page) for details.
+        If you''re submitting an application as a job board, use the `applicationForm.submit` endpoint instead. See Creating a custom careers page for details.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-applicationcreate) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
-        To set values for custom fields on Applications, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.
-
-        '
+        To set values for custom fields on Applications, use the `customFields.setValue` endpoint.'
       tags:
       - Application
       requestBody:
@@ -307,9 +301,7 @@ paths:
       description: 'Fetch application details by application id or by submitted form instance id (which is return by the `applicationForm.submit` endpoint). If both applicationId and submittedFormInstanceId are provided, we will lookup by applicationId.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-applicationinfo) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Application
       requestBody:
@@ -405,12 +397,10 @@ paths:
       description: 'Gets all applications in the organization.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-applicationlist) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Application
       requestBody:
@@ -462,9 +452,7 @@ paths:
       description: 'Transfer an application to a different job.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-applicationtransfer) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       tags:
       - Application
       requestBody:
@@ -527,12 +515,10 @@ paths:
       description: 'Update an application
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-applicationupdate) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
-        To set values for custom fields on Applications, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.
-
-        '
+        To set values for custom fields on Applications, use the `customFields.setValue` endpoint.'
       tags:
       - Application
       requestBody:
@@ -593,9 +579,7 @@ paths:
       description: 'Update the history of an application. This endpoint is used to update the history of an application, such as setting the entered stage time or deleting a history event.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-applicationupdatehistory) permission and the `Allow updating application history?` setting found in your admin API key permissions configuration.**
-
-        '
+        **Requires the `candidatesWrite` permission and the `Allow updating application history?` setting found in your admin API key permissions configuration.**'
       tags:
       - Application
       requestBody:
@@ -685,12 +669,10 @@ paths:
       description: 'Fetch a paginated list of application history items for an application.
 
 
-        This endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.
+        This endpoint supports pagination only (not incremental sync). See the Pagination and Incremental Synchronization guide for usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-applicationListHistory) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Application
       requestBody:
@@ -775,15 +757,13 @@ paths:
         This endpoint returns the AI-generated criteria evaluations that assess how well a candidate meets specific job requirements. Each evaluation contains the outcome, reasoning, and other assessment details.
 
 
-        This endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.
+        This endpoint supports pagination only (not incremental sync). See the Pagination and Incremental Synchronization guide for usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-applicationListCriteriaEvaluations) permission.**
+        **Requires the `candidatesRead` permission.**
 
 
-        **Note:** This endpoint requires the AI Application Review feature to be enabled for your organization.
-
-        '
+        **Note:** This endpoint requires the AI Application Review feature to be enabled for your organization.'
       tags:
       - Application
       requestBody:
@@ -915,7 +895,10 @@ paths:
   /application.addHiringTeamMember:
     post:
       summary: application.addHiringTeamMember
-      description: "Adds an Ashby user to the hiring team at the application level. \n\n**Requires the [`candidateWrite`](authentication#permissions-applicationaddhiringteammember) permission.**\n"
+      description: 'Adds an Ashby user to the hiring team at the application level.
+
+
+        **Requires the `candidateWrite` permission.**'
       operationId: applicationaddhiringteammember
       tags:
       - Application
@@ -961,7 +944,10 @@ paths:
   /application.removeHiringTeamMember:
     post:
       summary: application.removeHiringTeamMember
-      description: "Removes an Ashby user to the hiring team at the application level. \n\n**Requires the [`candidateWrite`](authentication#permissions-applicationremovehiringteammember) permission.**\n"
+      description: 'Removes an Ashby user to the hiring team at the application level.
+
+
+        **Requires the `candidateWrite` permission.**'
       operationId: applicationremovehiringteammember
       tags:
       - Application

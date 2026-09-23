@@ -24,7 +24,7 @@ paths:
         This endpoint mimics the behavior of the "Force Approve" function in the Ashby app, where an admin can override approval for a specific step or entire approval process.
 
 
-        **Requires the [`offersWrite`](authentication#permissions-offerapprove) permission.**
+        **Requires the `offersWrite` permission.**
 
 
         This endpoint can be used in two ways:
@@ -34,9 +34,7 @@ paths:
         2. **Approve specific step**: Provide both `approvalStepId` and `userId` to approve a specific step in the approval process
 
 
-        When approving a specific step, the step must be the current step in the approval process and the user must be an approver for that step.
-
-        '
+        When approving a specific step, the step must be the current step in the approval process and the user must be an approver for that step.'
       tags:
       - Offer
       requestBody:
@@ -91,7 +89,7 @@ paths:
       description: 'Creates a new Offer
 
 
-        **Requires the [`offersWrite`](authentication#permissions-offercreate) permission.**
+        **Requires the `offersWrite` permission.**
 
 
         Offer forms support a variety of field types. The values accepted for each field depend on the type of field that''s being filled out:
@@ -120,9 +118,7 @@ paths:
 
         | `opening_in_use` | The opening is already in use by another offer. |
 
-        | `opening_state_invalid` | The opening has already been closed or filled by a different application.. |
-
-        '
+        | `opening_state_invalid` | The opening has already been closed or filled by a different application.. |'
       tags:
       - Offer
       requestBody:
@@ -189,9 +185,7 @@ paths:
       description: 'Returns details about a single offer by id
 
 
-        **Requires the [`offersRead`](authentication#permissions-offerinfo) permission.**
-
-        '
+        **Requires the `offersRead` permission.**'
       tags:
       - Offer
       requestBody:
@@ -229,12 +223,10 @@ paths:
       description: 'Get a list of all offers with their latest version.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`offersRead`](authentication#permissions-offerlist) permission.**
-
-        '
+        **Requires the `offersRead` permission.**'
       operationId: offerList
       tags:
       - Offer
@@ -338,7 +330,19 @@ paths:
     post:
       summary: offer.start
       operationId: offerStart
-      description: "The offer.start endpoint creates and returns an offer version instance that can be filled out and submitted\nusing the `offer.create` endpoint. \n\n**Requires the [`offersWrite`](authentication#permissions-offerstart) permission.**\n\nIn order to create a new offer version for a candidate with an in-progress \noffer process, you can call the `offer.start` endpoint and then call the `offer.create` endpoint to fill out the\nnewly created offer version form.  \n"
+      description: 'The offer.start endpoint creates and returns an offer version instance that can be filled out and submitted
+
+        using the `offer.create` endpoint.
+
+
+        **Requires the `offersWrite` permission.**
+
+
+        In order to create a new offer version for a candidate with an in-progress
+
+        offer process, you can call the `offer.start` endpoint and then call the `offer.create` endpoint to fill out the
+
+        newly created offer version form.'
       tags:
       - Offer
       requestBody:
@@ -458,9 +462,7 @@ paths:
         The offer version ID can be obtained from the offer (e.g. `offer.info` or `offer.list` response''s `latestVersion.id`).
 
 
-        **Requires the [`offersWrite`](authentication#permissions-offerstartapprovalprocess) permission.**
-
-        '
+        **Requires the `offersWrite` permission.**'
       tags:
       - Offer
       requestBody:
@@ -503,7 +505,7 @@ paths:
       description: 'Updates an existing Offer
 
 
-        **Requires the [`offersWrite`](authentication#permissions-offerupdate) permission.**
+        **Requires the `offersWrite` permission.**
 
 
         Offer forms support a variety of field types. The values accepted for each field depend on the type of field that''s being filled out:
@@ -523,9 +525,7 @@ paths:
         - `MultiValueSelect` - An array of strings that exist in the MultiValueSelect field''s selectable options.
 
 
-        Calling this endpoint will create a new version of the offer and retrigger any necessary approval steps.
-
-        '
+        Calling this endpoint will create a new version of the offer and retrigger any necessary approval steps.'
       tags:
       - Offer
       requestBody:

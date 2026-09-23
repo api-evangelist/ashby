@@ -54,9 +54,7 @@ webhooks:
 
         - Job transfers (when an application is moved to a different job)
 
-        - Also triggered by [candidateHire](ref:candidatehirewebhook) and [candidateStageChange](ref:candidatestagechangewebhook)
-
-        '
+        - Also triggered by candidateHire and candidateStageChange'
       operationId: applicationUpdateWebhook
       tags:
       - Webhook Payloads
@@ -90,9 +88,7 @@ webhooks:
 
         Includes the application and most recent accepted offer (if one exists).
 
-        Also triggers [applicationUpdate](ref:applicationupdatewebhook) and [candidateStageChange](ref:candidatestagechangewebhook)
-
-        '
+        Also triggers applicationUpdate and candidateStageChange'
       operationId: candidateHireWebhook
       tags:
       - Webhook Payloads
@@ -124,7 +120,7 @@ webhooks:
   candidateStageChange:
     post:
       summary: candidateStageChange
-      description: Triggered when a candidate changes stages in an application. Also triggered by [candidateHire](ref:candidatehirewebhook)
+      description: Triggered when a candidate changes stages in an application. Also triggered by candidateHire
       operationId: candidateStageChangeWebhook
       tags:
       - Webhook Payloads
@@ -154,7 +150,9 @@ webhooks:
   candidateDelete:
     post:
       summary: candidateDelete
-      description: "Triggered when a candidate is deleted. \nIncludes the deleted candidate id.\n"
+      description: 'Triggered when a candidate is deleted.
+
+        Includes the deleted candidate id.'
       operationId: candidateDeleteWebhook
       tags:
       - Webhook Payloads
@@ -188,7 +186,9 @@ webhooks:
   candidateMerge:
     post:
       summary: candidateMerge
-      description: "Triggered when a candidate is merged. \nIncludes the deleted candidate's id and merged candidate data.\n"
+      description: 'Triggered when a candidate is merged.
+
+        Includes the deleted candidate''s id and merged candidate data.'
       operationId: candidateMergeWebhook
       tags:
       - Webhook Payloads
@@ -228,7 +228,7 @@ webhooks:
   interviewPlanTransition:
     post:
       summary: interviewPlanTransition
-      description: Triggered when a job's interview plan is switched to a different plan. Sends interview plan data and ids for the interview stage mappings. Also triggers [jobUpdate](ref:jobupdatewebhook)
+      description: Triggered when a job's interview plan is switched to a different plan. Sends interview plan data and ids for the interview stage mappings. Also triggers jobUpdate
       operationId: interviewPlanTransitionWebhook
       tags:
       - Webhook Payloads
@@ -297,7 +297,7 @@ webhooks:
   interviewScheduleCreate:
     post:
       summary: interviewScheduleCreate
-      description: The webhook is called when an interview schedule is created. Also triggers [interviewScheduleUpdate](ref:interviewscheduleupdatewebhook)
+      description: The webhook is called when an interview schedule is created. Also triggers interviewScheduleUpdate
       operationId: interviewScheduleCreateWebhook
       tags:
       - Webhook Payloads
@@ -372,7 +372,7 @@ webhooks:
   interviewScheduleUpdate:
     post:
       summary: interviewScheduleUpdate
-      description: The webhook is called when an interview schedule is updated, including when interviews that are part of the schedule are scheduled, updated, or cancelled. Also triggered by [interviewScheduleCreate](ref:interviewschedulecreatewebhook)
+      description: The webhook is called when an interview schedule is updated, including when interviews that are part of the schedule are scheduled, updated, or cancelled. Also triggered by interviewScheduleCreate
       operationId: interviewScheduleUpdateWebhook
       tags:
       - Webhook Payloads
@@ -513,7 +513,7 @@ webhooks:
   jobUpdate:
     post:
       summary: jobUpdate
-      description: Triggered when a job is updated. Also triggered by [interviewPlanTransition](ref:interviewplantransitionwebhook)
+      description: Triggered when a job is updated. Also triggered by interviewPlanTransition
       operationId: jobUpdateWebhook
       tags:
       - Webhook Payloads
@@ -543,7 +543,7 @@ webhooks:
   jobPostingUpdate:
     post:
       summary: jobPostingUpdate
-      description: Triggered when a job posting is updated. Also triggered by [jobPostingPublish](ref:jobpostingpublishwebhook) and [jobPostingUnpublish](ref:jobpostingunpublishwebhook)
+      description: Triggered when a job posting is updated. Also triggered by jobPostingPublish and jobPostingUnpublish
       operationId: jobPostingUpdateWebhook
       tags:
       - Webhook Payloads
@@ -672,7 +672,7 @@ webhooks:
   jobPostingPublish:
     post:
       summary: jobPostingPublish
-      description: Triggered when a job posting is published. Also triggers [jobPostingUpdate](ref:jobpostingupdatewebhook)
+      description: Triggered when a job posting is published. Also triggers jobPostingUpdate
       operationId: jobPostingPublishWebhook
       tags:
       - Webhook Payloads
@@ -702,7 +702,7 @@ webhooks:
   jobPostingUnpublish:
     post:
       summary: jobPostingUnpublish
-      description: Triggered when a job posting is unpublished. Also triggers [jobPostingUpdate](ref:jobpostingupdatewebhook)
+      description: Triggered when a job posting is unpublished. Also triggers jobPostingUpdate
       operationId: jobPostingUnpublishWebhook
       tags:
       - Webhook Payloads
@@ -1184,7 +1184,14 @@ webhooks:
   signatureRequestUpdate:
     post:
       summary: signatureRequestUpdate
-      description: "Triggered on updates to requests for e-signatures: when requests are sent, cancelled, completed, or deleted.\n\nDepending on the type of request, additional context will be included in the webhook payload:\n  - **Offers** - `\"relatedEntityType\"` is `\"offer\"` and `\"offerId\"` is included.\n  - **Applications** - `\"relatedEntityType\"` is `\"application\"` and `\"applicationId\"` is included.\n"
+      description: 'Triggered on updates to requests for e-signatures: when requests are sent, cancelled, completed, or deleted.
+
+
+        Depending on the type of request, additional context will be included in the webhook payload:
+
+        - **Offers** - `"relatedEntityType"` is `"offer"` and `"offerId"` is included.
+
+        - **Applications** - `"relatedEntityType"` is `"application"` and `"applicationId"` is included.'
       operationId: signatureRequestUpdateWebhook
       tags:
       - Webhook Payloads
@@ -1247,7 +1254,19 @@ webhooks:
   surveySubmit:
     post:
       summary: surveySubmit
-      description: "The webhook is triggered when a candidate submits a non-anonymous survey. It will not fire for anonymous survey submissions.\n\nDepending on the type of survey that was submitted, survey responses may be included in the webhook payload:\n  - **Questionnaires**, **Candidate Data Consent** - Survey responses will be included in the payload.\n  - **Candidate Experience** - If the submission is not anonymous, survey responses will be included in the payload. If the submission is anonymous, the webhook will not trigger.\n  - **Diversity Surveys**, **EEOC Surveys** - Survey responses will never be included in the payload.\n\nIf survey responses are included in the payload, the `submittedValues` field will contain the submitted answers in an object where each key is the path of the field and the value is the value submitted for that field.\n"
+      description: 'The webhook is triggered when a candidate submits a non-anonymous survey. It will not fire for anonymous survey submissions.
+
+
+        Depending on the type of survey that was submitted, survey responses may be included in the webhook payload:
+
+        - **Questionnaires**, **Candidate Data Consent** - Survey responses will be included in the payload.
+
+        - **Candidate Experience** - If the submission is not anonymous, survey responses will be included in the payload. If the submission is anonymous, the webhook will not trigger.
+
+        - **Diversity Surveys**, **EEOC Surveys** - Survey responses will never be included in the payload.
+
+
+        If survey responses are included in the payload, the `submittedValues` field will contain the submitted answers in an object where each key is the path of the field and the value is the value submitted for that field.'
       operationId: surveySubmitWebhook
       tags:
       - Webhook Payloads

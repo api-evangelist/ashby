@@ -21,12 +21,10 @@ paths:
       description: 'List all interviewer pools.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-interviewerpoollist) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Interviewer Pool
       requestBody:
@@ -145,9 +143,7 @@ paths:
       description: 'Get information about an interviewer pool.
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-interviewerpoolinfo) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Interviewer Pool
       requestBody:
@@ -226,9 +222,7 @@ paths:
       description: 'Create an interviewer pool.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolcreate) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       tags:
       - Interviewer Pool
       requestBody:
@@ -271,9 +265,7 @@ paths:
       description: 'Update an interviewer pool.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolupdate) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       tags:
       - Interviewer Pool
       requestBody:
@@ -318,9 +310,7 @@ paths:
       description: 'Archives an interviewer pool.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolarchive) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       tags:
       - Interviewer Pool
       requestBody:
@@ -357,9 +347,7 @@ paths:
       description: 'Restores an archived interviewer pool.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolrestore) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       tags:
       - Interviewer Pool
       requestBody:
@@ -396,9 +384,7 @@ paths:
       description: 'Add a user to an interviewer pool.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpooladduser) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       tags:
       - Interviewer Pool
       requestBody:
@@ -443,9 +429,7 @@ paths:
       description: 'Remove a user from an interviewer pool.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-interviewerpoolremoveuser) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       tags:
       - Interviewer Pool
       requestBody:

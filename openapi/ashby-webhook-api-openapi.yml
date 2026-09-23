@@ -20,9 +20,7 @@ paths:
       description: 'Creates a webhook setting.
 
 
-        **Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) scope.**
-
-        '
+        **Requires the `apiKeysWrite` scope.**'
       operationId: webhookcreate
       tags:
       - Webhook
@@ -112,9 +110,7 @@ paths:
       description: 'Retrieves information about a specific webhook setting by its ID
 
 
-        **Requires the [`apiKeysRead`](authentication#permissions-webhookinfo) permission.**
-
-        '
+        **Requires the `apiKeysRead` permission.**'
       operationId: webhookInfo
       tags:
       - Webhook
@@ -173,9 +169,7 @@ paths:
       description: 'Updates a webhook setting. One of `enabled`, `requestUrl`, or `secretToken` must be provided.
 
 
-        **Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) permission.**
-
-        '
+        **Requires the `apiKeysWrite` permission.**'
       operationId: webhookupdate
       tags:
       - Webhook
@@ -224,9 +218,7 @@ paths:
       description: 'Deletes a webhook setting.
 
 
-        **Requires the [`apiKeysWrite`](authentication#permissions-webhookcreate) permission.**
-
-        '
+        **Requires the `apiKeysWrite` permission.**'
       operationId: webhookdelete
       tags:
       - Webhook

@@ -20,9 +20,7 @@ paths:
       description: 'Archives a candidate tag.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-candidatetagarchive) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       operationId: candidateTagArchive
       tags:
       - Candidate Tag
@@ -65,9 +63,7 @@ paths:
       description: 'Creates a candidate tag.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-candidatetagcreate) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       operationId: candidatetagcreate
       tags:
       - Candidate Tag
@@ -122,12 +118,10 @@ paths:
       description: 'Lists all candidate tags.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-candidatetaglist) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Candidate Tag
       requestBody:

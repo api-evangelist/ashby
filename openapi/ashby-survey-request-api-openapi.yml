@@ -17,7 +17,13 @@ paths:
   /surveyRequest.create:
     post:
       summary: surveyRequest.create
-      description: "This endpoint generates a survey request and returns a survey URL. You can send this URL to a candidate to allow them to complete a survey. \n\n**Requires the [`candidatesWrite`](authentication#permissions-surveyrequestcreate) permission.**\n\n**Note that calling this endpoint will not automatically email the survey to the candidate.** It simply creates the request and gives you a URL to share with a candidate.\n"
+      description: 'This endpoint generates a survey request and returns a survey URL. You can send this URL to a candidate to allow them to complete a survey.
+
+
+        **Requires the `candidatesWrite` permission.**
+
+
+        **Note that calling this endpoint will not automatically email the survey to the candidate.** It simply creates the request and gives you a URL to share with a candidate.'
       operationId: surveyRequestCreate
       tags:
       - Survey Request
@@ -104,12 +110,10 @@ paths:
       description: 'Lists all survey requests.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-surveyRequestList) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       operationId: surveyRequestList
       tags:
       - Survey Request

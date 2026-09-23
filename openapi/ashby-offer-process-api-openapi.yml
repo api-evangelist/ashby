@@ -21,9 +21,7 @@ paths:
       description: 'Starts an offer process for a candidate.
 
 
-        **Requires the [`offersWrite`](authentication#permissions-offerprocessstart) permission.**
-
-        '
+        **Requires the `offersWrite` permission.**'
       tags:
       - Offer Process
       requestBody:

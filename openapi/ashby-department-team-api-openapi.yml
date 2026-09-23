@@ -20,9 +20,7 @@ paths:
       description: 'Creates a department
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-departmentcreate) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: departmentcreate
       tags:
       - Department & Team
@@ -75,9 +73,7 @@ paths:
       description: 'Archives a department
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-departmentarchive) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: departmentarchive
       tags:
       - Department & Team
@@ -117,9 +113,7 @@ paths:
       description: 'Restores a department
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-departmentrestore) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: departmentrestore
       tags:
       - Department & Team
@@ -159,9 +153,7 @@ paths:
       description: 'Moves a department to another parent
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-departmentmove) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: departmentmove
       tags:
       - Department & Team
@@ -205,9 +197,7 @@ paths:
       description: 'Updates a department
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-departmentupdate) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: departmentupdate
       tags:
       - Department & Team

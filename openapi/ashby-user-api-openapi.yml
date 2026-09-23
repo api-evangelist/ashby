@@ -20,9 +20,7 @@ paths:
       description: 'Get an Ashby user by id
 
 
-        **Requires the [`organizationRead`](authentication#permissions-userinfo) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       operationId: userInfo
       tags:
       - User
@@ -99,17 +97,15 @@ paths:
       description: 'Get a list of all Ashby users.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`organizationRead`](authentication#permissions-userlist) permission.**
+        **Requires the `organizationRead` permission.**
 
 
         The `globalRole` property in the response specifies the user''s access level in Ashby.
 
-        For more details on the permissions granted with each role, see our [documentation here](https://docs.ashbyhq.com/user-permissions).
-
-        '
+        For more details on the permissions granted with each role, see our documentation here.'
       operationId: userList
       tags:
       - User
@@ -151,9 +147,7 @@ paths:
       description: 'Search for an Ashby user by email address
 
 
-        **Requires the [`organizationRead`](authentication#permissions-usersearch) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       operationId: userSearch
       tags:
       - User
@@ -195,9 +189,7 @@ paths:
       description: 'Get interviewer settings for a user.
 
 
-        **Requires the [`organizationRead`](authentication#permissions-userinfo) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       operationId: userInterviewerSettings
       tags:
       - User
@@ -249,7 +241,13 @@ paths:
   /user.updateInterviewerSettings:
     post:
       summary: user.updateInterviewerSettings
-      description: "Update interviewer settings for a user. \n\nEither limit can be provided, or both can be provided. If only one is provided, the other will remain unchanged. If a limit is provided but set to null, it will be unset.\n\n**Requires the [`organizationWrite`](authentication#permissions-userinfo) permission.**\n"
+      description: 'Update interviewer settings for a user.
+
+
+        Either limit can be provided, or both can be provided. If only one is provided, the other will remain unchanged. If a limit is provided but set to null, it will be unset.
+
+
+        **Requires the `organizationWrite` permission.**'
       operationId: userUpdateInterviewerSettings
       tags:
       - User
@@ -302,9 +300,7 @@ paths:
         A user can only have one interviewer pause at a time (whether active or scheduled). Attempting to create a pause when one already exists will return an error.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-usercreateinterviewerpause) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: userCreateInterviewerPause
       tags:
       - User
@@ -397,9 +393,7 @@ paths:
       description: 'Lists all active or scheduled interviewer pauses for a user.
 
 
-        **Requires the [`organizationRead`](authentication#permissions-userlistinterviewerpauses) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       operationId: userListInterviewerPauses
       tags:
       - User
@@ -442,9 +436,7 @@ paths:
       description: 'Deletes an interviewer pause.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-userdeleteinterviewerpause) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: userDeleteInterviewerPause
       tags:
       - User

@@ -21,9 +21,7 @@ paths:
       description: 'Add a completed assessment to a candidate
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-assessmentaddcompletedtocandidate) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       tags:
       - Assessment
       requestBody:
@@ -168,9 +166,7 @@ paths:
     post:
       summary: assessment.start (Implemented by Partner)
       operationId: assessmentStart
-      description: 'The API for starting an assessment. Implemented by the partner, called by Ashby.
-
-        '
+      description: The API for starting an assessment. Implemented by the partner, called by Ashby.
       tags:
       - Assessment
       requestBody:
@@ -312,9 +308,7 @@ paths:
     post:
       summary: assessment.list (Implemented by Partner)
       operationId: assessmentList
-      description: 'The API for listing assessments that the partner supports — implemented by the partner, but called by Ashby
-
-        '
+      description: The API for listing assessments that the partner supports — implemented by the partner, but called by Ashby
       tags:
       - Assessment
       requestBody:
@@ -356,12 +350,10 @@ paths:
       description: 'Update Ashby about the status of a started assessment.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-assessmentupdate) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
-        `assessment_status` is required unless `cancelled_reason` is provided.
-
-        '
+        `assessment_status` is required unless `cancelled_reason` is provided.'
       tags:
       - Assessment
       requestBody:
@@ -407,9 +399,7 @@ paths:
     post:
       summary: assessment.cancel (Implemented by Partner)
       operationId: assessmentCancel
-      description: '(Optional) Cancels an assessment. Implemented by the partner, called by Ashby.
-
-        '
+      description: (Optional) Cancels an assessment. Implemented by the partner, called by Ashby.
       tags:
       - Assessment
       requestBody:
@@ -444,9 +434,7 @@ paths:
       description: 'The API for listing custom fields that can be synced to Ashby — implemented by the assessment partner, but called by Ashby.
 
 
-        This endpoint is optional and must be enabled for your integration. Contact Ashby if you wish to use this feature.
-
-        '
+        This endpoint is optional and must be enabled for your integration. Contact Ashby if you wish to use this feature.'
       tags:
       - Assessment
       requestBody:

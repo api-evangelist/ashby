@@ -20,9 +20,7 @@ paths:
       description: 'Archives a location or location hierarchy.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-locationarchive) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: locationarchive
       tags:
       - Location
@@ -61,9 +59,7 @@ paths:
       description: 'Creates a location or location hierarchy.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-locationcreate) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: locationcreate
       tags:
       - Location
@@ -170,9 +166,7 @@ paths:
       description: 'Gets details for a single location by id.
 
 
-        **Requires the [`organizationRead`](authentication#permissions-locationinfo) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       operationId: locationInfo
       tags:
       - Location
@@ -269,12 +263,10 @@ paths:
       description: 'List all locations. Regions are not returned.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`organizationRead`](authentication#permissions-locationlist) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       operationId: locationlist
       tags:
       - Location
@@ -322,9 +314,7 @@ paths:
       description: 'Moves a location in location hierarchy.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-locationmove) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: locationmove
       tags:
       - Location
@@ -367,9 +357,7 @@ paths:
       description: 'Restores an archived location or location hierarchy.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-locationrestore) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: locationrestore
       tags:
       - Location
@@ -408,9 +396,7 @@ paths:
       description: 'Update an address of a location or location hierarchy.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-locationupdateaddress) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: locationupdateaddress
       tags:
       - Location
@@ -472,9 +458,7 @@ paths:
       description: 'Update location''s name.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-locationupdateName) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: locationupdateName
       tags:
       - Location
@@ -517,9 +501,7 @@ paths:
       description: 'Update a location''s external (candidate-facing) name.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-locationupdateexternalname) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: locationupdateexternalname
       tags:
       - Location
@@ -562,9 +544,7 @@ paths:
       description: 'Update location''s workplace type.
 
 
-        **Requires the [`organizationWrite`](authentication#permissions-locationupdateworkplacetype) permission.**
-
-        '
+        **Requires the `organizationWrite` permission.**'
       operationId: locationupdateworkplacetype
       tags:
       - Location

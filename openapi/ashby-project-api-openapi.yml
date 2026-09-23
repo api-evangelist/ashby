@@ -17,7 +17,10 @@ paths:
   /project.info:
     post:
       summary: project.info
-      description: "Retrieves an project by its UUID.\n      \n**Requires the [`jobsRead`](authentication#permissions-projectinfo) permission.**"
+      description: 'Retrieves an project by its UUID.
+
+
+        **Requires the `jobsRead` permission.**'
       operationId: projectinfo
       tags:
       - Project
@@ -78,7 +81,13 @@ paths:
   /project.list:
     post:
       summary: project.list
-      description: "Lists projects.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n      \n**Requires the [`candidatesRead`](authentication#permissions-projectlist) permission.**"
+      description: 'Lists projects.
+
+
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
+
+
+        **Requires the `candidatesRead` permission.**'
       operationId: projectlist
       tags:
       - Project
@@ -110,7 +119,13 @@ paths:
     post:
       summary: project.search
       operationId: projectSearch
-      description: "Search for projects by title. \n\n**Requires the [`candidatesRead`](authentication#permissions-projectsearch) permission.**\n\nResponses are limited to 100 results. Consider refining your search or using /project.list to paginate through all projects, if you approach this limit. This API is for use cases where you intend operate on a final small set of projects, like building a project autocomplete.\n"
+      description: 'Search for projects by title.
+
+
+        **Requires the `candidatesRead` permission.**
+
+
+        Responses are limited to 100 results. Consider refining your search or using /project.list to paginate through all projects, if you approach this limit. This API is for use cases where you intend operate on a final small set of projects, like building a project autocomplete.'
       tags:
       - Project
       requestBody:

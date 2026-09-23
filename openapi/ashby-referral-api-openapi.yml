@@ -21,9 +21,7 @@ paths:
       description: 'Creates a referral
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-referralcreate) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       tags:
       - Referral
       requestBody:

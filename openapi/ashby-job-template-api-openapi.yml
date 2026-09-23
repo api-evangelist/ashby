@@ -20,12 +20,10 @@ paths:
       description: 'List all active and inactive job templates.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`jobsRead`](authentication#permissions-jobtemplatelist) permission.**
-
-        '
+        **Requires the `jobsRead` permission.**'
       operationId: jobTemplateList
       tags:
       - Job Template

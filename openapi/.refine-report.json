@@ -124,7 +124,8 @@
     "ashby-assessments-partner-openapi.json: declared missing tag: Workflow.info",
     "ashby-assessments-partner-openapi.json: declared missing tag: Workflow.list",
     "ashby-assessments-partner-openapi.json: declared missing tag: Workflow.start",
-    "ashby-assessments-partner-openapi.json: declared missing tag: Workflow.update"
+    "ashby-assessments-partner-openapi.json: declared missing tag: Workflow.update",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "ashby-api-key-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -176,6 +177,7 @@
     "ashby-survey-submission-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "ashby-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "ashby-webhook-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ashby-webhook-payloads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "ashby-workflow-info-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "ashby-workflow-list-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "ashby-workflow-start-api-openapi.yml: previously refined output, superseded by openapi/_original/",

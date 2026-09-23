@@ -21,9 +21,7 @@ paths:
       description: 'Fetches the default referral form or creates a default referral form if none exists.
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-referralforminfo) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Referral Form
       responses:

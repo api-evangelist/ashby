@@ -20,9 +20,7 @@ paths:
       description: 'List all enabled communication templates.
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-communicationtemplatelist) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       operationId: communicationTemplateList
       tags:
       - Communication Template

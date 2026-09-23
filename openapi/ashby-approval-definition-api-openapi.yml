@@ -24,9 +24,7 @@ paths:
         If the provided approval step definitions is an empty list, then approval will be skipped and the entity will proceed to the next stage.
 
 
-        **Requires the [`approvalsWrite`](authentication#permissions-approvaldefinitionupdate) permission.**
-
-        '
+        **Requires the `approvalsWrite` permission.**'
       tags:
       - Approval Definition
       requestBody:

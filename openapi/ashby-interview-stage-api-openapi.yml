@@ -20,9 +20,7 @@ paths:
       description: 'List all interview stages for an interview plan in order.
 
 
-        **Requires the [`interviewsRead`](authentication#permissions-interviewstagelist) permission.**
-
-        '
+        **Requires the `interviewsRead` permission.**'
       operationId: interviewStageList
       tags:
       - Interview Stage
@@ -68,9 +66,7 @@ paths:
       description: 'Fetch interview stage details by id
 
 
-        **Requires the [`interviewsRead`](authentication#permissions-interviewstageinfo) permission.**
-
-        '
+        **Requires the `interviewsRead` permission.**'
       tags:
       - Interview Stage
       requestBody:

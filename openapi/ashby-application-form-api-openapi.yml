@@ -20,13 +20,13 @@ paths:
       description: 'Submit an application for a job posting.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-applicationformsubmit) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
         The Content-Type of this request must be `multipart/form-data` or `application/json`.
 
 
-        When using `application/json`, file fields should contain a handle string obtained from [`file.createFileUploadHandle`](https://developers.ashbyhq.com/reference/filecreatefileuploadhandle) with `fileUploadContext` set to `ApplicationForm`. This allows files to be uploaded directly to storage, bypassing the need to send file bytes through the API.
+        When using `application/json`, file fields should contain a handle string obtained from `file.createFileUploadHandle` with `fileUploadContext` set to `ApplicationForm`. This allows files to be uploaded directly to storage, bypassing the need to send file bytes through the API.
 
 
         When using `multipart/form-data`, file fields should reference a file part included in the multipart request body (existing behavior).
@@ -60,9 +60,7 @@ paths:
 
         - `Location` - An object with the following properties: `{ country: "USA", city: "San Francisco", region: "California" }`. You may provide any combination of these properties and we will attempt to geocode the location. For best results, provide all three properties.
 
-        - `EducationHistory` - [Early Access] An array of objects with the following properties: `{ schoolName: "University of California, Berkeley", degree: "Bachelor of Science", major: "Computer Science", startDate: "2020-09-01", endDate: "2024-05-15", isCurrent: true }`. Only `schoolName` is required. We will attempt to match the school name to a known school in our database. If `isCurrent` is true, `endDate` must not be provided.
-
-        '
+        - `EducationHistory` - [Early Access] An array of objects with the following properties: `{ schoolName: "University of California, Berkeley", degree: "Bachelor of Science", major: "Computer Science", startDate: "2020-09-01", endDate: "2024-05-15", isCurrent: true }`. Only `schoolName` is required. We will attempt to match the school name to a known school in our database. If `isCurrent` is true, `endDate` must not be provided.'
       operationId: applicationformsubmit
       tags:
       - Application Form

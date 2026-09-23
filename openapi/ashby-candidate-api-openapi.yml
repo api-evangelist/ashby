@@ -20,9 +20,7 @@ paths:
       description: 'Adds an email message to a candidate''s profile.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateaddemailmessage) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       operationId: candidateAddEmailMessage
       tags:
       - Candidate
@@ -177,9 +175,7 @@ paths:
       description: 'Adds the candidate to a project.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateaddproject) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       tags:
       - Candidate
       requestBody:
@@ -226,9 +222,7 @@ paths:
       description: 'Adds a tag to a candidate
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateaddtag) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       operationId: candidateAddTag
       tags:
       - Candidate
@@ -272,12 +266,10 @@ paths:
       description: 'Anonymizes a candidate.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateanonymize) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
-        **Note**: this action cannot be reversed and requires all of a candidate''s applications to be in the archived or hired state.
-
-        '
+        **Note**: this action cannot be reversed and requires all of a candidate''s applications to be in the archived or hired state.'
       operationId: candidateAnonymize
       tags:
       - Candidate
@@ -318,12 +310,10 @@ paths:
       description: 'Creates a new candidate
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidatecreate) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
-        To set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.
-
-        '
+        To set values for custom fields on Candidates, use the `customFields.setValue` endpoint.'
       tags:
       - Candidate
       requestBody:
@@ -417,7 +407,39 @@ paths:
   /candidate.createNote:
     post:
       summary: candidate.createNote
-      description: "Creates a note on a candidate.\n\n**Requires the [`candidatesWrite`](authentication#permissions-candidatecreatenote) permission.**\n\nFor notes submitted with a type of `text/html`, we support the elements listed below. Any unsupported elements will be stripped out of the note's content before posting.\n  - Bold `<b>`\n  - Italic `<i>`\n  - Underline `<u>`\n  - Links `<a>`\n  - Bulleted Lists - `<ul>`, `<li>`\n  - Ordered Lists - `<ol>`, `<li>`\n  - Code - `<code>`\n  - Code Block - `<pre>`\n"
+      description: 'Creates a note on a candidate.
+
+
+        **Requires the `candidatesWrite` permission.**
+
+
+        For notes submitted with a type of `text/html`, we support the elements listed below. Any unsupported elements will be stripped out of the note''s content before posting.
+
+        - Bold ``
+
+        - Italic ``
+
+        - Underline ``
+
+        - Links ``
+
+        - Bulleted Lists - `
+
+        `, `
+
+        `
+
+        - Ordered Lists - `
+
+        `, `
+
+        `
+
+        - Code - ``
+
+        - Code Block - `
+
+        `'
       operationId: candidateCreateNote
       tags:
       - Candidate
@@ -537,9 +559,7 @@ paths:
       description: 'Gets a single candidate by id.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-candidateinfo) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Candidate
       requestBody:
@@ -757,12 +777,10 @@ paths:
       description: 'Lists all candidates in an organization.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-candidatelist) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Candidate
       requestBody:
@@ -794,12 +812,10 @@ paths:
       description: 'Lists all client info records for a candidate.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-candidatelistclientinfo) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Candidate
       requestBody:
@@ -894,15 +910,13 @@ paths:
         - `category`, `name`, `description`, and `value` fields on fraud signals are unstable and may change as signals are added, renamed, or recategorized.
 
 
-        This endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.
+        This endpoint supports pagination only (not incremental sync). See the Pagination and Incremental Synchronization guide for usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-candidatelistfraudchecks) permission.**
+        **Requires the `candidatesRead` permission.**
 
 
-        **Note:** This endpoint requires Fraud Detection feature to be enabled for your organization.
-
-        '
+        **Note:** This endpoint requires Fraud Detection feature to be enabled for your organization.'
       tags:
       - Candidate
       requestBody:
@@ -1029,12 +1043,10 @@ paths:
       description: 'This endpoint allows marking candidates as fraudulent, not fraudulent, or unsure after reviewing their fraud signals via `candidate.listFraudChecks`.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidatesetfraudstatus) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
-        **Note:** This endpoint requires the Fraud Detection feature to be enabled for your organization.
-
-        '
+        **Note:** This endpoint requires the Fraud Detection feature to be enabled for your organization.'
       tags:
       - Candidate
       requestBody:
@@ -1092,12 +1104,10 @@ paths:
       description: 'Lists all notes on a candidate.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-candidatelistnotes) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Candidate
       requestBody:
@@ -1140,12 +1150,10 @@ paths:
       description: 'Lists all projects on a candidate.
 
 
-        This endpoint supports pagination only (not incremental sync). See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for usage examples.
+        This endpoint supports pagination only (not incremental sync). See the Pagination and Incremental Synchronization guide for usage examples.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-candidatelistprojects) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Candidate
       requestBody:
@@ -1189,9 +1197,7 @@ paths:
       description: 'Removes the candidate from a project.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateremoveproject) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       tags:
       - Candidate
       requestBody:
@@ -1240,9 +1246,7 @@ paths:
       description: 'Removes a tag from a candidate.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateremovetag) permission.**
-
-        '
+        **Requires the `candidatesWrite` permission.**'
       operationId: candidateRemoveTag
       tags:
       - Candidate
@@ -1288,7 +1292,16 @@ paths:
     post:
       summary: candidate.search
       operationId: candidateSearch
-      description: "Search for candidates by email and / or name. \n\n**Requires the [`candidatesRead`](authentication#permissions-candidatesearch) permission.**\n\nResponses are limited to 100 results. Consider refining your search or using /candidate.list to paginate through all candidates, if you approach this limit. This API is for use cases where you intend to operate on a final small set of candidates, like building a candidate autocomplete.\n\nNote: When multiple search parameters are provided, the parameters are combined with the `AND` operator.\n"
+      description: 'Search for candidates by email and / or name.
+
+
+        **Requires the `candidatesRead` permission.**
+
+
+        Responses are limited to 100 results. Consider refining your search or using /candidate.list to paginate through all candidates, if you approach this limit. This API is for use cases where you intend to operate on a final small set of candidates, like building a candidate autocomplete.
+
+
+        Note: When multiple search parameters are provided, the parameters are combined with the `AND` operator.'
       tags:
       - Candidate
       requestBody:
@@ -1332,12 +1345,10 @@ paths:
       description: 'Updates an existing candidate
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateupdate) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
-        To set values for custom fields on Candidates, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint.
-
-        '
+        To set values for custom fields on Candidates, use the `customFields.setValue` endpoint.'
       tags:
       - Candidate
       requestBody:
@@ -1445,7 +1456,7 @@ paths:
       description: 'Uploads a file to attach to the candidate''s profile.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateuploadfile) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
         **Recommended: Presigned upload handle**
@@ -1455,9 +1466,7 @@ paths:
 
         **Deprecated: Multipart upload**
 
-        Send the file as `multipart/form-data` with the file in a `file` field. This mode is deprecated and may be removed in a future API version.
-
-        '
+        Send the file as `multipart/form-data` with the file in a `file` field. This mode is deprecated and may be removed in a future API version.'
       tags:
       - Candidate
       requestBody:
@@ -1520,7 +1529,7 @@ paths:
       description: 'Uploads a candidate''s resume, parses it, and updates their information.
 
 
-        **Requires the [`candidatesWrite`](authentication#permissions-candidateuploadresume) permission.**
+        **Requires the `candidatesWrite` permission.**
 
 
         **Recommended: Presigned upload handle**
@@ -1533,9 +1542,7 @@ paths:
         Send the resume as `multipart/form-data` with the file in a `resume` field. This mode is deprecated and may be removed in a future API version.
 
 
-        Note: Existing candidate data always takes precedence over data found by parsing the resume. Resume data only populates candidate data, if it''s data that was missing in the candidate model.
-
-        '
+        Note: Existing candidate data always takes precedence over data found by parsing the resume. Resume data only populates candidate data, if it''s data that was missing in the candidate model.'
       tags:
       - Candidate
       requestBody:

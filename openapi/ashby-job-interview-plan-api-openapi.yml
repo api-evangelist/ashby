@@ -21,9 +21,7 @@ paths:
       description: 'Returns a job''s interview plan, including activities and interviews that need to be scheduled at each stage
 
 
-        **Requires the [`jobsRead`](authentication#permissions-jobinterviewplaninfo) permission.**
-
-        '
+        **Requires the `jobsRead` permission.**'
       tags:
       - Job Interview Plan
       requestBody:

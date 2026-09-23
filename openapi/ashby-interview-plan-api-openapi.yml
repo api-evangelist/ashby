@@ -21,12 +21,10 @@ paths:
       description: 'List published interview plans. Draft interview plans are not returned. If `includeArchived` is true, archived interview plans are also included.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`interviewsRead`](authentication#permissions-interviewplanlist) permission.**
-
-        '
+        **Requires the `interviewsRead` permission.**'
       tags:
       - Interview Plan
       requestBody:

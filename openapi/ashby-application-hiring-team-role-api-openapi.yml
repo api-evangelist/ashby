@@ -21,9 +21,7 @@ paths:
       description: 'Gets all available hiring team roles for applications in the organization.
 
 
-        **Requires the [`candidatesRead`](authentication#permissions-applicationHiringTeamRoleList) permission.**
-
-        '
+        **Requires the `candidatesRead` permission.**'
       tags:
       - Application Hiring Team Role
       responses:

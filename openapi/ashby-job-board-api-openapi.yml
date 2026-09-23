@@ -20,9 +20,7 @@ paths:
       description: 'List all enabled job boards.
 
 
-        **Requires the [`jobsRead`](authentication#permissions-jobboardlist) permission.**
-
-        '
+        **Requires the `jobsRead` permission.**'
       operationId: jobBoardList
       tags:
       - Job Board

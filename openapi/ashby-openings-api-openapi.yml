@@ -17,7 +17,10 @@ paths:
   /opening.info:
     post:
       summary: opening.info
-      description: "Retrieves an opening by its UUID.\n      \n**Requires the [`jobsRead`](authentication#permissions-openinginfo) permission.**"
+      description: 'Retrieves an opening by its UUID.
+
+
+        **Requires the `jobsRead` permission.**'
       operationId: openinginfo
       tags:
       - Openings
@@ -52,7 +55,13 @@ paths:
   /opening.list:
     post:
       summary: opening.list
-      description: "Lists openings.\n\nSee the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.\n      \n**Requires the [`jobsRead`](authentication#permissions-openinglist) permission.**"
+      description: 'Lists openings.
+
+
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
+
+
+        **Requires the `jobsRead` permission.**'
       operationId: openinglist
       tags:
       - Openings
@@ -103,7 +112,10 @@ paths:
   /opening.search:
     post:
       summary: opening.search
-      description: "Searches for openings by identifier.\n      \n**Requires the [`jobsRead`](authentication#permissions-openingsearch) permission.**"
+      description: 'Searches for openings by identifier.
+
+
+        **Requires the `jobsRead` permission.**'
       operationId: openingsearch
       tags:
       - Openings
@@ -140,7 +152,13 @@ paths:
   /opening.create:
     post:
       summary: opening.create
-      description: "Creates an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingcreate) permission.**\n\nTo set values of custom fields on Openings, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint."
+      description: 'Creates an opening.
+
+
+        **Requires the `jobsWrite` permission.**
+
+
+        To set values of custom fields on Openings, use the `customFields.setValue` endpoint.'
       operationId: openingcreate
       tags:
       - Openings
@@ -217,7 +235,10 @@ paths:
   /opening.addJob:
     post:
       summary: opening.addJob
-      description: "Adds a job to an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingaddjob) permission.**"
+      description: 'Adds a job to an opening.
+
+
+        **Requires the `jobsWrite` permission.**'
       operationId: openingaddjob
       tags:
       - Openings
@@ -256,7 +277,10 @@ paths:
   /opening.removeJob:
     post:
       summary: opening.removeJob
-      description: "Removes a job from an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingremovejob) permission.**"
+      description: 'Removes a job from an opening.
+
+
+        **Requires the `jobsWrite` permission.**'
       operationId: openingremovejob
       tags:
       - Openings
@@ -295,7 +319,10 @@ paths:
   /opening.addLocation:
     post:
       summary: opening.addLocation
-      description: "Adds a location to an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingaddlocation) permission.**"
+      description: 'Adds a location to an opening.
+
+
+        **Requires the `jobsWrite` permission.**'
       operationId: openingaddlocation
       tags:
       - Openings
@@ -334,7 +361,10 @@ paths:
   /opening.removeLocation:
     post:
       summary: opening.removeLocation
-      description: "Removes a location from an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingremovelocation) permission.**"
+      description: 'Removes a location from an opening.
+
+
+        **Requires the `jobsWrite` permission.**'
       operationId: openingremovelocation
       tags:
       - Openings
@@ -373,7 +403,10 @@ paths:
   /opening.setOpeningState:
     post:
       summary: opening.setOpeningState
-      description: "Sets the state of an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingsetopeningstate) permission.**"
+      description: 'Sets the state of an opening.
+
+
+        **Requires the `jobsWrite` permission.**'
       operationId: openingsetopeningstate
       tags:
       - Openings
@@ -417,7 +450,10 @@ paths:
   /opening.setArchived:
     post:
       summary: opening.setArchived
-      description: "Sets the archived state of an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingsetarchived) permission.**"
+      description: 'Sets the archived state of an opening.
+
+
+        **Requires the `jobsWrite` permission.**'
       operationId: openingsetarchived
       tags:
       - Openings
@@ -453,7 +489,13 @@ paths:
   /opening.update:
     post:
       summary: opening.update
-      description: "Updates an opening.\n      \n**Requires the [`jobsWrite`](authentication#permissions-openingupdate) permission.**\n\nTo set values for custom fields on Openings, use the [`customFields.setValue`](ref:customfieldsetvalue) endpoint."
+      description: 'Updates an opening.
+
+
+        **Requires the `jobsWrite` permission.**
+
+
+        To set values for custom fields on Openings, use the `customFields.setValue` endpoint.'
       operationId: openingupdate
       tags:
       - Openings

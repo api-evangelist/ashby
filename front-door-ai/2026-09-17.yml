@@ -1,0 +1,27 @@
+# Front Door AI Index — ashby — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: ashby
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.ashbyhq.com
+  final_host: www.ashbyhq.com
+  ownership: shared
+  owner: ashby-hq
+  shares_host_with:
+  - ashby-hq
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 8
+  density: null
+  words: 505
+  tiers:
+    agentic: 0
+    core: 8
+    model: 0
+  ambiguous: 1
+  top_terms:
+    AI: 8
+    automation: 1

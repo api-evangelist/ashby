@@ -21,9 +21,7 @@ paths:
       description: 'Returns details about a single survey form definition by id
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-surveyformdefinitioninfo) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Survey Form Definition
       requestBody:
@@ -73,12 +71,10 @@ paths:
       description: 'Lists all survey form definitions.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-surveyformdefinitionlist) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Survey Form Definition
       requestBody:

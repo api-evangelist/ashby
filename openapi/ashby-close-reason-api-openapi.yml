@@ -21,9 +21,7 @@ paths:
       description: 'Lists all close reasons for jobs or openings.
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-closereasonlist) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Close Reason
       requestBody:

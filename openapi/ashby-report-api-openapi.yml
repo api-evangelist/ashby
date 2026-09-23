@@ -63,23 +63,21 @@ paths:
 
         - **Start generation requests** (without `requestId`): 15 requests per minute per organization
 
-        - **Concurrent limit**: Maximum 3 report operations at once per organization (shared with [`report.synchronous`](ref:reportsynchronous))
+        - **Concurrent limit**: Maximum 3 report operations at once per organization (shared with `report.synchronous`)
 
         - **Polling requests** (with `requestId`): Bypass all limits
 
 
         **Usage Notes:**
 
-        - If you receive a 429 error, your organization has hit its limit - wait and retry or use [`report.synchronous`](ref:reportsynchronous)
+        - If you receive a 429 error, your organization has hit its limit - wait and retry or use `report.synchronous`
 
-        - For synchronous retrieval of existing data, use [`report.synchronous`](ref:reportsynchronous)
+        - For synchronous retrieval of existing data, use `report.synchronous`
 
         - Use this async endpoint for reports that may exceed 30 seconds
 
 
-        **Requires the [`reportsRead`](authentication#permissions-reportgenerate) permission.**
-
-        '
+        **Requires the `reportsRead` permission.**'
       tags:
       - Report
       requestBody:
@@ -324,30 +322,28 @@ paths:
         Retrieves report data synchronously.
 
 
-        **Timeout:** 30 seconds. If a report is timing out, use the asynchronous [`report.generate`](ref:reportgenerate) instead.
+        **Timeout:** 30 seconds. If a report is timing out, use the asynchronous `report.generate` instead.
 
 
         **Rate Limiting (Per Organization):**
 
         - **Request limit**: 15 requests per minute per organization
 
-        - **Concurrent limit**: Maximum 3 report operations at once per organization (shared with [`report.generate`](ref:reportgenerate))
+        - **Concurrent limit**: Maximum 3 report operations at once per organization (shared with `report.generate`)
 
-        - Rate limits are shared with [`report.generate`](ref:reportgenerate) for starting new generations
+        - Rate limits are shared with `report.generate` for starting new generations
 
 
         **Usage Notes:**
 
         - If you receive a 429 error, your organization has hit its limit - wait briefly and retry
 
-        - For long-running reports, use [`report.generate`](ref:reportgenerate) for async processing
+        - For long-running reports, use `report.generate` for async processing
 
         - Concurrent limit is released when the HTTP request completes
 
 
-        **Requires the [`reportsRead`](authentication#permissions-reportsynchronous) permission.**
-
-        '
+        **Requires the `reportsRead` permission.**'
       tags:
       - Report
       requestBody:

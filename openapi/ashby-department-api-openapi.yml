@@ -21,9 +21,7 @@ paths:
       description: 'Fetch department details by id
 
 
-        **Requires the [`organizationRead`](authentication#permissions-departmentinfo) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       tags:
       - Department
       requestBody:
@@ -88,12 +86,10 @@ paths:
       description: 'Lists all departments
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`organizationRead`](authentication#permissions-departmentlist) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       tags:
       - Department
       requestBody:

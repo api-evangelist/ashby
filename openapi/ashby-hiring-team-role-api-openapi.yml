@@ -20,9 +20,7 @@ paths:
       description: 'Lists the possible hiring team roles in an organization
 
 
-        **Requires the [`organizationRead`](authentication#permissions-hiringteamrolelist) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       operationId: hiringteamrolelist
       tags:
       - Hiring Team Role

@@ -17,7 +17,13 @@ paths:
   /hiringTeam.addMember:
     post:
       summary: hiringTeam.addMember
-      description: "Adds an Ashby user to the hiring team at the application or job-level. \n\n**Requires the [`organizationWrite`](authentication#permissions-hiringteamaddmember) permission.**\n\nHiring team members can be added to a hiring team at the application, job, or opening level. \n"
+      description: 'Adds an Ashby user to the hiring team at the application or job-level.
+
+
+        **Requires the `organizationWrite` permission.**
+
+
+        Hiring team members can be added to a hiring team at the application, job, or opening level.'
       operationId: hiringteamaddmember
       tags:
       - Hiring Team
@@ -124,7 +130,13 @@ paths:
   /hiringTeam.removeMember:
     post:
       summary: hiringTeam.removeMember
-      description: "Removes an Ashby user from the hiring team at the application or job-level. \n\n**Requires the [`organizationWrite`](authentication#permissions-hiringteamremovemember) permission.**\n\nHiring team members can be removed from a hiring team at the application, job, or opening level. \n"
+      description: 'Removes an Ashby user from the hiring team at the application or job-level.
+
+
+        **Requires the `organizationWrite` permission.**
+
+
+        Hiring team members can be removed from a hiring team at the application, job, or opening level.'
       operationId: hiringteamremovemember
       tags:
       - Hiring Team

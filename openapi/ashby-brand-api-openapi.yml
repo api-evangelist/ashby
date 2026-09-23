@@ -21,9 +21,7 @@ paths:
       description: 'Lists all brands for the organization.
 
 
-        **Requires the [`organizationRead`](authentication#permissions-departmentinfo) permission.**
-
-        '
+        **Requires the `organizationRead` permission.**'
       tags:
       - Brand
       requestBody:

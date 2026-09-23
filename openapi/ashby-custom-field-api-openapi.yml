@@ -21,9 +21,7 @@ paths:
       description: 'Create a new custom field
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-customfieldcreate) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       tags:
       - Custom Field
       requestBody:
@@ -113,9 +111,7 @@ paths:
       description: 'Get information about a custom field
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldinfo) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Custom Field
       requestBody:
@@ -221,12 +217,10 @@ paths:
       description: 'Lists all custom fields.
 
 
-        See the [Pagination and Incremental Synchronization](/docs/pagination-and-incremental-sync) guide for detailed usage examples.
+        See the Pagination and Incremental Synchronization guide for detailed usage examples.
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-customfieldlist) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       tags:
       - Custom Field
       requestBody:
@@ -263,7 +257,62 @@ paths:
     post:
       summary: customField.setValue
       operationId: customFieldSetValue
-      description: "Set the value of a custom field for a given object.\n\n**Note:** When updating multiple custom fields on the same object, use \n[`customField.setValues`](#operation/customFieldSetValues) instead to avoid \nrace conditions.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalue) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n  - Date - An ISO Date string\n  - Email, LongText, Phone, String - String\n  - ValueSelect - A string that matches the value of one of the ValueSelect field's options\n  - MultiValueSelect - An array of strings that exist in the MultiValueSelect field's options\n  - Number - A number\n  - Currency - An object with the following properties:\n    - value: A number\n    - currencyCode: A valid ISO 4217 currency code\n  - NumberRange - An object with the following properties:\n    - type: \"number-range\"\n    - minValue: A number\n    - maxValue: A number\n  - CompensationRange - An object with the following properties:\n    - type: \"compensation-range\"\n    - minValue: A number\n    - maxValue: A number\n    - currencyCode: A string\n    - interval: A valid interval string\n  - Url - A valid http or https URL (e.g., https://example.com)\n  - UUID - A valid UUID string (e.g., for Employee fields)\n"
+      description: 'Set the value of a custom field for a given object.
+
+
+        **Note:** When updating multiple custom fields on the same object, use
+
+        `customField.setValues` instead to avoid
+
+        race conditions.
+
+
+        **Requires the `candidatesWrite` permission.**
+
+
+        The values accepted in the `fieldValue` param depend on the type of field that''s being updated. See below for more details:
+
+        - Boolean - A boolean value
+
+        - Date - An ISO Date string
+
+        - Email, LongText, Phone, String - String
+
+        - ValueSelect - A string that matches the value of one of the ValueSelect field''s options
+
+        - MultiValueSelect - An array of strings that exist in the MultiValueSelect field''s options
+
+        - Number - A number
+
+        - Currency - An object with the following properties:
+
+        - value: A number
+
+        - currencyCode: A valid ISO 4217 currency code
+
+        - NumberRange - An object with the following properties:
+
+        - type: "number-range"
+
+        - minValue: A number
+
+        - maxValue: A number
+
+        - CompensationRange - An object with the following properties:
+
+        - type: "compensation-range"
+
+        - minValue: A number
+
+        - maxValue: A number
+
+        - currencyCode: A string
+
+        - interval: A valid interval string
+
+        - Url - A valid http or https URL (e.g., https://example.com)
+
+        - UUID - A valid UUID string (e.g., for Employee fields)'
       tags:
       - Custom Field
       requestBody:
@@ -532,7 +581,59 @@ paths:
     post:
       summary: customField.setValues
       operationId: customFieldSetValues
-      description: "Set the values of multiple custom fields for a given object in a single call.\nThis is the recommended approach when updating multiple fields on the same object\nto avoid race conditions that can occur with concurrent `customField.setValue` calls.\n\n**Requires the [`candidatesWrite`](authentication#permissions-customfieldsetvalues) permission.**\n\nThe values accepted in the `fieldValue` param depend on the type of field that's being updated. See below for more details:\n  - Boolean - A boolean value\n  - Date - An ISO Date string\n  - Email, LongText, Phone, String - String\n  - ValueSelect - A string that matches the value of one of the ValueSelect field's options\n  - MultiValueSelect - An array of strings that exist in the MultiValueSelect field's options\n  - Number - A number\n  - Currency - An object with the following properties:\n    - value: A number\n    - currencyCode: A valid ISO 4217 currency code\n  - NumberRange - An object with the following properties:\n    - type: \"number-range\"\n    - minValue: A number\n    - maxValue: A number\n  - CompensationRange - An object with the following properties:\n    - type: \"compensation-range\"\n    - minValue: A number\n    - maxValue: A number\n    - currencyCode: A string\n    - interval: A valid interval string\n  - Url - A valid http or https URL (e.g., https://example.com)\n  - UUID - A valid UUID string (e.g., for Employee fields)\n"
+      description: 'Set the values of multiple custom fields for a given object in a single call.
+
+        This is the recommended approach when updating multiple fields on the same object
+
+        to avoid race conditions that can occur with concurrent `customField.setValue` calls.
+
+
+        **Requires the `candidatesWrite` permission.**
+
+
+        The values accepted in the `fieldValue` param depend on the type of field that''s being updated. See below for more details:
+
+        - Boolean - A boolean value
+
+        - Date - An ISO Date string
+
+        - Email, LongText, Phone, String - String
+
+        - ValueSelect - A string that matches the value of one of the ValueSelect field''s options
+
+        - MultiValueSelect - An array of strings that exist in the MultiValueSelect field''s options
+
+        - Number - A number
+
+        - Currency - An object with the following properties:
+
+        - value: A number
+
+        - currencyCode: A valid ISO 4217 currency code
+
+        - NumberRange - An object with the following properties:
+
+        - type: "number-range"
+
+        - minValue: A number
+
+        - maxValue: A number
+
+        - CompensationRange - An object with the following properties:
+
+        - type: "compensation-range"
+
+        - minValue: A number
+
+        - maxValue: A number
+
+        - currencyCode: A string
+
+        - interval: A valid interval string
+
+        - Url - A valid http or https URL (e.g., https://example.com)
+
+        - UUID - A valid UUID string (e.g., for Employee fields)'
       tags:
       - Custom Field
       requestBody:
@@ -714,9 +815,7 @@ paths:
         The `isArchived` field defaults to `false` if not provided.
 
 
-        **Requires the [`hiringProcessMetadataWrite`](authentication#permissions-customfieldupdateselectablevalues) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataWrite` permission.**'
       tags:
       - Custom Field
       requestBody:

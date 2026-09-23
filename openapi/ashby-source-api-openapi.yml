@@ -20,9 +20,7 @@ paths:
       description: 'List all sources
 
 
-        **Requires the [`hiringProcessMetadataRead`](authentication#permissions-sourcelist) permission.**
-
-        '
+        **Requires the `hiringProcessMetadataRead` permission.**'
       operationId: sourcelist
       tags:
       - Source

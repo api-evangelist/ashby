@@ -20,9 +20,7 @@ paths:
       description: 'Retrieve information about the API key being used to make the request.
 
 
-        **Requires the [`apiKeysRead`](authentication#permissions-apikeyinfo) permission.**
-
-        '
+        **Requires the `apiKeysRead` permission.**'
       operationId: apiKeyInfo
       tags:
       - API Key
