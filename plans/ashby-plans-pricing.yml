@@ -52,3 +52,48 @@ plans:
   currency: USD
   period: month
   included_quota: SAML or OIDC SSO (Foundations)
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  - subscription
+  units: []
+  plans:
+  - name: All-In-One Foundations Plan
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: All-In-One Plus Plan
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: All-In-One Enterprise Plan
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Ashby Analytics
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: SSO
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - month
