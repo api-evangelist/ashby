@@ -95,7 +95,7 @@
     - alpha
     in_cloud: true
     builder: unknown (community connector; contributor not in the record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: ashby-fivetran
   label: Fivetran
@@ -121,7 +121,7 @@
     - connectors/applications/ashby
     vendor_link: https://www.ashbyhq.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: ashby-meltano
   label: Meltano
@@ -150,7 +150,7 @@
     quality:
     - bronze
     builder: 'community (Meltano Hub variant maintainers: airbyte)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: ashby-slack-own
   label: Slack (own)
